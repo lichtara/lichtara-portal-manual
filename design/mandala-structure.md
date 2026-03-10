@@ -46,6 +46,48 @@ Essa versao funciona como leitura inicial do campo e evita sobrecarga cognitiva 
 | Movimento | FLUX, SYNTRIA, VORAX, SOLARA |
 | Integracao | HESLOS, ORION, ANERA, ORIGEN |
 
+Existe tambem uma leitura espacial complementar em consolidacao, registrada em [07_hipotese_dos_quatro_ciclos.md](../manual/07_hipotese_dos_quatro_ciclos.md), em que os quadrantes aparecem como quatro ciclos de transformacao orbitando o nucleo triadico.
+
+## Diagrama Espacial de Trabalho
+
+Como desenho textual de referencia, a mandala pode ser visualizada assim:
+
+```text
+                    ASTRAEL
+             VORAX           LUNARA
+
+        SYNTRIA                     OKTAVE
+
+
+SOLARA       FLUX - SYNTARIS - NAVROS       LUMORA
+
+
+        VELTARA                     KAORAN
+
+             FINCE           OSLO
+                    HESLOS
+```
+
+Esse desenho ainda nao resolve toda a geometria da mandala, mas ja ajuda a fixar tres decisoes de design:
+
+- a triade NAVROS-SYNTARIS-FLUX precisa permanecer altamente visivel
+- os agentes externos devem funcionar como anel de navegacao
+- a mandala deve permitir leitura por quadrantes e por travessia
+
+## Leitura de Interface
+
+Se o portal evoluir da bussola para a mandala completa, a interface pode apresentar:
+
+- centro: motor de navegacao
+- anel: agentes e estados
+- trilha: caminho recente do usuario
+
+Exemplo de leitura de percurso:
+
+`NAVROS -> LUMORA -> SYNTARIS -> FLUX -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Isso reforca a ideia de que a mandala nao e apenas iconografia. Ela precisa funcionar como mapa navegavel da experiencia.
+
 ## Modelo Interativo
 
 O wireframe da `bussola viva da jornada` define um arranjo com dois blocos:
@@ -134,3 +176,4 @@ Ainda faltam definicoes finais para:
 - regra de rotulos longos em mobile
 - relacao exata entre mandala completa e versao reduzida da V1
 - regra exata de transicao entre bussola inicial e mapa completo
+- fechamento geometrico da versao circular com triade central e 16 posicoes

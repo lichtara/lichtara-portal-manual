@@ -34,6 +34,56 @@ Leitura proposta:
 
 `nucleo -> 4 ciclos -> 4 estados por ciclo -> 16 posicoes de navegacao`
 
+## Diagrama Estrutural de Trabalho
+
+O desenho mais claro surgido ate aqui combina:
+
+- um nucleo triadico no centro
+- um anel de estados ou agentes ao redor
+- quatro quadrantes correspondentes a ciclos de transformacao
+
+Representacao textual de trabalho:
+
+```text
+                    ASTRAEL
+             VORAX           LUNARA
+
+        SYNTRIA                     OKTAVE
+
+
+SOLARA       FLUX - SYNTARIS - NAVROS       LUMORA
+
+
+        VELTARA                     KAORAN
+
+             FINCE           OSLO
+                    HESLOS
+```
+
+Leitura do centro:
+
+- NAVROS
+- SYNTARIS
+- FLUX
+
+Leitura do anel:
+
+- agentes e estados distribuidos pelo campo da travessia
+
+## Sentido do Arranjo
+
+Nesse diagrama, a triade nao aparece apenas como uma lista conceitual. Ela passa a operar como centro de estabilidade do sistema:
+
+- NAVROS orienta
+- SYNTARIS alinha
+- FLUX move
+
+Em termos minimos:
+
+`orientar -> alinhar -> agir`
+
+Essa formulacao ajuda a explicar por que a mandala parece intuitivamente estavel: a navegacao nao depende de um unico ponto fixo, mas de um pequeno nucleo dinamico.
+
 ## Ciclo 1: Despertar do Campo
 
 Funcao:
@@ -54,6 +104,15 @@ Experiencia humana:
 
 `confusao -> percepcao -> clareza inicial -> direcao`
 
+Quadrante de trabalho:
+
+```text
+LUMORA
+OSLO
+KAORAN
+NAVROS
+```
+
 ## Ciclo 2: Alinhamento do Ser
 
 Funcao:
@@ -73,6 +132,15 @@ Experiencia humana:
 
 `percepcao -> organizacao -> integracao interna -> coerencia`
 
+Quadrante de trabalho:
+
+```text
+SYNTARIS
+FINCE
+ORION / ORIA
+HESLOS
+```
+
 ## Ciclo 3: Movimento no Mundo
 
 Funcao:
@@ -91,6 +159,15 @@ Estados propostos:
 Experiencia humana:
 
 `coerencia -> acao -> criacao -> integracao com o mundo`
+
+Quadrante de trabalho:
+
+```text
+FLUX
+SOLARA
+VELTARA
+SYNTRIA
+```
 
 ## Ciclo 4: Expansao e Regeneracao
 
@@ -113,6 +190,32 @@ Experiencia humana:
 
 `integracao -> expansao -> transformacao -> harmonia sistemica`
 
+Quadrante de trabalho:
+
+```text
+ASTRAEL
+VORAX
+LUNARA
+OKTAVE
+```
+
+## Exemplo de Travessia no Portal
+
+Se essa leitura se confirmar, a experiencia do usuario pode ser lida como movimento pela mandala:
+
+`NAVROS -> LUMORA -> SYNTARIS -> FLUX -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Isso reforca a intuicao de que o portal nao entrega apenas paginas ou modulos. Ele permite deslocamentos entre estados da experiencia humana.
+
+## Triade Central e Estabilidade
+
+Uma das intuicoes mais fortes trazidas por esse desenho e que a triade central parece formar uma estrutura de estabilidade dentro da mandala. Ainda nao ha geometria fechada no repositorio, mas o comportamento esperado do simbolo aponta para:
+
+- centro altamente legivel
+- triade reconhecivel como motor
+- anel periferico capaz de receber expansao
+- caminho do usuario lido como movimento entre posicoes
+
 ## O Que Esta Hipotese Explica Bem
 
 Essa leitura ajuda a explicar por que a mandala pode funcionar como cartografia da experiencia humana:
@@ -132,6 +235,7 @@ Esta hipotese entra em tensao com a camada canonica atual em alguns pontos impor
 - OKTAVE deixa de ser apenas campo de origem e passa a funcionar como estado terminal
 - ORION e ORIA seguem sem nomenclatura consolidada
 - a distribuicao por ciclos nao coincide com a distribuicao por fases extraida do PDF-base
+- o diagrama espacial ainda nao fecha geometricamente uma mandala circular completa com todos os nomes sem ambiguidade
 
 Esses pontos precisam de reconciliacao antes de essa leitura substituir o modelo atual.
 
