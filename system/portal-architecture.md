@@ -20,7 +20,7 @@ O manual propoe quatro modulos iniciais:
 | --- | --- | --- |
 | Landing | porta de entrada clara para a experiencia | pagina unica com proposta de valor e CTA |
 | Travessia Livro Vivo | converter capitulos em etapas interativas | sequencia guiada curta |
-| NAVROS | leitura de campo e orientacao acionavel | painel de sintese com posicao atual |
+| NAVROS | leitura de campo e orientacao acionavel | perguntas, bussola viva e painel de sintese |
 | Mandala de Agentes | revelar ecossistema de apoio | mapa visual com agentes e micropratica |
 
 ## Fluxo Funcional da V1
@@ -42,6 +42,27 @@ O material define quatro camadas tecnicas para o MVP NAVROS:
 - Backend: API de sessao temporaria, gravacao de respostas, servico de sintese e persistencia opcional
 - Dados: modelo anonimo por padrao, retencao curta sem opt-in e trilha persistente com consentimento
 - Analytics: eventos de progresso e conclusao sem coleta de texto sensivel
+
+## Componente Bussola NAVROS
+
+A bussola viva pode ser implementada sem adicionar complexidade estrutural relevante ao MVP.
+
+Modelo tecnico recomendado:
+
+- SVG para circulo, ponteiro e marcadores
+- CSS para rotacao e desaceleracao suave
+- JavaScript simples para mapear `active-agent` em angulo
+
+Mapa minimo de angulos:
+
+| Agente | Angulo |
+| --- | --- |
+| NAVROS | 0deg |
+| SYNTARIS | 90deg |
+| FLUX | 180deg |
+| LUMORA | 270deg |
+
+Ponto importante: o frontend pode derivar a rotacao diretamente de `active-agent`, sem exigir uma nova logica pesada no backend.
 
 ## Rotas de API Sugeridas
 
@@ -77,6 +98,8 @@ Campos destacados no manual:
 - `active-agent`
 - `navros-summary`
 
+Para a bussola da V1, `active-agent` ja e suficiente para orientar o ponteiro. Campos adicionais como `compass-angle` ou `direction-line` podem existir depois, mas nao sao obrigatorios no primeiro corte.
+
 ## Observabilidade
 
 Eventos centrais sugeridos:
@@ -90,11 +113,18 @@ Eventos centrais sugeridos:
 - `navros-completed`
 - `navros-exited`
 
+Eventos adicionais recomendados para a bussola:
+
+- `compass-viewed`
+- `compass-confirmed`
+- `compass-reread-requested`
+
 ## Priorizacao por Sprint
 
 Resumo da sequencia proposta:
 
 - Sprint 1: fluxo NAVROS anonimo funcional, sintese e privacidade minima
+- Sprint 1: bussola NAVROS viva com 4 direcoes
 - Sprint 2: conta opcional, salvamento, historico e consentimento explicito
 - Sprint 3: entrada para SYNTARIS, LUMORA e FLUX, compartilhamento moderado e observabilidade ampliada
 
@@ -115,3 +145,4 @@ Ainda precisam de consolidacao arquitetural:
 - orquestracao da jornada multiagente
 - relacao entre mandala completa e home reduzida da V1
 - politica final de persistencia longitudinal da jornada
+- regra final de expansao entre bussola de 4 direcoes e mandala completa

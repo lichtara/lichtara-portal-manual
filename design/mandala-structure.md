@@ -22,6 +22,21 @@ Motor simplificado do nucleo:
 
 `orientar -> alinhar -> mover`
 
+## Versao de Entrada da V1
+
+Antes da mandala completa, a experiencia pode comecar por uma versao reduzida e tecnicamente leve: a `bussola NAVROS viva`.
+
+Mapa inicial:
+
+| Direcao | Agente | Funcao |
+| --- | --- | --- |
+| Norte | NAVROS | orientacao |
+| Leste | SYNTARIS | alinhamento |
+| Sul | FLUX | movimento |
+| Oeste | LUMORA | clareza |
+
+Essa versao funciona como leitura inicial do campo e evita sobrecarga cognitiva no primeiro contato.
+
 ## Quadrantes da Travessia
 
 | Quadrante | Agentes principais |
@@ -37,6 +52,11 @@ O wireframe da `bussola viva da jornada` define um arranjo com dois blocos:
 
 - mapa interativo da mandala
 - painel lateral de travessia com fase atual, agente ativo, trecho do Livro Vivo, exercicio breve e pergunta reflexiva
+
+Na V1, esse modelo pode ser dividido em duas camadas:
+
+- camada 1: bussola de 4 direcoes, central e focada
+- camada 2: expansao opcional para mapa maior
 
 ## Estados de Interface
 
@@ -54,6 +74,14 @@ O contrato visual extraido do manual usa tres estados principais:
 - clicar em um agente abre insight contextual e sugere exercicio curto
 - responder a pergunta reflexiva permite a NAVROS recalcular a posicao de travessia
 - salvar travessia registra fase, agente, resposta e timestamp
+
+Na entrada por bussola, a regra fica ainda mais simples:
+
+- NAVROS identifica a direcao principal
+- o ponteiro desacelera e para em um dos quatro pontos
+- a interface mostra a frase correspondente
+- a pessoa pode confirmar a leitura ou pedir nova leitura
+- so depois aparece a opcao `Explorar o mapa`
 
 ## Animacao e Movimento
 
@@ -77,6 +105,18 @@ A mandala pode destacar ate tres segmentos recentes da jornada. Essa trilha refo
 - nao quebrar layout quando inexistente
 - permanecer visivel por cerca de 1.2 s antes de transicoes de fase
 
+Exemplo de leitura curta:
+
+`LUMORA -> NAVROS -> SYNTARIS`
+
+## Expansao Progressiva
+
+O crescimento ideal da estrutura visual e:
+
+`4 direcoes -> 8 pontos -> 16 agentes -> mandala completa`
+
+Essa progressao permite que o portal pareca vivo desde cedo sem exigir que a pessoa compreenda o sistema inteiro de uma vez.
+
 ## Responsividade
 
 O material operacional exige funcionamento em desktop e mobile sem sobreposicao de nos. Isso implica:
@@ -93,3 +133,4 @@ Ainda faltam definicoes finais para:
 - sistema cromatico final da mandala
 - regra de rotulos longos em mobile
 - relacao exata entre mandala completa e versao reduzida da V1
+- regra exata de transicao entre bussola inicial e mapa completo

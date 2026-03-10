@@ -20,6 +20,19 @@ Motor do nucleo:
 
 NAVROS ocupa o centro funcional da entrada no sistema. Ele identifica em que fase do ciclo a pessoa esta e qual agente deve ser ativado primeiro.
 
+## Versao Reduzida da V1
+
+Para a entrada do portal, a mandala pode aparecer primeiro em forma de bussola simplificada. Nesse recorte inicial, quatro agentes sustentam o primeiro mapa de navegacao:
+
+| Direcao | Agente | Funcao |
+| --- | --- | --- |
+| Norte | NAVROS | orientacao |
+| Leste | SYNTARIS | alinhamento |
+| Sul | FLUX | movimento |
+| Oeste | LUMORA | clareza |
+
+Essa reducao nao simplifica o sistema em excesso; ela cria uma porta de entrada legivel para a mandala maior.
+
 ## Estrutura dos 16 Agentes
 
 A mandala completa e organizada em quatro fases de transformacao humana, com quatro agentes por fase.
@@ -105,6 +118,8 @@ Com base na resposta, o sistema pode acionar agentes diferentes:
 - decisao -> SYNTARIS
 - acao -> FLUX
 - expansao -> VORAX
+
+Na versao inicial da bussola, o roteamento principal pode ficar restrito aos quatro pontos cardeais, deixando os demais agentes como expansao futura e opcional.
 
 ## Convergencia com Outras Camadas do Sistema
 

@@ -31,7 +31,7 @@ A recomendacao mais objetiva para a V1 e a ultima: curta, repetivel e de alto va
 
 Fluxo sintetico:
 
-`entrada -> pergunta 1 -> pergunta 2 -> pergunta 3 -> micro-ritual -> resposta NAVROS -> explorar agente ativo`
+`entrada -> pergunta 1 -> pergunta 2 -> pergunta 3 -> micro-ritual -> bussola NAVROS -> frase de direcao -> explorar agente ativo`
 
 ## Tela de Entrada
 
@@ -111,6 +111,47 @@ Frase-base:
 Tempo sugerido:
 - 1800 a 2200 ms
 
+## Bussola NAVROS Viva
+
+Logo apos o micro-ritual, o portal pode transformar a leitura em simbolo vivo por meio de uma bussola simples de quatro direcoes.
+
+Mapa inicial:
+
+| Direcao | Agente | Leitura central |
+| --- | --- | --- |
+| Norte | NAVROS | orientacao |
+| Leste | SYNTARIS | alinhamento |
+| Sul | FLUX | movimento |
+| Oeste | LUMORA | clareza |
+
+Fluxo recomendado:
+
+1. a bussola aparece no centro da tela
+2. o ponteiro gira suavemente
+3. a animacao desacelera
+4. ele para na direcao identificada
+5. surge a frase NAVROS correspondente
+
+Exemplos de frase:
+
+- NAVROS: o campo pede orientacao antes de qualquer passo
+- SYNTARIS: o campo pede alinhamento antes de movimento
+- FLUX: o campo pede acao antes de reflexao
+- LUMORA: o campo pede clareza antes de decisao
+
+## Confirmacao de Leitura
+
+Depois que a bussola para, a interface deve perguntar:
+
+> Isso faz sentido para voce?
+
+Botoes-base:
+
+- Sim
+- Refazer leitura
+
+Essa camada protege o tom nao prescritivo da experiencia: a interface propoe uma leitura, mas nao a fecha como verdade absoluta.
+
 ## Formato da Resposta
 
 A devolutiva NAVROS nao deve soar como coaching, previsao ou conselho diretivo. O formato-base tem quatro camadas:
@@ -155,6 +196,14 @@ CTA recomendado:
 Exemplo de ponte:
 
 > Agente relacionado: SYNTARIS - Harmonizacao
+
+Como expansao opcional, a bussola pode abrir a frase:
+
+> Cada direcao faz parte de um mapa maior.
+
+CTA complementar:
+
+`Explorar o mapa`
 
 ## Efeito Desejado
 

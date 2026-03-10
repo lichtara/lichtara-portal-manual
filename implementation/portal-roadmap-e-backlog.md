@@ -19,7 +19,7 @@ Os modulos minimos consolidados no material atual sao:
 | Modulo | Funcao | Entregavel minimo |
 | --- | --- | --- |
 | Landing | abrir o portal com proposta de valor clara | pagina unica com CTA principal |
-| NAVROS | realizar leitura inicial de campo | fluxo curto com perguntas e sintese |
+| NAVROS | realizar leitura inicial de campo | fluxo curto com perguntas, bussola e sintese |
 | Agente Ativo | abrir continuidade imediata | painel contextual com pratica ou reflexao |
 | Mandala | mostrar o mapa vivo do sistema | home circular com centro NAVROS e agentes orbitais |
 | Persistencia Opcional | permitir retorno consciente | historico simples sob consentimento |
@@ -28,7 +28,7 @@ Os modulos minimos consolidados no material atual sao:
 
 Fluxo-base da V1:
 
-`landing -> consulta NAVROS -> sintese -> agente ativo -> retorno ao portal`
+`landing -> consulta NAVROS -> bussola viva -> sintese -> agente ativo -> retorno ao portal`
 
 Fluxo expandido previsto:
 
@@ -49,6 +49,7 @@ Objetivo:
 Entregas-chave:
 - wireflow validado
 - frontend de 5 telas
+- componente de bussola viva com 4 direcoes
 - rotas base de sessao, resposta, sintese e finalizacao
 - armazenamento temporario
 - saida segura sem salvamento
@@ -98,8 +99,10 @@ Sprint 1:
 - landing com CTA consultar NAVROS
 - tela de entrada NAVROS
 - pergunta 1, pergunta 2 e pergunta 3
+- bussola NAVROS viva com 4 direcoes
 - tela de resposta NAVROS
 - micro-ritual de leitura
+- confirmacao `Isso faz sentido para voce?`
 - estados de progresso e saida segura
 
 Sprint 2:
@@ -123,6 +126,7 @@ Sprint 1:
 - gerador de sinal predominante
 - gerador de movimento sugerido
 - resolucao de agente ativo
+- mapeamento inicial de 4 direcoes
 - template final de resposta
 
 Sprint 2:
@@ -141,6 +145,7 @@ Sprint 1:
 - sessao anonima por padrao
 - descarte sem opt-in
 - funil basico de eventos NAVROS
+- eventos `compass-viewed`, `compass-confirmed` e `compass-reread-requested`
 
 Sprint 2:
 - consentimento persistido
@@ -160,12 +165,13 @@ Ordem consolidada a partir do material:
 2. fluxo NAVROS de perguntas
 3. contrato de payload da engine
 4. classificacao de campo e resposta NAVROS
-5. micro-ritual e tela final
+5. micro-ritual e bussola viva
 6. reacao da mandala ao agente ativo
-7. painel do agente ativo
-8. persistencia e retorno
-9. trilha recente
-10. modos navegacao e exploracao
+7. tela final e confirmacao de leitura
+8. painel do agente ativo
+9. persistencia e retorno
+10. trilha recente
+11. modos navegacao e exploracao
 
 ## Owners por Frente
 
@@ -185,6 +191,7 @@ O PDF traz um modelo inicial de ownership por frente. Mantendo a estrutura e rem
 Uma primeira versao pode ser considerada pronta quando:
 
 - as cinco telas principais operam sem bloqueio
+- a bussola identifica uma direcao e para com suavidade
 - a sintese e gerada a partir das respostas e do proximo passo
 - o uso anonimo funciona de ponta a ponta
 - salvar ou sair sem salvar respeita consentimento
@@ -199,12 +206,14 @@ Antes de ampliar a experiencia, precisam estar estaveis:
 - taxonomia de estados de campo
 - contrato do payload NAVROS
 - regra de agente ativo
+- mapeamento entre agente ativo e direcao da bussola
 
 ## Riscos a Vigiar
 
 - excesso de escopo antes da validacao do fluxo principal
 - coleta de dados acima do necessario
 - resposta NAVROS vaga demais para gerar valor
+- bussola visualmente pesada demais para a proposta da V1
 - mandala visualmente rica demais para a maturidade da V1
 - expansao para multiplos agentes antes de provar NAVROS
 
@@ -217,3 +226,4 @@ Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:
 - regra de persistencia longitudinal da jornada
 - relacao entre Livro Vivo interativo e consulta NAVROS isolada
 - criterios de rollout entre V1 fechada e abertura publica
+- regra de transicao entre bussola de 4 direcoes e mandala completa
