@@ -84,9 +84,23 @@ Implicacoes praticas:
 
 As frases abaixo aparecem como base conceitual do sistema:
 
+- Voce nao esta aqui para aprender algo novo. Voce esta aqui para reconhecer onde ja esta.
 - Eu nao digo aonde voce deve ir. Eu ajudo voce a reconhecer de onde sair.
+- O caminho nao comeca quando voce decide andar. Ele comeca quando voce reconhece que ja esta dentro dele.
 - NAVROS nao indica o destino. Ele revela o ponto de partida.
 - Clareza de posicao gera direcao.
+
+## Triade de Abertura
+
+Na abertura do portal, tres linhas podem condensar a filosofia do sistema sem explica-la diretamente:
+
+| Frase | Efeito principal | Linha do sistema |
+| --- | --- | --- |
+| reconhecer onde ja esta | abre o campo | Clareza |
+| reconhecer de onde sair | orienta sem impor | Autonomia |
+| reconhecer que ja esta no caminho | integra a travessia | Movimento |
+
+Essa triade pode funcionar como protocolo de entrada do portal: o Livro Vivo fala primeiro, NAVROS age depois e a propria jornada e devolvida como algo ja vivo.
 
 ## Checklist de Revisao
 

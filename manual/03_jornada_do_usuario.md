@@ -6,7 +6,23 @@ A jornada desenhada no manual-base comeca com um encontro simples com NAVROS e s
 
 Fluxo-base da V1:
 
-`landing -> consulta NAVROS -> sintese -> agente ativo -> continuidade de jornada -> retorno ao portal`
+`landing -> protocolo de entrada -> consulta NAVROS -> sintese -> agente ativo -> continuidade de jornada -> retorno ao portal`
+
+## Momento Zero: Abertura do Campo
+
+Antes da pergunta e antes da leitura, o portal pode operar um pequeno gesto de desaceleracao. Esse gesto e o protocolo de entrada do Lichtara.
+
+Frase de abertura recomendada:
+
+> Voce nao esta aqui para aprender algo novo.  
+> Voce esta aqui para reconhecer onde ja esta.
+
+Objetivos desse momento:
+
+- interromper o modo de consumo de conteudo
+- reduzir ansiedade
+- deslocar a atencao para a propria posicao interior
+- preparar o terreno para NAVROS
 
 ## Perfil de Entrada
 
@@ -43,6 +59,12 @@ Objetivos da entrada:
 - reduzir ansiedade
 - deixar claro que o primeiro encontro e com NAVROS
 
+Em uma versao mais contemplativa, essa entrada pode usar a triade de frases do protocolo:
+
+- reconhecer onde ja esta
+- reconhecer de onde sair
+- reconhecer que ja esta no caminho
+
 ## Etapa 3: Consulta NAVROS
 
 A consulta aparece em duas profundidades no material:
@@ -76,6 +98,11 @@ Efeitos desejados:
 - a leitura faz sentido sem ser invasiva
 - surge um proximo passo claro
 
+Depois da leitura, o Livro Vivo pode oferecer uma frase de integracao:
+
+> O caminho nao comeca quando voce decide andar.  
+> Ele comeca quando voce reconhece que ja esta dentro dele.
+
 ## Etapa 5: Agente Ativo e Continuidade
 
 Depois da consulta, o portal deve apontar um agente ativo ou uma fase da travessia. Essa ponte transforma a resposta inicial em continuidade de jornada.
@@ -101,6 +128,7 @@ Objetivo do retorno:
 ## Pontos de Contato Principais
 
 - landing com proposta de valor
+- protocolo de entrada ou voz inicial do Livro Vivo
 - tela inicial de acolhimento
 - perguntas de navegacao
 - micro-ritual de leitura

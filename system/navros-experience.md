@@ -31,7 +31,39 @@ A recomendacao mais objetiva para a V1 e a ultima: curta, repetivel e de alto va
 
 Fluxo sintetico:
 
-`entrada -> pergunta 1 -> pergunta 2 -> pergunta 3 -> micro-ritual -> bussola NAVROS -> frase de direcao -> explorar agente ativo`
+`protocolo de entrada -> pergunta 1 -> pergunta 2 -> pergunta 3 -> micro-ritual -> bussola NAVROS -> frase de direcao -> explorar agente ativo`
+
+## Protocolo de Entrada
+
+Antes da camada funcional de perguntas, a experiencia pode abrir com a voz do Livro Vivo. A funcao dessa abertura nao e explicar o portal, mas criar o estado interno adequado para a navegacao.
+
+Primeira frase recomendada:
+
+> Voce nao esta aqui para aprender algo novo.  
+> Voce esta aqui para reconhecer onde ja esta.
+
+Logica da sequencia:
+
+- o Livro Vivo fala primeiro
+- NAVROS age depois
+- a leitura e integrada por uma ultima frase de continuidade
+
+Triade-base de abertura:
+
+> Voce nao esta aqui para aprender algo novo.  
+> Voce esta aqui para reconhecer onde ja esta.
+
+> Eu nao digo aonde voce deve ir.  
+> Eu ajudo voce a reconhecer de onde sair.
+
+> O caminho nao comeca quando voce decide andar.  
+> Ele comeca quando voce reconhece que ja esta dentro dele.
+
+Essa sequencia conduz a pessoa por tres estados:
+
+- reconhecimento
+- orientacao
+- movimento
 
 ## Tela de Entrada
 
@@ -39,12 +71,18 @@ Direcao visual:
 - ambiente simples
 - circulo suave pulsando
 - acolhimento sem excesso de teoria
+- um unico CTA principal
 
 Copy-base:
 
 > Bem-vindo ao Portal Lichtara.  
 > Este espaco existe para ajudar voce a navegar momentos de decisao e transicao.  
 > Seu primeiro encontro e com NAVROS, o arquetipo de orientacao.
+
+Ou, numa versao mais silenciosa e alinhada ao protocolo de entrada:
+
+> Voce nao esta aqui para aprender algo novo.  
+> Voce esta aqui para reconhecer onde ja esta.
 
 CTA principal:
 
@@ -200,6 +238,11 @@ Exemplo de ponte:
 Como expansao opcional, a bussola pode abrir a frase:
 
 > Cada direcao faz parte de um mapa maior.
+
+Depois da leitura NAVROS, o Livro Vivo pode fechar o circulo com a frase:
+
+> O caminho nao comeca quando voce decide andar.  
+> Ele comeca quando voce reconhece que ja esta dentro dele.
 
 CTA complementar:
 

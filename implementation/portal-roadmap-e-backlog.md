@@ -18,7 +18,7 @@ Os modulos minimos consolidados no material atual sao:
 
 | Modulo | Funcao | Entregavel minimo |
 | --- | --- | --- |
-| Landing | abrir o portal com proposta de valor clara | pagina unica com CTA principal |
+| Landing | abrir o portal com proposta de valor clara e estado interior adequado | pagina unica com triade de frases e CTA principal |
 | NAVROS | realizar leitura inicial de campo | fluxo curto com perguntas, bussola e sintese |
 | Agente Ativo | abrir continuidade imediata | painel contextual com pratica ou reflexao |
 | Mandala | mostrar o mapa vivo do sistema | home circular com centro NAVROS e agentes orbitais |
@@ -29,6 +29,10 @@ Os modulos minimos consolidados no material atual sao:
 Fluxo-base da V1:
 
 `landing -> consulta NAVROS -> bussola viva -> sintese -> agente ativo -> retorno ao portal`
+
+Com camada de abertura contemplativa:
+
+`landing -> protocolo de entrada -> consulta NAVROS -> bussola viva -> sintese -> agente ativo -> retorno ao portal`
 
 Fluxo expandido previsto:
 
@@ -96,6 +100,7 @@ Indicador de sucesso:
 ### Frontend
 
 Sprint 1:
+- abertura do portal com triade de frases e unico CTA
 - landing com CTA consultar NAVROS
 - tela de entrada NAVROS
 - pergunta 1, pergunta 2 e pergunta 3
@@ -190,6 +195,7 @@ O PDF traz um modelo inicial de ownership por frente. Mantendo a estrutura e rem
 
 Uma primeira versao pode ser considerada pronta quando:
 
+- a abertura cria estado de entrada sem excesso de explicacao
 - as cinco telas principais operam sem bloqueio
 - a bussola identifica uma direcao e para com suavidade
 - a sintese e gerada a partir das respostas e do proximo passo
@@ -202,6 +208,7 @@ Uma primeira versao pode ser considerada pronta quando:
 Antes de ampliar a experiencia, precisam estar estaveis:
 
 - textos finais de tela
+- triade de abertura consolidada
 - politica minima de privacidade
 - taxonomia de estados de campo
 - contrato do payload NAVROS
