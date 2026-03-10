@@ -137,3 +137,7 @@ Tudo descreve o mesmo organismo em linguagens diferentes.
 ## Nota de Consistencia
 
 O PDF-base alterna `ORION` e `ORIA` em trechos diferentes do desenho da mandala. Neste repositorio, `ORION` foi mantido como nome da fase de Integracao, e `ORIA` deve ser tratado como nome ainda nao consolidado no desenho estrutural ate revisao conceitual futura.
+
+## Leitura Complementar em Consolidacao
+
+Existe agora uma hipotese de trabalho que reorganiza os 16 agentes em quatro ciclos de transformacao humana alinhados ao Livro Vivo. Essa leitura foi registrada separadamente em [07_hipotese_dos_quatro_ciclos.md](07_hipotese_dos_quatro_ciclos.md) para nao sobrescrever a distribuicao canonica extraida do PDF-base.

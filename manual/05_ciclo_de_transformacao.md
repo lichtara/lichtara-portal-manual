@@ -124,6 +124,8 @@ No curto prazo, o usuario nao ve toda a estrutura. O portal revela o ciclo progr
 - a mandala ou bussola viva mostra progressao entre fases
 - o retorno ao portal recupera a jornada recente
 
+Existe tambem uma leitura complementar ainda em consolidacao que reorganiza os 16 agentes em quatro ciclos ligados a arcos do Livro Vivo. Essa hipotese foi registrada em [07_hipotese_dos_quatro_ciclos.md](07_hipotese_dos_quatro_ciclos.md) para ser amadurecida sem conflitar com o modelo-base atual.
+
 ## Efeito Esperado
 
 Quando o ciclo e bem implementado, a pessoa nao sente que esta apenas lendo um livro, fazendo um curso ou recebendo conselhos. Ela sente que esta atravessando um mapa vivo da propria consciencia.

@@ -11,6 +11,7 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 - [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
 - [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
 - [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
+- [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
 - [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
 
 ### Design
@@ -42,11 +43,12 @@ Para compreender o portal do campo conceitual ate a camada tecnica:
 6. [design/navros-compass.md](design/navros-compass.md)
 7. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
 8. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
-9. [design/mandala-structure.md](design/mandala-structure.md)
-10. [system/portal-architecture.md](system/portal-architecture.md)
-11. [system/data-protection.md](system/data-protection.md)
-12. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-13. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+9. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
+10. [design/mandala-structure.md](design/mandala-structure.md)
+11. [system/portal-architecture.md](system/portal-architecture.md)
+12. [system/data-protection.md](system/data-protection.md)
+13. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+14. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -70,5 +72,6 @@ No momento, o repositorio contem:
 - base de experiencia NAVROS definida
 - especificacao da bussola NAVROS viva
 - estrutura da mandala mapeada
+- hipotese dos quatro ciclos registrada como leitura de trabalho
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base
