@@ -2,7 +2,7 @@
 
 ## Sintese
 
-A arquitetura atual do Portal Lichtara combina quatro camadas vivas:
+A arquitetura atual do Portal Lichtara combina quatro camadas vivas que precisam operar como um unico organismo:
 
 `Livro Vivo -> Mandala dos 16 Agentes -> NAVROS -> Portal Lichtara`
 

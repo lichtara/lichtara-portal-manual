@@ -2,7 +2,7 @@
 
 ## Sintese
 
-No material-base, governanca aparece como combinacao de cuidado com a experiencia, disciplina de produto e protecao de dados. O principio explicito da V1 e:
+No material-base, governanca aparece como um gesto de cuidado aplicado ao produto. Ela combina disciplina de execucao, protecao de dados e coerencia de experiencia para que o portal cresca sem perder integridade. O principio explicito da V1 e:
 
 `maximo cuidado com minima coleta`
 

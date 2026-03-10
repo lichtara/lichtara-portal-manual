@@ -2,13 +2,13 @@
 
 ## Sintese
 
-O Portal Lichtara e um sistema de navegacao da consciencia pensado para ajudar a pessoa usuaria a reconhecer onde esta, compreender o campo atual e identificar um proximo passo verdadeiro.
+O Portal Lichtara se apresenta como um sistema de navegacao da consciencia. Sua funcao central e ajudar a pessoa usuaria a reconhecer onde esta, compreender o campo que atravessa e perceber qual e o proximo passo verdadeiro.
 
 Na formulacao atual do manual-base, a direcao mais forte para a Versao 1 combina utilidade imediata com linguagem simbolica propria:
 
 `diagnostico inicial -> jornada simbolica personalizada`
 
-Essa combinacao permite que o portal entregue clareza pratica desde o primeiro contato sem abrir mao da identidade conceitual de Lichtara.
+Essa combinacao permite que o portal entregue clareza pratica desde o primeiro contato sem perder a densidade simbolica que faz Lichtara ser reconhecivel como sistema proprio.
 
 ## Tres Modelos de Experiencia
 

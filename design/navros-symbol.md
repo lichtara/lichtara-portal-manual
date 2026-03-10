@@ -2,7 +2,7 @@
 
 ## Estado Atual da Referencia
 
-O manual-base ainda nao traz uma especificacao grafica fechada do simbolo Navros. O que existe hoje e um conjunto consistente de pistas conceituais, textuais e de comportamento visual.
+O manual-base ainda nao traz uma especificacao grafica fechada do simbolo Navros. O que ja existe, no entanto, e um eixo conceitual bastante consistente, feito de pistas textuais, simbolicas e comportamentais que podem orientar a construcao visual futura.
 
 ## Intencao Simbolica
 

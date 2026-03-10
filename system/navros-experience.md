@@ -2,7 +2,7 @@
 
 ## Sintese
 
-NAVROS e a porta de entrada do Portal Lichtara. A experiencia foi pensada para ser simples, calma, direta e util desde o primeiro encontro.
+NAVROS e a porta de entrada do Portal Lichtara. A experiencia foi desenhada para ser simples, calma, direta e util desde o primeiro encontro, sem abrir mao da profundidade que sustenta o sistema.
 
 Promessa central:
 

@@ -2,7 +2,7 @@
 
 ## Sintese
 
-A mandala e o mapa visual e sistemico do portal. Ela organiza agentes, fases da travessia e continuidade de jornada em uma interface circular progressiva.
+A mandala e o mapa visual e sistemico do portal. Ela organiza agentes, fases da travessia e continuidade de jornada em uma interface circular que precisa ser ao mesmo tempo legivel, viva e orientadora.
 
 ## Estrutura Base
 

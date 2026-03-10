@@ -2,7 +2,7 @@
 
 ## Sintese
 
-A mandala organiza a arquitetura simbolica e funcional do sistema Lichtara. Ela nao e apenas um elemento visual: funciona como mapa de navegacao da consciencia, acionado a partir da leitura inicial de NAVROS.
+A mandala organiza a arquitetura simbolica e funcional do sistema Lichtara. Mais do que um elemento visual, ela funciona como mapa de navegacao da consciencia e como linguagem estrutural para a progressao da jornada iniciada por NAVROS.
 
 ## Nucleo Operativo
 

@@ -2,11 +2,11 @@
 
 ## Sintese
 
-O ciclo vivo do portal e descrito como uma travessia em quatro grandes movimentos:
+O ciclo vivo do portal traduz a transformacao humana em quatro grandes movimentos. Cada fase nomeia um tipo de experiencia interna e oferece ao sistema um modo proprio de acompanhar essa travessia:
 
 `Percepcao -> Reorganizacao -> Movimento -> Integracao`
 
-Cada movimento corresponde a um estado humano, a um conjunto de agentes e a uma forma especifica de intervencao do sistema.
+Cada movimento corresponde a um estado humano, a um conjunto de agentes e a uma forma especifica de intervencao do portal.
 
 ## Fase 1: Percepcao
 

@@ -2,7 +2,7 @@
 
 ## Sintese
 
-A jornada desenhada no manual-base parte de uma entrada simples com NAVROS e evolui para uma travessia progressiva por agentes, fases e retornos de continuidade.
+A jornada desenhada no manual-base comeca com um encontro simples com NAVROS e se desdobra em uma travessia progressiva. O portal nao quer apenas responder a uma pergunta; quer acompanhar a pessoa em fases, agentes e retornos de continuidade.
 
 Fluxo-base da V1:
 

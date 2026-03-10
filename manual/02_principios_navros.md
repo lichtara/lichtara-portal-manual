@@ -2,7 +2,7 @@
 
 ## Sintese
 
-Os principios abaixo foram extraidos do posicionamento recorrente do manual-base. Eles orientam linguagem, produto, experiencia, dados e tomada de decisao no portal.
+Os principios abaixo formam o eixo de discernimento do portal. Eles orientam linguagem, produto, experiencia, dados e tomada de decisao para que o sistema permaneca coerente com a proposta de navegacao que sustenta Lichtara.
 
 ## Modelo de Orientacao
 

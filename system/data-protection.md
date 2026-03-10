@@ -2,7 +2,7 @@
 
 ## Sintese
 
-No Portal Lichtara, protecao de dados e parte do cuidado da experiencia. O material-base explicita que respostas profundas podem revelar dados sensiveis de contexto emocional, relacional e existencial.
+No Portal Lichtara, proteger dados e parte do mesmo gesto de cuidado que acolhe a experiencia. O material-base explicita que respostas profundas podem revelar dados sensiveis de contexto emocional, relacional e existencial.
 
 Referencia regulatoria mencionada:
 
