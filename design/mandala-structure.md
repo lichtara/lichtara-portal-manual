@@ -48,6 +48,8 @@ Essa versao funciona como leitura inicial do campo e evita sobrecarga cognitiva 
 
 Existe tambem uma leitura espacial complementar em consolidacao, registrada em [07_hipotese_dos_quatro_ciclos.md](../manual/07_hipotese_dos_quatro_ciclos.md), em que os quadrantes aparecem como quatro ciclos de transformacao orbitando o nucleo triadico.
 
+Como referencia visual mais pronta para manual e interface, a versao em Mermaid foi registrada em [mandala-geometry.md](mandala-geometry.md).
+
 ## Diagrama Espacial de Trabalho
 
 Como desenho textual de referencia, a mandala pode ser visualizada assim:

@@ -19,6 +19,7 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 - [design/navros-symbol.md](design/navros-symbol.md)
 - [design/navros-compass.md](design/navros-compass.md)
 - [design/mandala-structure.md](design/mandala-structure.md)
+- [design/mandala-geometry.md](design/mandala-geometry.md)
 
 ### Sistema
 
@@ -45,10 +46,11 @@ Para compreender o portal do campo conceitual ate a camada tecnica:
 8. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
 9. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
 10. [design/mandala-structure.md](design/mandala-structure.md)
-11. [system/portal-architecture.md](system/portal-architecture.md)
-12. [system/data-protection.md](system/data-protection.md)
-13. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-14. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+11. [design/mandala-geometry.md](design/mandala-geometry.md)
+12. [system/portal-architecture.md](system/portal-architecture.md)
+13. [system/data-protection.md](system/data-protection.md)
+14. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+15. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -73,5 +75,6 @@ No momento, o repositorio contem:
 - especificacao da bussola NAVROS viva
 - estrutura da mandala mapeada
 - hipotese dos quatro ciclos registrada como leitura de trabalho
+- geometria Mermaid da mandala pronta para manual e interface
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base

@@ -70,6 +70,8 @@ Leitura do anel:
 
 - agentes e estados distribuidos pelo campo da travessia
 
+Para a camada visual de trabalho em Mermaid, ver [mandala-geometry.md](../design/mandala-geometry.md).
+
 ## Sentido do Arranjo
 
 Nesse diagrama, a triade nao aparece apenas como uma lista conceitual. Ela passa a operar como centro de estabilidade do sistema:
