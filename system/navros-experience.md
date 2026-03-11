@@ -268,6 +268,17 @@ Mapeamento exploratorio:
 
 Essa camada nao precisa existir na primeira versao, mas oferece uma direcao forte para personalizar a entrada sem perder a unidade do sistema.
 
+Leitura operacional:
+
+- a rota da Percepcao funciona como micro-jornada de 5 estados
+- a rota da Estrutura funciona como micro-jornada de 5 estados
+- a rota da Acao funciona como micro-jornada de 6 estados
+
+Em experiencia, isso abre duas escalas dentro do mesmo portal:
+
+- jornada curta: uma rota completa para a necessidade do agora
+- jornada expandida: combinacao de rotas no retorno recorrente ao nucleo `NAVROS - SYNTARIS - FLUX`
+
 ## Efeito Desejado
 
 Ao final da primeira experiencia, a pessoa deve sentir:

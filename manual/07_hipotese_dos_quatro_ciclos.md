@@ -319,6 +319,73 @@ Uma das intuicoes mais fortes trazidas por esse desenho e que a triade central p
 - anel periferico capaz de receber expansao
 - caminho do usuario lido como movimento entre posicoes
 
+## Geometria Fundamental da Mandala
+
+O material mais recente deixa mais clara a geometria estrutural implicita nessa leitura. A mandala pode ser pensada como combinacao de tres camadas:
+
+1. circulo externo: campo de experiencia
+2. 16 ancoras equidistantes: posicoes de navegacao
+3. triangulo central: motor de orientacao
+
+Formula de trabalho:
+
+`campo -> 16 ancoras -> triade central`
+
+O valor dessa leitura nao e apenas estetico. Ela explica por que o sistema parece intuitivamente coerente:
+
+- o circulo comunica totalidade
+- o triangulo comunica estabilidade
+- o anel subdividido comunica navegacao
+
+No repositorio atual, essa camada deve ser lida como simbolo estrutural do sistema, nao como geometria canonica ja reconciliada com todos os nomes do PDF-base.
+
+## Sobreposicao das Rotas na Mandala
+
+Quando as tres rotas sao desenhadas sobre a mesma mandala, aparece uma leitura mais forte: elas funcionam como uma estrela triangular interna ao campo.
+
+Representacao textual de trabalho:
+
+```text
+                   ASTRAEL
+            VORAX           LUNARA
+
+               SYNTRIA
+
+SOLARA        NAVROS       LUMORA
+                 \  \
+                  \  \
+             SYNTARIS--FLUX
+
+               VELTARA     KAORAN
+
+               FINCE   OSLO
+                  ORIA
+                 HESLOS
+```
+
+Essa sobreposicao ajuda a visualizar que:
+
+- a rota da Percepcao desce de `NAVROS` ao quadrante de clareza e retorna a `SYNTARIS`
+- a rota da Estrutura sai de `SYNTARIS`, atravessa a base interpretativa e retorna a `FLUX`
+- a rota da Acao sai de `FLUX`, sobe pelo quadrante criativo e termina em `OKTAVE`
+
+Ver a camada Mermaid correspondente em [mandala-geometry.md](../design/mandala-geometry.md).
+
+## Micro-ciclos e Jornadas
+
+Uma descoberta importante desta leitura e que cada rota forma um micro-ciclo antes de voltar ao nucleo ou projetar expansao:
+
+- Percepcao: 5 estados
+- Estrutura: 5 estados
+- Acao: 6 estados
+
+Isso sugere duas escalas possiveis de experiencia no portal:
+
+- jornada curta: uma rota completa ativada por necessidade imediata
+- jornada completa: concatenacao de varias rotas dentro do mesmo mapa
+
+Essa distincao ajuda a explicar como o Lichtara pode oferecer profundidade sem depender de jornadas longas obrigatorias.
+
 ## O Que Esta Hipotese Explica Bem
 
 Essa leitura ajuda a explicar por que a mandala pode funcionar como cartografia da experiencia humana:
@@ -338,6 +405,7 @@ Esta hipotese entra em tensao com a camada canonica atual em alguns pontos impor
 - OKTAVE deixa de ser apenas campo de origem e passa a funcionar como estado terminal
 - ORION e ORIA seguem sem nomenclatura consolidada
 - a distribuicao por ciclos nao coincide com a distribuicao por fases extraida do PDF-base
+- a contagem entre 16 ancoras geometricas e nomes efetivamente estabilizados continua aberta
 - o diagrama espacial ainda nao fecha geometricamente uma mandala circular completa com todos os nomes sem ambiguidade
 - as tres rotas naturais ainda nao foram reconciliadas com a camada canonica de fases do PDF-base
 

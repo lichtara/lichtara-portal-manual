@@ -39,6 +39,20 @@ Esse arquivo materializa a camada `React + SVG` desta especificacao com:
 - `MandalaCanvas` controlado
 - `MandalaPrototype` autocontido para demonstracao local
 
+## Camadas de Geometria no Frontend
+
+O trabalho mais recente da mandala pede separar duas camadas geometricas:
+
+- geometria simbolica: circulo, 16 ancoras equidistantes e triangulo central
+- projecao de interface v0: distribuicao simplificada para SVG e interacao inicial
+
+No estado atual do repo:
+
+- [mandala-geometry.md](mandala-geometry.md) registra a geometria simbolica
+- [../implementation/frontend/mandala/MandalaCanvas.tsx](../implementation/frontend/mandala/MandalaCanvas.tsx) implementa a projecao v0
+
+Essa separacao e importante porque o simbolo estrutural da mandala ja esta ficando mais claro do que a sua primeira projecao tecnica.
+
 ## ViewBox de Referencia
 
 Para manter a implementacao simples e escalavel, a mandala pode usar um `viewBox` fixo:
@@ -53,6 +67,16 @@ Centro do sistema:
 cx = 500
 cy = 500
 ```
+
+Para a futura versao geometrica parametrica, o frontend pode derivar as ancoras do anel a partir de coordenadas polares:
+
+```text
+angleStep = 360 / 16
+x = cx + radius * cos(theta)
+y = cy + radius * sin(theta)
+```
+
+Isso ainda nao substitui a malha v0; apenas prepara a migracao para uma versao mais simbolica e regular do mapa.
 
 ## Mapa de Coordenadas
 
@@ -82,6 +106,7 @@ Notas:
 - `ORIA` entra aqui como no de trabalho para a rota de estrutura
 - `ORION`, `ANERA` e `ORIGEN` continuam fora desta malha exploratoria
 - o frontend deve tratar esta lista como `route overlay v0`, nao como modelo final do sistema
+- a geometria simbolica final deve permitir ancoras regulares mesmo quando parte dos nomes ainda estiver em revisao
 
 ## Contrato de Dados
 
