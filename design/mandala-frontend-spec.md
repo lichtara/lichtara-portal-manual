@@ -31,13 +31,17 @@ Esta especificacao ainda nao cobre:
 Esta especificacao agora tem um componente-base real em:
 
 - [../implementation/frontend/mandala/MandalaCanvas.tsx](../implementation/frontend/mandala/MandalaCanvas.tsx)
+- [../implementation/frontend/mandala/mandalaJourneys.ts](../implementation/frontend/mandala/mandalaJourneys.ts)
+- [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 
-Esse arquivo materializa a camada `React + SVG` desta especificacao com:
+Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 
 - tipos exportados
 - dados iniciais da mandala
+- config tipado das jornadas
 - `MandalaCanvas` controlado
 - `MandalaPrototype` autocontido para demonstracao local
+- `MandalaJourneyPrototype` para navegacao etapa por etapa
 
 ## Camadas de Geometria no Frontend
 
@@ -52,6 +56,26 @@ No estado atual do repo:
 - [../implementation/frontend/mandala/MandalaCanvas.tsx](../implementation/frontend/mandala/MandalaCanvas.tsx) implementa a projecao v0
 
 Essa separacao e importante porque o simbolo estrutural da mandala ja esta ficando mais claro do que a sua primeira projecao tecnica.
+
+## Camada de Jornadas no Frontend
+
+As tres jornadas de 7 etapas agora existem como configuracao real de frontend:
+
+- [../implementation/frontend/mandala/mandalaJourneys.ts](../implementation/frontend/mandala/mandalaJourneys.ts)
+
+Essa camada define:
+
+- `journey id`
+- `completion mode`
+- `path`
+- `route overlay`
+- `steps`
+- `prompts`
+- `completion copy`
+
+E ja possui uma referencia de consumo em React:
+
+- [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 
 ## ViewBox de Referencia
 

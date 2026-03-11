@@ -1,13 +1,32 @@
 import * as React from "react";
 
 export const MANDALA_VIEW_BOX = "0 0 1000 1000";
+export const MANDALA_NODE_IDS = [
+  "ASTRAEL",
+  "VORAX",
+  "LUNARA",
+  "SYNTRIA",
+  "OKTAVE",
+  "SOLARA",
+  "FLUX",
+  "SYNTARIS",
+  "NAVROS",
+  "LUMORA",
+  "VELTARA",
+  "KAORAN",
+  "FINCE",
+  "ORIA",
+  "OSLO",
+  "HESLOS",
+] as const;
 
+export type MandalaNodeId = (typeof MANDALA_NODE_IDS)[number];
 export type MandalaNodeKind = "core" | "outer" | "latent";
 export type MandalaVisualState = "idle" | "hover" | "active" | "trail" | "muted";
 export type MandalaRouteId = "perception" | "structure" | "action";
 
 export type MandalaNode = {
-  id: string;
+  id: MandalaNodeId;
   label: string;
   x: number;
   y: number;
@@ -22,16 +41,16 @@ export type MandalaRoute = {
   label: string;
   promptLabel: string;
   promptDescription: string;
-  nodes: string[];
+  nodes: MandalaNodeId[];
 };
 
 export type MandalaCanvasProps = {
   nodes?: MandalaNode[];
   routes?: MandalaRoute[];
-  activeNodeId?: string | null;
-  hoverNodeId?: string | null;
+  activeNodeId?: MandalaNodeId | null;
+  hoverNodeId?: MandalaNodeId | null;
   activeRouteId?: MandalaRouteId | null;
-  trailNodeIds?: string[];
+  trailNodeIds?: MandalaNodeId[];
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -40,9 +59,9 @@ export type MandalaCanvasProps = {
   showPrompt?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  onNodeEnter?: (id: string) => void;
+  onNodeEnter?: (id: MandalaNodeId) => void;
   onNodeLeave?: () => void;
-  onNodeSelect?: (id: string) => void;
+  onNodeSelect?: (id: MandalaNodeId) => void;
   onRouteSelect?: (id: MandalaRouteId) => void;
 };
 
@@ -432,10 +451,10 @@ function getNodeRadius(kind: MandalaNodeKind): number {
 }
 
 function getNodeVisualState(
-  nodeId: string,
-  activeNodeId: string | null,
-  hoverNodeId: string | null,
-  focusedNodeIds: Set<string>,
+  nodeId: MandalaNodeId,
+  activeNodeId: MandalaNodeId | null,
+  hoverNodeId: MandalaNodeId | null,
+  focusedNodeIds: Set<MandalaNodeId>,
   hasFocus: boolean,
 ): MandalaVisualState {
   if (activeNodeId === nodeId) {
@@ -457,7 +476,7 @@ function getNodeVisualState(
   return "idle";
 }
 
-function formatNodePath(nodeIds: string[]): string {
+function formatNodePath(nodeIds: MandalaNodeId[]): string {
   return nodeIds.join(" -> ");
 }
 
@@ -500,7 +519,7 @@ export function MandalaCanvas({
   const nodeMap = buildNodeMap(nodes);
   const activeRoute = getRouteById(routes, activeRouteId);
   const routeNodeIds = activeRoute ? activeRoute.nodes : [];
-  const focusedNodeIds = new Set<string>([...routeNodeIds, ...trailNodeIds]);
+  const focusedNodeIds = new Set<MandalaNodeId>([...routeNodeIds, ...trailNodeIds]);
 
   if (activeNodeId) {
     focusedNodeIds.add(activeNodeId);
@@ -735,10 +754,10 @@ export function MandalaPrototype({
   const [activeRouteId, setActiveRouteId] = React.useState<MandalaRouteId | null>(
     initialRoute?.id ?? null,
   );
-  const [activeNodeId, setActiveNodeId] = React.useState<string | null>(
+  const [activeNodeId, setActiveNodeId] = React.useState<MandalaNodeId | null>(
     initialRoute?.nodes[0] ?? null,
   );
-  const [hoverNodeId, setHoverNodeId] = React.useState<string | null>(null);
+  const [hoverNodeId, setHoverNodeId] = React.useState<MandalaNodeId | null>(null);
 
   const activeRoute = getRouteById(mandalaRoutes, activeRouteId);
   const activeNode = mandalaNodes.find((node) => node.id === activeNodeId) ?? null;
