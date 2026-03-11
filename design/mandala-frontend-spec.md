@@ -91,6 +91,7 @@ E ja possui uma referencia de consumo em React:
 
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../src/main.tsx](../src/main.tsx)
 
 Na camada de producao, `JourneyScreen` agora aceita props mais proximas de uso real:
 
@@ -108,6 +109,12 @@ A regra de negocio ja nao fica presa ao componente de tela:
 - `useJourneyAnalytics` concentra emissao de eventos e fechamento de jornada
 - `useJourneyHover` concentra hover e limpeza de estado efemero
 - `useJourneyCanvasSelection` traduz clique em no para etapa valida da jornada
+
+Na entrada React atual, a app de demonstracao ja valida essa API com:
+
+- persistencia via callback
+- leitura do ultimo progresso
+- log visivel de analytics emitidos
 
 ## ViewBox de Referencia
 

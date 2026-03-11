@@ -106,6 +106,7 @@ No momento, o repositorio contem:
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para separar estado e instrumentacao
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para separar a camada visual
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
+- app React Vite validando progresso persistido e analytics em `src/main.tsx`
 - prototipo `tsx` de jornada etapa por etapa sobre a mandala
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base
