@@ -53,3 +53,18 @@ export { MandalaJourneyPrototype } from "./MandalaJourneyPrototype";
 export type {
   MandalaJourneyPrototypeProps,
 } from "./MandalaJourneyPrototype";
+
+export {
+  emitJourneyAnalyticsForChange,
+  useJourneyAnalytics,
+} from "./useJourneyAnalytics";
+export type {
+  UseJourneyAnalyticsOptions,
+  UseJourneyAnalyticsResult,
+} from "./useJourneyAnalytics";
+
+export { useJourneyProgress } from "./useJourneyProgress";
+export type {
+  UseJourneyProgressOptions,
+  UseJourneyProgressResult,
+} from "./useJourneyProgress";

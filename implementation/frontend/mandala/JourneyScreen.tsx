@@ -9,23 +9,20 @@ import {
 import { JourneySelector } from "./JourneySelector";
 import { JourneyStepper } from "./JourneyStepper";
 import {
-  getSafeMandalaJourney,
-  getMandalaJourneyTrail,
-  isMandalaJourneyComplete,
   mandalaJourneys,
-  normalizeMandalaJourneyProgress,
-  type MandalaJourneyAnalyticsEvent,
   type MandalaJourney,
+  type MandalaJourneyAnalyticsEvent,
   type MandalaJourneyId,
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
-  type MandalaJourneyProgressSource,
 } from "./mandalaJourneys";
 import {
   getClosestJourneyStepIndex,
   journeyCx,
   MANDALA_JOURNEY_UI_CSS,
 } from "./journeyUI";
+import { useJourneyAnalytics } from "./useJourneyAnalytics";
+import { useJourneyProgress } from "./useJourneyProgress";
 
 export type JourneyScreenProps = {
   journeys?: MandalaJourney[];
@@ -34,6 +31,8 @@ export type JourneyScreenProps = {
   progress?: MandalaJourneyProgress;
   defaultProgress?: MandalaJourneyProgress;
   storageKey?: string;
+  loadPersistedProgress?: () => MandalaJourneyProgress | null | undefined;
+  onPersistProgress?: (progress: MandalaJourneyProgress) => void;
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -46,26 +45,6 @@ export type JourneyScreenProps = {
   onJourneyComplete?: (change: MandalaJourneyProgressChange) => void;
 };
 
-function readStoredJourneyProgress(
-  storageKey: string,
-): MandalaJourneyProgress | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  try {
-    const rawValue = window.localStorage.getItem(storageKey);
-
-    if (!rawValue) {
-      return null;
-    }
-
-    return JSON.parse(rawValue) as MandalaJourneyProgress;
-  } catch {
-    return null;
-  }
-}
-
 export function JourneyScreen({
   journeys = mandalaJourneys,
   initialJourneyId = "perception",
@@ -73,6 +52,8 @@ export function JourneyScreen({
   progress,
   defaultProgress,
   storageKey,
+  loadPersistedProgress,
+  onPersistProgress,
   width = "100%",
   height,
   title = "Por onde voce quer comecar?",
@@ -88,145 +69,35 @@ export function JourneyScreen({
     return null;
   }
 
-  const isControlled = progress !== undefined;
-  const [internalProgress, setInternalProgress] =
-    React.useState<MandalaJourneyProgress>(() => {
-      const storedProgress = storageKey
-        ? readStoredJourneyProgress(storageKey)
-        : null;
-
-      return normalizeMandalaJourneyProgress(
-        journeys,
-        defaultProgress ??
-          storedProgress ?? {
-            journeyId: initialJourneyId,
-            stepIndex: initialStepIndex,
-          },
-        initialJourneyId,
-      );
-    });
+  const { trackProgressChange } = useJourneyAnalytics({
+    onAnalyticsEvent,
+    onJourneyComplete,
+  });
+  const {
+    activeProgress,
+    activeJourney,
+    activeStep,
+    trailNodeIds,
+    isLastStep,
+    selectJourney,
+    selectStep,
+    goToPreviousStep,
+    goToNextStep,
+  } = useJourneyProgress({
+    journeys,
+    initialJourneyId,
+    initialStepIndex,
+    progress,
+    defaultProgress,
+    storageKey,
+    loadPersistedProgress,
+    onPersistProgress,
+    onProgressChange,
+    onProgressCommit: trackProgressChange,
+  });
   const [hoverNodeId, setHoverNodeId] = React.useState<MandalaNodeId | null>(
     null,
   );
-
-  const activeProgress = normalizeMandalaJourneyProgress(
-    journeys,
-    isControlled ? progress : internalProgress,
-    initialJourneyId,
-  );
-  const activeJourney = getSafeMandalaJourney(
-    journeys,
-    activeProgress.journeyId,
-    initialJourneyId,
-  );
-  const activeStep = activeJourney.steps[activeProgress.stepIndex];
-  const trailNodeIds = getMandalaJourneyTrail(
-    activeJourney,
-    activeProgress.stepIndex,
-  );
-  const isLastStep = isMandalaJourneyComplete(
-    activeJourney,
-    activeProgress.stepIndex,
-  );
-
-  React.useEffect(() => {
-    if (!storageKey || typeof window === "undefined") {
-      return;
-    }
-
-    try {
-      window.localStorage.setItem(storageKey, JSON.stringify(activeProgress));
-    } catch {
-      // Ignore storage failures so the journey keeps working.
-    }
-  }, [activeProgress, storageKey]);
-
-  function commitProgress(
-    nextProgressInput: MandalaJourneyProgress,
-    source: MandalaJourneyProgressSource,
-  ) {
-    const previousProgress = activeProgress;
-    const nextProgress = normalizeMandalaJourneyProgress(
-      journeys,
-      {
-        ...nextProgressInput,
-        updatedAt: new Date().toISOString(),
-      },
-      initialJourneyId,
-    );
-    const hasJourneyChanged =
-      previousProgress.journeyId !== nextProgress.journeyId;
-    const hasStepChanged =
-      previousProgress.stepIndex !== nextProgress.stepIndex;
-
-    if (!hasJourneyChanged && !hasStepChanged) {
-      return;
-    }
-
-    const nextJourney = getSafeMandalaJourney(
-      journeys,
-      nextProgress.journeyId,
-      initialJourneyId,
-    );
-    const nextStep = nextJourney.steps[nextProgress.stepIndex];
-    const previousJourney = getSafeMandalaJourney(
-      journeys,
-      previousProgress.journeyId,
-      initialJourneyId,
-    );
-    const wasComplete = isMandalaJourneyComplete(
-      previousJourney,
-      previousProgress.stepIndex,
-    );
-    const isComplete = isMandalaJourneyComplete(
-      nextJourney,
-      nextProgress.stepIndex,
-    );
-    const change: MandalaJourneyProgressChange = {
-      source,
-      journey: nextJourney,
-      step: nextStep,
-      isJourneyComplete: isComplete,
-      previousProgress,
-      nextProgress,
-    };
-
-    if (!isControlled) {
-      setInternalProgress(nextProgress);
-    }
-
-    onProgressChange?.(change);
-
-    if (hasJourneyChanged) {
-      onAnalyticsEvent?.({
-        type: "journey_selected",
-        source,
-        journeyId: nextJourney.id,
-        stepIndex: nextProgress.stepIndex,
-      });
-    }
-
-    onAnalyticsEvent?.({
-      type: "journey_step_changed",
-      source,
-      journeyId: nextJourney.id,
-      stepIndex: nextProgress.stepIndex,
-      stepId: nextStep.id,
-      nodeId: nextStep.nodeId,
-    });
-
-    if (!wasComplete && isComplete) {
-      onAnalyticsEvent?.({
-        type: "journey_completed",
-        source,
-        journeyId: nextJourney.id,
-        completionMode: nextJourney.completionMode,
-        finalNodeId: nextStep.nodeId,
-        stepIndex: nextProgress.stepIndex,
-      });
-      onJourneyComplete?.(change);
-    }
-  }
 
   return (
     <section className={journeyCx("journey-screen", className)} style={style}>
@@ -243,13 +114,7 @@ export function JourneyScreen({
           journeys={journeys}
           activeJourneyId={activeJourney.id}
           onJourneySelect={(journeyId) => {
-            commitProgress(
-              {
-                journeyId,
-                stepIndex: 0,
-              },
-              "selector",
-            );
+            selectJourney(journeyId);
             setHoverNodeId(null);
           }}
         />
@@ -277,13 +142,7 @@ export function JourneyScreen({
             );
 
             if (stepIndex >= 0) {
-              commitProgress(
-                {
-                  journeyId: activeJourney.id,
-                  stepIndex,
-                },
-                "canvas",
-              );
+              selectStep(stepIndex, "canvas");
             }
           }}
         />
@@ -291,47 +150,16 @@ export function JourneyScreen({
         <JourneyStepper
           journey={activeJourney}
           activeStepIndex={activeProgress.stepIndex}
-          onStepSelect={(stepIndex) =>
-            commitProgress(
-              {
-                journeyId: activeJourney.id,
-                stepIndex,
-              },
-              "stepper",
-            )
-          }
-          onPreviousStep={() =>
-            commitProgress(
-              {
-                journeyId: activeJourney.id,
-                stepIndex: Math.max(0, activeProgress.stepIndex - 1),
-              },
-              "previous",
-            )
-          }
+          onStepSelect={(stepIndex) => selectStep(stepIndex, "stepper")}
+          onPreviousStep={() => goToPreviousStep()}
           onNextStep={() => {
             if (isLastStep) {
-              commitProgress(
-                {
-                  journeyId: activeJourney.id,
-                  stepIndex: 0,
-                },
-                "restart",
-              );
+              goToNextStep();
               setHoverNodeId(null);
               return;
             }
 
-            commitProgress(
-              {
-                journeyId: activeJourney.id,
-                stepIndex: Math.min(
-                  activeJourney.steps.length - 1,
-                  activeProgress.stepIndex + 1,
-                ),
-              },
-              "next",
-            );
+            goToNextStep();
           }}
         />
       </div>

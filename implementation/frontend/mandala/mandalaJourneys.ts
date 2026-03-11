@@ -64,6 +64,9 @@ export type MandalaJourneyProgressSource =
 
 export type MandalaJourneyProgressChange = {
   source: MandalaJourneyProgressSource;
+  previousJourney: MandalaJourney;
+  previousStep: MandalaJourneyStep;
+  wasJourneyComplete: boolean;
   journey: MandalaJourney;
   step: MandalaJourneyStep;
   isJourneyComplete: boolean;

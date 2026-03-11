@@ -36,6 +36,8 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../implementation/frontend/mandala/useJourneyProgress.ts](../implementation/frontend/mandala/useJourneyProgress.ts)
+- [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
 - [../implementation/frontend/mandala/index.ts](../implementation/frontend/mandala/index.ts)
 
 Esses arquivos materializam a camada `React + SVG` desta especificacao com:
@@ -47,6 +49,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `MandalaPrototype` autocontido para demonstracao local
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
+- hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
 - `index.ts` como ponto unico de export
 
 ## Camadas de Geometria no Frontend
@@ -90,9 +93,16 @@ Na camada de producao, `JourneyScreen` agora aceita props mais proximas de uso r
 
 - `progress` e `defaultProgress`
 - `storageKey`
+- `loadPersistedProgress`
+- `onPersistProgress`
 - `onProgressChange`
 - `onAnalyticsEvent`
 - `onJourneyComplete`
+
+A regra de negocio ja nao fica presa ao componente de tela:
+
+- `useJourneyProgress` concentra controle, persistencia e navegacao
+- `useJourneyAnalytics` concentra emissao de eventos e fechamento de jornada
 
 ## ViewBox de Referencia
 
