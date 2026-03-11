@@ -40,6 +40,8 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [implementation/frontend/mandala/useJourneyProgress.ts](implementation/frontend/mandala/useJourneyProgress.ts)
 - [implementation/frontend/mandala/useJourneyAnalytics.ts](implementation/frontend/mandala/useJourneyAnalytics.ts)
+- [implementation/frontend/mandala/useJourneyHover.ts](implementation/frontend/mandala/useJourneyHover.ts)
+- [implementation/frontend/mandala/useJourneyCanvasSelection.ts](implementation/frontend/mandala/useJourneyCanvasSelection.ts)
 - [implementation/frontend/mandala/index.ts](implementation/frontend/mandala/index.ts)
 
 ## Ordem de Leitura Recomendada
@@ -102,6 +104,7 @@ No momento, o repositorio contem:
 - config frontend das jornadas de 7 etapas
 - composicao de producao das jornadas em `JourneySelector`, `JourneyStepper` e `JourneyScreen`
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para separar estado e instrumentacao
+- hooks `useJourneyHover` e `useJourneyCanvasSelection` para separar a camada visual
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
 - prototipo `tsx` de jornada etapa por etapa sobre a mandala
 - camada inicial de arquitetura, dados e governanca

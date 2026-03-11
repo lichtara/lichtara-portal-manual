@@ -68,3 +68,15 @@ export type {
   UseJourneyProgressOptions,
   UseJourneyProgressResult,
 } from "./useJourneyProgress";
+
+export {
+  resolveJourneyCanvasStepIndex,
+  useJourneyCanvasSelection,
+} from "./useJourneyCanvasSelection";
+export type {
+  UseJourneyCanvasSelectionOptions,
+  UseJourneyCanvasSelectionResult,
+} from "./useJourneyCanvasSelection";
+
+export { useJourneyHover } from "./useJourneyHover";
+export type { UseJourneyHoverResult } from "./useJourneyHover";

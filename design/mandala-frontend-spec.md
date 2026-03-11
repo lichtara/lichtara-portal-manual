@@ -38,6 +38,8 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [../implementation/frontend/mandala/useJourneyProgress.ts](../implementation/frontend/mandala/useJourneyProgress.ts)
 - [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
+- [../implementation/frontend/mandala/useJourneyHover.ts](../implementation/frontend/mandala/useJourneyHover.ts)
+- [../implementation/frontend/mandala/useJourneyCanvasSelection.ts](../implementation/frontend/mandala/useJourneyCanvasSelection.ts)
 - [../implementation/frontend/mandala/index.ts](../implementation/frontend/mandala/index.ts)
 
 Esses arquivos materializam a camada `React + SVG` desta especificacao com:
@@ -50,6 +52,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
+- hooks `useJourneyHover` e `useJourneyCanvasSelection` para isolar estado efemero e selecao visual
 - `index.ts` como ponto unico de export
 
 ## Camadas de Geometria no Frontend
@@ -103,6 +106,8 @@ A regra de negocio ja nao fica presa ao componente de tela:
 
 - `useJourneyProgress` concentra controle, persistencia e navegacao
 - `useJourneyAnalytics` concentra emissao de eventos e fechamento de jornada
+- `useJourneyHover` concentra hover e limpeza de estado efemero
+- `useJourneyCanvasSelection` traduz clique em no para etapa valida da jornada
 
 ## ViewBox de Referencia
 
