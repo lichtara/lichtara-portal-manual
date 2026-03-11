@@ -76,6 +76,16 @@ Quando novos conteudos chegarem, a regra editorial atual e simples:
 - experiencia, dados e arquitetura entram em `system/`
 - backlog, cronograma e execucao entram em `implementation/`
 
+## Ambiente React
+
+O repositorio agora pode renderizar o prototipo da mandala em React com Vite.
+
+1. Instale as dependencias com `npm install`
+2. Rode o ambiente local com `npm run dev`
+3. Gere build de verificacao com `npm run build`
+
+A entrada da aplicacao fica em `src/main.tsx` e reutiliza os componentes em `implementation/frontend/mandala/`.
+
 ## Estado do Trabalho
 
 No momento, o repositorio contem:
