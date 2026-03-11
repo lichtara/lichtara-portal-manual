@@ -4,7 +4,6 @@ import {
   MandalaCanvas,
   mandalaNodes,
   mandalaRoutes,
-  type MandalaNodeId,
 } from "./MandalaCanvas";
 import { JourneySelector } from "./JourneySelector";
 import { JourneyStepper } from "./JourneyStepper";
@@ -16,12 +15,10 @@ import {
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
 } from "./mandalaJourneys";
-import {
-  getClosestJourneyStepIndex,
-  journeyCx,
-  MANDALA_JOURNEY_UI_CSS,
-} from "./journeyUI";
+import { journeyCx, MANDALA_JOURNEY_UI_CSS } from "./journeyUI";
 import { useJourneyAnalytics } from "./useJourneyAnalytics";
+import { useJourneyCanvasSelection } from "./useJourneyCanvasSelection";
+import { useJourneyHover } from "./useJourneyHover";
 import { useJourneyProgress } from "./useJourneyProgress";
 
 export type JourneyScreenProps = {
@@ -95,9 +92,15 @@ export function JourneyScreen({
     onProgressChange,
     onProgressCommit: trackProgressChange,
   });
-  const [hoverNodeId, setHoverNodeId] = React.useState<MandalaNodeId | null>(
-    null,
-  );
+  const { hoverNodeId, handleNodeEnter, handleNodeLeave, clearHover } =
+    useJourneyHover();
+  const { handleNodeSelect } = useJourneyCanvasSelection({
+    activeJourney,
+    activeProgress,
+    onSelectStep(stepIndex) {
+      selectStep(stepIndex, "canvas");
+    },
+  });
 
   return (
     <section className={journeyCx("journey-screen", className)} style={style}>
@@ -115,7 +118,7 @@ export function JourneyScreen({
           activeJourneyId={activeJourney.id}
           onJourneySelect={(journeyId) => {
             selectJourney(journeyId);
-            setHoverNodeId(null);
+            clearHover();
           }}
         />
       ) : null}
@@ -132,19 +135,9 @@ export function JourneyScreen({
           trailNodeIds={trailNodeIds}
           title={activeJourney.title}
           subtitle={activeJourney.centralQuestion}
-          onNodeEnter={setHoverNodeId}
-          onNodeLeave={() => setHoverNodeId(null)}
-          onNodeSelect={(nodeId) => {
-            const stepIndex = getClosestJourneyStepIndex(
-              nodeId,
-              activeProgress.stepIndex,
-              activeJourney.steps,
-            );
-
-            if (stepIndex >= 0) {
-              selectStep(stepIndex, "canvas");
-            }
-          }}
+          onNodeEnter={handleNodeEnter}
+          onNodeLeave={handleNodeLeave}
+          onNodeSelect={handleNodeSelect}
         />
 
         <JourneyStepper
@@ -155,7 +148,7 @@ export function JourneyScreen({
           onNextStep={() => {
             if (isLastStep) {
               goToNextStep();
-              setHoverNodeId(null);
+              clearHover();
               return;
             }
 
