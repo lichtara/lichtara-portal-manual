@@ -386,6 +386,92 @@ Isso sugere duas escalas possiveis de experiencia no portal:
 
 Essa distincao ajuda a explicar como o Lichtara pode oferecer profundidade sem depender de jornadas longas obrigatorias.
 
+## Jornadas de 7 Etapas
+
+Uma derivacao natural dessas rotas e transforma-las em jornadas guiadas de 7 etapas. O ganho dessa escolha e psicologico e operacional ao mesmo tempo: a travessia fica profunda o suficiente para gerar sentido e curta o suficiente para ser concluida.
+
+Padrao sugerido:
+
+1. entrada
+2. percepcao
+3. compreensao
+4. integracao
+5. movimento
+6. expansao
+7. retorno consciente
+
+O papel de `NAVROS` nesse desenho e funcionar como orientacao renovada no inicio e, idealmente, tambem no fim.
+
+### Jornada 1: Caminho da Percepcao
+
+Fluxo:
+
+`NAVROS -> LUMORA -> OSLO -> KAORAN -> SYNTARIS -> FLUX -> NAVROS`
+
+Pergunta central:
+
+> O que realmente esta acontecendo na minha vida?
+
+Leitura humana:
+
+- NAVROS: reconhecer onde estou
+- LUMORA: perceber padroes
+- OSLO: compreender o campo
+- KAORAN: proteger e filtrar
+- SYNTARIS: alinhar internamente
+- FLUX: iniciar movimento
+- NAVROS: orientacao renovada
+
+### Jornada 2: Caminho da Estrutura
+
+Fluxo:
+
+`NAVROS -> SYNTARIS -> FINCE -> ORIA -> HESLOS -> FLUX -> NAVROS`
+
+Pergunta central:
+
+> Como organizar minha vida de forma coerente?
+
+Leitura humana:
+
+- NAVROS: reconhecer posicao
+- SYNTARIS: estabilizar
+- FINCE: interpretar padroes
+- ORIA: abrir possibilidades
+- HESLOS: integrar dimensoes
+- FLUX: agir com coerencia
+- NAVROS: nova direcao
+
+### Jornada 3: Caminho da Acao
+
+Fluxo:
+
+`NAVROS -> FLUX -> SOLARA -> VELTARA -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Pergunta central:
+
+> Como transformar minha visao em realidade?
+
+Leitura humana:
+
+- NAVROS: reconhecer direcao
+- FLUX: iniciar movimento
+- SOLARA: energia criativa
+- VELTARA: integracao
+- SYNTRIA: expressao
+- ASTRAEL: visao ampliada
+- OKTAVE: harmonia sistemica
+
+### Leitura Estrutural das Jornadas
+
+Vistas em conjunto, as tres jornadas transformam a mandala em travessia guiada:
+
+- `Percepcao`: comeca em NAVROS, atravessa clareza e retorna ao centro
+- `Estrutura`: comeca em NAVROS, organiza coerencia e retorna ao centro
+- `Acao`: comeca em NAVROS, sobe por criacao e se resolve em `OKTAVE`
+
+Essa terceira jornada introduz uma tensao util no modelo: se a teoria geral fala em retorno ao centro, a formulacao atual da rota de Acao ainda fecha em `OKTAVE`. Isso precisa ser mantido como ponto aberto, nao como contradicao apagada.
+
 ## O Que Esta Hipotese Explica Bem
 
 Essa leitura ajuda a explicar por que a mandala pode funcionar como cartografia da experiencia humana:
@@ -408,6 +494,7 @@ Esta hipotese entra em tensao com a camada canonica atual em alguns pontos impor
 - a contagem entre 16 ancoras geometricas e nomes efetivamente estabilizados continua aberta
 - o diagrama espacial ainda nao fecha geometricamente uma mandala circular completa com todos os nomes sem ambiguidade
 - as tres rotas naturais ainda nao foram reconciliadas com a camada canonica de fases do PDF-base
+- as jornadas de 7 etapas ainda precisam decidir se toda travessia retorna explicitamente a NAVROS ou se algumas se resolvem em agentes terminais como `OKTAVE`
 
 Esses pontos precisam de reconciliacao antes de essa leitura substituir o modelo atual.
 

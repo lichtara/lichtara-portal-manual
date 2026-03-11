@@ -125,6 +125,34 @@ Objetivo do retorno:
 - reforcar percepcao de processo vivo
 - manter a pessoa dentro de um mapa compreensivel
 
+## Expansao: Jornadas de 7 Etapas
+
+Como evolucao natural das rotas da mandala, o portal pode oferecer jornadas guiadas de 7 etapas. A vantagem dessa estrutura e manter profundidade sem alongar demais a travessia.
+
+Padrao-base:
+
+1. entrada
+2. percepcao
+3. compreensao
+4. integracao
+5. movimento
+6. expansao
+7. retorno consciente
+
+Leitura operacional:
+
+- `Percepcao`: `NAVROS -> LUMORA -> OSLO -> KAORAN -> SYNTARIS -> FLUX -> NAVROS`
+- `Estrutura`: `NAVROS -> SYNTARIS -> FINCE -> ORIA -> HESLOS -> FLUX -> NAVROS`
+- `Acao`: `NAVROS -> FLUX -> SOLARA -> VELTARA -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Em interface, isso permite trocar um menu amplo por tres entradas legiveis:
+
+- compreender o que esta acontecendo
+- organizar minha vida ou projeto
+- criar movimento e transformacao
+
+Cada etapa pode aparecer como um agente da mandala com uma unica reflexao, uma acao breve e um avanco claro para o proximo passo.
+
 ## Pontos de Contato Principais
 
 - landing com proposta de valor
@@ -134,6 +162,8 @@ Objetivo do retorno:
 - micro-ritual de leitura
 - sintese NAVROS
 - painel do agente ativo
+- seletor de jornadas de 7 etapas
+- stepper da jornada ativa
 - mandala ou bussola viva da jornada
 - historico de retorno
 
@@ -150,4 +180,5 @@ Objetivo do retorno:
 - a pessoa conclui a primeira travessia em poucos minutos
 - a sintese gera percepcao real de clareza
 - ha desejo de continuar para o agente ativo
+- a jornada guiada de 7 etapas pode ser completada sem fadiga
 - o retorno ao portal produz sensacao de continuidade

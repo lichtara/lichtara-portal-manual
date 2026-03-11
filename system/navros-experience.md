@@ -279,6 +279,44 @@ Em experiencia, isso abre duas escalas dentro do mesmo portal:
 - jornada curta: uma rota completa para a necessidade do agora
 - jornada expandida: combinacao de rotas no retorno recorrente ao nucleo `NAVROS - SYNTARIS - FLUX`
 
+## Jornadas Guiadas de 7 Etapas
+
+Uma camada seguinte da experiencia pode transformar as rotas em jornadas guiadas. Nessa leitura, o usuario deixa de apenas receber uma leitura e passa a atravessar um microciclo completo.
+
+Estrutura-base:
+
+1. entrada
+2. percepcao
+3. compreensao
+4. integracao
+5. movimento
+6. expansao
+7. retorno consciente
+
+Mapas de jornada:
+
+- `Percepcao`: `NAVROS -> LUMORA -> OSLO -> KAORAN -> SYNTARIS -> FLUX -> NAVROS`
+- `Estrutura`: `NAVROS -> SYNTARIS -> FINCE -> ORIA -> HESLOS -> FLUX -> NAVROS`
+- `Acao`: `NAVROS -> FLUX -> SOLARA -> VELTARA -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Fluxo de interface sugerido:
+
+1. escolha da jornada
+2. apresentacao de cada agente como etapa ativa
+3. reflexao ou gesto breve por etapa
+4. avancar para a proxima posicao da mandala
+5. fechar a travessia com nova orientacao
+
+Frase de fechamento sugerida:
+
+> Voce voltou ao NAVROS.  
+> Agora voce ve o campo de forma diferente.
+
+Observacao de modelagem:
+
+- as jornadas de `Percepcao` e `Estrutura` retornam explicitamente a `NAVROS`
+- a jornada de `Acao` ainda termina em `OKTAVE`, o que deixa aberta a decisao sobre retorno simbolico ou retorno explicito ao centro
+
 ## Efeito Desejado
 
 Ao final da primeira experiencia, a pessoa deve sentir:

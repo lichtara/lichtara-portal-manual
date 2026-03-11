@@ -120,6 +120,7 @@ Sprint 3:
 - home da mandala viva
 - alternancia entre modo navegacao e modo exploracao
 - seletor de rotas `compreender / organizar / agir`
+- stepper de jornadas guiadas de 7 etapas
 - trilha recente
 - tela de agente ativo
 - fluxo de comunidade
@@ -142,6 +143,7 @@ Sprint 2:
 
 Sprint 3:
 - orquestracao multi-jornada
+- estado de progressao por etapa da jornada
 - moderacao de compartilhamentos
 - controles avancados de operacao
 
@@ -178,6 +180,7 @@ Ordem consolidada a partir do material:
 9. persistencia e retorno
 10. trilha recente
 11. modos navegacao e exploracao
+12. jornadas guiadas de 7 etapas
 
 ## Owners por Frente
 
@@ -236,3 +239,4 @@ Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:
 - criterios de rollout entre V1 fechada e abertura publica
 - regra de transicao entre bussola de 4 direcoes e mandala completa
 - momento exato de entrada do seletor de rotas naturais
+- regra de fechamento das jornadas de 7 etapas, especialmente na passagem entre `ASTRAEL`, `OKTAVE` e `NAVROS`
