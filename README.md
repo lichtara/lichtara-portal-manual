@@ -20,6 +20,7 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 - [design/navros-compass.md](design/navros-compass.md)
 - [design/mandala-structure.md](design/mandala-structure.md)
 - [design/mandala-geometry.md](design/mandala-geometry.md)
+- [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
 
 ### Sistema
 
@@ -31,6 +32,7 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 ### Implementacao
 
 - [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+- [implementation/frontend/mandala/MandalaCanvas.tsx](implementation/frontend/mandala/MandalaCanvas.tsx)
 
 ## Ordem de Leitura Recomendada
 
@@ -47,10 +49,11 @@ Para compreender o portal do campo conceitual ate a camada tecnica:
 9. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
 10. [design/mandala-structure.md](design/mandala-structure.md)
 11. [design/mandala-geometry.md](design/mandala-geometry.md)
-12. [system/portal-architecture.md](system/portal-architecture.md)
-13. [system/data-protection.md](system/data-protection.md)
-14. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-15. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+12. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
+13. [system/portal-architecture.md](system/portal-architecture.md)
+14. [system/data-protection.md](system/data-protection.md)
+15. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+16. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -76,5 +79,7 @@ No momento, o repositorio contem:
 - estrutura da mandala mapeada
 - hipotese dos quatro ciclos registrada como leitura de trabalho
 - geometria Mermaid da mandala pronta para manual e interface
+- especificacao frontend da mandala com contrato React/SVG
+- componente-base `tsx` da mandala com dados iniciais e prototipo interativo
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base

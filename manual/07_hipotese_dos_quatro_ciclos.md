@@ -209,6 +209,107 @@ Se essa leitura se confirmar, a experiencia do usuario pode ser lida como movime
 
 Isso reforca a intuicao de que o portal nao entrega apenas paginas ou modulos. Ele permite deslocamentos entre estados da experiencia humana.
 
+## Tres Rotas Naturais
+
+Quando a mandala e lida como campo de navegacao, e nao apenas como diagrama estatico, surgem tres rotas naturais de entrada pela experiencia humana. Elas nascem da propria triade central:
+
+- NAVROS: onde estou
+- SYNTARIS: o que precisa se alinhar
+- FLUX: qual e o proximo movimento
+
+Essas tres perguntas abrem vetores diferentes pela mandala. Nem toda pessoa deve iniciar a travessia pelo mesmo ponto.
+
+### Rota 1: Percepcao
+
+Entrada:
+- NAVROS
+
+Percurso proposto:
+
+`NAVROS -> LUMORA -> OSLO -> KAORAN -> SYNTARIS`
+
+Experiencia humana:
+
+`desorientacao -> percepcao -> clareza -> protecao do campo -> alinhamento interno`
+
+Perfil de entrada:
+
+- buscadores
+- pessoas em transicao
+- quem atravessa crise existencial
+
+Modo sugerido no portal:
+
+- `Explorar o Campo`
+
+### Rota 2: Estrutura
+
+Entrada:
+- SYNTARIS
+
+Percurso proposto:
+
+`SYNTARIS -> FINCE -> ORIA -> HESLOS -> FLUX`
+
+Experiencia humana:
+
+`equilibrio -> interpretacao -> abertura de possibilidades -> integracao -> movimento alinhado`
+
+Perfil de entrada:
+
+- lideres
+- profissionais em decisao
+- pessoas estruturando projetos
+
+Modo sugerido no portal:
+
+- `Organizar a Vida`
+
+### Rota 3: Acao
+
+Entrada:
+- FLUX
+
+Percurso proposto:
+
+`FLUX -> SOLARA -> VELTARA -> SYNTRIA -> ASTRAEL -> OKTAVE`
+
+Experiencia humana:
+
+`movimento -> criacao -> integracao -> expressao -> visao ampliada -> harmonia sistemica`
+
+Perfil de entrada:
+
+- criadores
+- empreendedores
+- agentes de transformacao
+
+Modo sugerido no portal:
+
+- `Criar Movimento`
+
+## Pergunta Elegante de Entrada
+
+Em vez de perguntar apenas `por onde comecar?`, o portal pode abrir com:
+
+> O que voce precisa agora?
+
+Opcoes de trabalho:
+
+- compreender
+- organizar
+- agir
+
+Cada escolha aciona uma rota diferente na mandala, sem quebrar a unidade do sistema.
+
+## Convergencia no Nucleo
+
+O detalhe mais importante e que as tres rotas convergem novamente para o nucleo triadico. Isso cria um ciclo vivo de navegacao:
+
+`percepcao -> estrutura -> acao -> retorno ao centro`
+
+Essa convergencia e uma das razoes pelas quais o sistema parece intuitivamente coerente.
+
 ## Triade Central e Estabilidade
 
 Uma das intuicoes mais fortes trazidas por esse desenho e que a triade central parece formar uma estrutura de estabilidade dentro da mandala. Ainda nao ha geometria fechada no repositorio, mas o comportamento esperado do simbolo aponta para:
@@ -238,6 +339,7 @@ Esta hipotese entra em tensao com a camada canonica atual em alguns pontos impor
 - ORION e ORIA seguem sem nomenclatura consolidada
 - a distribuicao por ciclos nao coincide com a distribuicao por fases extraida do PDF-base
 - o diagrama espacial ainda nao fecha geometricamente uma mandala circular completa com todos os nomes sem ambiguidade
+- as tres rotas naturais ainda nao foram reconciliadas com a camada canonica de fases do PDF-base
 
 Esses pontos precisam de reconciliacao antes de essa leitura substituir o modelo atual.
 

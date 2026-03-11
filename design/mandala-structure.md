@@ -50,6 +50,8 @@ Existe tambem uma leitura espacial complementar em consolidacao, registrada em [
 
 Como referencia visual mais pronta para manual e interface, a versao em Mermaid foi registrada em [mandala-geometry.md](mandala-geometry.md).
 
+Como ponte direta para implementacao, o contrato mais proximo do frontend foi registrado em [mandala-frontend-spec.md](mandala-frontend-spec.md).
+
 ## Diagrama Espacial de Trabalho
 
 Como desenho textual de referencia, a mandala pode ser visualizada assim:
@@ -83,12 +85,23 @@ Se o portal evoluir da bussola para a mandala completa, a interface pode apresen
 - centro: motor de navegacao
 - anel: agentes e estados
 - trilha: caminho recente do usuario
+- rotas: vetores naturais de entrada
 
 Exemplo de leitura de percurso:
 
 `NAVROS -> LUMORA -> SYNTARIS -> FLUX -> SYNTRIA -> ASTRAEL -> OKTAVE`
 
 Isso reforca a ideia de que a mandala nao e apenas iconografia. Ela precisa funcionar como mapa navegavel da experiencia.
+
+Pergunta de entrada sugerida para a camada de rotas:
+
+`O que voce precisa agora?`
+
+Opcoes de trabalho:
+
+- compreender
+- organizar
+- agir
 
 ## Modelo Interativo
 

@@ -248,6 +248,26 @@ CTA complementar:
 
 `Explorar o mapa`
 
+## Rotas Naturais de Entrada
+
+Como expansao da experiencia, o portal pode oferecer tres vetores de entrada pela mandala a partir de uma pergunta simples:
+
+> O que voce precisa agora?
+
+Opcoes-base:
+
+- compreender
+- organizar
+- agir
+
+Mapeamento exploratorio:
+
+- compreender -> rota da Percepcao
+- organizar -> rota da Estrutura
+- agir -> rota da Acao
+
+Essa camada nao precisa existir na primeira versao, mas oferece uma direcao forte para personalizar a entrada sem perder a unidade do sistema.
+
 ## Efeito Desejado
 
 Ao final da primeira experiencia, a pessoa deve sentir:

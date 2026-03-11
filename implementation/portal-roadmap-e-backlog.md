@@ -119,6 +119,7 @@ Sprint 2:
 Sprint 3:
 - home da mandala viva
 - alternancia entre modo navegacao e modo exploracao
+- seletor de rotas `compreender / organizar / agir`
 - trilha recente
 - tela de agente ativo
 - fluxo de comunidade
@@ -234,3 +235,4 @@ Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:
 - relacao entre Livro Vivo interativo e consulta NAVROS isolada
 - criterios de rollout entre V1 fechada e abertura publica
 - regra de transicao entre bussola de 4 direcoes e mandala completa
+- momento exato de entrada do seletor de rotas naturais
