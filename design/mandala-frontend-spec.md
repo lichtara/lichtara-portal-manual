@@ -36,6 +36,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../implementation/frontend/mandala/index.ts](../implementation/frontend/mandala/index.ts)
 
 Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 
@@ -46,6 +47,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `MandalaPrototype` autocontido para demonstracao local
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
+- `index.ts` como ponto unico de export
 
 ## Camadas de Geometria no Frontend
 
@@ -76,11 +78,21 @@ Essa camada define:
 - `steps`
 - `prompts`
 - `completion copy`
+- `progress`
+- `analytics event`
 
 E ja possui uma referencia de consumo em React:
 
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+
+Na camada de producao, `JourneyScreen` agora aceita props mais proximas de uso real:
+
+- `progress` e `defaultProgress`
+- `storageKey`
+- `onProgressChange`
+- `onAnalyticsEvent`
+- `onJourneyComplete`
 
 ## ViewBox de Referencia
 

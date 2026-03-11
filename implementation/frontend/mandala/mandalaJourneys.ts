@@ -45,6 +45,56 @@ export type MandalaJourney = {
   steps: MandalaJourneyStep[];
 };
 
+export type MandalaJourneyProgress = {
+  journeyId: MandalaJourneyId;
+  stepIndex: number;
+  updatedAt?: string;
+};
+
+export type MandalaJourneyProgressSource =
+  | "initial"
+  | "selector"
+  | "stepper"
+  | "canvas"
+  | "next"
+  | "previous"
+  | "restart"
+  | "external"
+  | "storage";
+
+export type MandalaJourneyProgressChange = {
+  source: MandalaJourneyProgressSource;
+  journey: MandalaJourney;
+  step: MandalaJourneyStep;
+  isJourneyComplete: boolean;
+  previousProgress: MandalaJourneyProgress;
+  nextProgress: MandalaJourneyProgress;
+};
+
+export type MandalaJourneyAnalyticsEvent =
+  | {
+      type: "journey_selected";
+      source: MandalaJourneyProgressSource;
+      journeyId: MandalaJourneyId;
+      stepIndex: number;
+    }
+  | {
+      type: "journey_step_changed";
+      source: MandalaJourneyProgressSource;
+      journeyId: MandalaJourneyId;
+      stepIndex: number;
+      stepId: string;
+      nodeId: MandalaNodeId;
+    }
+  | {
+      type: "journey_completed";
+      source: MandalaJourneyProgressSource;
+      journeyId: MandalaJourneyId;
+      completionMode: MandalaJourneyCompletionMode;
+      finalNodeId: MandalaNodeId;
+      stepIndex: number;
+    };
+
 export const mandalaJourneyOrder: MandalaJourneyId[] = [
   "perception",
   "structure",
@@ -394,6 +444,63 @@ export function getMandalaJourneyById(
   }
 
   return mandalaJourneys.find((journey) => journey.id === journeyId) ?? null;
+}
+
+export function getSafeMandalaJourney(
+  journeys: MandalaJourney[],
+  journeyId: MandalaJourneyId | null | undefined,
+  fallbackJourneyId?: MandalaJourneyId,
+): MandalaJourney {
+  const matchingJourney =
+    (journeyId
+      ? journeys.find((journey) => journey.id === journeyId)
+      : undefined) ??
+    (fallbackJourneyId
+      ? journeys.find((journey) => journey.id === fallbackJourneyId)
+      : undefined) ??
+    journeys[0];
+
+  return matchingJourney;
+}
+
+export function clampMandalaJourneyStepIndex(
+  journey: MandalaJourney,
+  stepIndex: number,
+): number {
+  if (journey.steps.length === 0) {
+    return 0;
+  }
+
+  return Math.min(Math.max(stepIndex, 0), journey.steps.length - 1);
+}
+
+export function normalizeMandalaJourneyProgress(
+  journeys: MandalaJourney[],
+  progress: MandalaJourneyProgress | null | undefined,
+  fallbackJourneyId: MandalaJourneyId = "perception",
+): MandalaJourneyProgress {
+  const safeJourney = getSafeMandalaJourney(
+    journeys,
+    progress?.journeyId,
+    fallbackJourneyId,
+  );
+  const safeStepIndex = clampMandalaJourneyStepIndex(
+    safeJourney,
+    progress?.stepIndex ?? 0,
+  );
+
+  return {
+    journeyId: safeJourney.id,
+    stepIndex: safeStepIndex,
+    updatedAt: progress?.updatedAt,
+  };
+}
+
+export function isMandalaJourneyComplete(
+  journey: MandalaJourney,
+  stepIndex: number,
+): boolean {
+  return stepIndex >= journey.steps.length - 1;
 }
 
 export function getMandalaJourneyTrail(
