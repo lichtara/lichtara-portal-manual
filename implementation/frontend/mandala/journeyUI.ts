@@ -1,0 +1,272 @@
+import type { MandalaNodeId } from "./MandalaCanvas";
+
+export const MANDALA_JOURNEY_UI_CSS = `
+.journey-screen {
+  display: grid;
+  gap: 24px;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.journey-screen__header {
+  display: grid;
+  gap: 10px;
+}
+
+.journey-screen__eyebrow {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.journey-screen__title {
+  color: #1f1b16;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.journey-screen__intro {
+  color: #7f7668;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 72ch;
+}
+
+.journey-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.journey-selector__button {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(58, 53, 44, 0.14);
+  border-radius: 20px;
+  color: #1f1b16;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+  padding: 16px 18px;
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.journey-selector__button:hover,
+.journey-selector__button:focus-visible {
+  border-color: rgba(58, 53, 44, 0.34);
+  box-shadow: 0 12px 28px rgba(58, 53, 44, 0.08);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.journey-selector__button--active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(58, 53, 44, 0.42);
+}
+
+.journey-selector__label {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.journey-selector__copy {
+  color: #7f7668;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.journey-screen__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+}
+
+.journey-stepper {
+  background: linear-gradient(180deg, rgba(250, 247, 240, 0.98), rgba(247, 243, 235, 0.98));
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(58, 53, 44, 0.06);
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+}
+
+.journey-stepper__meta {
+  display: grid;
+  gap: 8px;
+}
+
+.journey-stepper__count {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.journey-stepper__title {
+  color: #1f1b16;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.journey-stepper__agent {
+  color: #7f7668;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.journey-stepper__copy,
+.journey-stepper__question,
+.journey-stepper__completion,
+.journey-stepper__path {
+  color: #7f7668;
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.journey-stepper__question strong,
+.journey-stepper__completion strong,
+.journey-stepper__copy strong {
+  color: #1f1b16;
+  font-weight: 600;
+}
+
+.journey-stepper__steps {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.journey-stepper__step-button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 16px;
+  color: #1f1b16;
+  cursor: pointer;
+  display: grid;
+  gap: 2px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  padding: 12px 14px;
+  text-align: left;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.journey-stepper__step-button:hover,
+.journey-stepper__step-button:focus-visible {
+  background: rgba(255, 255, 255, 0.58);
+  border-color: rgba(58, 53, 44, 0.28);
+  outline: none;
+}
+
+.journey-stepper__step-button--active {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(58, 53, 44, 0.42);
+}
+
+.journey-stepper__step-button--done {
+  border-color: rgba(58, 53, 44, 0.22);
+}
+
+.journey-stepper__step-order {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.journey-stepper__step-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.journey-stepper__step-experience {
+  color: #7f7668;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.journey-stepper__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.journey-stepper__action {
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(58, 53, 44, 0.16);
+  border-radius: 999px;
+  color: #1f1b16;
+  cursor: pointer;
+  padding: 10px 14px;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.journey-stepper__action:hover,
+.journey-stepper__action:focus-visible {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(58, 53, 44, 0.36);
+  outline: none;
+}
+
+.journey-stepper__action:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+@media (max-width: 980px) {
+  .journey-screen__grid {
+    grid-template-columns: 1fr;
+  }
+}
+`;
+
+export function journeyCx(
+  ...parts: Array<string | false | null | undefined>
+): string {
+  return parts.filter(Boolean).join(" ");
+}
+
+export function buildJourneyPath(nodeIds: MandalaNodeId[]): string {
+  return nodeIds.join(" -> ");
+}
+
+export function getClosestJourneyStepIndex(
+  nodeId: MandalaNodeId,
+  currentStepIndex: number,
+  steps: Array<{ nodeId: MandalaNodeId }>,
+): number {
+  let closestIndex = -1;
+  let smallestDistance = Number.POSITIVE_INFINITY;
+
+  for (let index = 0; index < steps.length; index += 1) {
+    if (steps[index].nodeId !== nodeId) {
+      continue;
+    }
+
+    const distance = Math.abs(index - currentStepIndex);
+
+    if (distance < smallestDistance) {
+      closestIndex = index;
+      smallestDistance = distance;
+    }
+  }
+
+  return closestIndex;
+}

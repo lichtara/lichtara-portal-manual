@@ -32,6 +32,9 @@ Esta especificacao agora tem um componente-base real em:
 
 - [../implementation/frontend/mandala/MandalaCanvas.tsx](../implementation/frontend/mandala/MandalaCanvas.tsx)
 - [../implementation/frontend/mandala/mandalaJourneys.ts](../implementation/frontend/mandala/mandalaJourneys.ts)
+- [../implementation/frontend/mandala/JourneySelector.tsx](../implementation/frontend/mandala/JourneySelector.tsx)
+- [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
+- [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 
 Esses arquivos materializam a camada `React + SVG` desta especificacao com:
@@ -41,6 +44,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - config tipado das jornadas
 - `MandalaCanvas` controlado
 - `MandalaPrototype` autocontido para demonstracao local
+- `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 
 ## Camadas de Geometria no Frontend
@@ -75,6 +79,7 @@ Essa camada define:
 
 E ja possui uma referencia de consumo em React:
 
+- [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 
 ## ViewBox de Referencia
