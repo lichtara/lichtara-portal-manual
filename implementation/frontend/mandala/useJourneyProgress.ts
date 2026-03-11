@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {
   getSafeMandalaJourney,
+  getSafeMandalaJourneyStep,
   getMandalaJourneyTrail,
   isMandalaJourneyComplete,
   normalizeMandalaJourneyProgress,
@@ -192,7 +193,10 @@ export function useJourneyProgress({
     activeProgress.journeyId,
     initialJourneyId,
   );
-  const activeStep = activeJourney.steps[activeProgress.stepIndex];
+  const activeStep = getSafeMandalaJourneyStep(
+    activeJourney,
+    activeProgress.stepIndex,
+  );
   const trailNodeIds = getMandalaJourneyTrail(
     activeJourney,
     activeProgress.stepIndex,
@@ -249,7 +253,10 @@ export function useJourneyProgress({
       previousProgress.journeyId,
       initialJourneyId,
     );
-    const previousStep = previousJourney.steps[previousProgress.stepIndex];
+    const previousStep = getSafeMandalaJourneyStep(
+      previousJourney,
+      previousProgress.stepIndex,
+    );
     const wasComplete = isMandalaJourneyComplete(
       previousJourney,
       previousProgress.stepIndex,
@@ -259,7 +266,10 @@ export function useJourneyProgress({
       nextProgress.journeyId,
       initialJourneyId,
     );
-    const nextStep = nextJourney.steps[nextProgress.stepIndex];
+    const nextStep = getSafeMandalaJourneyStep(
+      nextJourney,
+      nextProgress.stepIndex,
+    );
     const isComplete = isMandalaJourneyComplete(
       nextJourney,
       nextProgress.stepIndex,

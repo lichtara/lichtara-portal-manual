@@ -454,6 +454,10 @@ export function getSafeMandalaJourney(
   journeyId: MandalaJourneyId | null | undefined,
   fallbackJourneyId?: MandalaJourneyId,
 ): MandalaJourney {
+  if (journeys.length === 0) {
+    throw new Error("getSafeMandalaJourney requires at least one journey.");
+  }
+
   const matchingJourney =
     (journeyId
       ? journeys.find((journey) => journey.id === journeyId)
@@ -462,6 +466,10 @@ export function getSafeMandalaJourney(
       ? journeys.find((journey) => journey.id === fallbackJourneyId)
       : undefined) ??
     journeys[0];
+
+  if (!matchingJourney) {
+    throw new Error("Unable to resolve a valid mandala journey.");
+  }
 
   return matchingJourney;
 }
@@ -475,6 +483,20 @@ export function clampMandalaJourneyStepIndex(
   }
 
   return Math.min(Math.max(stepIndex, 0), journey.steps.length - 1);
+}
+
+export function getSafeMandalaJourneyStep(
+  journey: MandalaJourney,
+  stepIndex: number,
+): MandalaJourneyStep {
+  const safeStepIndex = clampMandalaJourneyStepIndex(journey, stepIndex);
+  const step = journey.steps[safeStepIndex];
+
+  if (!step) {
+    throw new Error(`Journey "${journey.id}" does not contain any steps.`);
+  }
+
+  return step;
 }
 
 export function normalizeMandalaJourneyProgress(

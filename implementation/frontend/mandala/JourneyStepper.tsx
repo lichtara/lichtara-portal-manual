@@ -1,6 +1,9 @@
 import * as React from "react";
 
-import type { MandalaJourney } from "./mandalaJourneys";
+import {
+  getSafeMandalaJourneyStep,
+  type MandalaJourney,
+} from "./mandalaJourneys";
 import { buildJourneyPath, journeyCx } from "./journeyUI";
 
 export type JourneyStepperProps = {
@@ -20,7 +23,7 @@ export function JourneyStepper({
   onNextStep,
   className,
 }: JourneyStepperProps) {
-  const activeStep = journey.steps[activeStepIndex];
+  const activeStep = getSafeMandalaJourneyStep(journey, activeStepIndex);
   const isLastStep = activeStepIndex === journey.steps.length - 1;
   const pathLabel = buildJourneyPath(journey.path);
 

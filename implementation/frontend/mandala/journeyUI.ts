@@ -256,7 +256,9 @@ export function getClosestJourneyStepIndex(
   let smallestDistance = Number.POSITIVE_INFINITY;
 
   for (let index = 0; index < steps.length; index += 1) {
-    if (steps[index].nodeId !== nodeId) {
+    const step = steps[index];
+
+    if (!step || step.nodeId !== nodeId) {
       continue;
     }
 
