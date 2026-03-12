@@ -82,6 +82,37 @@ Ponto importante:
 
 Ou seja, o grid radial nao apaga a estrutura anterior; ele a torna mais legivel.
 
+## Modelo Triangulo-Sobre-Quadrado
+
+Uma leitura complementar e especialmente util para a mandala do Lichtara e a geometria de `triangulo-sobre-quadrado`.
+
+Nesse arranjo:
+
+- o triangulo organiza as `3` direcoes de navegacao
+- o quadrado organiza os `4` ciclos estruturais
+- o circulo externo preserva a totalidade da mandala
+- `NAVROS` ocupa o ponto central de orientacao
+
+Leitura sintetica:
+
+```text
+circulo -> totalidade do sistema
+quadrado -> estabilidade estrutural
+triangulo -> movimento da jornada
+centro -> orientacao
+```
+
+Em experiencia, isso ajuda a mandala a resolver duas exigencias ao mesmo tempo:
+
+- manter as `3` rotas legiveis como vetores de decisao
+- manter os `4` ciclos legiveis como base estrutural do sistema
+
+Ponto de rigor:
+
+- o triangulo-sobre-quadrado e uma leitura de composicao e interface
+- ele nao substitui a triade profunda `NAVROS - SYNTARIS - FLUX`
+- ele oferece uma malha mais clara para desenhar o mapa sem arbitrariedade visual
+
 ## Diagrama Geometrico Simbolico
 
 O desenho abaixo aproxima a mandala como simbolo estrutural: um campo externo com ancoras nomeadas e um triangulo central de navegacao.
@@ -184,6 +215,16 @@ O simbolo combina tres formas primarias:
 Em linguagem direta:
 
 `campo -> orientacao -> percurso`
+
+No modelo triangulo-sobre-quadrado, a leitura se torna:
+
+`centro -> orientacao`
+
+`triangulo -> navegacao`
+
+`quadrado -> estrutura`
+
+`circulo -> totalidade`
 
 ## Diagrama das Tres Rotas Naturais
 

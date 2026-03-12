@@ -104,6 +104,31 @@ Regra de leitura:
 - o portal oferece navegacao
 - a jornada oferece sequencia legivel dentro do mapa
 
+## Leitura como Sistema de Coordenadas
+
+Na camada de interface e experiencia, o portal pode ser lido como um sistema de coordenadas da experiencia humana.
+
+Elementos-base:
+
+| Elemento | Papel |
+| --- | --- |
+| origem | `NAVROS` |
+| eixos | `Percepcao`, `Estrutura`, `Acao` |
+| profundidade estrutural | `Expansao` |
+| posicoes | `16` estados da mandala |
+
+Leitura pratica:
+
+- a pessoa se localiza em `NAVROS`
+- escolhe uma direcao de navegacao
+- desloca sua posicao por uma jornada de `7` etapas
+- retorna ao sistema com uma leitura mais ampla do campo
+
+Ponto de rigor:
+
+- isso nao substitui a ontologia do sistema
+- isso descreve como a ontologia se torna navegavel para a pessoa usuaria
+
 ## Matriz de Linguagens
 
 | Camada | O que descreve | Linguagem dominante |

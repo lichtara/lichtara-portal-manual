@@ -43,6 +43,24 @@ Regra de rigor:
 - a interface pode expor `NAVROS` como centro de entrada
 - a arquitetura profunda continua sustentada por `NAVROS - SYNTARIS - FLUX`
 
+## Triangulo, Quadrado e Circulo
+
+Para a leitura visual da mandala, tres geometrias precisam operar juntas:
+
+| Geometria | Funcao |
+| --- | --- |
+| triangulo | direcoes de navegacao |
+| quadrado | estabilidade dos ciclos |
+| circulo | totalidade do sistema |
+
+Traducao para o portal:
+
+- triangulo: `Percepcao`, `Estrutura`, `Acao`
+- quadrado: `Percepcao`, `Estrutura`, `Acao`, `Expansao`
+- circulo: anel cartografico mais amplo da mandala
+
+Essa combinacao e especialmente util porque evita a sensacao de divisao arbitraria do circulo. A pessoa percebe direcao, base estrutural e campo total ao mesmo tempo.
+
 ## Versao de Entrada da V1
 
 Antes da mandala completa, a experiencia pode comecar por uma versao reduzida e tecnicamente leve: a `bussola NAVROS viva`.
@@ -133,9 +151,10 @@ A mandala nao deve aparecer completa no primeiro segundo. A revelacao mais legiv
 Traducao de interface:
 
 1. estado de orientacao: `NAVROS`
-2. estado de escolha: `Percepcao`, `Estrutura`, `Acao`
-3. estado de jornada: `etapa 1 -> etapa 7`
-4. estado expandido: mandala mais ampla como mapa de continuidade
+2. estado de navegacao: triangulo com `Percepcao`, `Estrutura`, `Acao`
+3. estado estrutural: quadrado invisivel dos ciclos `Percepcao`, `Estrutura`, `Acao`, `Expansao`
+4. estado cartografico: circulo externo com a mandala mais ampla
+5. estado de jornada: `etapa 1 -> etapa 7`
 
 Essa progressao reduz sobrecarga cognitiva sem desmontar a arquitetura do sistema.
 

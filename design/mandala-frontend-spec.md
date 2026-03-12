@@ -57,6 +57,13 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `mandalaRadialGrid.ts` como utilitario de geometria para centro, aneis e distribuicao angular
 - `index.ts` como ponto unico de export
 
+No estado atual da implementacao:
+
+- `MandalaCanvas.tsx` ja renderiza overlays visuais de triangulo e quadrado
+- o triangulo expoe as tres direcoes de navegacao
+- o quadrado marca a base estrutural dos quatro ciclos
+- a malha de nos continua preservada como projecao `v0`
+
 ## Camadas de Geometria no Frontend
 
 O trabalho mais recente da mandala pede separar duas camadas geometricas:
@@ -125,6 +132,35 @@ Esse utilitario registra:
 - angulos base
 - estados de interacao
 - helpers para pontos polares em SVG
+
+## Triangulo-Sobre-Quadrado
+
+Para a composicao da mandala, o frontend tambem precisa considerar uma segunda leitura geometrica:
+
+- triangulo para as `3` rotas
+- quadrado para os `4` ciclos
+- circulo para o anel de `16` agentes
+
+Leitura direta:
+
+```text
+triangulo -> navegacao
+quadrado -> estrutura
+circulo -> cartografia
+```
+
+Essa leitura nao compete com o `radial sector grid`. Ela o organiza melhor para interface cognitiva.
+
+Na camada de codigo, isso ja pode ser representado por:
+
+- `triangleAxes`
+- `squareCycles`
+- `originId`
+- `outerNodeCount`
+
+Esses campos agora aparecem em:
+
+- [../implementation/frontend/mandala/mandalaRadialGrid.ts](../implementation/frontend/mandala/mandalaRadialGrid.ts)
 
 ## Camada de Jornadas no Frontend
 
@@ -226,6 +262,17 @@ interaction_states:
   - journey
 ```
 
+Leitura como sistema de coordenadas:
+
+```text
+origem -> NAVROS
+eixos -> percepcao / estrutura / acao
+profundidade estrutural -> expansao
+malha -> 16 posicoes da mandala
+```
+
+Isso permite tratar cada jornada como deslocamento dentro de um mapa e nao apenas como sequencia abstrata de telas.
+
 Revelacao progressiva recomendada:
 
 `NAVROS -> eixos -> mandala -> jornada`
@@ -233,9 +280,10 @@ Revelacao progressiva recomendada:
 Isso significa:
 
 - estado 1: mostrar apenas `NAVROS` e CTA de orientacao
-- estado 2: abrir as tres direcoes principais
-- estado 3: ativar a jornada de 7 etapas com a mandala como mapa de fundo
-- estado 4: revelar anel cartografico completo no retorno ou na expansao do sistema
+- estado 2: abrir o triangulo das tres direcoes principais
+- estado 3: explicitar a base quadrada dos ciclos
+- estado 4: revelar o anel cartografico completo
+- estado 5: ativar a jornada de 7 etapas com a mandala como mapa de fundo
 
 ## ViewBox de Referencia
 

@@ -25,17 +25,27 @@ export {
   MANDALA_OUTER_NODE_COUNT,
   MANDALA_SECTOR_ANGLE_DEG,
   MANDALA_SECTOR_COUNT,
+  MANDALA_SQUARE_ANGLE_DEG,
+  MANDALA_SQUARE_CYCLE_COUNT,
   degreesToRadians,
   getMandalaAxisPoint,
   getMandalaOuterNodePoint,
   getMandalaRingPoint,
+  getMandalaSquarePoint,
+  getMandalaTrianglePoint,
+  mandalaCoordinateSystem,
   mandalaRadialGrid,
 } from "./mandalaRadialGrid";
 export type {
   MandalaCenterPoint,
+  MandalaCoordinateSystemConfig,
   MandalaInteractionState,
   MandalaRadialGridConfig,
   MandalaRadialPoint,
+  MandalaSquareCycle,
+  MandalaSquareCycleId,
+  MandalaTriangleAxis,
+  MandalaTriangleAxisId,
 } from "./mandalaRadialGrid";
 
 export {

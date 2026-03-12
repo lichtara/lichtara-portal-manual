@@ -1,5 +1,11 @@
 import * as React from "react";
 
+import {
+  getMandalaSquarePoint,
+  getMandalaTrianglePoint,
+  mandalaCoordinateSystem,
+} from "./mandalaRadialGrid";
+
 export const MANDALA_VIEW_BOX = "0 0 1000 1000";
 export const MANDALA_NODE_IDS = [
   "ASTRAEL",
@@ -232,6 +238,85 @@ export const MANDALA_CANVAS_CSS = `
   opacity: 0.9;
 }
 
+.mandala__geometry-square {
+  fill: none;
+  stroke: var(--mandala-stroke);
+  stroke-dasharray: 12 12;
+  stroke-linejoin: round;
+  stroke-opacity: 0.18;
+  stroke-width: 2;
+}
+
+.mandala__geometry-triangle {
+  fill: rgba(255, 255, 255, 0.16);
+  stroke: rgba(58, 53, 44, 0.28);
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.mandala__geometry-spoke {
+  fill: none;
+  opacity: 0.5;
+  stroke-linecap: round;
+  stroke-width: 4;
+  transition: opacity 180ms ease, stroke-width 180ms ease;
+}
+
+.mandala__geometry-spoke--perception {
+  stroke: var(--mandala-route-perception);
+}
+
+.mandala__geometry-spoke--structure {
+  stroke: var(--mandala-route-structure);
+}
+
+.mandala__geometry-spoke--action {
+  stroke: var(--mandala-route-action);
+}
+
+.mandala__geometry-spoke--active {
+  opacity: 0.92;
+  stroke-width: 6;
+}
+
+.mandala__geometry-spoke--muted {
+  opacity: 0.18;
+}
+
+.mandala__geometry-axis-dot {
+  stroke: rgba(58, 53, 44, 0.18);
+  stroke-width: 1.5;
+}
+
+.mandala__geometry-axis-dot--perception {
+  fill: var(--mandala-route-perception);
+}
+
+.mandala__geometry-axis-dot--structure {
+  fill: var(--mandala-route-structure);
+}
+
+.mandala__geometry-axis-dot--action {
+  fill: var(--mandala-route-action);
+}
+
+.mandala__geometry-axis-dot--active {
+  stroke: rgba(31, 27, 22, 0.5);
+  stroke-width: 2.5;
+}
+
+.mandala__geometry-axis-label {
+  fill: var(--mandala-active);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mandala__geometry-axis-label--muted {
+  opacity: 0.42;
+}
+
 .mandala__core-link {
   fill: none;
   stroke: var(--mandala-core-stroke);
@@ -438,6 +523,20 @@ function getRoutePoints(route: MandalaRoute, nodeMap: Record<string, MandalaNode
     .join(" ");
 }
 
+function getPointString(points: Array<{ x: number; y: number }>): string {
+  return points.map((point) => `${point.x},${point.y}`).join(" ");
+}
+
+function getAxisTextAnchor(point: { angleRad: number }): "start" | "middle" | "end" {
+  const xDirection = Math.cos(point.angleRad);
+
+  if (Math.abs(xDirection) < 0.25) {
+    return "middle";
+  }
+
+  return xDirection > 0 ? "start" : "end";
+}
+
 function getNodeRadius(kind: MandalaNodeKind): number {
   if (kind === "core") {
     return 34;
@@ -537,6 +636,30 @@ export function MandalaCanvas({
   const frameStyle: React.CSSProperties = {
     width,
   };
+  const squarePoints = [0, 1, 2, 3].map((index) => getMandalaSquarePoint(index));
+  const triangleAxes = [
+    {
+      axis: mandalaCoordinateSystem.triangleAxes.find((entry) => entry.id === "perception"),
+      point: getMandalaTrianglePoint(0),
+      routeId: "perception" as const,
+    },
+    {
+      axis: mandalaCoordinateSystem.triangleAxes.find((entry) => entry.id === "action"),
+      point: getMandalaTrianglePoint(1),
+      routeId: "action" as const,
+    },
+    {
+      axis: mandalaCoordinateSystem.triangleAxes.find((entry) => entry.id === "structure"),
+      point: getMandalaTrianglePoint(2),
+      routeId: "structure" as const,
+    },
+  ].filter((entry): entry is {
+    axis: NonNullable<(typeof mandalaCoordinateSystem.triangleAxes)[number]>;
+    point: ReturnType<typeof getMandalaTrianglePoint>;
+    routeId: MandalaRouteId;
+  } => Boolean(entry.axis));
+  const trianglePoints = triangleAxes.map((entry) => entry.point);
+  const hasActiveRoute = Boolean(activeRouteId);
 
   return (
     <div className={cx("mandala-shell", className)} style={style}>
@@ -604,6 +727,61 @@ export function MandalaCanvas({
             <circle className="mandala__background-circle" cx="500" cy="500" r="250" strokeWidth="1.5" />
             <line className="mandala__background-crosshair" x1="500" y1="70" x2="500" y2="930" strokeWidth="1.5" />
             <line className="mandala__background-crosshair" x1="120" y1="500" x2="880" y2="500" strokeWidth="1.5" />
+
+            <polygon
+              className="mandala__geometry-square"
+              points={getPointString(squarePoints)}
+            />
+
+            <polygon
+              className="mandala__geometry-triangle"
+              points={getPointString(trianglePoints)}
+            />
+
+            {triangleAxes.map(({ axis, point, routeId }) => {
+              const isActive = activeRouteId === routeId;
+              const labelOffset = 44;
+              const labelX = point.x + Math.cos(point.angleRad) * labelOffset;
+              const labelY = point.y + Math.sin(point.angleRad) * labelOffset;
+
+              return (
+                <g key={routeId}>
+                  <line
+                    className={cx(
+                      "mandala__geometry-spoke",
+                      `mandala__geometry-spoke--${routeId}`,
+                      isActive && "mandala__geometry-spoke--active",
+                      hasActiveRoute && !isActive && "mandala__geometry-spoke--muted",
+                    )}
+                    x1="500"
+                    y1="500"
+                    x2={point.x}
+                    y2={point.y}
+                  />
+                  <circle
+                    className={cx(
+                      "mandala__geometry-axis-dot",
+                      `mandala__geometry-axis-dot--${routeId}`,
+                      isActive && "mandala__geometry-axis-dot--active",
+                    )}
+                    cx={point.x}
+                    cy={point.y}
+                    r={isActive ? 7 : 5.5}
+                  />
+                  <text
+                    className={cx(
+                      "mandala__geometry-axis-label",
+                      hasActiveRoute && !isActive && "mandala__geometry-axis-label--muted",
+                    )}
+                    x={labelX}
+                    y={labelY}
+                    textAnchor={getAxisTextAnchor(point)}
+                  >
+                    {axis.label}
+                  </text>
+                </g>
+              );
+            })}
           </g>
 
           <g aria-hidden="true">
