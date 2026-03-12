@@ -74,6 +74,21 @@ Quando o sistema sai do nucleo e se torna experiencia, ele se organiza assim:
 
 Isso significa que o portal nao inventa uma jornada arbitraria. Ele traduz em interface uma arquitetura ja presente no sistema.
 
+## Escalas de Organizacao
+
+Uma forma simples de ler a arquitetura inteira e:
+
+| Nivel | Numero | Funcao |
+| --- | --- | --- |
+| estrutura | 3 | `Field - Coherence - Limit` |
+| processo | 4 | percepcao, estrutura, acao e expansao |
+| navegacao | 7 | jornada guiada legivel |
+| cartografia | 16 | mapa expandido da mandala |
+
+Formula resumida:
+
+`3 principios -> 4 estados -> 7 etapas -> 16 posicoes`
+
 ## Regra de Uso
 
 Usar este documento quando for preciso responder rapidamente:

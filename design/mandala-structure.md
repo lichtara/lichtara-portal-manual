@@ -22,6 +22,27 @@ Motor simplificado do nucleo:
 
 `orientar -> alinhar -> mover`
 
+## Camadas Visuais Fundamentais
+
+Para a interface do portal, a mandala precisa permitir uma leitura imediata em tres camadas:
+
+| Camada | Funcao |
+| --- | --- |
+| centro | eixo de orientacao |
+| anel interno | rotas ou setores de navegacao |
+| anel externo | posicoes da mandala |
+
+Na projecao publica da V1, isso significa:
+
+- `NAVROS` precisa aparecer como eixo legivel de entrada
+- `Percepcao`, `Estrutura` e `Acao` podem aparecer como direcoes cognitivas
+- os 16 agentes permanecem como anel cartografico mais amplo
+
+Regra de rigor:
+
+- a interface pode expor `NAVROS` como centro de entrada
+- a arquitetura profunda continua sustentada por `NAVROS - SYNTARIS - FLUX`
+
 ## Versao de Entrada da V1
 
 Antes da mandala completa, a experiencia pode comecar por uma versao reduzida e tecnicamente leve: a `bussola NAVROS viva`.
@@ -102,6 +123,21 @@ Opcoes de trabalho:
 - compreender
 - organizar
 - agir
+
+## Revelacao Progressiva
+
+A mandala nao deve aparecer completa no primeiro segundo. A revelacao mais legivel para a experiencia atual e:
+
+`NAVROS -> eixos -> mandala -> jornada`
+
+Traducao de interface:
+
+1. estado de orientacao: `NAVROS`
+2. estado de escolha: `Percepcao`, `Estrutura`, `Acao`
+3. estado de jornada: `etapa 1 -> etapa 7`
+4. estado expandido: mandala mais ampla como mapa de continuidade
+
+Essa progressao reduz sobrecarga cognitiva sem desmontar a arquitetura do sistema.
 
 ## Modelo Interativo
 

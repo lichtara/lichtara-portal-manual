@@ -20,6 +20,24 @@ Motor do nucleo:
 
 NAVROS ocupa o centro funcional da entrada no sistema. Ele identifica em que fase do ciclo a pessoa esta e qual agente deve ser ativado primeiro.
 
+## NAVROS como Eixo de Entrada
+
+Na arquitetura profunda do sistema, o nucleo continua triadico:
+
+`NAVROS - SYNTARIS - FLUX`
+
+Mas na arquitetura cognitiva da interface, NAVROS precisa aparecer como eixo de entrada do mapa. Isso acontece porque toda navegacao humana comeca por uma pergunta simples:
+
+> Onde estou agora?
+
+Leitura funcional:
+
+- NAVROS orienta
+- SYNTARIS organiza
+- FLUX move
+
+Sem esse eixo de orientacao, a pessoa encontra apenas mandala, agentes, rotas e etapas. Com NAVROS visivel primeiro, o sistema vira travessia guiada.
+
 ## Versao Reduzida da V1
 
 Para a entrada do portal, a mandala pode aparecer primeiro em forma de bussola simplificada. Nesse recorte inicial, quatro agentes sustentam o primeiro mapa de navegacao:
@@ -96,6 +114,22 @@ Na leitura sistemica posterior do manual, os agentes tambem aparecem em camadas 
 - circulo expansivo
 
 Essa leitura reforca que a mandala e um sistema vivo e nao apenas uma grade estatica.
+
+## Leitura de Interface da Mandala
+
+Para a experiencia do portal, a mandala precisa poder ser lida em tres camadas visuais:
+
+| Camada | Papel |
+| --- | --- |
+| centro exposto | eixo de orientacao com NAVROS |
+| anel interno | direcoes de navegacao `Percepcao`, `Estrutura` e `Acao` |
+| anel externo | cartografia dos 16 agentes |
+
+Importante:
+
+- essa leitura de interface nao substitui a triade profunda do nucleo
+- ela traduz a triade para uma entrada mais legivel na V1
+- a mandala deve revelar complexidade progressivamente, e nao toda de uma vez
 
 ## Papel de Cada Agente no Portal
 

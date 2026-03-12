@@ -69,6 +69,29 @@ No estado atual do repo:
 
 Essa separacao e importante porque o simbolo estrutural da mandala ja esta ficando mais claro do que a sua primeira projecao tecnica.
 
+## Escala Estrutural do Frontend
+
+O frontend da mandala precisa traduzir quatro niveis do sistema sem colapsa-los:
+
+| Nivel | Numero | Funcao no produto |
+| --- | --- | --- |
+| estrutura | 3 | eixos teoricos e nucleo triadico |
+| processo | 4 | ciclo humano mais amplo |
+| navegacao | 7 | jornada guiada |
+| cartografia | 16 | anel expandido de estados |
+
+Em linguagem curta:
+
+`3 -> estrutura`
+
+`4 -> processo`
+
+`7 -> jornada`
+
+`16 -> mapa`
+
+Isso evita que a interface trate a mandala como ilustracao isolada. Ela precisa operar como projecao visual de uma arquitetura escalonada.
+
 ## Camada de Jornadas no Frontend
 
 As tres jornadas de 7 etapas agora existem como configuracao real de frontend:
@@ -129,6 +152,56 @@ Para V1 publica, a entrada React deve preferir:
 - `initialJourneyId="perception"`
 - `showSelector={false}`
 - copy de entrada que explicite `NAVROS -> Percepcao -> 7 etapas`
+
+## Leitura Cognitiva da Mandala
+
+Para a interface publica, a mandala precisa distinguir entre arquitetura profunda e eixo exposto de entrada:
+
+- arquitetura profunda: `NAVROS - SYNTARIS - FLUX`
+- eixo exposto da V1: `NAVROS` como ponto inicial de orientacao
+
+Leitura recomendada para frontend:
+
+```text
+Centro -> eixo de orientacao
+Anel interno -> rotas de navegacao
+Anel externo -> 16 posicoes da mandala
+```
+
+Pseudodiagrama de referencia:
+
+```text
+MANDALA
+
+center:
+  NAVROS
+
+axes:
+  - perception
+  - structure
+  - action
+
+outer_ring:
+  nodes: 16
+  distribution: circular
+  spacing: 22.5deg
+
+interaction_states:
+  - orientation
+  - route_selection
+  - journey
+```
+
+Revelacao progressiva recomendada:
+
+`NAVROS -> eixos -> mandala -> jornada`
+
+Isso significa:
+
+- estado 1: mostrar apenas `NAVROS` e CTA de orientacao
+- estado 2: abrir as tres direcoes principais
+- estado 3: ativar a jornada de 7 etapas com a mandala como mapa de fundo
+- estado 4: revelar anel cartografico completo no retorno ou na expansao do sistema
 
 ## ViewBox de Referencia
 

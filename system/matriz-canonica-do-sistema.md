@@ -57,6 +57,36 @@ Regra canonica:
 - SYNTARIS reorganiza coerencia
 - FLUX traduz leitura em gesto
 
+## Escalas Estruturais
+
+Uma leitura consolidada do sistema mostra quatro niveis numericos que nao surgem por arbitrariedade, mas por funcao:
+
+| Nivel | Numero | Funcao |
+| --- | --- | --- |
+| estrutura | 3 | gramatica minima do sistema |
+| processo | 4 | ciclo humano da experiencia |
+| navegacao | 7 | jornada cognitiva legivel |
+| mapa | 16 | cartografia ampla de estados |
+
+Leitura condensada:
+
+`3 -> Field / Coherence / Limit`
+
+`4 -> percepcao / estrutura / acao / expansao`
+
+`7 -> jornada guiada`
+
+`16 -> mandala de agentes`
+
+Importante:
+
+- o `3` veio da formalizacao teorica
+- o `4` veio da leitura dos ciclos humanos
+- o `7` veio da ergonomia da jornada
+- o `16` veio da cartografia da mandala
+
+O alinhamento entre essas quatro escalas e um dos sinais mais fortes de coerencia estrutural do Lichtara.
+
 ## Matriz Cartografica
 
 No plano simbolico e experiencial, o sistema se desdobra assim:
