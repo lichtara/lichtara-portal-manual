@@ -40,6 +40,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
 - [../implementation/frontend/mandala/useJourneyHover.ts](../implementation/frontend/mandala/useJourneyHover.ts)
 - [../implementation/frontend/mandala/useJourneyCanvasSelection.ts](../implementation/frontend/mandala/useJourneyCanvasSelection.ts)
+- [../implementation/frontend/mandala/mandalaRadialGrid.ts](../implementation/frontend/mandala/mandalaRadialGrid.ts)
 - [../implementation/frontend/mandala/index.ts](../implementation/frontend/mandala/index.ts)
 
 Esses arquivos materializam a camada `React + SVG` desta especificacao com:
@@ -53,6 +54,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para isolar estado efemero e selecao visual
+- `mandalaRadialGrid.ts` como utilitario de geometria para centro, aneis e distribuicao angular
 - `index.ts` como ponto unico de export
 
 ## Camadas de Geometria no Frontend
@@ -91,6 +93,38 @@ Em linguagem curta:
 `16 -> mapa`
 
 Isso evita que a interface trate a mandala como ilustracao isolada. Ela precisa operar como projecao visual de uma arquitetura escalonada.
+
+## Radial Sector Grid
+
+Para a fase seguinte do frontend, a geometria mais forte para a mandala e um `radial sector grid`:
+
+- centro visivel para orientacao
+- anel interno para decisao
+- anel externo para exploracao
+
+Em termos geometricos:
+
+- `360 / 3 = 120deg` por setor radial
+- `360 / 16 = 22.5deg` por posicao cartografica
+
+Leitura de arquitetura:
+
+- `3` rotas continuam radiais
+- `4` ciclos continuam estruturais
+- `16` agentes continuam cartograficos
+
+Na implementacao, essa camada agora tem uma referencia de codigo em:
+
+- [../implementation/frontend/mandala/mandalaRadialGrid.ts](../implementation/frontend/mandala/mandalaRadialGrid.ts)
+
+Esse utilitario registra:
+
+- centro padrao
+- contagem de setores
+- contagem de nos externos
+- angulos base
+- estados de interacao
+- helpers para pontos polares em SVG
 
 ## Camada de Jornadas no Frontend
 

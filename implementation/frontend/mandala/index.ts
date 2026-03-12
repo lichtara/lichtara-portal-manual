@@ -19,6 +19,26 @@ export type {
 } from "./MandalaCanvas";
 
 export {
+  DEFAULT_MANDALA_CENTER,
+  MANDALA_JOURNEY_STEP_COUNT,
+  MANDALA_OUTER_NODE_ANGLE_DEG,
+  MANDALA_OUTER_NODE_COUNT,
+  MANDALA_SECTOR_ANGLE_DEG,
+  MANDALA_SECTOR_COUNT,
+  degreesToRadians,
+  getMandalaAxisPoint,
+  getMandalaOuterNodePoint,
+  getMandalaRingPoint,
+  mandalaRadialGrid,
+} from "./mandalaRadialGrid";
+export type {
+  MandalaCenterPoint,
+  MandalaInteractionState,
+  MandalaRadialGridConfig,
+  MandalaRadialPoint,
+} from "./mandalaRadialGrid";
+
+export {
   clampMandalaJourneyStepIndex,
   getMandalaJourneyById,
   getMandalaJourneyTrail,

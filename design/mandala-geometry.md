@@ -51,6 +51,37 @@ Para evitar confusao, esta doc passa a separar explicitamente:
 
 A primeira orienta o sentido profundo do sistema. A segunda orienta a implementacao pratica da V1.
 
+## Modelo Radial Sector Grid
+
+Uma leitura mais precisa para interface radial usa o modelo de `radial sector grid`. Nesse arranjo, a mandala combina:
+
+1. centro
+2. aneis concentricos
+3. setores radiais
+
+Formula de base:
+
+`centro + aneis + setores`
+
+No Portal Lichtara, isso produz uma leitura util:
+
+- anel 0: `NAVROS`
+- anel 1: rotas ou eixos de navegacao
+- anel 2: 16 posicoes da mandala
+
+Regra geometrica principal:
+
+- `360 / 3 = 120deg` por setor de navegacao
+- `360 / 16 = 22.5deg` por ancora do anel externo
+
+Ponto importante:
+
+- as `3` rotas organizam direcoes cognitivas
+- os `4` ciclos continuam organizando quadrantes estruturais
+- os `16` agentes continuam ocupando ancoras cartograficas
+
+Ou seja, o grid radial nao apaga a estrutura anterior; ele a torna mais legivel.
+
 ## Diagrama Geometrico Simbolico
 
 O desenho abaixo aproxima a mandala como simbolo estrutural: um campo externo com ancoras nomeadas e um triangulo central de navegacao.
