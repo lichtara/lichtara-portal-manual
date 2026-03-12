@@ -18,6 +18,9 @@ export type {
   MandalaVisualState,
 } from "./MandalaCanvas";
 
+export { FieldFlowLayer } from "./FieldFlowLayer";
+export type { FieldFlowLayerProps } from "./FieldFlowLayer";
+
 export {
   DEFAULT_MANDALA_CENTER,
   MANDALA_JOURNEY_STEP_COUNT,
@@ -91,11 +94,32 @@ export type {
   MandalaTrajectoryStorageMode,
 } from "./mandalaTrajectories";
 
+export {
+  getMandalaFieldFlows,
+  getMandalaFieldPeriodById,
+  getMandalaFieldRecords,
+  mandalaFieldFlowSource,
+  mandalaFieldPeriods,
+} from "./fieldFlowSource";
+export type {
+  MandalaFieldPeriod,
+  MandalaFieldPeriodId,
+} from "./fieldFlowSource";
+
+export { useFieldFlows } from "./useFieldFlows";
+export type {
+  UseFieldFlowsOptions,
+  UseFieldFlowsResult,
+} from "./useFieldFlows";
+
 export { useJourneyTrajectory } from "./useJourneyTrajectory";
 export type {
   UseJourneyTrajectoryOptions,
   UseJourneyTrajectoryResult,
 } from "./useJourneyTrajectory";
+
+export { FieldPeriodSelector } from "./FieldPeriodSelector";
+export type { FieldPeriodSelectorProps } from "./FieldPeriodSelector";
 
 export { JourneySelector } from "./JourneySelector";
 export type { JourneySelectorProps } from "./JourneySelector";

@@ -36,7 +36,11 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../implementation/frontend/mandala/FieldFlowLayer.tsx](../implementation/frontend/mandala/FieldFlowLayer.tsx)
+- [../implementation/frontend/mandala/FieldPeriodSelector.tsx](../implementation/frontend/mandala/FieldPeriodSelector.tsx)
+- [../implementation/frontend/mandala/fieldFlowSource.ts](../implementation/frontend/mandala/fieldFlowSource.ts)
 - [../implementation/frontend/mandala/mandalaTrajectories.ts](../implementation/frontend/mandala/mandalaTrajectories.ts)
+- [../implementation/frontend/mandala/useFieldFlows.ts](../implementation/frontend/mandala/useFieldFlows.ts)
 - [../implementation/frontend/mandala/useJourneyProgress.ts](../implementation/frontend/mandala/useJourneyProgress.ts)
 - [../implementation/frontend/mandala/useJourneyTrajectory.ts](../implementation/frontend/mandala/useJourneyTrajectory.ts)
 - [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
@@ -54,7 +58,11 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `MandalaPrototype` autocontido para demonstracao local
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
+- `FieldFlowLayer` para correntes agregadas do campo
+- `FieldPeriodSelector` para leitura temporal leve do observatorio
+- `fieldFlowSource.ts` como fonte agregada por periodo
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
+- `useFieldFlows` para observatorio leve sem sair da mesma tela
 - `mandalaTrajectories.ts` para contrato de memoria local, sessao efemera e atlas agregado
 - `useJourneyTrajectory` para registrar memoria local da travessia
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para isolar estado efemero e selecao visual
@@ -69,6 +77,8 @@ No estado atual da implementacao:
 - a malha de nos continua preservada como projecao `v0`
 - a trajetoria historica ja pode ser desenhada diretamente sobre a mandala a partir do `JourneyScreen`
 - fluxos coletivos agregados ja podem ser desenhados como correntes suaves atras da trajetoria pessoal
+- o observatorio inicial ja pode trocar periodos do campo sem abrir interface paralela
+- a troca de periodo ja pode acontecer com transicao suave e frase curta de clima do campo
 
 ## Camadas de Geometria no Frontend
 
@@ -223,6 +233,7 @@ Na entrada React atual, a app de demonstracao ja valida essa API com:
 - log visivel de analytics emitidos
 - desenho da trajetoria historica diretamente sobre a mandala
 - camada inicial de campo coletivo desenhada na mesma mandala
+- filtro simples de periodo abrindo o observatorio dentro da mesma tela
 
 Para V1 publica, a entrada React deve preferir:
 
@@ -240,7 +251,7 @@ A mandala precisa crescer por camadas opcionais, sem virar dashboard:
 | base | geometria, eixos e nos | implementado |
 | jornada pessoal | etapa ativa e trajetoria historica | implementado |
 | campo coletivo | fluxos agregados como correntes suaves | implementado em overlay inicial |
-| observatorio | leitura temporal do campo por periodo | planejado |
+| observatorio | leitura temporal do campo por periodo | implementado em filtro inicial |
 
 Regra de composicao:
 

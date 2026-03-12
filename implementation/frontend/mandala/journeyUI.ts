@@ -36,6 +36,79 @@ export const MANDALA_JOURNEY_UI_CSS = `
   max-width: 72ch;
 }
 
+.journey-field {
+  display: grid;
+  gap: 10px;
+}
+
+.journey-field__label {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.journey-field__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.journey-field__button {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 18px;
+  color: #1f1b16;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+  padding: 12px 14px;
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.journey-field__button:hover,
+.journey-field__button:focus-visible {
+  border-color: rgba(58, 53, 44, 0.3);
+  box-shadow: 0 10px 24px rgba(58, 53, 44, 0.08);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.journey-field__button--active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(58, 53, 44, 0.38);
+}
+
+.journey-field__button-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.journey-field__button-copy {
+  color: #7f7668;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.journey-field__climate {
+  color: #5e564a;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 72ch;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.journey-field__climate--transitioning {
+  opacity: 0.58;
+  transform: translateY(2px);
+}
+
 .journey-selector {
   display: flex;
   flex-wrap: wrap;

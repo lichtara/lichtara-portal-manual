@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { FieldPeriodSelector } from "./FieldPeriodSelector";
 import {
   MandalaCanvas,
   mandalaNodes,
@@ -15,6 +16,10 @@ import {
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
 } from "./mandalaJourneys";
+import {
+  type MandalaFieldPeriod,
+  type MandalaFieldPeriodId,
+} from "./fieldFlowSource";
 import {
   type MandalaCollectiveFlow,
   type MandalaTrajectoryRecord,
@@ -43,6 +48,11 @@ export type JourneyScreenProps = {
   onPersistTrajectory?: (record: MandalaTrajectoryRecord) => void;
   collectiveFlows?: MandalaCollectiveFlow[];
   maxCollectiveFlows?: number;
+  fieldPeriods?: MandalaFieldPeriod[];
+  activeFieldPeriodId?: MandalaFieldPeriodId;
+  fieldPeriodLabel?: string;
+  fieldClimateCopy?: string;
+  isFieldTransitioning?: boolean;
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -51,6 +61,7 @@ export type JourneyScreenProps = {
   className?: string;
   style?: React.CSSProperties;
   onProgressChange?: (change: MandalaJourneyProgressChange) => void;
+  onFieldPeriodSelect?: (periodId: MandalaFieldPeriodId) => void;
   onTrajectoryChange?: (
     record: MandalaTrajectoryRecord,
     snapshot: MandalaTrajectorySnapshot | null,
@@ -74,6 +85,11 @@ export function JourneyScreen({
   onPersistTrajectory,
   collectiveFlows = [],
   maxCollectiveFlows = 5,
+  fieldPeriods = [],
+  activeFieldPeriodId,
+  fieldPeriodLabel = "Observatorio",
+  fieldClimateCopy,
+  isFieldTransitioning = false,
   width = "100%",
   height,
   title = "Por onde voce quer comecar?",
@@ -82,6 +98,7 @@ export function JourneyScreen({
   className,
   style,
   onProgressChange,
+  onFieldPeriodSelect,
   onTrajectoryChange,
   onAnalyticsEvent,
   onJourneyComplete,
@@ -144,6 +161,17 @@ export function JourneyScreen({
         <h2 className="journey-screen__title">{title}</h2>
         <p className="journey-screen__intro">{intro}</p>
       </header>
+
+      {fieldPeriods.length > 0 && activeFieldPeriodId && onFieldPeriodSelect ? (
+        <FieldPeriodSelector
+          periods={fieldPeriods}
+          activePeriodId={activeFieldPeriodId}
+          climateCopy={fieldClimateCopy}
+          isTransitioning={isFieldTransitioning}
+          label={fieldPeriodLabel}
+          onPeriodSelect={onFieldPeriodSelect}
+        />
+      ) : null}
 
       {showSelector ? (
         <JourneySelector

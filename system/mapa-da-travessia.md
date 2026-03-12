@@ -53,6 +53,8 @@ No prototipo atual, essa leitura ja pode aparecer diretamente sobre a mandala:
 - a trajetoria historica desenha o caminho ja percorrido
 - o resumo lateral funciona apenas como apoio textual
 - fluxos coletivos agregados podem aparecer como correntes suaves atras da trajetoria pessoal
+- um filtro curto de periodo pode modular o campo sem abrir uma segunda interface
+- o observatorio pode descrever o clima atual do campo com linguagem contemplativa, sem metricas
 
 ## Trajetoria sem Identidade
 

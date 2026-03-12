@@ -252,6 +252,11 @@ Antes de ampliar a experiencia, precisam estar estaveis:
 - expansao para multiplos agentes antes de provar NAVROS
 - captura de trajetoria antes de fechar regras de privacidade e apagamento
 
+Regra de disciplina para as proximas iteracoes:
+
+- refinamentos de experiencia podem avancar com mais fluidez
+- mudancas de arquitetura devem passar pelo filtro em [../system/disciplina-estrutural.md](../system/disciplina-estrutural.md)
+
 ## Proximas Decisoes Estruturais
 
 Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:

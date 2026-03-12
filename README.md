@@ -42,6 +42,7 @@ No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposica
 - [system/lichtara-core-architecture.md](system/lichtara-core-architecture.md)
 - [system/lichtara-system-vs-portal.md](system/lichtara-system-vs-portal.md)
 - [system/matriz-canonica-do-sistema.md](system/matriz-canonica-do-sistema.md)
+- [system/disciplina-estrutural.md](system/disciplina-estrutural.md)
 - [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
 - [system/navros-experience.md](system/navros-experience.md)
 - [system/mapa-da-travessia.md](system/mapa-da-travessia.md)
@@ -57,7 +58,11 @@ No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposica
 - [implementation/frontend/mandala/JourneyStepper.tsx](implementation/frontend/mandala/JourneyStepper.tsx)
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [implementation/frontend/mandala/FieldFlowLayer.tsx](implementation/frontend/mandala/FieldFlowLayer.tsx)
+- [implementation/frontend/mandala/FieldPeriodSelector.tsx](implementation/frontend/mandala/FieldPeriodSelector.tsx)
+- [implementation/frontend/mandala/fieldFlowSource.ts](implementation/frontend/mandala/fieldFlowSource.ts)
 - [implementation/frontend/mandala/mandalaTrajectories.ts](implementation/frontend/mandala/mandalaTrajectories.ts)
+- [implementation/frontend/mandala/useFieldFlows.ts](implementation/frontend/mandala/useFieldFlows.ts)
 - [implementation/frontend/mandala/useJourneyProgress.ts](implementation/frontend/mandala/useJourneyProgress.ts)
 - [implementation/frontend/mandala/useJourneyTrajectory.ts](implementation/frontend/mandala/useJourneyTrajectory.ts)
 - [implementation/frontend/mandala/useJourneyAnalytics.ts](implementation/frontend/mandala/useJourneyAnalytics.ts)
@@ -72,24 +77,25 @@ Para compreender o portal do campo conceitual ate a camada tecnica:
 1. [manual/00_o_que_e_lichtara.md](manual/00_o_que_e_lichtara.md)
 2. [system/lichtara-core-architecture.md](system/lichtara-core-architecture.md)
 3. [system/matriz-canonica-do-sistema.md](system/matriz-canonica-do-sistema.md)
-4. [system/lichtara-system-vs-portal.md](system/lichtara-system-vs-portal.md)
-5. [manual/01_visao_do_portal.md](manual/01_visao_do_portal.md)
-6. [manual/02_principios_navros.md](manual/02_principios_navros.md)
-7. [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
-8. [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
-9. [system/navros-experience.md](system/navros-experience.md)
-10. [system/mapa-da-travessia.md](system/mapa-da-travessia.md)
-11. [design/navros-compass.md](design/navros-compass.md)
-12. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
-13. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
-14. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
-15. [design/mandala-structure.md](design/mandala-structure.md)
-16. [design/mandala-geometry.md](design/mandala-geometry.md)
-17. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
-18. [system/portal-architecture.md](system/portal-architecture.md)
-19. [system/data-protection.md](system/data-protection.md)
-20. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-21. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+4. [system/disciplina-estrutural.md](system/disciplina-estrutural.md)
+5. [system/lichtara-system-vs-portal.md](system/lichtara-system-vs-portal.md)
+6. [manual/01_visao_do_portal.md](manual/01_visao_do_portal.md)
+7. [manual/02_principios_navros.md](manual/02_principios_navros.md)
+8. [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
+9. [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
+10. [system/navros-experience.md](system/navros-experience.md)
+11. [system/mapa-da-travessia.md](system/mapa-da-travessia.md)
+12. [design/navros-compass.md](design/navros-compass.md)
+13. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
+14. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
+15. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
+16. [design/mandala-structure.md](design/mandala-structure.md)
+17. [design/mandala-geometry.md](design/mandala-geometry.md)
+18. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
+19. [system/portal-architecture.md](system/portal-architecture.md)
+20. [system/data-protection.md](system/data-protection.md)
+21. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+22. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -123,6 +129,7 @@ No momento, o repositorio contem:
 - protocolo de entrada do portal documentado
 - base de experiencia NAVROS definida
 - matriz canonica do sistema consolidando manual, repo e paper
+- nota curta de disciplina estrutural para guiar futuras expansoes
 - especificacao da bussola NAVROS viva
 - estrutura da mandala mapeada
 - hipotese dos quatro ciclos registrada como leitura de trabalho
@@ -132,6 +139,7 @@ No momento, o repositorio contem:
 - config frontend das jornadas de 7 etapas
 - composicao de producao das jornadas em `JourneySelector`, `JourneyStepper` e `JourneyScreen`
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para separar estado e instrumentacao
+- `FieldFlowLayer`, `FieldPeriodSelector` e `useFieldFlows` para abrir o campo coletivo na mesma mandala
 - hook `useJourneyTrajectory` para registrar trajetoria local da jornada
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para separar a camada visual
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
@@ -139,6 +147,8 @@ No momento, o repositorio contem:
 - prototipo `tsx` de jornada etapa por etapa sobre a mandala
 - trajetoria historica desenhada diretamente sobre a mandala no prototipo React
 - camada inicial de fluxos coletivos desenhada atras da trajetoria pessoal no prototipo React
+- observatorio inicial com filtro de periodo sem sair da mesma interface
+- transicao suave entre periodos e frase curta de clima do campo no observatorio inicial
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base

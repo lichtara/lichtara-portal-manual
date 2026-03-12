@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { MandalaCollectiveFlow } from "./mandalaTrajectories";
 
+import { FieldFlowLayer } from "./FieldFlowLayer";
 import {
   getMandalaSquarePoint,
   getMandalaTrianglePoint,
@@ -642,38 +643,6 @@ function getSmoothPath(points: Array<{ x: number; y: number }>): string {
   return path;
 }
 
-function getCollectiveFlowPath(
-  fromNode: MandalaNode,
-  toNode: MandalaNode,
-  center = { x: 500, y: 500 },
-): string {
-  const midX = (fromNode.x + toNode.x) / 2;
-  const midY = (fromNode.y + toNode.y) / 2;
-  const deltaX = toNode.x - fromNode.x;
-  const deltaY = toNode.y - fromNode.y;
-  const segmentLength = Math.hypot(deltaX, deltaY) || 1;
-  const radialX = midX - center.x;
-  const radialY = midY - center.y;
-  const radialLength = Math.hypot(radialX, radialY);
-  const fallbackX = -deltaY / segmentLength;
-  const fallbackY = deltaX / segmentLength;
-  const directionX = radialLength > 0 ? radialX / radialLength : fallbackX;
-  const directionY = radialLength > 0 ? radialY / radialLength : fallbackY;
-  const curvature = Math.max(36, Math.min(96, segmentLength * 0.22));
-  const controlX = midX + directionX * curvature;
-  const controlY = midY + directionY * curvature;
-
-  return `M ${fromNode.x} ${fromNode.y} Q ${controlX} ${controlY} ${toNode.x} ${toNode.y}`;
-}
-
-function getNormalizedStrength(count: number, maxCount: number): number {
-  if (maxCount <= 0) {
-    return 0;
-  }
-
-  return count / maxCount;
-}
-
 function getAxisTextAnchor(point: { angleRad: number }): "start" | "middle" | "end" {
   const xDirection = Math.cos(point.angleRad);
 
@@ -778,10 +747,6 @@ export function MandalaCanvas({
   const trajectoryStartNodeId = trajectoryPathNodeIds[0] ?? null;
   const trajectoryEndNodeId =
     trajectoryPathNodeIds[trajectoryPathNodeIds.length - 1] ?? null;
-  const visibleCollectiveFlows = [...collectiveFlows]
-    .sort((left, right) => right.count - left.count)
-    .slice(0, maxCollectiveFlows);
-  const maxCollectiveFlowCount = visibleCollectiveFlows[0]?.count ?? 0;
 
   if (activeNodeId) {
     focusedNodeIds.add(activeNodeId);
@@ -947,64 +912,11 @@ export function MandalaCanvas({
             })}
           </g>
 
-          {visibleCollectiveFlows.length > 0 ? (
-            <g className="mandala__collective-flows" aria-hidden="true">
-              {visibleCollectiveFlows.map((flow) => {
-                const fromNode = nodeMap[flow.fromNodeId];
-                const toNode = nodeMap[flow.toNodeId];
-
-                if (!fromNode || !toNode) {
-                  return null;
-                }
-
-                const normalizedStrength = getNormalizedStrength(
-                  flow.count,
-                  maxCollectiveFlowCount,
-                );
-                const collectivePath = getCollectiveFlowPath(fromNode, toNode);
-                const glowOpacity = 0.08 + normalizedStrength * 0.2;
-                const lineOpacity = 0.14 + normalizedStrength * 0.34;
-                const glowWidth = 10 + normalizedStrength * 10;
-                const lineWidth = 2 + normalizedStrength * 4;
-                const nodeRadius = 2.5 + normalizedStrength * 2.5;
-
-                return (
-                  <g key={flow.flowId}>
-                    <path
-                      className="mandala__collective-flow-glow"
-                      d={collectivePath}
-                      style={{
-                        opacity: glowOpacity,
-                        strokeWidth: glowWidth,
-                      }}
-                    />
-                    <path
-                      className="mandala__collective-flow-line"
-                      d={collectivePath}
-                      style={{
-                        opacity: lineOpacity,
-                        strokeWidth: lineWidth,
-                      }}
-                    />
-                    <circle
-                      className="mandala__collective-flow-node"
-                      cx={fromNode.x}
-                      cy={fromNode.y}
-                      r={nodeRadius}
-                      style={{ opacity: lineOpacity }}
-                    />
-                    <circle
-                      className="mandala__collective-flow-node"
-                      cx={toNode.x}
-                      cy={toNode.y}
-                      r={nodeRadius}
-                      style={{ opacity: lineOpacity }}
-                    />
-                  </g>
-                );
-              })}
-            </g>
-          ) : null}
+          <FieldFlowLayer
+            flows={collectiveFlows}
+            nodeMap={nodeMap}
+            maxFlows={maxCollectiveFlows}
+          />
 
           <g aria-hidden="true">
             {routes.map((route) => {

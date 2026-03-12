@@ -178,6 +178,14 @@ Ao escrever, modelar ou implementar, verificar:
 - o portal continua sendo travessia e nao apenas conteudo?
 - o paper continua formalizando o sistema real e nao uma abstracao desconectada dele?
 
+Filtro adicional de expansao:
+
+- a proxima mudanca altera a arquitetura do sistema ou apenas refina a experiencia?
+
+Quando essa resposta nao estiver clara, usar:
+
+- [disciplina-estrutural.md](disciplina-estrutural.md)
+
 ## Uso Recomendado
 
 No manual:
