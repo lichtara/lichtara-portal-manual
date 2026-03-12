@@ -15,6 +15,12 @@ Essa distincao precisa ficar explicita para evitar que decisao de produto seja c
 | Lichtara | sistema de navegacao da experiencia humana |
 | Portal Lichtara | interface publica e navegavel desse sistema |
 
+Formula curta para uso editorial:
+
+`Lichtara e um sistema de navegacao da consciencia.`
+
+`O Portal e a interface dessa navegacao.`
+
 ## O Que Pertence ao Sistema Lichtara
 
 Pertence ao sistema:
@@ -41,6 +47,18 @@ Pertence ao portal:
 - analytics e observabilidade
 
 Esses elementos definem como o sistema se torna experiencia acessivel.
+
+## Interface Cognitiva do Portal
+
+Na linguagem do portal, tres elementos precisam permanecer estruturalmente legiveis:
+
+| Elemento | Funcao |
+| --- | --- |
+| Mandala | mapa |
+| NAVROS | bussola |
+| Jornada | percurso |
+
+Essa triade protege o portal de parecer apenas app de autoajuda ou simbolismo difuso. Ela mostra que a interface existe para orientar travessias dentro de um mapa coerente.
 
 ## Regra de Projeto
 

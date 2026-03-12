@@ -167,6 +167,20 @@ Essa leitura importa porque mostra que a jornada de 7 etapas do portal nao foi i
 
 Como evolucao natural das rotas da mandala, o portal pode oferecer jornadas guiadas de 7 etapas. A vantagem dessa estrutura e manter profundidade sem alongar demais a travessia.
 
+Decisao recomendada para a primeira experiencia publica:
+
+- V1 publica com uma unica jornada
+- rota ativa: `Percepcao`
+- agente de entrada: `NAVROS`
+
+Leitura de rollout:
+
+- `Percepcao` entra primeiro
+- `Estrutura` fica preparada para camada seguinte sob `SYNTARIS`
+- `Acao` fica preparada para camada seguinte sob `FLUX`
+
+Isso reduz a complexidade percebida na primeira travessia sem desmontar a arquitetura das tres rotas.
+
 Padrao-base:
 
 1. entrada
@@ -188,6 +202,10 @@ Em interface, isso permite trocar um menu amplo por tres entradas legiveis:
 - compreender o que esta acontecendo
 - organizar minha vida ou projeto
 - criar movimento e transformacao
+
+Mas essa camada nao precisa aparecer na V1 publica. Na primeira abertura do portal, a recomendacao mais segura e:
+
+`NAVROS -> jornada de Percepcao -> clareza e orientacao`
 
 Cada etapa pode aparecer como um agente da mandala com uma unica reflexao, uma acao breve e um avanco claro para o proximo passo.
 

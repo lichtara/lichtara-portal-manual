@@ -34,6 +34,12 @@ Com camada de abertura contemplativa:
 
 `landing -> protocolo de entrada -> consulta NAVROS -> bussola viva -> sintese -> agente ativo -> retorno ao portal`
 
+Regra de rollout publico:
+
+- a V1 publica deve operar com uma unica jornada
+- essa jornada deve ser `Percepcao`
+- `Estrutura` e `Acao` permanecem preparadas na arquitetura, mas nao expostas como seletor inicial
+
 Fluxo expandido previsto:
 
 `mandala -> modo navegacao -> NAVROS -> agente ativo -> trilha recente -> continuidade`
@@ -119,7 +125,8 @@ Sprint 2:
 Sprint 3:
 - home da mandala viva
 - alternancia entre modo navegacao e modo exploracao
-- seletor de rotas `compreender / organizar / agir`
+- rota publica unica de `Percepcao` estabilizada
+- rotas `Estrutura` e `Acao` preparadas sob feature flag ou rollout posterior
 - stepper de jornadas guiadas de 7 etapas
 - alinhamento das etapas com a progressao narrativa do Capitulo 01 do Livro Vivo
 - trilha recente
@@ -240,5 +247,5 @@ Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:
 - relacao entre Livro Vivo interativo e consulta NAVROS isolada
 - criterios de rollout entre V1 fechada e abertura publica
 - regra de transicao entre bussola de 4 direcoes e mandala completa
-- momento exato de entrada do seletor de rotas naturais
+- criterio de abertura publica das rotas `Estrutura` e `Acao` apos a V1
 - regra de fechamento das jornadas de 7 etapas, especialmente na passagem entre `ASTRAEL`, `OKTAVE` e `NAVROS`

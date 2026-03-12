@@ -12,6 +12,16 @@ Na pratica:
 - NAVROS opera como instrumento de navegacao
 - o portal entrega a experiencia pratica
 
+Formula operacional:
+
+`Mandala -> mapa`
+
+`NAVROS -> bussola`
+
+`Jornada -> percurso`
+
+Essa leitura e importante porque descreve o portal como interface cognitiva, nao como menu de conteudo.
+
 Referencia de alinhamento:
 
 - [matriz-canonica-do-sistema.md](matriz-canonica-do-sistema.md)
@@ -35,10 +45,25 @@ Fluxo recomendado:
 
 `Landing -> Travessia -> NAVROS -> Agentes -> retorno ao portal`
 
+Recorte publico recomendado:
+
+`Landing -> protocolo de entrada -> NAVROS -> jornada de Percepcao -> clareza/orientacao -> retorno`
+
 Tempo de experiencia recomendado no recorte mais enxuto:
 
 - 5 a 8 minutos para a travessia mais completa
 - 2 a 3 minutos para a primeira consulta NAVROS isolada
+
+Decisao de rollout:
+
+- V1 publica com uma unica jornada
+- jornada inicial: `Percepcao`
+- `Estrutura` e `Acao` mantidas na arquitetura, mas fora da primeira exposicao publica
+
+Formula de entrada do portal:
+
+> Bem-vindo ao Portal Lichtara.  
+> Um sistema de navegacao da consciencia.
 
 ## Arquitetura Tecnica Minima
 

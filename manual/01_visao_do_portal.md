@@ -4,6 +4,72 @@
 
 O Portal Lichtara se apresenta como um sistema de navegacao da consciencia. Sua funcao central e ajudar a pessoa usuaria a reconhecer onde esta, compreender o campo que atravessa e perceber qual e o proximo passo verdadeiro.
 
+## Definicao do Portal
+
+Definicao principal:
+
+> O Portal Lichtara e um sistema de navegacao da consciencia que permite ao usuario atravessar processos de percepcao, organizacao interna e acao responsavel por meio de uma interface simbolica e interativa.
+
+Forma condensada:
+
+`Lichtara e um sistema de navegacao da consciencia.`
+
+`O Portal e a interface dessa navegacao.`
+
+Essa formulacao existe para evitar confusao entre sistema e interface.
+
+## Arquitetura Conceitual do Portal
+
+Leitura estrutural:
+
+```text
+Sistema Lichtara
+  ->
+gramatica estrutural
+  ->
+Field - Coherence - Limit
+  ->
+Portal
+  ->
+interface de navegacao
+  ->
+Jornadas
+  ->
+Percepcao - Estrutura - Acao
+```
+
+Leitura minima:
+
+```text
+consciencia
+  ->
+navegacao
+  ->
+experiencia
+```
+
+## Papel da Mandala
+
+A mandala nao funciona apenas como simbolo. Ela funciona como mapa de navegacao da consciencia.
+
+Traducoes operacionais:
+
+| Elemento | Funcao |
+| --- | --- |
+| Mandala | mapa |
+| NAVROS | bussola |
+| Jornada | percurso |
+
+Essa relacao transforma o portal em uma interface cognitiva, nao apenas em uma colecao de telas.
+
+## Consequencia para a V1
+
+Essa definicao reforca o recorte mais claro para a primeira experiencia publica:
+
+`Mandala -> NAVROS -> 7 etapas de Percepcao`
+
+NAVROS entra primeiro porque ja cumpre funcao simbolica e funcao operacional ao mesmo tempo. Ele e a bussola do sistema e tambem a porta de entrada da travessia.
+
 Na formulacao atual do manual-base, a direcao mais forte para a Versao 1 combina utilidade imediata com linguagem simbolica propria:
 
 `diagnostico inicial -> jornada simbolica personalizada`

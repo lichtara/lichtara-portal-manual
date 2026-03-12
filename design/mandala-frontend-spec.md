@@ -75,6 +75,13 @@ As tres jornadas de 7 etapas agora existem como configuracao real de frontend:
 
 - [../implementation/frontend/mandala/mandalaJourneys.ts](../implementation/frontend/mandala/mandalaJourneys.ts)
 
+Para rollout de produto, a camada de frontend tambem precisa distinguir entre capacidade estrutural e exposicao publica:
+
+- o sistema suporta `Percepcao`, `Estrutura` e `Acao`
+- a V1 publica expoe apenas `Percepcao`
+- o seletor de jornadas pode permanecer oculto na primeira abertura
+- `Estrutura` e `Acao` devem entrar por configuracao, nao por reescrita da tela
+
 Essa camada define:
 
 - `journey id`
@@ -115,6 +122,13 @@ Na entrada React atual, a app de demonstracao ja valida essa API com:
 - persistencia via callback
 - leitura do ultimo progresso
 - log visivel de analytics emitidos
+
+Para V1 publica, a entrada React deve preferir:
+
+- `journeys` limitado a uma unica jornada
+- `initialJourneyId="perception"`
+- `showSelector={false}`
+- copy de entrada que explicite `NAVROS -> Percepcao -> 7 etapas`
 
 ## ViewBox de Referencia
 

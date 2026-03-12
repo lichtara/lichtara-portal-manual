@@ -104,6 +104,8 @@ export const mandalaJourneyOrder: MandalaJourneyId[] = [
   "action",
 ];
 
+export const mandalaPublicV1JourneyIds: MandalaJourneyId[] = ["perception"];
+
 export const mandalaJourneys: MandalaJourney[] = [
   {
     id: "perception",
@@ -438,6 +440,10 @@ export const mandalaJourneys: MandalaJourney[] = [
     ],
   },
 ];
+
+export const mandalaPublicV1Journeys: MandalaJourney[] = mandalaJourneys.filter(
+  (journey) => mandalaPublicV1JourneyIds.includes(journey.id),
+);
 
 export function getMandalaJourneyById(
   journeyId: MandalaJourneyId | null | undefined,

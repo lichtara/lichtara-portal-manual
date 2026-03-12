@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import {
   JourneyScreen,
+  mandalaPublicV1Journeys,
   type MandalaJourneyAnalyticsEvent,
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
@@ -56,13 +57,19 @@ function App() {
         <p className="hero__eyebrow">Portal Lichtara</p>
         <h1 className="hero__title">Ambiente React para a mandala viva</h1>
         <p className="hero__copy">
-          Esta pagina conecta o manual com o prototipo interativo ja presente no
-          repositorio, sem mover a implementacao original.
+          Esta pagina valida a decisao de produto da V1 publica: uma unica
+          jornada de Percepcao, iniciada por NAVROS, com as outras rotas
+          mantidas apenas como estrutura futura.
         </p>
       </section>
 
       <section className="app-grid">
         <JourneyScreen
+          journeys={mandalaPublicV1Journeys}
+          initialJourneyId="perception"
+          showSelector={false}
+          title="Jornada V1: Percepcao"
+          intro="A V1 publica abre com NAVROS e uma unica travessia de 7 etapas. Estrutura e Acao permanecem preparadas, mas fora da primeira exposicao publica."
           loadPersistedProgress={readPersistedProgress}
           onPersistProgress={(progress) => {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));

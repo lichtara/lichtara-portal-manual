@@ -102,9 +102,17 @@ Configuracao-base:
 
 - titulo: `Lichtara`
 - subtitulo opcional: `Sistema de navegacao da consciencia`
+- saudacao opcional: `Bem-vindo ao Portal Lichtara.`
 - triade de frases revelada em sequencia
 - bussola NAVROS aparecendo ao final
 - CTA unico: `Iniciar Navegacao`
+
+Formula de entrada recomendada:
+
+> Bem-vindo ao Portal Lichtara.  
+> Um sistema de navegacao da consciencia.
+
+Essa frase pode aparecer antes da triade do Livro Vivo ou funcionar como forma condensada do protocolo quando a abertura precisar ser ainda mais enxuta.
 
 ## Sequencia Recomendada
 

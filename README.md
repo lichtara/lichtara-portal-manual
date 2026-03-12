@@ -2,6 +2,20 @@
 
 Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conceitual, a linguagem da experiencia, a estrutura simbolica dos agentes e a base de implementacao da V1.
 
+## O Que e o Portal Lichtara
+
+O Portal Lichtara e a interface publica do sistema Lichtara.
+
+Ele apresenta um sistema de navegacao da consciencia estruturado por tres rotas de experiencia:
+
+- percepcao
+- estrutura
+- acao
+
+Cada rota e composta por jornadas guiadas dentro da mandala do sistema.
+
+No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposicao inicial fica concentrada em `NAVROS -> Percepcao`.
+
 ## Mapa do Repositorio
 
 ### Manual

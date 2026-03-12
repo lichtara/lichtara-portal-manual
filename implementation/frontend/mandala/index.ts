@@ -26,6 +26,8 @@ export {
   isMandalaJourneyComplete,
   mandalaJourneyOrder,
   mandalaJourneys,
+  mandalaPublicV1JourneyIds,
+  mandalaPublicV1Journeys,
   normalizeMandalaJourneyProgress,
 } from "./mandalaJourneys";
 export type {

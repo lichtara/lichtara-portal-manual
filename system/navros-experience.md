@@ -279,6 +279,32 @@ Em experiencia, isso abre duas escalas dentro do mesmo portal:
 - jornada curta: uma rota completa para a necessidade do agora
 - jornada expandida: combinacao de rotas no retorno recorrente ao nucleo `NAVROS - SYNTARIS - FLUX`
 
+## Decisao de Rollout da V1
+
+Embora o sistema ja suporte tres rotas em nivel conceitual e tecnico, a recomendacao mais clara para a primeira experiencia publica e expor apenas uma jornada.
+
+Formula recomendada:
+
+`V1 publica = NAVROS -> rota de Percepcao -> 7 etapas`
+
+Justificativa:
+
+- NAVROS ja funciona como porta de entrada do campo
+- NAVROS ja funciona como onboarding simbolico do sistema
+- a rota de Percepcao ja testa navegabilidade, clareza e retorno sem sobrecarregar a primeira travessia
+
+Consequencia de produto:
+
+- a arquitetura continua suportando `Percepcao`, `Estrutura` e `Acao`
+- a V1 publica mostra apenas `Percepcao`
+- `Estrutura` e `Acao` permanecem preparadas para expansao futura
+
+Sequencia de expansao sugerida:
+
+- V1: `Percepcao` sob `NAVROS`
+- V2: `Estrutura` sob `SYNTARIS`
+- V3: `Acao` sob `FLUX`
+
 ## Jornadas Guiadas de 7 Etapas
 
 Uma camada seguinte da experiencia pode transformar as rotas em jornadas guiadas. Nessa leitura, o usuario deixa de apenas receber uma leitura e passa a atravessar um microciclo completo.
