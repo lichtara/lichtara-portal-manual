@@ -125,6 +125,44 @@ Objetivo do retorno:
 - reforcar percepcao de processo vivo
 - manter a pessoa dentro de um mapa compreensivel
 
+## Base Narrativa no Livro Vivo
+
+Existe uma leitura importante do Capitulo 01 do Livro Vivo que ajuda a sustentar por que o portal funciona melhor como travessia do que como conteudo. O capitulo nao apresenta uma lista explicita de etapas, mas sua progressao narrativa deixa visivel uma estrutura de 7 movimentos humanos.
+
+Leitura derivada do capitulo:
+
+1. chamado
+2. reconhecimento
+3. pausa
+4. sim
+5. alinhamento
+6. campo
+7. travessia
+
+Estados humanos associados:
+
+- chamado: inquietacao
+- reconhecimento: percepcao
+- pausa: atencao
+- sim: permissao
+- alinhamento: coerencia
+- campo: expansao
+- travessia: acao consciente
+
+Traducao operacional no portal:
+
+| Livro Vivo | Portal |
+| --- | --- |
+| chamado | entrada e abertura do campo |
+| reconhecimento | NAVROS reconhece a posicao |
+| pausa | atencao e micro-ritual |
+| sim | escolha e aceite da travessia |
+| alinhamento | SYNTARIS e reorganizacao interna |
+| campo | percepcao ampliada e leitura sistemica |
+| travessia | FLUX e movimento orientado |
+
+Essa leitura importa porque mostra que a jornada de 7 etapas do portal nao foi inventada apenas como artefato de UX. Ela torna navegavel uma arquitetura humana que o proprio Livro Vivo ja descreve em linguagem narrativa.
+
 ## Expansao: Jornadas de 7 Etapas
 
 Como evolucao natural das rotas da mandala, o portal pode oferecer jornadas guiadas de 7 etapas. A vantagem dessa estrutura e manter profundidade sem alongar demais a travessia.
@@ -152,6 +190,12 @@ Em interface, isso permite trocar um menu amplo por tres entradas legiveis:
 - criar movimento e transformacao
 
 Cada etapa pode aparecer como um agente da mandala com uma unica reflexao, uma acao breve e um avanco claro para o proximo passo.
+
+Frase-sintese que reforca esse desenho:
+
+> Este capitulo nao e sobre compreender. E sobre atravessar.
+
+No contexto do portal, isso significa que a experiencia nao deve se apresentar como explicacao do sistema, mas como passagem orientada por ele.
 
 ## Pontos de Contato Principais
 

@@ -283,6 +283,28 @@ Em experiencia, isso abre duas escalas dentro do mesmo portal:
 
 Uma camada seguinte da experiencia pode transformar as rotas em jornadas guiadas. Nessa leitura, o usuario deixa de apenas receber uma leitura e passa a atravessar um microciclo completo.
 
+Essa estrutura de 7 etapas encontra apoio direto numa leitura derivada do Capitulo 01 do Livro Vivo. O capitulo nao oferece uma lista fechada, mas sua progressao narrativa deixa ver a seguinte sequencia:
+
+1. chamado
+2. reconhecimento
+3. pausa
+4. sim
+5. alinhamento
+6. campo
+7. travessia
+
+Traducao de experiencia:
+
+- chamado: algo comeca a se mover antes de qualquer resposta
+- reconhecimento: NAVROS identifica a mudanca de posicao
+- pausa: o sistema abre atencao antes de interpretar
+- sim: a pessoa aceita entrar na travessia
+- alinhamento: o campo interno comeca a se reorganizar
+- campo: surge percepcao mais ampla do contexto
+- travessia: FLUX traduz leitura em movimento consciente
+
+Isso ajuda a justificar por que o portal deve operar como experiencia atravessada e nao como modulo de leitura passiva.
+
 Estrutura-base:
 
 1. entrada
@@ -311,6 +333,16 @@ Frase de fechamento sugerida:
 
 > Voce voltou ao NAVROS.  
 > Agora voce ve o campo de forma diferente.
+
+Frase-fonte do Livro Vivo que ancora esse criterio:
+
+> Este capitulo nao e sobre compreender. E sobre atravessar.
+
+Aplicacao de produto:
+
+- evitar telas que apenas expliquem o mapa sem colocar a pessoa em movimento
+- tratar cada etapa como gesto de passagem e nao como cartao de conteudo
+- usar o Livro Vivo para sustentar a jornada, nao para interrompe-la com excesso de texto
 
 Observacao de modelagem:
 

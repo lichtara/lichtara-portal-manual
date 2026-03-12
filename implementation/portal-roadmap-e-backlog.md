@@ -121,6 +121,7 @@ Sprint 3:
 - alternancia entre modo navegacao e modo exploracao
 - seletor de rotas `compreender / organizar / agir`
 - stepper de jornadas guiadas de 7 etapas
+- alinhamento das etapas com a progressao narrativa do Capitulo 01 do Livro Vivo
 - trilha recente
 - tela de agente ativo
 - fluxo de comunidade
@@ -218,6 +219,7 @@ Antes de ampliar a experiencia, precisam estar estaveis:
 - contrato do payload NAVROS
 - regra de agente ativo
 - mapeamento entre agente ativo e direcao da bussola
+- leitura consolidada da estrutura de 7 movimentos do Capitulo 01 para nomeacao final da jornada
 
 ## Riscos a Vigiar
 
