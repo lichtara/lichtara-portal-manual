@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { MandalaCollectiveFlow } from "./mandalaTrajectories";
 
 import {
   getMandalaSquarePoint,
@@ -57,6 +58,9 @@ export type MandalaCanvasProps = {
   hoverNodeId?: MandalaNodeId | null;
   activeRouteId?: MandalaRouteId | null;
   trailNodeIds?: MandalaNodeId[];
+  trajectoryPathNodeIds?: MandalaNodeId[];
+  collectiveFlows?: MandalaCollectiveFlow[];
+  maxCollectiveFlows?: number;
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -368,6 +372,69 @@ export const MANDALA_CANVAS_CSS = `
   color: var(--mandala-route-action);
 }
 
+.mandala__trajectory {
+  pointer-events: none;
+}
+
+.mandala__trajectory-glow {
+  fill: none;
+  opacity: 0.22;
+  stroke: rgba(180, 109, 60, 0.38);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 20;
+}
+
+.mandala__trajectory-line {
+  fill: none;
+  stroke: rgba(58, 53, 44, 0.78);
+  stroke-dasharray: 2 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 6;
+}
+
+.mandala__trajectory-point {
+  fill: rgba(250, 247, 240, 0.96);
+  stroke: rgba(58, 53, 44, 0.32);
+  stroke-width: 1.5;
+}
+
+.mandala__trajectory-point--milestone {
+  fill: rgba(180, 109, 60, 0.16);
+  stroke: rgba(180, 109, 60, 0.48);
+}
+
+.mandala__trajectory-point--current {
+  fill: rgba(58, 53, 44, 0.92);
+  stroke: rgba(250, 247, 240, 0.88);
+  stroke-width: 2;
+}
+
+.mandala__collective-flows {
+  pointer-events: none;
+}
+
+.mandala__collective-flow-glow {
+  fill: none;
+  stroke: rgba(92, 124, 138, 0.14);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mandala__collective-flow-line {
+  fill: none;
+  stroke: rgba(92, 124, 138, 0.38);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mandala__collective-flow-node {
+  fill: rgba(92, 124, 138, 0.18);
+  stroke: rgba(92, 124, 138, 0.24);
+  stroke-width: 1;
+}
+
 .mandala__node {
   cursor: default;
   transform-origin: center;
@@ -523,8 +590,88 @@ function getRoutePoints(route: MandalaRoute, nodeMap: Record<string, MandalaNode
     .join(" ");
 }
 
+function getNodeSequence(
+  nodeIds: MandalaNodeId[],
+  nodeMap: Record<string, MandalaNode>,
+): MandalaNode[] {
+  return nodeIds
+    .map((nodeId) => nodeMap[nodeId])
+    .filter((node): node is MandalaNode => Boolean(node));
+}
+
 function getPointString(points: Array<{ x: number; y: number }>): string {
   return points.map((point) => `${point.x},${point.y}`).join(" ");
+}
+
+function getSmoothPath(points: Array<{ x: number; y: number }>): string {
+  const firstPoint = points[0];
+
+  if (!firstPoint) {
+    return "";
+  }
+
+  if (points.length === 1) {
+    return `M ${firstPoint.x} ${firstPoint.y}`;
+  }
+
+  let path = `M ${firstPoint.x} ${firstPoint.y}`;
+
+  for (let index = 1; index < points.length - 1; index += 1) {
+    const currentPoint = points[index];
+    const nextPoint = points[index + 1];
+
+    if (!currentPoint || !nextPoint) {
+      continue;
+    }
+
+    const midX = (currentPoint.x + nextPoint.x) / 2;
+    const midY = (currentPoint.y + nextPoint.y) / 2;
+
+    path += ` Q ${currentPoint.x} ${currentPoint.y} ${midX} ${midY}`;
+  }
+
+  const penultimatePoint = points[points.length - 2];
+  const lastPoint = points[points.length - 1];
+
+  if (!penultimatePoint || !lastPoint) {
+    return path;
+  }
+
+  path += ` Q ${penultimatePoint.x} ${penultimatePoint.y} ${lastPoint.x} ${lastPoint.y}`;
+
+  return path;
+}
+
+function getCollectiveFlowPath(
+  fromNode: MandalaNode,
+  toNode: MandalaNode,
+  center = { x: 500, y: 500 },
+): string {
+  const midX = (fromNode.x + toNode.x) / 2;
+  const midY = (fromNode.y + toNode.y) / 2;
+  const deltaX = toNode.x - fromNode.x;
+  const deltaY = toNode.y - fromNode.y;
+  const segmentLength = Math.hypot(deltaX, deltaY) || 1;
+  const radialX = midX - center.x;
+  const radialY = midY - center.y;
+  const radialLength = Math.hypot(radialX, radialY);
+  const fallbackX = -deltaY / segmentLength;
+  const fallbackY = deltaX / segmentLength;
+  const directionX = radialLength > 0 ? radialX / radialLength : fallbackX;
+  const directionY = radialLength > 0 ? radialY / radialLength : fallbackY;
+  const curvature = Math.max(36, Math.min(96, segmentLength * 0.22));
+  const controlX = midX + directionX * curvature;
+  const controlY = midY + directionY * curvature;
+
+  return `M ${fromNode.x} ${fromNode.y} Q ${controlX} ${controlY} ${toNode.x} ${toNode.y}`;
+}
+
+function getNormalizedStrength(count: number, maxCount: number): number {
+  if (maxCount <= 0) {
+    return 0;
+  }
+
+  return count / maxCount;
 }
 
 function getAxisTextAnchor(point: { angleRad: number }): "start" | "middle" | "end" {
@@ -601,6 +748,9 @@ export function MandalaCanvas({
   hoverNodeId = null,
   activeRouteId = null,
   trailNodeIds = [],
+  trajectoryPathNodeIds = [],
+  collectiveFlows = [],
+  maxCollectiveFlows = 5,
   width = "100%",
   height,
   title = "Mandala do Portal Lichtara",
@@ -618,7 +768,20 @@ export function MandalaCanvas({
   const nodeMap = buildNodeMap(nodes);
   const activeRoute = getRouteById(routes, activeRouteId);
   const routeNodeIds = activeRoute ? activeRoute.nodes : [];
-  const focusedNodeIds = new Set<MandalaNodeId>([...routeNodeIds, ...trailNodeIds]);
+  const focusedNodeIds = new Set<MandalaNodeId>([
+    ...routeNodeIds,
+    ...trailNodeIds,
+    ...trajectoryPathNodeIds,
+  ]);
+  const trajectoryNodes = getNodeSequence(trajectoryPathNodeIds, nodeMap);
+  const trajectoryPath = getSmoothPath(trajectoryNodes);
+  const trajectoryStartNodeId = trajectoryPathNodeIds[0] ?? null;
+  const trajectoryEndNodeId =
+    trajectoryPathNodeIds[trajectoryPathNodeIds.length - 1] ?? null;
+  const visibleCollectiveFlows = [...collectiveFlows]
+    .sort((left, right) => right.count - left.count)
+    .slice(0, maxCollectiveFlows);
+  const maxCollectiveFlowCount = visibleCollectiveFlows[0]?.count ?? 0;
 
   if (activeNodeId) {
     focusedNodeIds.add(activeNodeId);
@@ -784,6 +947,65 @@ export function MandalaCanvas({
             })}
           </g>
 
+          {visibleCollectiveFlows.length > 0 ? (
+            <g className="mandala__collective-flows" aria-hidden="true">
+              {visibleCollectiveFlows.map((flow) => {
+                const fromNode = nodeMap[flow.fromNodeId];
+                const toNode = nodeMap[flow.toNodeId];
+
+                if (!fromNode || !toNode) {
+                  return null;
+                }
+
+                const normalizedStrength = getNormalizedStrength(
+                  flow.count,
+                  maxCollectiveFlowCount,
+                );
+                const collectivePath = getCollectiveFlowPath(fromNode, toNode);
+                const glowOpacity = 0.08 + normalizedStrength * 0.2;
+                const lineOpacity = 0.14 + normalizedStrength * 0.34;
+                const glowWidth = 10 + normalizedStrength * 10;
+                const lineWidth = 2 + normalizedStrength * 4;
+                const nodeRadius = 2.5 + normalizedStrength * 2.5;
+
+                return (
+                  <g key={flow.flowId}>
+                    <path
+                      className="mandala__collective-flow-glow"
+                      d={collectivePath}
+                      style={{
+                        opacity: glowOpacity,
+                        strokeWidth: glowWidth,
+                      }}
+                    />
+                    <path
+                      className="mandala__collective-flow-line"
+                      d={collectivePath}
+                      style={{
+                        opacity: lineOpacity,
+                        strokeWidth: lineWidth,
+                      }}
+                    />
+                    <circle
+                      className="mandala__collective-flow-node"
+                      cx={fromNode.x}
+                      cy={fromNode.y}
+                      r={nodeRadius}
+                      style={{ opacity: lineOpacity }}
+                    />
+                    <circle
+                      className="mandala__collective-flow-node"
+                      cx={toNode.x}
+                      cy={toNode.y}
+                      r={nodeRadius}
+                      style={{ opacity: lineOpacity }}
+                    />
+                  </g>
+                );
+              })}
+            </g>
+          ) : null}
+
           <g aria-hidden="true">
             {routes.map((route) => {
               const routePoints = getRoutePoints(route, nodeMap);
@@ -824,6 +1046,33 @@ export function MandalaCanvas({
               );
             })}
           </g>
+
+          {trajectoryPath ? (
+            <g className="mandala__trajectory" aria-hidden="true">
+              <path className="mandala__trajectory-glow" d={trajectoryPath} />
+              <path className="mandala__trajectory-line" d={trajectoryPath} />
+
+              {trajectoryNodes.map((node, index) => {
+                const isCurrent = node.id === trajectoryEndNodeId;
+                const isMilestone =
+                  node.id === trajectoryStartNodeId || index === trajectoryNodes.length - 1;
+
+                return (
+                  <circle
+                    key={`${node.id}-${index}`}
+                    className={cx(
+                      "mandala__trajectory-point",
+                      isMilestone && "mandala__trajectory-point--milestone",
+                      isCurrent && "mandala__trajectory-point--current",
+                    )}
+                    cx={node.x}
+                    cy={node.y}
+                    r={isCurrent ? 7 : isMilestone ? 5.5 : 4}
+                  />
+                );
+              })}
+            </g>
+          ) : null}
 
           <g aria-hidden="true">
             {coreLinks.map(([fromId, toId]) => {

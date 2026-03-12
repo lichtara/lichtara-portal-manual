@@ -36,6 +36,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../implementation/frontend/mandala/mandalaTrajectories.ts](../implementation/frontend/mandala/mandalaTrajectories.ts)
 - [../implementation/frontend/mandala/useJourneyProgress.ts](../implementation/frontend/mandala/useJourneyProgress.ts)
 - [../implementation/frontend/mandala/useJourneyTrajectory.ts](../implementation/frontend/mandala/useJourneyTrajectory.ts)
 - [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
@@ -54,6 +55,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
+- `mandalaTrajectories.ts` para contrato de memoria local, sessao efemera e atlas agregado
 - `useJourneyTrajectory` para registrar memoria local da travessia
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para isolar estado efemero e selecao visual
 - `mandalaRadialGrid.ts` como utilitario de geometria para centro, aneis e distribuicao angular
@@ -65,6 +67,8 @@ No estado atual da implementacao:
 - o triangulo expoe as tres direcoes de navegacao
 - o quadrado marca a base estrutural dos quatro ciclos
 - a malha de nos continua preservada como projecao `v0`
+- a trajetoria historica ja pode ser desenhada diretamente sobre a mandala a partir do `JourneyScreen`
+- fluxos coletivos agregados ja podem ser desenhados como correntes suaves atras da trajetoria pessoal
 
 ## Camadas de Geometria no Frontend
 
@@ -217,6 +221,8 @@ Na entrada React atual, a app de demonstracao ja valida essa API com:
 - persistencia via callback
 - leitura do ultimo progresso
 - log visivel de analytics emitidos
+- desenho da trajetoria historica diretamente sobre a mandala
+- camada inicial de campo coletivo desenhada na mesma mandala
 
 Para V1 publica, a entrada React deve preferir:
 
@@ -224,6 +230,29 @@ Para V1 publica, a entrada React deve preferir:
 - `initialJourneyId="perception"`
 - `showSelector={false}`
 - copy de entrada que explicite `NAVROS -> Percepcao -> 7 etapas`
+
+## Camadas de Leitura da Mandala
+
+A mandala precisa crescer por camadas opcionais, sem virar dashboard:
+
+| Camada | Papel | Estado atual |
+| --- | --- | --- |
+| base | geometria, eixos e nos | implementado |
+| jornada pessoal | etapa ativa e trajetoria historica | implementado |
+| campo coletivo | fluxos agregados como correntes suaves | implementado em overlay inicial |
+| observatorio | leitura temporal do campo por periodo | planejado |
+
+Regra de composicao:
+
+- fluxos coletivos ficam atras da jornada pessoal
+- trajetoria pessoal permanece acima da malha e abaixo dos nos
+- observatorio deve reutilizar a mesma mandala, nao abrir um dashboard paralelo
+
+Regra de linguagem:
+
+- o coletivo deve aparecer como `clima do campo`
+- o observatorio deve aparecer como `estacoes do campo`
+- a interface nao deve expor scores, rankings ou metricas psicologicas
 
 ## Leitura Cognitiva da Mandala
 

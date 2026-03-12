@@ -131,7 +131,10 @@ Sprint 3:
 - stepper de jornadas guiadas de 7 etapas
 - alinhamento das etapas com a progressao narrativa do Capitulo 01 do Livro Vivo
 - trilha recente
+- camada visual da trajetoria pessoal sobre a mandala
 - trajetorias agregadas da mandala em modo anonimo
+- modo `campo` com fluxos coletivos suaves
+- modo `observatorio` com leitura temporal leve do campo
 - tela de agente ativo
 - fluxo de comunidade
 
@@ -178,6 +181,7 @@ Sprint 3:
 - versionamento de sinteses
 - coortes por jornada
 - atlas coletivo apenas com fluxos agregados
+- agregacao por janela temporal para `campo do momento`, `campo recente` e `campo ampliado`
 
 ## Sequencia Recomendada de Execucao
 
@@ -195,6 +199,9 @@ Ordem consolidada a partir do material:
 10. trilha recente
 11. modos navegacao e exploracao
 12. jornadas guiadas de 7 etapas
+13. camada visual de trajetoria pessoal
+14. modo campo com fluxos agregados
+15. observatorio leve por periodo
 
 ## Owners por Frente
 

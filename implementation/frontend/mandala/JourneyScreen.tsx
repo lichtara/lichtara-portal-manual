@@ -16,6 +16,7 @@ import {
   type MandalaJourneyProgressChange,
 } from "./mandalaJourneys";
 import {
+  type MandalaCollectiveFlow,
   type MandalaTrajectoryRecord,
   type MandalaTrajectorySnapshot,
   type MandalaTrajectoryStorageMode,
@@ -40,6 +41,8 @@ export type JourneyScreenProps = {
   trajectoryStorageMode?: MandalaTrajectoryStorageMode;
   loadPersistedTrajectory?: () => MandalaTrajectoryRecord | null | undefined;
   onPersistTrajectory?: (record: MandalaTrajectoryRecord) => void;
+  collectiveFlows?: MandalaCollectiveFlow[];
+  maxCollectiveFlows?: number;
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -69,6 +72,8 @@ export function JourneyScreen({
   trajectoryStorageMode = "local_only",
   loadPersistedTrajectory,
   onPersistTrajectory,
+  collectiveFlows = [],
+  maxCollectiveFlows = 5,
   width = "100%",
   height,
   title = "Por onde voce quer comecar?",
@@ -120,7 +125,7 @@ export function JourneyScreen({
       selectStep(stepIndex, "canvas");
     },
   });
-  useJourneyTrajectory({
+  const { trajectorySnapshot } = useJourneyTrajectory({
     journeys,
     activeProgress,
     storageKey: trajectoryStorageKey,
@@ -161,6 +166,9 @@ export function JourneyScreen({
           hoverNodeId={hoverNodeId}
           activeRouteId={activeJourney.routeOverlayId}
           trailNodeIds={trailNodeIds}
+          trajectoryPathNodeIds={trajectorySnapshot?.path ?? []}
+          collectiveFlows={collectiveFlows}
+          maxCollectiveFlows={maxCollectiveFlows}
           title={activeJourney.title}
           subtitle={activeJourney.centralQuestion}
           onNodeEnter={handleNodeEnter}

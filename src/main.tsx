@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import {
+  buildCollectiveFlows,
   buildTrajectorySnapshot,
   JourneyScreen,
   mandalaPublicV1Journeys,
+  type MandalaCollectiveFlow,
   type MandalaJourneyAnalyticsEvent,
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
+  type MandalaNodeId,
   type MandalaTrajectoryRecord,
   type MandalaTrajectorySnapshot,
 } from "../implementation/frontend/mandala";
@@ -16,6 +19,14 @@ import "./styles.css";
 
 const STORAGE_KEY = "lichtara-mandala-progress";
 const TRAJECTORY_STORAGE_KEY = "lichtara-mandala-trajectory";
+const DEMO_FIELD_PATHS: MandalaNodeId[][] = [
+  ["NAVROS", "LUMORA", "OSLO", "KAORAN", "SYNTARIS"],
+  ["NAVROS", "LUMORA", "OSLO", "KAORAN", "SYNTARIS", "FLUX"],
+  ["SYNTARIS", "FINCE", "ORIA", "HESLOS", "FLUX"],
+  ["SYNTARIS", "FINCE", "ORIA", "HESLOS", "FLUX", "SOLARA"],
+  ["FLUX", "SOLARA", "VELTARA", "SYNTRIA", "ASTRAEL"],
+  ["FLUX", "SOLARA", "VELTARA", "SYNTRIA", "ASTRAEL", "OKTAVE"],
+];
 
 function readPersistedProgress(): MandalaJourneyProgress | null {
   try {
@@ -79,6 +90,39 @@ function formatTrajectoryRecord(
   );
 }
 
+function createCollectiveDemoRecord(
+  path: MandalaNodeId[],
+  index: number,
+): MandalaTrajectoryRecord {
+  const timestamp = `2026-03-12T0${(index % 9) + 1}:00:00Z`;
+
+  return {
+    sessionId: `atlas-${index + 1}`,
+    mode: "aggregated_atlas",
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    points: [],
+    path: [...path],
+  };
+}
+
+function buildDemoCollectiveFlows(
+  persistedTrajectory: MandalaTrajectoryRecord | null,
+): MandalaCollectiveFlow[] {
+  const records = DEMO_FIELD_PATHS.map((path, index) => {
+    return createCollectiveDemoRecord(path, index);
+  });
+
+  if (persistedTrajectory && persistedTrajectory.path.length > 1) {
+    records.push({
+      ...persistedTrajectory,
+      sessionId: `${persistedTrajectory.sessionId}-overlay`,
+    });
+  }
+
+  return buildCollectiveFlows(records);
+}
+
 function App() {
   const [persistedProgress, setPersistedProgress] =
     React.useState<MandalaJourneyProgress | null>(() => readPersistedProgress());
@@ -91,6 +135,9 @@ function App() {
     () => formatTrajectoryRecord(readPersistedTrajectory()),
   );
   const [analyticsEvents, setAnalyticsEvents] = React.useState<string[]>([]);
+  const collectiveFlows = React.useMemo(() => {
+    return buildDemoCollectiveFlows(persistedTrajectory);
+  }, [persistedTrajectory]);
 
   return (
     <main className="app-shell">
@@ -121,6 +168,8 @@ function App() {
           onPersistTrajectory={(record) => {
             setPersistedTrajectory(record);
           }}
+          collectiveFlows={collectiveFlows}
+          maxCollectiveFlows={3}
           onProgressChange={(change) => {
             setLastProgressChange(formatProgress(change));
           }}
@@ -155,6 +204,15 @@ function App() {
               {persistedTrajectory
                 ? `${persistedTrajectory.mode} / ${trajectorySummary}`
                 : "Sem trajetoria persistida."}
+            </p>
+          </div>
+
+          <div className="inspector__section">
+            <p className="inspector__eyebrow">Campo</p>
+            <p className="inspector__copy">
+              {collectiveFlows.length > 0
+                ? `${Math.min(collectiveFlows.length, 3)} correntes suaves ativas na mandala.`
+                : "Sem fluxos coletivos ativos."}
             </p>
           </div>
 

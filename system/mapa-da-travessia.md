@@ -47,6 +47,13 @@ Uma futura tela chamada `Mapa da Travessia` pode mostrar:
 
 Essa camada deve ser apresentada como apoio de navegacao, nao como avaliacao psicologica.
 
+No prototipo atual, essa leitura ja pode aparecer diretamente sobre a mandala:
+
+- a jornada em curso define a trilha ativa
+- a trajetoria historica desenha o caminho ja percorrido
+- o resumo lateral funciona apenas como apoio textual
+- fluxos coletivos agregados podem aparecer como correntes suaves atras da trajetoria pessoal
+
 ## Trajetoria sem Identidade
 
 Regra estrutural:
@@ -109,6 +116,29 @@ Essa camada pode revelar:
 - pontos pouco visitados da mandala
 - correntes coletivas de travessia
 
+Regra de visualizacao:
+
+- o coletivo deve aparecer como clima do campo, nao como tabela de dados
+- mostrar no maximo os fluxos predominantes
+- usar correntes suaves, arcos ou intensidades leves
+- nunca competir com a jornada pessoal em primeiro plano
+
+Leitura recomendada para interface:
+
+| Modo | Funcao |
+| --- | --- |
+| navegacao | jornada pessoal |
+| campo | fluxos coletivos agregados |
+| observatorio | mudancas do campo ao longo do tempo |
+
+No observatorio, o tempo deve aparecer como mudanca de estacao do campo, por exemplo:
+
+- campo do momento
+- campo recente
+- campo ampliado
+
+Essa camada nao deve parecer analytics. Ela deve parecer leitura do campo.
+
 ## Guardrails de Limit
 
 O principio `Limit` entra aqui como governanca estrutural.
@@ -143,6 +173,12 @@ Arquitetura minima sugerida:
 2. memoria local de trajetoria
 3. agregacao anonima opcional
 4. atlas coletivo sem identidades persistentes
+
+Expansao recomendada sem fragmentar a mandala:
+
+1. `TrajectoryLayer` para percurso pessoal
+2. `FieldFlowLayer` para fluxos coletivos agregados
+3. `ObservatoryLayer` para periodos e estacoes do campo
 
 ## Documento Relacionado
 

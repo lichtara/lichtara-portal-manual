@@ -137,6 +137,8 @@ No momento, o repositorio contem:
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
 - app React Vite validando progresso persistido e analytics em `src/main.tsx`
 - prototipo `tsx` de jornada etapa por etapa sobre a mandala
+- trajetoria historica desenhada diretamente sobre a mandala no prototipo React
+- camada inicial de fluxos coletivos desenhada atras da trajetoria pessoal no prototipo React
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base
