@@ -12,6 +12,12 @@ Na pratica:
 - NAVROS opera como instrumento de navegacao
 - o portal entrega a experiencia pratica
 
+Referencia de alinhamento:
+
+- [matriz-canonica-do-sistema.md](matriz-canonica-do-sistema.md)
+
+Essa matriz funciona como fonte de verdade para manter manual, repo e paper descrevendo o mesmo sistema em camadas diferentes.
+
 ## Modulos Minimos da V1
 
 O manual propoe quatro modulos iniciais:

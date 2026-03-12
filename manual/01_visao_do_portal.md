@@ -118,6 +118,18 @@ Na arquitetura atual, o portal se apoia em quatro frentes principais:
 
 Como expansao natural, o material tambem conecta o portal ao Livro Vivo e ao Instituto Lichtara.
 
+## Matriz Canonica do Sistema
+
+A leitura consolidada mais estavel do repo agora esta registrada em [../system/matriz-canonica-do-sistema.md](../system/matriz-canonica-do-sistema.md).
+
+Essa matriz existe para impedir deriva entre linguagem poetica, linguagem de produto e linguagem teorica. Ela resume:
+
+- a triade `Field - Coherence - Limit`
+- o nucleo operativo `NAVROS - SYNTARIS - FLUX`
+- a relacao entre Livro Vivo, Mandala, Portal e Paper
+
+Para a visao do portal, isso significa que a V1 nao inaugura um sistema novo. Ela oferece a primeira forma navegavel de um sistema que ja emergiu em outras camadas.
+
 ## Papel do Portal no Ecossistema Lichtara
 
 O portal funciona como porta de entrada recorrente do ecossistema. Na formulacao economica atual:

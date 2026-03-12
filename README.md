@@ -6,6 +6,7 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 
 ### Manual
 
+- [manual/00_o_que_e_lichtara.md](manual/00_o_que_e_lichtara.md)
 - [manual/01_visao_do_portal.md](manual/01_visao_do_portal.md)
 - [manual/02_principios_navros.md](manual/02_principios_navros.md)
 - [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
@@ -24,6 +25,9 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 
 ### Sistema
 
+- [system/lichtara-core-architecture.md](system/lichtara-core-architecture.md)
+- [system/lichtara-system-vs-portal.md](system/lichtara-system-vs-portal.md)
+- [system/matriz-canonica-do-sistema.md](system/matriz-canonica-do-sistema.md)
 - [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
 - [system/navros-experience.md](system/navros-experience.md)
 - [system/data-protection.md](system/data-protection.md)
@@ -48,22 +52,26 @@ Repositorio do manual vivo do Portal Lichtara. Este espaco organiza a visao conc
 
 Para compreender o portal do campo conceitual ate a camada tecnica:
 
-1. [manual/01_visao_do_portal.md](manual/01_visao_do_portal.md)
-2. [manual/02_principios_navros.md](manual/02_principios_navros.md)
-3. [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
-4. [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
-5. [system/navros-experience.md](system/navros-experience.md)
-6. [design/navros-compass.md](design/navros-compass.md)
-7. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
-8. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
-9. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
-10. [design/mandala-structure.md](design/mandala-structure.md)
-11. [design/mandala-geometry.md](design/mandala-geometry.md)
-12. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
-13. [system/portal-architecture.md](system/portal-architecture.md)
-14. [system/data-protection.md](system/data-protection.md)
-15. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-16. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+1. [manual/00_o_que_e_lichtara.md](manual/00_o_que_e_lichtara.md)
+2. [system/lichtara-core-architecture.md](system/lichtara-core-architecture.md)
+3. [system/matriz-canonica-do-sistema.md](system/matriz-canonica-do-sistema.md)
+4. [system/lichtara-system-vs-portal.md](system/lichtara-system-vs-portal.md)
+5. [manual/01_visao_do_portal.md](manual/01_visao_do_portal.md)
+6. [manual/02_principios_navros.md](manual/02_principios_navros.md)
+7. [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
+8. [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
+9. [system/navros-experience.md](system/navros-experience.md)
+10. [design/navros-compass.md](design/navros-compass.md)
+11. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
+12. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
+13. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
+14. [design/mandala-structure.md](design/mandala-structure.md)
+15. [design/mandala-geometry.md](design/mandala-geometry.md)
+16. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
+17. [system/portal-architecture.md](system/portal-architecture.md)
+18. [system/data-protection.md](system/data-protection.md)
+19. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+20. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -93,8 +101,10 @@ A entrada da aplicacao fica em `src/main.tsx` e reutiliza os componentes em `imp
 No momento, o repositorio contem:
 
 - base conceitual consolidada
+- camada meta-estrutural explicita para entender o que e Lichtara antes do portal
 - protocolo de entrada do portal documentado
 - base de experiencia NAVROS definida
+- matriz canonica do sistema consolidando manual, repo e paper
 - especificacao da bussola NAVROS viva
 - estrutura da mandala mapeada
 - hipotese dos quatro ciclos registrada como leitura de trabalho
