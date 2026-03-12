@@ -44,6 +44,7 @@ No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposica
 - [system/matriz-canonica-do-sistema.md](system/matriz-canonica-do-sistema.md)
 - [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
 - [system/navros-experience.md](system/navros-experience.md)
+- [system/mapa-da-travessia.md](system/mapa-da-travessia.md)
 - [system/data-protection.md](system/data-protection.md)
 - [system/portal-architecture.md](system/portal-architecture.md)
 
@@ -56,7 +57,9 @@ No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposica
 - [implementation/frontend/mandala/JourneyStepper.tsx](implementation/frontend/mandala/JourneyStepper.tsx)
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [implementation/frontend/mandala/mandalaTrajectories.ts](implementation/frontend/mandala/mandalaTrajectories.ts)
 - [implementation/frontend/mandala/useJourneyProgress.ts](implementation/frontend/mandala/useJourneyProgress.ts)
+- [implementation/frontend/mandala/useJourneyTrajectory.ts](implementation/frontend/mandala/useJourneyTrajectory.ts)
 - [implementation/frontend/mandala/useJourneyAnalytics.ts](implementation/frontend/mandala/useJourneyAnalytics.ts)
 - [implementation/frontend/mandala/useJourneyHover.ts](implementation/frontend/mandala/useJourneyHover.ts)
 - [implementation/frontend/mandala/useJourneyCanvasSelection.ts](implementation/frontend/mandala/useJourneyCanvasSelection.ts)
@@ -75,17 +78,18 @@ Para compreender o portal do campo conceitual ate a camada tecnica:
 7. [manual/03_jornada_do_usuario.md](manual/03_jornada_do_usuario.md)
 8. [system/portal-entry-protocol.md](system/portal-entry-protocol.md)
 9. [system/navros-experience.md](system/navros-experience.md)
-10. [design/navros-compass.md](design/navros-compass.md)
-11. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
-12. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
-13. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
-14. [design/mandala-structure.md](design/mandala-structure.md)
-15. [design/mandala-geometry.md](design/mandala-geometry.md)
-16. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
-17. [system/portal-architecture.md](system/portal-architecture.md)
-18. [system/data-protection.md](system/data-protection.md)
-19. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
-20. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+10. [system/mapa-da-travessia.md](system/mapa-da-travessia.md)
+11. [design/navros-compass.md](design/navros-compass.md)
+12. [manual/04_mandala_dos_agentes.md](manual/04_mandala_dos_agentes.md)
+13. [manual/05_ciclo_de_transformacao.md](manual/05_ciclo_de_transformacao.md)
+14. [manual/07_hipotese_dos_quatro_ciclos.md](manual/07_hipotese_dos_quatro_ciclos.md)
+15. [design/mandala-structure.md](design/mandala-structure.md)
+16. [design/mandala-geometry.md](design/mandala-geometry.md)
+17. [design/mandala-frontend-spec.md](design/mandala-frontend-spec.md)
+18. [system/portal-architecture.md](system/portal-architecture.md)
+19. [system/data-protection.md](system/data-protection.md)
+20. [manual/06_governanca_do_portal.md](manual/06_governanca_do_portal.md)
+21. [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
 
 ## Fonte Atual
 
@@ -128,9 +132,11 @@ No momento, o repositorio contem:
 - config frontend das jornadas de 7 etapas
 - composicao de producao das jornadas em `JourneySelector`, `JourneyStepper` e `JourneyScreen`
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para separar estado e instrumentacao
+- hook `useJourneyTrajectory` para registrar trajetoria local da jornada
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para separar a camada visual
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
 - app React Vite validando progresso persistido e analytics em `src/main.tsx`
 - prototipo `tsx` de jornada etapa por etapa sobre a mandala
+- contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - roadmap de implementacao V1 extraido do material-base

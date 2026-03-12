@@ -2,16 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import {
+  buildTrajectorySnapshot,
   JourneyScreen,
   mandalaPublicV1Journeys,
   type MandalaJourneyAnalyticsEvent,
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
+  type MandalaTrajectoryRecord,
+  type MandalaTrajectorySnapshot,
 } from "../implementation/frontend/mandala";
 
 import "./styles.css";
 
 const STORAGE_KEY = "lichtara-mandala-progress";
+const TRAJECTORY_STORAGE_KEY = "lichtara-mandala-trajectory";
 
 function readPersistedProgress(): MandalaJourneyProgress | null {
   try {
@@ -43,11 +47,48 @@ function formatAnalyticsEvent(event: MandalaJourneyAnalyticsEvent): string {
   return `journey_completed -> ${event.journeyId} / ${event.completionMode}`;
 }
 
+function readPersistedTrajectory(): MandalaTrajectoryRecord | null {
+  try {
+    const rawValue = window.localStorage.getItem(TRAJECTORY_STORAGE_KEY);
+
+    if (!rawValue) {
+      return null;
+    }
+
+    return JSON.parse(rawValue) as MandalaTrajectoryRecord;
+  } catch {
+    return null;
+  }
+}
+
+function formatTrajectorySnapshot(
+  snapshot: MandalaTrajectorySnapshot | null,
+): string {
+  if (!snapshot) {
+    return "Nenhuma trajetoria registrada ainda.";
+  }
+
+  return `${snapshot.points.length} pontos -> ${snapshot.path.join(" -> ")}`;
+}
+
+function formatTrajectoryRecord(
+  record: MandalaTrajectoryRecord | null,
+): string {
+  return formatTrajectorySnapshot(
+    record ? buildTrajectorySnapshot(record) : null,
+  );
+}
+
 function App() {
   const [persistedProgress, setPersistedProgress] =
     React.useState<MandalaJourneyProgress | null>(() => readPersistedProgress());
+  const [persistedTrajectory, setPersistedTrajectory] =
+    React.useState<MandalaTrajectoryRecord | null>(() => readPersistedTrajectory());
   const [lastProgressChange, setLastProgressChange] = React.useState<string>(
     "Nenhuma interacao registrada ainda.",
+  );
+  const [trajectorySummary, setTrajectorySummary] = React.useState<string>(
+    () => formatTrajectoryRecord(readPersistedTrajectory()),
   );
   const [analyticsEvents, setAnalyticsEvents] = React.useState<string[]>([]);
 
@@ -75,8 +116,16 @@ function App() {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
             setPersistedProgress(progress);
           }}
+          trajectoryStorageKey={TRAJECTORY_STORAGE_KEY}
+          loadPersistedTrajectory={readPersistedTrajectory}
+          onPersistTrajectory={(record) => {
+            setPersistedTrajectory(record);
+          }}
           onProgressChange={(change) => {
             setLastProgressChange(formatProgress(change));
+          }}
+          onTrajectoryChange={(_, snapshot) => {
+            setTrajectorySummary(formatTrajectorySnapshot(snapshot));
           }}
           onAnalyticsEvent={(event) => {
             setAnalyticsEvents((currentEvents) => {
@@ -98,6 +147,15 @@ function App() {
           <div className="inspector__section">
             <p className="inspector__eyebrow">Ultima mudanca</p>
             <p className="inspector__copy">{lastProgressChange}</p>
+          </div>
+
+          <div className="inspector__section">
+            <p className="inspector__eyebrow">Mapa da Travessia</p>
+            <p className="inspector__copy">
+              {persistedTrajectory
+                ? `${persistedTrajectory.mode} / ${trajectorySummary}`
+                : "Sem trajetoria persistida."}
+            </p>
           </div>
 
           <div className="inspector__section">

@@ -70,6 +70,60 @@ A politica proposta para analytics e:
 - anonimizar identificadores quando nao houver cadastro
 - permitir exclusao dos dados salvos mediante solicitacao da pessoa usuaria
 
+## Trajetorias sem Identidade
+
+Se o portal registrar trajetorias na mandala, a regra estrutural precisa ser:
+
+`experiencia != identidade`
+
+Implicacoes:
+
+- trajetorias podem existir sem nome ou email
+- identificadores devem ser efemeros por default
+- a V1 deve preferir memoria local antes de memoria de servidor
+
+Exemplo de registro minimo:
+
+```json
+{
+  "session": "hash-temporario",
+  "journey": "perception",
+  "trajectory": ["NAVROS", "LUMORA", "OSLO", "KAORAN", "SYNTARIS", "FLUX", "NAVROS"],
+  "timestamp": "2026-03-12T12:00:00Z"
+}
+```
+
+## Identidade Efemera
+
+Uma implementacao alinhada ao principio de `Limit` deve usar identificacao curta e nao permanente.
+
+Recomendacao:
+
+- gerar `session hash` aleatorio
+- usar validade de sessao ou janela curta
+- tornar dados anonimos apos expiracao
+
+Isso reduz drasticamente a chance de reconstruir identidade a partir da experiencia.
+
+## Memoria Local e Atlas Agregado
+
+Ordem de preferencia:
+
+1. historico pessoal apenas no dispositivo
+2. memoria de sessao anonimizada
+3. atlas coletivo apenas em camada agregada
+
+Exemplo de agregacao etica:
+
+```json
+{
+  "movement": "perception->structure",
+  "count": 142
+}
+```
+
+Essa camada permite leitura coletiva de fluxos sem expor trajetorias individuais.
+
 ## Modelo de Dados Minimo Relacionado a Consentimento
 
 Campos destacados no material:
@@ -97,3 +151,10 @@ Os riscos mais sensiveis na V1 sao:
 - indexacao de texto sensivel em analytics
 - uso comercial de conteudo intimo
 - acesso interno acima do necessario
+
+Riscos adicionais para a camada de trajetoria:
+
+- transformar experiencia em perfil individual
+- manter identificadores permanentes sem necessidade
+- criar score, ranking ou inferencia psicologica indevida
+- impedir apagamento rapido da memoria registrada

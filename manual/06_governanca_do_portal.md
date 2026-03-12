@@ -79,6 +79,24 @@ Uma iniciativa deve esperar quando:
 - historico persistente so deve existir com opt-in
 - analytics nao deve indexar conteudo textual sensivel
 
+## Limit na Camada de Trajetoria
+
+Se o portal passar a registrar trajetorias de experiencia, a governanca precisa tornar `Limit` operacional.
+
+Regras minimas:
+
+- nao transformar trajetoria em ativo comercial
+- nao perfilar individuos a partir da mandala
+- nao criar score de consciencia
+- manter reversibilidade e apagamento simples
+- diferenciar claramente memoria pessoal de atlas coletivo
+
+Formula de protecao:
+
+`trajetoria pode existir`
+
+`identidade nao precisa existir junto`
+
 ## Incidentes e Escalacao
 
 Mesmo sem um manual completo de incidentes, o material sugere algumas prioridades claras:
@@ -95,3 +113,10 @@ Uma entrega pode ser considerada governada de forma adequada quando:
 - existem regras claras de consentimento e descarte
 - o ownership esta definido
 - a experiencia continua coerente com os principios Navros
+
+Para a camada de trajetorias, isso significa tambem:
+
+- memoria local como padrao inicial
+- identificacao efemera quando houver sessao remota
+- atlas coletivo apenas com agregacao anonima
+- visualizacao desenhada para orientacao, nao para classificacao

@@ -52,6 +52,7 @@ export {
   clampMandalaJourneyStepIndex,
   getMandalaJourneyById,
   getMandalaJourneyTrail,
+  getSafeMandalaJourneyStep,
   getSafeMandalaJourney,
   isMandalaJourneyComplete,
   mandalaJourneyOrder,
@@ -71,6 +72,30 @@ export type {
   MandalaJourneyStageId,
   MandalaJourneyStep,
 } from "./mandalaJourneys";
+
+export {
+  MANDALA_TRAJECTORY_STORAGE_KEY,
+  appendTrajectoryPoint,
+  buildCollectiveFlows,
+  buildTrajectorySnapshot,
+  createEphemeralTrajectorySessionId,
+  createTrajectoryPoint,
+  createTrajectoryRecord,
+  recordJourneyProgress,
+} from "./mandalaTrajectories";
+export type {
+  MandalaCollectiveFlow,
+  MandalaTrajectoryPoint,
+  MandalaTrajectoryRecord,
+  MandalaTrajectorySnapshot,
+  MandalaTrajectoryStorageMode,
+} from "./mandalaTrajectories";
+
+export { useJourneyTrajectory } from "./useJourneyTrajectory";
+export type {
+  UseJourneyTrajectoryOptions,
+  UseJourneyTrajectoryResult,
+} from "./useJourneyTrajectory";
 
 export { JourneySelector } from "./JourneySelector";
 export type { JourneySelectorProps } from "./JourneySelector";

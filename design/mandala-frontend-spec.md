@@ -37,6 +37,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [../implementation/frontend/mandala/useJourneyProgress.ts](../implementation/frontend/mandala/useJourneyProgress.ts)
+- [../implementation/frontend/mandala/useJourneyTrajectory.ts](../implementation/frontend/mandala/useJourneyTrajectory.ts)
 - [../implementation/frontend/mandala/useJourneyAnalytics.ts](../implementation/frontend/mandala/useJourneyAnalytics.ts)
 - [../implementation/frontend/mandala/useJourneyHover.ts](../implementation/frontend/mandala/useJourneyHover.ts)
 - [../implementation/frontend/mandala/useJourneyCanvasSelection.ts](../implementation/frontend/mandala/useJourneyCanvasSelection.ts)
@@ -53,6 +54,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 - hooks `useJourneyProgress` e `useJourneyAnalytics` para desacoplar estado e instrumentacao
+- `useJourneyTrajectory` para registrar memoria local da travessia
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para isolar estado efemero e selecao visual
 - `mandalaRadialGrid.ts` como utilitario de geometria para centro, aneis e distribuicao angular
 - `index.ts` como ponto unico de export

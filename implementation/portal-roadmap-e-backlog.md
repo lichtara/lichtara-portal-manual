@@ -121,6 +121,7 @@ Sprint 2:
 - login opcional
 - historico de reflexoes
 - continuidade de retorno
+- memoria local do `Mapa da Travessia`
 
 Sprint 3:
 - home da mandala viva
@@ -130,6 +131,7 @@ Sprint 3:
 - stepper de jornadas guiadas de 7 etapas
 - alinhamento das etapas com a progressao narrativa do Capitulo 01 do Livro Vivo
 - trilha recente
+- trajetorias agregadas da mandala em modo anonimo
 - tela de agente ativo
 - fluxo de comunidade
 
@@ -148,10 +150,12 @@ Sprint 2:
 - persistencia por usuario
 - leitura de historico
 - rastreabilidade basica
+- sessao efemera para trajetoria anonima opcional
 
 Sprint 3:
 - orquestracao multi-jornada
 - estado de progressao por etapa da jornada
+- agregacao anonima de fluxos para atlas coletivo
 - moderacao de compartilhamentos
 - controles avancados de operacao
 
@@ -167,11 +171,13 @@ Sprint 2:
 - consentimento persistido
 - auditoria basica
 - funil de salvamento e retorno
+- leitura basica de trajetorias locais sem perfil persistente
 
 Sprint 3:
 - trilha evolutiva por ciclo
 - versionamento de sinteses
 - coortes por jornada
+- atlas coletivo apenas com fluxos agregados
 
 ## Sequencia Recomendada de Execucao
 
@@ -227,6 +233,7 @@ Antes de ampliar a experiencia, precisam estar estaveis:
 - regra de agente ativo
 - mapeamento entre agente ativo e direcao da bussola
 - leitura consolidada da estrutura de 7 movimentos do Capitulo 01 para nomeacao final da jornada
+- regra de governanca para memoria local, sessao efemera e atlas agregado
 
 ## Riscos a Vigiar
 
@@ -236,6 +243,7 @@ Antes de ampliar a experiencia, precisam estar estaveis:
 - bussola visualmente pesada demais para a proposta da V1
 - mandala visualmente rica demais para a maturidade da V1
 - expansao para multiplos agentes antes de provar NAVROS
+- captura de trajetoria antes de fechar regras de privacidade e apagamento
 
 ## Proximas Decisoes Estruturais
 
@@ -249,3 +257,4 @@ Pontos ainda abertos que merecem fechamento antes de acelerar desenvolvimento:
 - regra de transicao entre bussola de 4 direcoes e mandala completa
 - criterio de abertura publica das rotas `Estrutura` e `Acao` apos a V1
 - regra de fechamento das jornadas de 7 etapas, especialmente na passagem entre `ASTRAEL`, `OKTAVE` e `NAVROS`
+- momento adequado para abrir `Mapa da Travessia` e atlas coletivo

@@ -15,11 +15,17 @@ import {
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
 } from "./mandalaJourneys";
+import {
+  type MandalaTrajectoryRecord,
+  type MandalaTrajectorySnapshot,
+  type MandalaTrajectoryStorageMode,
+} from "./mandalaTrajectories";
 import { journeyCx, MANDALA_JOURNEY_UI_CSS } from "./journeyUI";
 import { useJourneyAnalytics } from "./useJourneyAnalytics";
 import { useJourneyCanvasSelection } from "./useJourneyCanvasSelection";
 import { useJourneyHover } from "./useJourneyHover";
 import { useJourneyProgress } from "./useJourneyProgress";
+import { useJourneyTrajectory } from "./useJourneyTrajectory";
 
 export type JourneyScreenProps = {
   journeys?: MandalaJourney[];
@@ -30,6 +36,10 @@ export type JourneyScreenProps = {
   storageKey?: string;
   loadPersistedProgress?: () => MandalaJourneyProgress | null | undefined;
   onPersistProgress?: (progress: MandalaJourneyProgress) => void;
+  trajectoryStorageKey?: string;
+  trajectoryStorageMode?: MandalaTrajectoryStorageMode;
+  loadPersistedTrajectory?: () => MandalaTrajectoryRecord | null | undefined;
+  onPersistTrajectory?: (record: MandalaTrajectoryRecord) => void;
   width?: number | string;
   height?: number | string;
   title?: string;
@@ -38,6 +48,10 @@ export type JourneyScreenProps = {
   className?: string;
   style?: React.CSSProperties;
   onProgressChange?: (change: MandalaJourneyProgressChange) => void;
+  onTrajectoryChange?: (
+    record: MandalaTrajectoryRecord,
+    snapshot: MandalaTrajectorySnapshot | null,
+  ) => void;
   onAnalyticsEvent?: (event: MandalaJourneyAnalyticsEvent) => void;
   onJourneyComplete?: (change: MandalaJourneyProgressChange) => void;
 };
@@ -51,6 +65,10 @@ export function JourneyScreen({
   storageKey,
   loadPersistedProgress,
   onPersistProgress,
+  trajectoryStorageKey,
+  trajectoryStorageMode = "local_only",
+  loadPersistedTrajectory,
+  onPersistTrajectory,
   width = "100%",
   height,
   title = "Por onde voce quer comecar?",
@@ -59,6 +77,7 @@ export function JourneyScreen({
   className,
   style,
   onProgressChange,
+  onTrajectoryChange,
   onAnalyticsEvent,
   onJourneyComplete,
 }: JourneyScreenProps) {
@@ -100,6 +119,15 @@ export function JourneyScreen({
     onSelectStep(stepIndex) {
       selectStep(stepIndex, "canvas");
     },
+  });
+  useJourneyTrajectory({
+    journeys,
+    activeProgress,
+    storageKey: trajectoryStorageKey,
+    storageMode: trajectoryStorageMode,
+    loadPersistedTrajectory,
+    onPersistTrajectory,
+    onTrajectoryChange,
   });
 
   return (

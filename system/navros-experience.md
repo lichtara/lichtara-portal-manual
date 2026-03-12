@@ -248,6 +248,31 @@ CTA complementar:
 
 `Explorar o mapa`
 
+## Mapa da Travessia
+
+Quando a mandala passa a funcionar como sistema de coordenadas da experiencia, cada jornada pode gerar uma trajetoria.
+
+Leitura-base:
+
+`estado inicial -> jornada -> novo estado`
+
+Isso permite uma camada futura chamada `Mapa da Travessia`, em que a pessoa pode ver:
+
+- caminhos ja percorridos
+- deslocamentos recorrentes entre eixos
+- areas ainda nao exploradas da mandala
+
+Guardrail central:
+
+- essa camada deve ampliar orientacao
+- ela nao deve funcionar como score, ranking ou perfil fixo da pessoa
+
+Regra de rollout:
+
+- V1 publica continua simples e nao depende dessa memoria
+- memoria local de trajetoria pode entrar primeiro como camada opcional
+- atlas coletivo vem apenas depois de consolidar governanca e anonimizacao
+
 ## Rotas Naturais de Entrada
 
 Como expansao da experiencia, o portal pode oferecer tres vetores de entrada pela mandala a partir de uma pergunta simples:
