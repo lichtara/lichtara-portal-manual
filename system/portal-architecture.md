@@ -28,31 +28,99 @@ Referencia de alinhamento:
 
 Essa matriz funciona como fonte de verdade para manter manual, repo e paper descrevendo o mesmo sistema em camadas diferentes.
 
-## Modulos Minimos da V1
+## Arquitetura Minima Operacional da V1
 
-O manual propoe quatro modulos iniciais:
+A V1 nao precisa expor todo o sistema Lichtara. Ela precisa apenas sustentar, com coerencia, a primeira travessia publica.
 
-| Modulo | Funcao | Entregavel minimo |
+Leitura-base:
+
+`Experiencia do Usuario -> Arquitetura do Sistema -> Infraestrutura Tecnica`
+
+### Camada 1: Experiencia do Usuario
+
+Objetivo:
+
+- permitir a primeira travessia
+- orientar sem sobrecarregar
+- registrar a experiencia sem transformar o portal em dashboard
+
+Fluxo estrutural:
+
+`Entrada -> Reconhecimento do Campo -> Mandala -> Escolha de Jornada -> Travessia -> Registro da trajetoria -> Retorno ao campo`
+
+Regra de rigor para a abertura publica:
+
+- na arquitetura, a escolha de jornada existe
+- na V1 publica, ela ja vem resolvida para `NAVROS -> Percepcao`
+- isso preserva clareza sem apagar a expansao futura
+
+Componentes minimos desta camada:
+
+| Componente | Funcao | Entregavel minimo |
 | --- | --- | --- |
-| Landing | porta de entrada clara para a experiencia | pagina unica com proposta de valor e CTA |
-| Travessia Livro Vivo | converter capitulos em etapas interativas | sequencia guiada curta |
-| NAVROS | leitura de campo e orientacao acionavel | perguntas, bussola viva e painel de sintese |
-| Mandala de Agentes | revelar ecossistema de apoio | mapa visual com agentes e micropratica |
+| Portal Entry | abrir o campo sem explicar demais | texto de orientacao, video opcional e CTA principal |
+| Protocolo de Entrada | alinhar expectativa e estado interior | voz do Livro Vivo antes da navegacao |
+| Mandala | operar como mapa, interface e navegador | centro NAVROS, trilhas, trajetoria e campo |
+| Jornada | conduzir a travessia de 7 etapas | `JourneyScreen` e `JourneyStepper` |
+| Trajetoria Pessoal | registrar o caminho vivido | linha historica sobre a mandala |
+| Campo Coletivo | mostrar o clima agregado do campo | fluxos suaves e observatorio leve |
+
+### Camada 2: Arquitetura do Sistema
+
+Arquitetura minima:
+
+`Portal Interface -> Journey Engine -> Trajectory System -> Field Observatory -> Data Layer`
+
+Leitura pratica:
+
+| Camada | Funcao | Implementacao atual |
+| --- | --- | --- |
+| Portal Interface | renderizar mandala, jornada e retorno ao campo | `MandalaCanvas`, `JourneyScreen`, `JourneyStepper` |
+| Journey Engine | definir etapas, progresso e rota ativa | `mandalaJourneys.ts`, `useJourneyProgress.ts` |
+| Trajectory System | registrar posicoes, sequencia e memoria local | `useJourneyTrajectory.ts`, `mandalaTrajectories.ts` |
+| Field Observatory | agregar e projetar fluxos coletivos | `FieldFlowLayer.tsx`, `useFieldFlows.ts`, `fieldFlowSource.ts` |
+| Data Layer | guardar o minimo necessario para retorno e leitura | `localStorage`, callbacks e contratos de evento |
+
+### Camada 3: Infraestrutura Tecnica
+
+Arquitetura tecnica minima:
+
+`Frontend React -> State Layer -> Persistence Layer -> Analytics Layer`
+
+Base atual:
+
+| Camada | Funcao | Base minima da V1 |
+| --- | --- | --- |
+| Frontend | renderizar mandala, trajetorias e jornadas | `React`, `TypeScript`, `Vite`, `SVG` |
+| State Layer | controlar estado e interacao | `useJourneyProgress`, `useJourneyHover`, `useJourneyCanvasSelection` |
+| Persistence Layer | permitir retorno sem backend pesado | `localStorage` e callbacks de persistencia |
+| Analytics Layer | observar o sistema sem perfilar a pessoa | `useJourneyAnalytics` e eventos de progresso |
+
+### Leitura Operacional da TTG na V1
+
+Na camada de interface, a arquitetura minima do portal pode ser lida assim:
+
+| TTG | Portal V1 |
+| --- | --- |
+| Field | Mandala |
+| Coherence | Jornada |
+| Limit | Etapas |
+
+Ponto de rigor:
+
+- essa equivalencia descreve como a teoria se torna navegavel na interface
+- ela nao substitui a matriz canonica em que `Limit` continua ligado a governanca e responsabilidade
 
 ## Fluxo Funcional da V1
 
 Fluxo recomendado:
 
-`Landing -> Travessia -> NAVROS -> Agentes -> retorno ao portal`
-
-Recorte publico recomendado:
-
-`Landing -> protocolo de entrada -> NAVROS -> jornada de Percepcao -> clareza/orientacao -> retorno`
+`Entrada -> protocolo de entrada -> reconhecimento do campo -> mandala -> jornada de Percepcao -> registro da trajetoria -> retorno ao campo`
 
 Tempo de experiencia recomendado no recorte mais enxuto:
 
-- 5 a 8 minutos para a travessia mais completa
-- 2 a 3 minutos para a primeira consulta NAVROS isolada
+- 5 a 8 minutos para a travessia guiada completa
+- 2 a 3 minutos para a primeira leitura NAVROS isolada
 
 Decisao de rollout:
 
@@ -64,15 +132,6 @@ Formula de entrada do portal:
 
 > Bem-vindo ao Portal Lichtara.  
 > Um sistema de navegacao da consciencia.
-
-## Arquitetura Tecnica Minima
-
-O material define quatro camadas tecnicas para o MVP NAVROS:
-
-- Frontend: fluxo em cinco telas, estado local de sessao, validacao e navegacao
-- Backend: API de sessao temporaria, gravacao de respostas, servico de sintese e persistencia opcional
-- Dados: modelo anonimo por padrao, retencao curta sem opt-in e trilha persistente com consentimento
-- Analytics: eventos de progresso e conclusao sem coleta de texto sensivel
 
 ## Componente Bussola NAVROS
 
@@ -95,7 +154,9 @@ Mapa minimo de angulos:
 
 Ponto importante: o frontend pode derivar a rotacao diretamente de `active-agent`, sem exigir uma nova logica pesada no backend.
 
-## Rotas de API Sugeridas
+## Evolucoes de Servico para Fase Posterior
+
+O corte minimo da abertura publica pode operar apenas com frontend, persistencia local e callbacks. Se a V1 evoluir para uma camada de servico, o desenho sugerido fica assim:
 
 | Rota | Metodo | Finalidade |
 | --- | --- | --- |
@@ -104,7 +165,7 @@ Ponto importante: o frontend pode derivar a rotacao diretamente de `active-agent
 | `/navros/synthesis` | `POST` | gerar sintese baseada nas respostas |
 | `/navros/finalize` | `POST` | salvar, descartar ou iniciar continuidade |
 
-## Esquema de Dados Minimo
+## Esquema de Dados Minimo em Caso de Servidor
 
 Entidades sugeridas:
 

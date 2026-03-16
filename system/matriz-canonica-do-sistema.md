@@ -104,6 +104,21 @@ Regra de leitura:
 - o portal oferece navegacao
 - a jornada oferece sequencia legivel dentro do mapa
 
+## Traducao Operacional da V1
+
+Na interface minima do portal, uma leitura util da teoria aparece assim:
+
+| TTG | Portal V1 | Funcao de interface |
+| --- | --- | --- |
+| Field | Mandala | abrir e organizar o campo navegavel |
+| Coherence | Jornada | sustentar a sequencia da travessia |
+| Limit | Etapas | dar borda, ritmo e criterio ao percurso |
+
+Ponto de rigor:
+
+- esta traducao vale para a operacao da interface
+- ela nao substitui a matriz estrutural em que `Field`, `Coherence` e `Limit` continuam articulados com narrativa, sistema e governanca
+
 ## Leitura como Sistema de Coordenadas
 
 Na camada de interface e experiencia, o portal pode ser lido como um sistema de coordenadas da experiencia humana.

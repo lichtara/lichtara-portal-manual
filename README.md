@@ -16,6 +16,19 @@ Cada rota e composta por jornadas guiadas dentro da mandala do sistema.
 
 No recorte publico da V1, a arquitetura ja suporta as tres rotas, mas a exposicao inicial fica concentrada em `NAVROS -> Percepcao`.
 
+## Arquitetura Minima da V1
+
+O corte operacional da abertura publica esta organizado em tres camadas:
+
+- experiencia do usuario: `Entrada -> Reconhecimento do Campo -> Mandala -> Jornada -> Trajetoria -> Retorno`
+- arquitetura do sistema: `Portal Interface -> Journey Engine -> Trajectory System -> Field Observatory -> Data Layer`
+- infraestrutura tecnica: `Frontend React -> State Layer -> Persistence Layer -> Analytics Layer`
+
+Leitura de rigor:
+
+- isso descreve o nucleo operacional da V1
+- nao substitui a arquitetura mais ampla do sistema Lichtara
+
 ## Mapa do Repositorio
 
 ### Manual
@@ -151,4 +164,5 @@ No momento, o repositorio contem:
 - transicao suave entre periodos e frase curta de clima do campo no observatorio inicial
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
+- arquitetura minima operacional da V1 consolidada em tres camadas
 - roadmap de implementacao V1 extraido do material-base

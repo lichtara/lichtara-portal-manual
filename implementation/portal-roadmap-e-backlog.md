@@ -24,6 +24,22 @@ Os modulos minimos consolidados no material atual sao:
 | Mandala | mostrar o mapa vivo do sistema | home circular com centro NAVROS e agentes orbitais |
 | Persistencia Opcional | permitir retorno consciente | historico simples sob consentimento |
 
+## Arquitetura Minima Operacional da V1
+
+O recorte minimo da V1 pode ser lido em tres camadas complementares:
+
+| Camada | Estrutura | Regra minima |
+| --- | --- | --- |
+| Experiencia do Usuario | `Entrada -> Reconhecimento do Campo -> Mandala -> Jornada -> Trajetoria -> Retorno` | nao sobrecarregar a primeira travessia |
+| Arquitetura do Sistema | `Portal Interface -> Journey Engine -> Trajectory System -> Field Observatory -> Data Layer` | manter uma linha clara entre navegacao, memoria e campo |
+| Infraestrutura Tecnica | `Frontend React -> State Layer -> Persistence Layer -> Analytics Layer` | operar a V1 sem depender de backend pesado |
+
+Consequencia de produto:
+
+- a jornada publica inicial continua unica
+- `NAVROS -> Percepcao` permanece como eixo de abertura
+- `Estrutura` e `Acao` seguem preparadas na arquitetura, mas fora da primeira exposicao
+
 ## Fluxo Prioritario
 
 Fluxo-base da V1:
@@ -33,6 +49,10 @@ Fluxo-base da V1:
 Com camada de abertura contemplativa:
 
 `landing -> protocolo de entrada -> consulta NAVROS -> bussola viva -> sintese -> agente ativo -> retorno ao portal`
+
+Fluxo de interface alinhado ao prototipo atual:
+
+`entrada -> protocolo de entrada -> mandala -> jornada de Percepcao -> trajetoria pessoal -> campo coletivo -> retorno ao campo`
 
 Regra de rollout publico:
 
@@ -115,6 +135,7 @@ Sprint 1:
 - micro-ritual de leitura
 - confirmacao `Isso faz sentido para voce?`
 - estados de progresso e saida segura
+- persistencia local minima para progresso e trajetoria
 
 Sprint 2:
 - sessao local e retomada
@@ -148,6 +169,7 @@ Sprint 1:
 - resolucao de agente ativo
 - mapeamento inicial de 4 direcoes
 - template final de resposta
+- callbacks para persistencia e analytics sem dependencia obrigatoria de servidor
 
 Sprint 2:
 - persistencia por usuario
@@ -169,6 +191,7 @@ Sprint 1:
 - descarte sem opt-in
 - funil basico de eventos NAVROS
 - eventos `compass-viewed`, `compass-confirmed` e `compass-reread-requested`
+- memoria local de jornada sem identificacao persistente por padrao
 
 Sprint 2:
 - consentimento persistido
