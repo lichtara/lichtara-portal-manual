@@ -4,11 +4,16 @@ import {
   buildNavrosMovementCopy,
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
+  navrosSuggestedAreas,
+  movementLabels,
   navrosSuggestedFeelings,
   normalizeNavrosFeeling,
+  resolveNextAgent,
+  type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
+import { MandalaMini } from "./MandalaMini";
 import { journeyCx } from "./journeyUI";
 
 export type NavrosOperationalScreenProps = {
@@ -89,7 +94,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [context, setContext] = React.useState(answers.context);
   const [feeling, setFeeling] = React.useState(answers.feeling);
 
-  const canContinue = Boolean(area.trim() && context.trim() && feeling.trim());
+  const canContinue = Boolean(area.trim() && feeling.trim());
 
   function handleNext() {
     if (!canContinue) {
@@ -110,9 +115,30 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         <input
           id="navros-area"
           className="operational-step__input"
+          placeholder="Ex.: trabalho, saude, relacoes, financas"
           value={area}
           onChange={(event) => setArea(event.target.value)}
         />
+        <div className="operational-step__chips">
+          {navrosSuggestedAreas.map((suggestedArea) => {
+            const isActive =
+              area.trim().toLowerCase() === suggestedArea.toLowerCase();
+
+            return (
+              <button
+                key={suggestedArea}
+                type="button"
+                className={journeyCx(
+                  "operational-step__chip",
+                  isActive && "operational-step__chip--active",
+                )}
+                onClick={() => setArea(suggestedArea)}
+              >
+                {suggestedArea}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="operational-step__field">
         <label className="operational-step__prompt" htmlFor="navros-context">
@@ -121,17 +147,19 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         <input
           id="navros-context"
           className="operational-step__input"
+          placeholder="Se quiser, descreva em poucas palavras"
           value={context}
           onChange={(event) => setContext(event.target.value)}
         />
       </div>
       <div className="operational-step__field">
         <label className="operational-step__prompt" htmlFor="navros-feeling">
-          Qual sensacao esta mais presente neste momento?
+          Qual dessas sensacoes esta mais proxima agora?
         </label>
         <input
           id="navros-feeling"
           className="operational-step__input"
+          placeholder="Ex.: confusao, sobrecarga, indefinicao"
           value={feeling}
           onChange={(event) => setFeeling(event.target.value)}
         />
@@ -249,11 +277,26 @@ function MovementStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
+  const paragraphs = buildNavrosMovementCopy(answers)
+    .split("\n\n")
+    .filter(Boolean);
+  const { movement, agent } = resolveNextAgent(answers.feeling);
+  const trajectory: NavrosAgentId[] =
+    agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
+
   return (
     <div className="operational-step">
       <p className="operational-step__label">Movimento</p>
-      <p className="operational-step__copy">
-        {buildNavrosMovementCopy(answers)}
+      <MandalaMini activeAgent={agent} trajectory={trajectory} />
+      <div className="operational-step__paragraphs">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className="operational-step__copy">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <p className="operational-step__tag">
+        Movimento reconhecido: {movementLabels[movement]} para {agent}
       </p>
       <div className="operational-step__actions">
         <button

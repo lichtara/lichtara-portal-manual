@@ -407,7 +407,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__quote,
 .operational-step__copy,
-.operational-step__prompt {
+.operational-step__prompt,
+.operational-step__tag {
   color: #2a251e;
   font-size: 18px;
   line-height: 1.65;
@@ -416,6 +417,80 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__quote {
   font-size: 22px;
+}
+
+.operational-step__tag {
+  color: #7f7668;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.mandala-mini {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 10px;
+  min-height: 220px;
+  position: relative;
+}
+
+.mandala-mini__ring {
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 50%;
+  height: 180px;
+  position: absolute;
+  width: 180px;
+}
+
+.mandala-mini__core {
+  background: radial-gradient(circle, rgba(58, 53, 44, 0.16), rgba(58, 53, 44, 0.04));
+  border-radius: 50%;
+  height: 18px;
+  position: absolute;
+  width: 18px;
+}
+
+.mandala-mini__agent {
+  align-items: center;
+  color: #a49a8b;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  opacity: 0.22;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 240ms ease, transform 240ms ease, color 240ms ease;
+}
+
+.mandala-mini__agent--past {
+  color: #776f63;
+  opacity: 0.36;
+}
+
+.mandala-mini__agent--active {
+  color: #1f1b16;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.mandala-mini__dot {
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(58, 53, 44, 0.04);
+  display: block;
+  height: 10px;
+  width: 10px;
+}
+
+.mandala-mini__agent--active .mandala-mini__dot {
+  box-shadow: 0 0 0 10px rgba(58, 53, 44, 0.08);
+}
+
+.mandala-mini__label {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .operational-step__input {

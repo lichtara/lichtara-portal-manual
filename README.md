@@ -73,6 +73,7 @@ Leitura de rigor:
 - [implementation/frontend/mandala/NavrosOperationalStepper.tsx](implementation/frontend/mandala/NavrosOperationalStepper.tsx)
 - [implementation/frontend/mandala/NavrosOperationalScreen.tsx](implementation/frontend/mandala/NavrosOperationalScreen.tsx)
 - [implementation/frontend/mandala/navrosOperationalJourney.ts](implementation/frontend/mandala/navrosOperationalJourney.ts)
+- [implementation/frontend/mandala/MandalaMini.tsx](implementation/frontend/mandala/MandalaMini.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [implementation/frontend/mandala/PortalEntryGate.tsx](implementation/frontend/mandala/PortalEntryGate.tsx)
 - [implementation/frontend/mandala/FieldFlowLayer.tsx](implementation/frontend/mandala/FieldFlowLayer.tsx)
@@ -171,6 +172,10 @@ No momento, o repositorio contem:
 - micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
 - traducao operacional da Jornada NAVROS em um fluxo React direto de 7 estados
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
+- leitura NAVROS agora composta por ancora concreta, organizacao estrutural e abertura leve, com menos dependencia do fallback
+- decisao de continuidade NAVROS agora separada em `feeling -> movement -> agent`
+- mandala minima no `MovementStep` funcionando como reflexo visual do agente ativo
+- rastro minimo na mandala operacional preservando apenas `NAVROS -> agente` como sombra curta de movimento
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas

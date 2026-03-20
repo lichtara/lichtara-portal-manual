@@ -124,6 +124,9 @@ export type { FieldPeriodSelectorProps } from "./FieldPeriodSelector";
 export { PortalEntryGate } from "./PortalEntryGate";
 export type { PortalEntryGateProps } from "./PortalEntryGate";
 
+export { MandalaMini } from "./MandalaMini";
+export type { MandalaMiniProps } from "./MandalaMini";
+
 export { NavrosOperationalScreen } from "./NavrosOperationalScreen";
 export type {
   NavrosOperationalScreenProps,
@@ -180,11 +183,18 @@ export {
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
   emptyNavrosOperationalAnswers,
+  getAgentFromMovement,
+  getMovementType,
+  movementLabels,
+  navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosOperationalSteps,
   normalizeNavrosFeeling,
+  resolveNextAgent,
 } from "./navrosOperationalJourney";
 export type {
+  MovementType,
+  NavrosAgentId,
   NavrosOperationalAnswers,
   NavrosReadingPatternId,
   NavrosOperationalStep,

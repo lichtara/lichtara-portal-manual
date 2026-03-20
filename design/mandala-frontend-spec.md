@@ -37,6 +37,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [../implementation/frontend/mandala/PortalEntryGate.tsx](../implementation/frontend/mandala/PortalEntryGate.tsx)
+- [../implementation/frontend/mandala/MandalaMini.tsx](../implementation/frontend/mandala/MandalaMini.tsx)
 - [../implementation/frontend/mandala/FieldFlowLayer.tsx](../implementation/frontend/mandala/FieldFlowLayer.tsx)
 - [../implementation/frontend/mandala/FieldPeriodSelector.tsx](../implementation/frontend/mandala/FieldPeriodSelector.tsx)
 - [../implementation/frontend/mandala/fieldFlowSource.ts](../implementation/frontend/mandala/fieldFlowSource.ts)
@@ -60,6 +61,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
 - `PortalEntryGate` para expectation gate antes da mandala
+- `MandalaMini` para reflexo visual minimo do agente ativo no `MovementStep`
 - `FieldFlowLayer` para correntes agregadas do campo
 - `FieldPeriodSelector` para leitura temporal leve do observatorio
 - `fieldFlowSource.ts` como fonte agregada por periodo
@@ -84,6 +86,8 @@ No estado atual da implementacao:
 - a abertura publica ja pode usar uma micro-tela de orientacao antes da mandala
 - a jornada ja pode oferecer `Comecar novamente` como reset suave de progresso e trajetoria local
 - o observatorio inicial ja pode se apresentar como `Campo coletivo`, com legenda curta e periodos legiveis
+- a etapa `movement` ja pode exibir uma mandala minima como confirmacao visual do agente ativo
+- essa confirmacao visual ja pode mostrar um rastro curto de ate dois pontos, com `NAVROS` em sombra e o agente atual em destaque
 
 ## Camadas de Geometria no Frontend
 
