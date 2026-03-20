@@ -187,10 +187,12 @@ export {
   getMovementType,
   movementLabels,
   navrosSuggestedAreas,
+  navrosSuggestedStates,
   navrosSuggestedFeelings,
   navrosOperationalSteps,
   normalizeNavrosFeeling,
   resolveNextAgent,
+  resolveNextAgentFromAnswers,
 } from "./navrosOperationalJourney";
 export type {
   MovementType,

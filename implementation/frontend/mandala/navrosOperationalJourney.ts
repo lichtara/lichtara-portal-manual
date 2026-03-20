@@ -9,8 +9,9 @@ export type NavrosOperationalStepId =
 
 export type NavrosOperationalAnswers = {
   area: string;
-  context: string;
+  state: string;
   feeling: string;
+  notes: string;
 };
 
 export type NavrosReadingPatternId =
@@ -54,8 +55,9 @@ export const navrosOperationalSteps: NavrosOperationalStep[] = [
 
 export const emptyNavrosOperationalAnswers: NavrosOperationalAnswers = {
   area: "",
-  context: "",
+  state: "",
   feeling: "",
+  notes: "",
 };
 
 export const navrosSuggestedAreas = [
@@ -67,14 +69,23 @@ export const navrosSuggestedAreas = [
   "transicao",
 ] as const;
 
+export const navrosSuggestedStates = [
+  "inicio",
+  "pressao",
+  "mudanca",
+  "indefinicao",
+  "sobrecarga",
+  "estagnacao",
+] as const;
+
 export const navrosSuggestedFeelings: Array<{
   id: NavrosReadingPatternId;
   label: string;
 }> = [
   { id: "confusao", label: "confusao" },
-  { id: "sobrecarga", label: "sobrecarga" },
-  { id: "paralisia", label: "paralisia" },
+  { id: "ansiedade", label: "pressao" },
   { id: "duvida", label: "duvida" },
+  { id: "paralisia", label: "travamento" },
   { id: "ansiedade", label: "ansiedade" },
   { id: "desalinhamento", label: "desalinhamento" },
   { id: "indefinicao", label: "indefinicao" },
@@ -127,6 +138,66 @@ function resolvePattern(
     : normalizeNavrosFeeling(String(feeling));
 }
 
+function normalizeNavrosState(state: string): string {
+  const normalizedState = state.trim().toLowerCase();
+
+  if (!normalizedState) {
+    return "";
+  }
+
+  if (hasWord(normalizedState, ["sobrec", "excesso", "acumul"])) {
+    return "sobrecarga";
+  }
+
+  if (hasWord(normalizedState, ["estagn", "parad", "trav"])) {
+    return "estagnacao";
+  }
+
+  if (hasWord(normalizedState, ["indefin", "nevoa", "sem forma"])) {
+    return "indefinicao";
+  }
+
+  if (hasWord(normalizedState, ["press", "aperto"])) {
+    return "pressao";
+  }
+
+  if (hasWord(normalizedState, ["mud", "trans"])) {
+    return "mudanca";
+  }
+
+  if (hasWord(normalizedState, ["inic", "comec"])) {
+    return "inicio";
+  }
+
+  return normalizedState;
+}
+
+function resolvePatternFromAnswers(
+  answers: NavrosOperationalAnswers,
+): NavrosReadingPatternId {
+  const state = normalizeNavrosState(answers.state);
+  const feelingPattern = normalizeNavrosFeeling(answers.feeling);
+
+  if (state === "sobrecarga") {
+    return "sobrecarga";
+  }
+
+  if (state === "estagnacao" && (feelingPattern === "duvida" || feelingPattern === "fallback")) {
+    return "paralisia";
+  }
+
+  if (
+    state === "indefinicao" &&
+    (feelingPattern === "duvida" ||
+      feelingPattern === "ansiedade" ||
+      feelingPattern === "fallback")
+  ) {
+    return "indefinicao";
+  }
+
+  return feelingPattern;
+}
+
 type NavrosReadingParts = {
   anchor: string;
   structure: string;
@@ -138,11 +209,18 @@ function buildNavrosReadingParts(
   answers: NavrosOperationalAnswers,
 ): NavrosReadingParts {
   const areaPrefix = resolveAreaPrefix(answers.area);
+  const state = normalizeNavrosState(answers.state);
+  const statePrefix = state
+    ? `${areaPrefix} o que aparece agora tem forma de ${state}.`
+    : "";
+  const withState = (fallbackAnchor: string): string => statePrefix || fallbackAnchor;
 
   switch (pattern) {
     case "confusao":
       return {
-        anchor: `${areaPrefix} o que aparece e excesso de possibilidades sem criterio suficiente para escolher.`,
+        anchor: withState(
+          `${areaPrefix} o que aparece e excesso de possibilidades sem criterio suficiente para escolher.`,
+        ),
         structure:
           "Nem toda possibilidade precisa do mesmo peso agora. Sem um criterio claro, tudo comeca a parecer urgencia.",
         opening:
@@ -151,7 +229,9 @@ function buildNavrosReadingParts(
 
     case "sobrecarga":
       return {
-        anchor: `${areaPrefix} o que aparece e um acumulo de demandas no mesmo nivel de prioridade.`,
+        anchor: withState(
+          `${areaPrefix} o que aparece e um acumulo de demandas no mesmo nivel de prioridade.`,
+        ),
         structure:
           "Nem tudo que esta na sua frente tem o mesmo peso, mas tudo esta sendo tratado como se tivesse.",
         opening:
@@ -160,7 +240,9 @@ function buildNavrosReadingParts(
 
     case "paralisia":
       return {
-        anchor: `${areaPrefix} existe movimento possivel, mas ele ainda nao encontrou uma base clara para se sustentar.`,
+        anchor: withState(
+          `${areaPrefix} existe movimento possivel, mas ele ainda nao encontrou uma base clara para se sustentar.`,
+        ),
         structure:
           "Quando falta um ponto de apoio, o sistema segura o movimento em vez de conseguir sustenta-lo.",
         opening:
@@ -169,7 +251,9 @@ function buildNavrosReadingParts(
 
     case "duvida":
       return {
-        anchor: `${areaPrefix} existem opcoes viaveis, mas ainda sem uma referencia suficiente para diferenciar uma da outra.`,
+        anchor: withState(
+          `${areaPrefix} existem opcoes viaveis, mas ainda sem uma referencia suficiente para diferenciar uma da outra.`,
+        ),
         structure:
           "O impasse nao esta apenas nos caminhos disponiveis, mas no criterio que ainda nao foi assumido.",
         opening:
@@ -178,7 +262,9 @@ function buildNavrosReadingParts(
 
     case "ansiedade":
       return {
-        anchor: `${areaPrefix} a pressao por resolver esta chegando antes da clareza.`,
+        anchor: withState(
+          `${areaPrefix} a pressao por resolver esta chegando antes da clareza.`,
+        ),
         structure:
           "Quando a resposta corre antes da base, a decisao tende a sair mais acelerada do que coerente.",
         opening:
@@ -187,7 +273,9 @@ function buildNavrosReadingParts(
 
     case "desalinhamento":
       return {
-        anchor: `${areaPrefix} algo continua em movimento mesmo sem corresponder mais ao que se sustenta internamente.`,
+        anchor: withState(
+          `${areaPrefix} algo continua em movimento mesmo sem corresponder mais ao que se sustenta internamente.`,
+        ),
         structure:
           "Esse tipo de desconforto costuma aparecer quando a forma externa continua, mas a coerencia interna ja mudou.",
         opening:
@@ -196,7 +284,9 @@ function buildNavrosReadingParts(
 
     case "indefinicao":
       return {
-        anchor: `${areaPrefix} o que aparece ainda nao esta totalmente definido.`,
+        anchor: withState(
+          `${areaPrefix} o que aparece ainda nao esta totalmente definido.`,
+        ),
         structure:
           "Nem tudo que esta se movendo aqui ja tomou forma suficiente para sustentar decisao.",
         opening:
@@ -205,7 +295,9 @@ function buildNavrosReadingParts(
 
     default:
       return {
-        anchor: `${areaPrefix} ainda nao ha forma suficiente para nomear com precisao o que esta acontecendo.`,
+        anchor: withState(
+          `${areaPrefix} ainda nao ha forma suficiente para nomear com precisao o que esta acontecendo.`,
+        ),
         structure:
           "Nem toda experiencia se entrega de imediato. Algumas primeiro pedem permanencia suficiente para se deixar ver.",
         opening:
@@ -231,7 +323,11 @@ export function normalizeNavrosFeeling(
     return "ansiedade";
   }
 
-  if (hasWord(normalizedFeeling, ["sobrec", "pressao", "excesso", "peso", "sufoc"])) {
+  if (hasWord(normalizedFeeling, ["pressao"])) {
+    return "ansiedade";
+  }
+
+  if (hasWord(normalizedFeeling, ["sobrec", "excesso", "peso", "sufoc"])) {
     return "sobrecarga";
   }
 
@@ -319,10 +415,24 @@ export function resolveNextAgent(
   return { pattern, movement, agent };
 }
 
+export function resolveNextAgentFromAnswers(
+  answers: NavrosOperationalAnswers,
+): {
+  pattern: NavrosReadingPatternId;
+  movement: MovementType;
+  agent: NavrosAgentId;
+} {
+  const pattern = resolvePatternFromAnswers(answers);
+  const movement = getMovementType(pattern);
+  const agent = getAgentFromMovement(movement);
+
+  return { pattern, movement, agent };
+}
+
 export function buildNavrosReadingCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const pattern = normalizeNavrosFeeling(answers.feeling);
+  const pattern = resolvePatternFromAnswers(answers);
   const parts = buildNavrosReadingParts(pattern, answers);
 
   return [parts.anchor, parts.structure, parts.opening].join("\n\n");
@@ -332,7 +442,7 @@ export function buildNavrosOrientationCopy(
   answers: NavrosOperationalAnswers,
 ): string {
   const area = answers.area.trim() || "essa situacao";
-  const pattern = normalizeNavrosFeeling(answers.feeling);
+  const pattern = resolvePatternFromAnswers(answers);
 
   switch (pattern) {
     case "confusao":
@@ -364,7 +474,7 @@ export function buildNavrosOrientationCopy(
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const { movement, agent } = resolveNextAgent(answers.feeling);
+  const { movement, agent } = resolveNextAgentFromAnswers(answers);
 
   return `A partir do que apareceu, o proximo passo nao e ampliar, e ${movementLabels[movement]}.
 

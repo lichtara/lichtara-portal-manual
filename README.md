@@ -171,6 +171,7 @@ No momento, o repositorio contem:
 - reset suave de jornada para limpar progresso e trajetoria local sem mexer na camada agregada
 - micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
 - traducao operacional da Jornada NAVROS em um fluxo React direto de 7 estados
+- entrada NAVROS agora estruturada em `area + estado + sensacao + notes opcional`
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
 - leitura NAVROS agora composta por ancora concreta, organizacao estrutural e abertura leve, com menos dependencia do fallback
 - decisao de continuidade NAVROS agora separada em `feeling -> movement -> agent`
