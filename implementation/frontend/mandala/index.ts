@@ -124,6 +124,9 @@ export type { FieldPeriodSelectorProps } from "./FieldPeriodSelector";
 export { PortalEntryGate } from "./PortalEntryGate";
 export type { PortalEntryGateProps } from "./PortalEntryGate";
 
+export { MandalaMini } from "./MandalaMini";
+export type { MandalaMiniProps } from "./MandalaMini";
+
 export { NavrosOperationalScreen } from "./NavrosOperationalScreen";
 export type {
   NavrosOperationalScreenProps,

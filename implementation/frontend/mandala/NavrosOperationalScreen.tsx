@@ -11,6 +11,7 @@ import {
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
+import { MandalaMini } from "./MandalaMini";
 import { journeyCx } from "./journeyUI";
 
 export type NavrosOperationalScreenProps = {
@@ -259,6 +260,7 @@ function MovementStep({
   return (
     <div className="operational-step">
       <p className="operational-step__label">Movimento</p>
+      <MandalaMini activeAgent={agent} />
       <div className="operational-step__paragraphs">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="operational-step__copy">
