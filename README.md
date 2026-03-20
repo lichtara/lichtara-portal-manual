@@ -174,6 +174,7 @@ No momento, o repositorio contem:
 - entrada NAVROS agora estruturada em `area + estado + sensacao + notes opcional`
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
 - leitura NAVROS agora composta por ancora concreta, organizacao estrutural e abertura leve, com menos dependencia do fallback
+- `ReadingStep` agora composicional em `anchor + structure + direction`, com aderencia direta a `area + estado + sensacao`
 - decisao de continuidade NAVROS agora separada em `feeling -> movement -> agent`
 - mandala minima no `MovementStep` funcionando como reflexo visual do agente ativo
 - rastro minimo na mandala operacional preservando apenas `NAVROS -> agente` como sombra curta de movimento

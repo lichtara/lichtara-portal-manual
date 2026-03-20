@@ -241,6 +241,12 @@ Regra pratica:
 - 1 linha de organizacao estrutural
 - 1 linha de abertura ou direcao sem soar oracular
 
+Composicao atual do `ReadingStep`:
+
+- `anchor`: area + estado
+- `structure`: leitura do padrao predominante
+- `direction`: proximo tipo de movimento em linguagem simples
+
 Entrada estruturada da V1:
 
 - area

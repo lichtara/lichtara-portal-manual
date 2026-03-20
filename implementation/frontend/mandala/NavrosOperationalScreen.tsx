@@ -8,7 +8,7 @@ import {
   navrosSuggestedStates,
   movementLabels,
   navrosSuggestedFeelings,
-  normalizeNavrosFeeling,
+  normalizeNavrosReadingFeeling,
   resolveNextAgentFromAnswers,
   type NavrosAgentId,
   type NavrosOperationalAnswers,
@@ -181,7 +181,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         <div className="operational-step__chips">
           {navrosSuggestedFeelings.map((suggestedFeeling) => {
             const isActive =
-              normalizeNavrosFeeling(feeling) === suggestedFeeling.id &&
+              normalizeNavrosReadingFeeling(feeling) === suggestedFeeling.id &&
               Boolean(feeling.trim());
 
             return (
