@@ -248,6 +248,35 @@ Cada um deve:
 - organizar a tensao presente
 - apontar uma direcao minima e executavel
 
+## Decisao de Continuidade
+
+NAVROS nao escolhe um agente por atalho.
+
+Ele opera em quatro camadas:
+
+1. estado percebido
+2. dinamica estrutural
+3. tipo de movimento necessario
+4. agente correspondente
+
+Pipeline-base da V1:
+
+`feeling -> movement type -> agent`
+
+Mapeamento inicial:
+
+- `confusao` -> `clarify` -> `LUMORA`
+- `sobrecarga` -> `organize` -> `SYNTARIS`
+- `paralisia` -> `initiate` -> `FLUX`
+- `duvida` -> `clarify` -> `LUMORA`
+- `ansiedade` -> `stabilize` -> `NAVROS`
+- `desalinhamento` -> `organize` -> `SYNTARIS`
+
+Ponto de rigor:
+
+- o sistema nao responde ao sintoma
+- o sistema responde a estrutura do estado
+
 ## Tom e Guardrails
 
 A resposta deve ser:

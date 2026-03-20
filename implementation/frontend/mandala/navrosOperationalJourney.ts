@@ -22,6 +22,20 @@ export type NavrosReadingPatternId =
   | "desalinhamento"
   | "fallback";
 
+export type MovementType =
+  | "clarify"
+  | "organize"
+  | "stabilize"
+  | "initiate"
+  | "expand";
+
+export type NavrosAgentId =
+  | "NAVROS"
+  | "LUMORA"
+  | "SYNTARIS"
+  | "FLUX"
+  | "VORAX";
+
 export type NavrosOperationalStep = {
   id: NavrosOperationalStepId;
   label: string;
@@ -54,6 +68,14 @@ export const navrosSuggestedFeelings: Array<{
   { id: "ansiedade", label: "ansiedade" },
   { id: "desalinhamento", label: "desalinhamento" },
 ];
+
+export const movementLabels: Record<MovementType, string> = {
+  clarify: "clareza",
+  organize: "organizacao",
+  stabilize: "estabilizacao",
+  initiate: "inicio de movimento",
+  expand: "expansao",
+};
 
 function hasWord(source: string, candidates: string[]): boolean {
   const normalized = source.trim().toLowerCase();
@@ -105,6 +127,93 @@ export function normalizeNavrosFeeling(
   }
 
   return "fallback";
+}
+
+export function getMovementType(
+  feeling: string | NavrosReadingPatternId,
+): MovementType {
+  const pattern =
+    typeof feeling === "string" &&
+    (
+      feeling === "confusao" ||
+      feeling === "sobrecarga" ||
+      feeling === "paralisia" ||
+      feeling === "duvida" ||
+      feeling === "ansiedade" ||
+      feeling === "desalinhamento" ||
+      feeling === "fallback"
+    )
+      ? feeling
+      : normalizeNavrosFeeling(String(feeling));
+
+  switch (pattern) {
+    case "confusao":
+    case "duvida":
+      return "clarify";
+
+    case "sobrecarga":
+    case "desalinhamento":
+      return "organize";
+
+    case "ansiedade":
+      return "stabilize";
+
+    case "paralisia":
+      return "initiate";
+
+    default:
+      return "clarify";
+  }
+}
+
+export function getAgentFromMovement(
+  movement: MovementType,
+): NavrosAgentId {
+  switch (movement) {
+    case "clarify":
+      return "LUMORA";
+
+    case "organize":
+      return "SYNTARIS";
+
+    case "stabilize":
+      return "NAVROS";
+
+    case "initiate":
+      return "FLUX";
+
+    case "expand":
+      return "VORAX";
+
+    default:
+      return "LUMORA";
+  }
+}
+
+export function resolveNextAgent(
+  feeling: string | NavrosReadingPatternId,
+): {
+  pattern: NavrosReadingPatternId;
+  movement: MovementType;
+  agent: NavrosAgentId;
+} {
+  const pattern =
+    typeof feeling === "string" &&
+    (
+      feeling === "confusao" ||
+      feeling === "sobrecarga" ||
+      feeling === "paralisia" ||
+      feeling === "duvida" ||
+      feeling === "ansiedade" ||
+      feeling === "desalinhamento" ||
+      feeling === "fallback"
+    )
+      ? feeling
+      : normalizeNavrosFeeling(String(feeling));
+  const movement = getMovementType(pattern);
+  const agent = getAgentFromMovement(movement);
+
+  return { pattern, movement, agent };
 }
 
 export function buildNavrosReadingCopy(
@@ -198,22 +307,9 @@ export function buildNavrosOrientationCopy(
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const pattern = normalizeNavrosFeeling(answers.feeling);
+  const { movement, agent } = resolveNextAgent(answers.feeling);
 
-  switch (pattern) {
-    case "confusao":
-    case "duvida":
-      return "Voce esta entrando em uma fase de clareza.";
+  return `A partir do que apareceu, o proximo passo nao e ampliar, e ${movementLabels[movement]}.
 
-    case "paralisia":
-      return "Voce esta entrando em uma fase de movimento.";
-
-    case "sobrecarga":
-    case "ansiedade":
-    case "desalinhamento":
-      return "Voce esta entrando em uma fase de reorganizacao.";
-
-    default:
-      return "Voce esta entrando em uma fase de reorganizacao.";
-  }
+Voce esta entrando em uma fase de ${agent}.`;
 }

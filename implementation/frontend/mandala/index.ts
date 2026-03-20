@@ -180,11 +180,17 @@ export {
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
   emptyNavrosOperationalAnswers,
+  getAgentFromMovement,
+  getMovementType,
+  movementLabels,
   navrosSuggestedFeelings,
   navrosOperationalSteps,
   normalizeNavrosFeeling,
+  resolveNextAgent,
 } from "./navrosOperationalJourney";
 export type {
+  MovementType,
+  NavrosAgentId,
   NavrosOperationalAnswers,
   NavrosReadingPatternId,
   NavrosOperationalStep,

@@ -407,7 +407,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__quote,
 .operational-step__copy,
-.operational-step__prompt {
+.operational-step__prompt,
+.operational-step__tag {
   color: #2a251e;
   font-size: 18px;
   line-height: 1.65;
@@ -416,6 +417,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__quote {
   font-size: 22px;
+}
+
+.operational-step__tag {
+  color: #7f7668;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .operational-step__input {

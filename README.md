@@ -171,6 +171,7 @@ No momento, o repositorio contem:
 - micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
 - traducao operacional da Jornada NAVROS em um fluxo React direto de 7 estados
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
+- decisao de continuidade NAVROS agora separada em `feeling -> movement -> agent`
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas

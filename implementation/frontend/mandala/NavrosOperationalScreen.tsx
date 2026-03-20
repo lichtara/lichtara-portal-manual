@@ -4,8 +4,10 @@ import {
   buildNavrosMovementCopy,
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
+  movementLabels,
   navrosSuggestedFeelings,
   normalizeNavrosFeeling,
+  resolveNextAgent,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
@@ -249,11 +251,23 @@ function MovementStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
+  const paragraphs = buildNavrosMovementCopy(answers)
+    .split("\n\n")
+    .filter(Boolean);
+  const { movement, agent } = resolveNextAgent(answers.feeling);
+
   return (
     <div className="operational-step">
       <p className="operational-step__label">Movimento</p>
-      <p className="operational-step__copy">
-        {buildNavrosMovementCopy(answers)}
+      <div className="operational-step__paragraphs">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className="operational-step__copy">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <p className="operational-step__tag">
+        Movimento reconhecido: {movementLabels[movement]} para {agent}
       </p>
       <div className="operational-step__actions">
         <button
