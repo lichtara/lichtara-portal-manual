@@ -8,6 +8,7 @@ import {
   navrosSuggestedFeelings,
   normalizeNavrosFeeling,
   resolveNextAgent,
+  type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
@@ -256,11 +257,13 @@ function MovementStep({
     .split("\n\n")
     .filter(Boolean);
   const { movement, agent } = resolveNextAgent(answers.feeling);
+  const trajectory: NavrosAgentId[] =
+    agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
   return (
     <div className="operational-step">
       <p className="operational-step__label">Movimento</p>
-      <MandalaMini activeAgent={agent} />
+      <MandalaMini activeAgent={agent} trajectory={trajectory} />
       <div className="operational-step__paragraphs">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="operational-step__copy">

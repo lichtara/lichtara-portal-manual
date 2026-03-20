@@ -174,6 +174,7 @@ No momento, o repositorio contem:
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
 - decisao de continuidade NAVROS agora separada em `feeling -> movement -> agent`
 - mandala minima no `MovementStep` funcionando como reflexo visual do agente ativo
+- rastro minimo na mandala operacional preservando apenas `NAVROS -> agente` como sombra curta de movimento
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas

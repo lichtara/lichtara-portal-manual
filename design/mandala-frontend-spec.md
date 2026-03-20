@@ -87,6 +87,7 @@ No estado atual da implementacao:
 - a jornada ja pode oferecer `Comecar novamente` como reset suave de progresso e trajetoria local
 - o observatorio inicial ja pode se apresentar como `Campo coletivo`, com legenda curta e periodos legiveis
 - a etapa `movement` ja pode exibir uma mandala minima como confirmacao visual do agente ativo
+- essa confirmacao visual ja pode mostrar um rastro curto de ate dois pontos, com `NAVROS` em sombra e o agente atual em destaque
 
 ## Camadas de Geometria no Frontend
 

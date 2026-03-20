@@ -5,6 +5,7 @@ import { journeyCx } from "./journeyUI";
 
 export type MandalaMiniProps = {
   activeAgent: NavrosAgentId;
+  trajectory?: NavrosAgentId[];
   agents?: NavrosAgentId[];
   className?: string;
 };
@@ -19,6 +20,7 @@ const DEFAULT_AGENTS: NavrosAgentId[] = [
 
 export function MandalaMini({
   activeAgent,
+  trajectory = [],
   agents = DEFAULT_AGENTS,
   className,
 }: MandalaMiniProps) {
@@ -33,12 +35,14 @@ export function MandalaMini({
         const x = 50 + radius * Math.cos(angle);
         const y = 50 + radius * Math.sin(angle);
         const isActive = agent === activeAgent;
+        const isPast = trajectory.includes(agent) && !isActive;
 
         return (
           <div
             key={agent}
             className={journeyCx(
               "mandala-mini__agent",
+              isPast && "mandala-mini__agent--past",
               isActive && "mandala-mini__agent--active",
             )}
             style={{

@@ -463,6 +463,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
   transition: opacity 240ms ease, transform 240ms ease, color 240ms ease;
 }
 
+.mandala-mini__agent--past {
+  color: #776f63;
+  opacity: 0.36;
+}
+
 .mandala-mini__agent--active {
   color: #1f1b16;
   opacity: 1;
