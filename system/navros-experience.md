@@ -229,6 +229,22 @@ Regra de qualidade:
 - se a pessoa pensa `faz sentido`, a leitura ainda pode estar fraca
 - se a pessoa pensa `e exatamente isso`, a leitura esta no ponto certo
 
+Tom recomendado:
+
+- concreto na ancoragem
+- claro na estrutura
+- levemente poetico apenas na abertura final
+
+Regra pratica:
+
+- 1 linha de ancora ligada ao input real
+- 1 linha de organizacao estrutural
+- 1 linha de abertura ou direcao sem soar oracular
+
+NAVROS nao deve operar como `categoria -> texto pronto`.
+
+Ele deve operar como `input -> interpretacao -> composicao da leitura`.
+
 ## Padroes Iniciais de Leitura
 
 Para a V1, a camada de leitura pode operar com seis padroes-base:
@@ -240,6 +256,10 @@ Para a V1, a camada de leitura pode operar com seis padroes-base:
 - ansiedade
 - desalinhamento
 
+Na calibragem atual da V1, um setimo padrao inicial tambem passou a existir:
+
+- indefinicao
+
 Esses padroes nao sao textos prontos para decorar. Eles sao estruturas de reconhecimento.
 
 Cada um deve:
@@ -247,6 +267,8 @@ Cada um deve:
 - nomear um estado humano real
 - organizar a tensao presente
 - apontar uma direcao minima e executavel
+
+O fallback deve existir, mas perder protagonismo. O objetivo da V1 e depender cada vez menos dele.
 
 ## Decisao de Continuidade
 

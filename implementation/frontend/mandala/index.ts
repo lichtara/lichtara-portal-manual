@@ -186,6 +186,7 @@ export {
   getAgentFromMovement,
   getMovementType,
   movementLabels,
+  navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosOperationalSteps,
   normalizeNavrosFeeling,
