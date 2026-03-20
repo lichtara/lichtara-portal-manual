@@ -4,6 +4,8 @@ import {
   buildNavrosMovementCopy,
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
+  navrosSuggestedFeelings,
+  normalizeNavrosFeeling,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
@@ -133,6 +135,27 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
           value={feeling}
           onChange={(event) => setFeeling(event.target.value)}
         />
+        <div className="operational-step__chips">
+          {navrosSuggestedFeelings.map((suggestedFeeling) => {
+            const isActive =
+              normalizeNavrosFeeling(feeling) === suggestedFeeling.id &&
+              Boolean(feeling.trim());
+
+            return (
+              <button
+                key={suggestedFeeling.id}
+                type="button"
+                className={journeyCx(
+                  "operational-step__chip",
+                  isActive && "operational-step__chip--active",
+                )}
+                onClick={() => setFeeling(suggestedFeeling.label)}
+              >
+                {suggestedFeeling.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="operational-step__actions">
         <button
@@ -152,12 +175,20 @@ function ReadingStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
+  const paragraphs = buildNavrosReadingCopy(answers)
+    .split("\n\n")
+    .filter(Boolean);
+
   return (
     <div className="operational-step">
       <p className="operational-step__label">Leitura</p>
-      <p className="operational-step__copy">
-        {buildNavrosReadingCopy(answers)}
-      </p>
+      <div className="operational-step__paragraphs">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className="operational-step__copy">
+            {paragraph}
+          </p>
+        ))}
+      </div>
       <div className="operational-step__actions">
         <button
           type="button"
