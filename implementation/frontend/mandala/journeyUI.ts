@@ -399,7 +399,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__copy-group,
-.operational-step__field {
+.operational-step__field,
+.operational-step__paragraphs {
   display: grid;
   gap: 8px;
 }
@@ -429,6 +430,28 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__input:focus-visible {
   border-color: rgba(58, 53, 44, 0.34);
   outline: none;
+}
+
+.operational-step__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.operational-step__chip {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 999px;
+  color: #5e564a;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.operational-step__chip--active {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(58, 53, 44, 0.32);
+  color: #1f1b16;
 }
 
 .operational-step__actions {

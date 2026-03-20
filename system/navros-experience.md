@@ -212,20 +212,41 @@ Essa camada protege o tom nao prescritivo da experiencia: a interface propoe uma
 
 ## Formato da Resposta
 
-A devolutiva NAVROS nao deve soar como coaching, previsao ou conselho diretivo. O formato-base tem quatro camadas:
+A devolutiva NAVROS nao deve soar como coaching, previsao ou conselho diretivo. Na V1 operacional, a leitura precisa aparecer em tres blocos visiveis:
 
-1. espelho imediato
-2. leitura do campo
-3. interpretacao do movimento
-4. sugestao de navegacao
+1. nomeacao
+2. tensao
+3. direcao
 
-Exemplo estrutural:
+Leitura estrutural:
 
-> Posicao de navegacao detectada  
-> Espelho imediato: ...  
-> Leitura do campo: ...  
-> Interpretacao do movimento: ...  
-> Sugestao de navegacao: ...
+- nomeacao: o que esta acontecendo
+- tensao: o que esta desalinhado, travado ou sem criterio suficiente
+- direcao: para onde o campo pede movimento minimo
+
+Regra de qualidade:
+
+- se a pessoa pensa `faz sentido`, a leitura ainda pode estar fraca
+- se a pessoa pensa `e exatamente isso`, a leitura esta no ponto certo
+
+## Padroes Iniciais de Leitura
+
+Para a V1, a camada de leitura pode operar com seis padroes-base:
+
+- confusao
+- sobrecarga
+- paralisia
+- duvida
+- ansiedade
+- desalinhamento
+
+Esses padroes nao sao textos prontos para decorar. Eles sao estruturas de reconhecimento.
+
+Cada um deve:
+
+- nomear um estado humano real
+- organizar a tensao presente
+- apontar uma direcao minima e executavel
 
 ## Tom e Guardrails
 

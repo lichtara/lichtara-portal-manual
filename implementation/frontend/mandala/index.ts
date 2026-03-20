@@ -180,10 +180,13 @@ export {
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
   emptyNavrosOperationalAnswers,
+  navrosSuggestedFeelings,
   navrosOperationalSteps,
+  normalizeNavrosFeeling,
 } from "./navrosOperationalJourney";
 export type {
   NavrosOperationalAnswers,
+  NavrosReadingPatternId,
   NavrosOperationalStep,
   NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
