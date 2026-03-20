@@ -317,6 +317,149 @@ export const MANDALA_JOURNEY_UI_CSS = `
   color: #7f7668;
 }
 
+.operational-journey {
+  display: grid;
+  gap: 24px;
+  max-width: 860px;
+}
+
+.operational-journey__header {
+  display: grid;
+  gap: 10px;
+}
+
+.operational-journey__eyebrow,
+.operational-journey__count,
+.operational-step__label {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.operational-journey__title {
+  color: #1f1b16;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.operational-journey__intro {
+  color: #5e564a;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 60ch;
+}
+
+.operational-journey__progress {
+  display: grid;
+  gap: 10px;
+}
+
+.operational-journey__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.operational-journey__step {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(58, 53, 44, 0.1);
+  border-radius: 999px;
+  color: #7f7668;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+.operational-journey__step--past {
+  border-color: rgba(58, 53, 44, 0.18);
+  color: #5e564a;
+}
+
+.operational-journey__step--active {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(58, 53, 44, 0.34);
+  color: #1f1b16;
+}
+
+.operational-journey__panel {
+  background: linear-gradient(180deg, rgba(250, 247, 240, 0.98), rgba(247, 243, 235, 0.98));
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(58, 53, 44, 0.06);
+  padding: 28px;
+}
+
+.operational-step {
+  display: grid;
+  gap: 18px;
+}
+
+.operational-step__copy-group,
+.operational-step__field {
+  display: grid;
+  gap: 8px;
+}
+
+.operational-step__quote,
+.operational-step__copy,
+.operational-step__prompt {
+  color: #2a251e;
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.operational-step__quote {
+  font-size: 22px;
+}
+
+.operational-step__input {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(58, 53, 44, 0.14);
+  border-radius: 18px;
+  color: #1f1b16;
+  min-height: 50px;
+  padding: 12px 14px;
+}
+
+.operational-step__input:focus-visible {
+  border-color: rgba(58, 53, 44, 0.34);
+  outline: none;
+}
+
+.operational-step__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.operational-step__action {
+  appearance: none;
+  background: #1f1b16;
+  border: none;
+  border-radius: 999px;
+  color: #f8f3ea;
+  cursor: pointer;
+  padding: 11px 16px;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.operational-step__action:hover,
+.operational-step__action:focus-visible {
+  box-shadow: 0 10px 20px rgba(31, 27, 22, 0.14);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.operational-step__action:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
 @media (max-width: 980px) {
   .journey-screen__grid {
     grid-template-columns: 1fr;

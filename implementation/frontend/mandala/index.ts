@@ -124,6 +124,16 @@ export type { FieldPeriodSelectorProps } from "./FieldPeriodSelector";
 export { PortalEntryGate } from "./PortalEntryGate";
 export type { PortalEntryGateProps } from "./PortalEntryGate";
 
+export { NavrosOperationalScreen } from "./NavrosOperationalScreen";
+export type {
+  NavrosOperationalScreenProps,
+} from "./NavrosOperationalScreen";
+
+export { NavrosOperationalStepper } from "./NavrosOperationalStepper";
+export type {
+  NavrosOperationalStepperProps,
+} from "./NavrosOperationalStepper";
+
 export { JourneySelector } from "./JourneySelector";
 export type { JourneySelectorProps } from "./JourneySelector";
 
@@ -164,3 +174,16 @@ export type {
 
 export { useJourneyHover } from "./useJourneyHover";
 export type { UseJourneyHoverResult } from "./useJourneyHover";
+
+export {
+  buildNavrosMovementCopy,
+  buildNavrosOrientationCopy,
+  buildNavrosReadingCopy,
+  emptyNavrosOperationalAnswers,
+  navrosOperationalSteps,
+} from "./navrosOperationalJourney";
+export type {
+  NavrosOperationalAnswers,
+  NavrosOperationalStep,
+  NavrosOperationalStepId,
+} from "./navrosOperationalJourney";

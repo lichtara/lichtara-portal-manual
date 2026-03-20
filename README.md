@@ -70,6 +70,9 @@ Leitura de rigor:
 - [implementation/frontend/mandala/JourneySelector.tsx](implementation/frontend/mandala/JourneySelector.tsx)
 - [implementation/frontend/mandala/JourneyStepper.tsx](implementation/frontend/mandala/JourneyStepper.tsx)
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
+- [implementation/frontend/mandala/NavrosOperationalStepper.tsx](implementation/frontend/mandala/NavrosOperationalStepper.tsx)
+- [implementation/frontend/mandala/NavrosOperationalScreen.tsx](implementation/frontend/mandala/NavrosOperationalScreen.tsx)
+- [implementation/frontend/mandala/navrosOperationalJourney.ts](implementation/frontend/mandala/navrosOperationalJourney.ts)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
 - [implementation/frontend/mandala/PortalEntryGate.tsx](implementation/frontend/mandala/PortalEntryGate.tsx)
 - [implementation/frontend/mandala/FieldFlowLayer.tsx](implementation/frontend/mandala/FieldFlowLayer.tsx)
@@ -126,7 +129,7 @@ Quando novos conteudos chegarem, a regra editorial atual e simples:
 
 ## Ambiente React
 
-O repositorio agora pode renderizar o prototipo da mandala em React com Vite.
+O repositorio agora pode renderizar prototipos operacionais do Portal Lichtara em React com Vite.
 
 1. Instale as dependencias com `npm install`
 2. Rode o ambiente local com `npm run dev`
@@ -157,8 +160,8 @@ No momento, o repositorio contem:
 - hook `useJourneyTrajectory` para registrar trajetoria local da jornada
 - hooks `useJourneyHover` e `useJourneyCanvasSelection` para separar a camada visual
 - camada de export unico e props de producao para analytics e persistencia via callback ou `localStorage`
-- app React Vite validando progresso persistido e analytics em `src/main.tsx`
-- prototipo `tsx` de jornada etapa por etapa sobre a mandala
+- app React Vite validando a jornada operacional pura em `src/main.tsx`
+- prototipo `tsx` de jornada etapa por etapa sobre a mandala preservado no repositorio para integracao posterior
 - trajetoria historica desenhada diretamente sobre a mandala no prototipo React
 - camada inicial de fluxos coletivos desenhada atras da trajetoria pessoal no prototipo React
 - observatorio inicial com filtro de periodo sem sair da mesma interface
@@ -166,6 +169,7 @@ No momento, o repositorio contem:
 - expectation gate inicial antes da mandala para orientar a primeira entrada
 - reset suave de jornada para limpar progresso e trajetoria local sem mexer na camada agregada
 - micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
+- traducao operacional da Jornada NAVROS em um fluxo React direto de 7 estados
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas
