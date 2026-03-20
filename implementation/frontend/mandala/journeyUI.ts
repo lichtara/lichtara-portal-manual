@@ -104,6 +104,14 @@ export const MANDALA_JOURNEY_UI_CSS = `
   transition: opacity 320ms ease, transform 320ms ease;
 }
 
+.journey-field__legend {
+  color: #7f7668;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 72ch;
+}
+
 .journey-field__climate--transitioning {
   opacity: 0.58;
   transform: translateY(2px);
@@ -301,6 +309,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .journey-stepper__action:disabled {
   cursor: not-allowed;
   opacity: 0.42;
+}
+
+.journey-stepper__action--quiet {
+  background: transparent;
+  border-color: rgba(58, 53, 44, 0.1);
+  color: #7f7668;
 }
 
 @media (max-width: 980px) {

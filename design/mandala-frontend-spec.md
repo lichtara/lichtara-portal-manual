@@ -36,6 +36,7 @@ Esta especificacao agora tem um componente-base real em:
 - [../implementation/frontend/mandala/JourneyStepper.tsx](../implementation/frontend/mandala/JourneyStepper.tsx)
 - [../implementation/frontend/mandala/JourneyScreen.tsx](../implementation/frontend/mandala/JourneyScreen.tsx)
 - [../implementation/frontend/mandala/MandalaJourneyPrototype.tsx](../implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [../implementation/frontend/mandala/PortalEntryGate.tsx](../implementation/frontend/mandala/PortalEntryGate.tsx)
 - [../implementation/frontend/mandala/FieldFlowLayer.tsx](../implementation/frontend/mandala/FieldFlowLayer.tsx)
 - [../implementation/frontend/mandala/FieldPeriodSelector.tsx](../implementation/frontend/mandala/FieldPeriodSelector.tsx)
 - [../implementation/frontend/mandala/fieldFlowSource.ts](../implementation/frontend/mandala/fieldFlowSource.ts)
@@ -58,6 +59,7 @@ Esses arquivos materializam a camada `React + SVG` desta especificacao com:
 - `MandalaPrototype` autocontido para demonstracao local
 - `JourneySelector`, `JourneyStepper` e `JourneyScreen` como composicao reutilizavel
 - `MandalaJourneyPrototype` para navegacao etapa por etapa
+- `PortalEntryGate` para expectation gate antes da mandala
 - `FieldFlowLayer` para correntes agregadas do campo
 - `FieldPeriodSelector` para leitura temporal leve do observatorio
 - `fieldFlowSource.ts` como fonte agregada por periodo
@@ -79,6 +81,9 @@ No estado atual da implementacao:
 - fluxos coletivos agregados ja podem ser desenhados como correntes suaves atras da trajetoria pessoal
 - o observatorio inicial ja pode trocar periodos do campo sem abrir interface paralela
 - a troca de periodo ja pode acontecer com transicao suave e frase curta de clima do campo
+- a abertura publica ja pode usar uma micro-tela de orientacao antes da mandala
+- a jornada ja pode oferecer `Comecar novamente` como reset suave de progresso e trajetoria local
+- o observatorio inicial ja pode se apresentar como `Campo coletivo`, com legenda curta e periodos legiveis
 
 ## Camadas de Geometria no Frontend
 
@@ -218,6 +223,21 @@ Na camada de producao, `JourneyScreen` agora aceita props mais proximas de uso r
 - `onProgressChange`
 - `onAnalyticsEvent`
 - `onJourneyComplete`
+- `onRestartJourney`
+
+## Calibragens de Clareza da V1
+
+Tres ajustes pequenos ajudam a estabilizar a abertura publica sem alterar a arquitetura:
+
+- expectation gate antes da mandala
+- reset suave da jornada
+- micro-observatorio do campo com legenda clara
+
+Leitura pratica:
+
+- a mandala nao deve ser o primeiro choque visual de quem chega
+- a pessoa precisa poder reiniciar a travessia sem ambiguidade
+- o campo coletivo deve aparecer como clima do mapa, nao como analitico de dados
 
 A regra de negocio ja nao fica presa ao componente de tela:
 

@@ -5,6 +5,7 @@ import {
   buildTrajectorySnapshot,
   JourneyScreen,
   mandalaPublicV1Journeys,
+  PortalEntryGate,
   type MandalaJourneyAnalyticsEvent,
   type MandalaJourneyProgress,
   type MandalaJourneyProgressChange,
@@ -81,6 +82,9 @@ function formatTrajectoryRecord(
 }
 
 function App() {
+  const skipPersistProgressCountRef = React.useRef(0);
+  const skipPersistTrajectoryCountRef = React.useRef(0);
+  const [hasEnteredPortal, setHasEnteredPortal] = React.useState(false);
   const [persistedProgress, setPersistedProgress] =
     React.useState<MandalaJourneyProgress | null>(() => readPersistedProgress());
   const [persistedTrajectory, setPersistedTrajectory] =
@@ -115,92 +119,132 @@ function App() {
         </p>
       </section>
 
-      <section className="app-grid">
-        <JourneyScreen
-          journeys={mandalaPublicV1Journeys}
-          initialJourneyId="perception"
-          showSelector={false}
-          title="Jornada V1: Percepcao"
-          intro="A V1 publica abre com NAVROS e uma unica travessia de 7 etapas. Estrutura e Acao permanecem preparadas, mas fora da primeira exposicao publica."
-          loadPersistedProgress={readPersistedProgress}
-          onPersistProgress={(progress) => {
-            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-            setPersistedProgress(progress);
-          }}
-          trajectoryStorageKey={TRAJECTORY_STORAGE_KEY}
-          loadPersistedTrajectory={readPersistedTrajectory}
-          onPersistTrajectory={(record) => {
-            setPersistedTrajectory(record);
-          }}
-          collectiveFlows={collectiveFlows}
-          maxCollectiveFlows={3}
-          fieldPeriods={periods}
-          activeFieldPeriodId={activePeriodId}
-          fieldClimateCopy={activePeriod.climateCopy}
-          isFieldTransitioning={isTransitioning}
-          onFieldPeriodSelect={selectPeriod}
-          onProgressChange={(change) => {
-            setLastProgressChange(formatProgress(change));
-          }}
-          onTrajectoryChange={(_, snapshot) => {
-            setTrajectorySummary(formatTrajectorySnapshot(snapshot));
-          }}
-          onAnalyticsEvent={(event) => {
-            setAnalyticsEvents((currentEvents) => {
-              return [formatAnalyticsEvent(event), ...currentEvents].slice(0, 6);
-            });
+      {!hasEnteredPortal ? (
+        <PortalEntryGate
+          ctaLabel={
+            persistedProgress ? "Retomar na Mandala" : "Entrar na Mandala"
+          }
+          helperCopy="Leitura breve antes da travessia. A abertura publica da V1 precisa orientar sem explicar demais."
+          onEnter={() => {
+            setHasEnteredPortal(true);
           }}
         />
+      ) : null}
 
-        <aside className="inspector">
-          <div className="inspector__section">
-            <p className="inspector__eyebrow">Persistencia</p>
-            <p className="inspector__copy">
-              {persistedProgress
-                ? `${persistedProgress.journeyId} / etapa ${persistedProgress.stepIndex + 1}`
-                : "Sem progresso persistido."}
-            </p>
-          </div>
+      {hasEnteredPortal ? (
+        <section className="app-grid">
+          <JourneyScreen
+            journeys={mandalaPublicV1Journeys}
+            initialJourneyId="perception"
+            showSelector={false}
+            title="Jornada V1: Percepcao"
+            intro="A V1 publica abre com NAVROS e uma unica travessia de 7 etapas. Estrutura e Acao permanecem preparadas, mas fora da primeira exposicao publica."
+            loadPersistedProgress={readPersistedProgress}
+            onPersistProgress={(progress) => {
+              if (skipPersistProgressCountRef.current > 0) {
+                skipPersistProgressCountRef.current -= 1;
+                setPersistedProgress(null);
+                return;
+              }
 
-          <div className="inspector__section">
-            <p className="inspector__eyebrow">Ultima mudanca</p>
-            <p className="inspector__copy">{lastProgressChange}</p>
-          </div>
+              window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+              setPersistedProgress(progress);
+            }}
+            trajectoryStorageKey={TRAJECTORY_STORAGE_KEY}
+            loadPersistedTrajectory={readPersistedTrajectory}
+            onPersistTrajectory={(record) => {
+              if (skipPersistTrajectoryCountRef.current > 0) {
+                skipPersistTrajectoryCountRef.current -= 1;
+                setPersistedTrajectory(null);
+                return;
+              }
 
-          <div className="inspector__section">
-            <p className="inspector__eyebrow">Mapa da Travessia</p>
-            <p className="inspector__copy">
-              {persistedTrajectory
-                ? `${persistedTrajectory.mode} / ${trajectorySummary}`
-                : "Sem trajetoria persistida."}
-            </p>
-          </div>
+              window.localStorage.setItem(
+                TRAJECTORY_STORAGE_KEY,
+                JSON.stringify(record),
+              );
+              setPersistedTrajectory(record);
+            }}
+            collectiveFlows={collectiveFlows}
+            maxCollectiveFlows={3}
+            fieldPeriods={periods}
+            activeFieldPeriodId={activePeriodId}
+            fieldClimateCopy={activePeriod.climateCopy}
+            isFieldTransitioning={isTransitioning}
+            onFieldPeriodSelect={selectPeriod}
+            onRestartJourney={() => {
+              skipPersistProgressCountRef.current = 1;
+              skipPersistTrajectoryCountRef.current = 2;
+              window.localStorage.removeItem(STORAGE_KEY);
+              window.localStorage.removeItem(TRAJECTORY_STORAGE_KEY);
+              setPersistedProgress(null);
+              setPersistedTrajectory(null);
+              setTrajectorySummary("Nenhuma trajetoria registrada ainda.");
+              setLastProgressChange("Jornada reiniciada a partir de NAVROS.");
+            }}
+            onProgressChange={(change) => {
+              setLastProgressChange(formatProgress(change));
+            }}
+            onTrajectoryChange={(_, snapshot) => {
+              setTrajectorySummary(formatTrajectorySnapshot(snapshot));
+            }}
+            onAnalyticsEvent={(event) => {
+              setAnalyticsEvents((currentEvents) => {
+                return [formatAnalyticsEvent(event), ...currentEvents].slice(0, 6);
+              });
+            }}
+          />
 
-          <div className="inspector__section">
-            <p className="inspector__eyebrow">Campo</p>
-            <p className="inspector__copy">
-              {collectiveFlows.length > 0
-                ? `${activePeriod.label} / ${Math.min(collectiveFlows.length, 3)} correntes suaves ativas.`
-                : "Sem fluxos coletivos ativos."}
-            </p>
-          </div>
+          <aside className="inspector">
+            <div className="inspector__section">
+              <p className="inspector__eyebrow">Persistencia</p>
+              <p className="inspector__copy">
+                {persistedProgress
+                  ? `${persistedProgress.journeyId} / etapa ${persistedProgress.stepIndex + 1}`
+                  : "Sem progresso persistido."}
+              </p>
+            </div>
 
-          <div className="inspector__section">
-            <p className="inspector__eyebrow">Analytics</p>
-            <ul className="inspector__events">
-              {analyticsEvents.length === 0 ? (
-                <li className="inspector__event">Nenhum evento emitido ainda.</li>
-              ) : (
-                analyticsEvents.map((event, index) => (
-                  <li key={`${event}-${index}`} className="inspector__event">
-                    {event}
-                  </li>
-                ))
-              )}
-            </ul>
-          </div>
-        </aside>
-      </section>
+            <div className="inspector__section">
+              <p className="inspector__eyebrow">Ultima mudanca</p>
+              <p className="inspector__copy">{lastProgressChange}</p>
+            </div>
+
+            <div className="inspector__section">
+              <p className="inspector__eyebrow">Mapa da Travessia</p>
+              <p className="inspector__copy">
+                {persistedTrajectory
+                  ? `${persistedTrajectory.mode} / ${trajectorySummary}`
+                  : "Sem trajetoria persistida."}
+              </p>
+            </div>
+
+            <div className="inspector__section">
+              <p className="inspector__eyebrow">Campo</p>
+              <p className="inspector__copy">
+                {collectiveFlows.length > 0
+                  ? `Campo coletivo ${activePeriod.label} / ${Math.min(collectiveFlows.length, 3)} correntes suaves ativas.`
+                  : "Sem fluxos coletivos ativos."}
+              </p>
+            </div>
+
+            <div className="inspector__section">
+              <p className="inspector__eyebrow">Analytics</p>
+              <ul className="inspector__events">
+                {analyticsEvents.length === 0 ? (
+                  <li className="inspector__event">Nenhum evento emitido ainda.</li>
+                ) : (
+                  analyticsEvents.map((event, index) => (
+                    <li key={`${event}-${index}`} className="inspector__event">
+                      {event}
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
+          </aside>
+        </section>
+      ) : null}
     </main>
   );
 }

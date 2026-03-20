@@ -17,24 +17,24 @@ export type MandalaFieldPeriod = {
 export const mandalaFieldPeriods: MandalaFieldPeriod[] = [
   {
     id: "moment",
-    label: "Campo do momento",
-    description: "Correntes mais proximas do instante atual.",
+    label: "24h",
+    description: "Leitura do campo mais proxima do momento atual.",
     climateCopy:
-      "O campo se aproxima do reconhecimento imediato e de pequenos ajustes de presenca.",
+      "Muitas jornadas comecam em percepcao nas ultimas 24 horas.",
   },
   {
     id: "recent",
-    label: "Campo recente",
-    description: "Movimentos recorrentes dos ultimos ciclos.",
+    label: "7 dias",
+    description: "Movimentos recorrentes do campo recente.",
     climateCopy:
-      "O campo recente inclina a mandala para reorganizacao, passagem e coerencia antes do impulso.",
+      "Nos ultimos 7 dias, o campo tem se movido entre percepcao e reorganizacao antes da acao.",
   },
   {
     id: "expanded",
-    label: "Campo ampliado",
-    description: "Leitura mais longa das correntes da mandala.",
+    label: "30 dias",
+    description: "Leitura mais ampla das correntes da mandala.",
     climateCopy:
-      "O campo ampliado revela ciclos mais lentos de integracao, retorno e amadurecimento do movimento.",
+      "Nos ultimos 30 dias, retornos a NAVROS e ciclos mais lentos de integracao ficam mais visiveis.",
   },
 ];
 
@@ -110,10 +110,10 @@ export function getMandalaFieldPeriodById(
 
   return {
     id: "recent",
-    label: "Campo recente",
-    description: "Movimentos recorrentes dos ultimos ciclos.",
+    label: "7 dias",
+    description: "Movimentos recorrentes do campo recente.",
     climateCopy:
-      "O campo recente inclina a mandala para reorganizacao, passagem e coerencia antes do impulso.",
+      "Nos ultimos 7 dias, o campo tem se movido entre percepcao e reorganizacao antes da acao.",
   };
 }
 

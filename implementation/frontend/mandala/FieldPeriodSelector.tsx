@@ -12,6 +12,7 @@ export type FieldPeriodSelectorProps = {
   climateCopy?: string;
   isTransitioning?: boolean;
   label?: string;
+  legend?: string;
   className?: string;
   onPeriodSelect?: (periodId: MandalaFieldPeriodId) => void;
 };
@@ -21,7 +22,8 @@ export function FieldPeriodSelector({
   activePeriodId,
   climateCopy,
   isTransitioning = false,
-  label = "Observatorio",
+  label = "Campo coletivo",
+  legend = "Fluxos suaves mostram correntes agregadas da mandala, nunca jornadas individuais.",
   className,
   onPeriodSelect,
 }: FieldPeriodSelectorProps) {
@@ -56,6 +58,8 @@ export function FieldPeriodSelector({
           );
         })}
       </div>
+
+      {legend ? <p className="journey-field__legend">{legend}</p> : null}
 
       {climateCopy ? (
         <p

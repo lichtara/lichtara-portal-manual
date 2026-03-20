@@ -88,6 +88,26 @@ CTA principal:
 
 `Comecar a navegacao`
 
+## Expectation Gate Antes da Mandala
+
+Antes da mandala completa, a V1 publica se beneficia de uma micro-tela de orientacao.
+
+Estrutura minima:
+
+`boas-vindas -> 3 frases claras -> entrar na mandala`
+
+Funcao:
+
+- reduzir confusao inicial
+- evitar exploracao aleatoria
+- preservar o portal como instrumento de navegacao, nao como galeria de simbolos
+
+Copy estrutural recomendada:
+
+> O Portal Lichtara nao e uma plataforma de conteudo.  
+> Ele e um espaco de navegacao da experiencia.  
+> Comece pela jornada NAVROS para reconhecer o campo em que voce esta.
+
 ## Perguntas Estruturais
 
 ### Pergunta 1: ponto de atencao
@@ -257,6 +277,38 @@ Leitura-base:
 `estado inicial -> jornada -> novo estado`
 
 Isso permite uma camada futura chamada `Mapa da Travessia`, em que a pessoa pode ver:
+
+- o caminho que ja percorreu
+- onde interrompeu a travessia
+- como retornar ou recomecar com clareza
+
+## Reset Suave da Jornada
+
+Para a abertura publica, a jornada precisa oferecer um gesto simples de autonomia:
+
+`Comecar novamente`
+
+Funcao:
+
+- limpar progresso local da jornada
+- reiniciar a trajetoria pessoal
+- manter apenas a camada agregada de observacao do sistema
+
+Essa calibragem evita travessias retomadas de forma confusa depois de pausas longas.
+
+## Micro-Observatorio do Campo
+
+O observatorio da V1 deve permanecer leve.
+
+Leitura recomendada:
+
+`Campo coletivo -> periodo curto -> frase de clima do campo`
+
+Regra de linguagem:
+
+- nao mostrar metricas para a pessoa usuaria
+- nao transformar o campo em dashboard
+- explicar o minimo necessario para tornar a leitura inteligivel
 
 - caminhos ja percorridos
 - deslocamentos recorrentes entre eixos

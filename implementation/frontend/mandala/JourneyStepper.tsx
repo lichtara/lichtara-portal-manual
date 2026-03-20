@@ -12,6 +12,8 @@ export type JourneyStepperProps = {
   onStepSelect: (stepIndex: number) => void;
   onPreviousStep: () => void;
   onNextStep: () => void;
+  onRestartJourney?: () => void;
+  restartLabel?: string;
   className?: string;
 };
 
@@ -21,6 +23,8 @@ export function JourneyStepper({
   onStepSelect,
   onPreviousStep,
   onNextStep,
+  onRestartJourney,
+  restartLabel = "Comecar novamente",
   className,
 }: JourneyStepperProps) {
   const activeStep = getSafeMandalaJourneyStep(journey, activeStepIndex);
@@ -109,6 +113,19 @@ export function JourneyStepper({
         >
           {isLastStep ? "Recomecar jornada" : activeStep.ctaLabel}
         </button>
+
+        {onRestartJourney && activeStepIndex > 0 ? (
+          <button
+            type="button"
+            className={journeyCx(
+              "journey-stepper__action",
+              "journey-stepper__action--quiet",
+            )}
+            onClick={onRestartJourney}
+          >
+            {restartLabel}
+          </button>
+        ) : null}
       </div>
     </aside>
   );

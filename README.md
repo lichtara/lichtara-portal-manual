@@ -71,6 +71,7 @@ Leitura de rigor:
 - [implementation/frontend/mandala/JourneyStepper.tsx](implementation/frontend/mandala/JourneyStepper.tsx)
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
+- [implementation/frontend/mandala/PortalEntryGate.tsx](implementation/frontend/mandala/PortalEntryGate.tsx)
 - [implementation/frontend/mandala/FieldFlowLayer.tsx](implementation/frontend/mandala/FieldFlowLayer.tsx)
 - [implementation/frontend/mandala/FieldPeriodSelector.tsx](implementation/frontend/mandala/FieldPeriodSelector.tsx)
 - [implementation/frontend/mandala/fieldFlowSource.ts](implementation/frontend/mandala/fieldFlowSource.ts)
@@ -162,6 +163,9 @@ No momento, o repositorio contem:
 - camada inicial de fluxos coletivos desenhada atras da trajetoria pessoal no prototipo React
 - observatorio inicial com filtro de periodo sem sair da mesma interface
 - transicao suave entre periodos e frase curta de clima do campo no observatorio inicial
+- expectation gate inicial antes da mandala para orientar a primeira entrada
+- reset suave de jornada para limpar progresso e trajetoria local sem mexer na camada agregada
+- micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas

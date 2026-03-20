@@ -51,6 +51,7 @@ export type JourneyScreenProps = {
   fieldPeriods?: MandalaFieldPeriod[];
   activeFieldPeriodId?: MandalaFieldPeriodId;
   fieldPeriodLabel?: string;
+  fieldLegend?: string;
   fieldClimateCopy?: string;
   isFieldTransitioning?: boolean;
   width?: number | string;
@@ -62,6 +63,7 @@ export type JourneyScreenProps = {
   style?: React.CSSProperties;
   onProgressChange?: (change: MandalaJourneyProgressChange) => void;
   onFieldPeriodSelect?: (periodId: MandalaFieldPeriodId) => void;
+  onRestartJourney?: () => void;
   onTrajectoryChange?: (
     record: MandalaTrajectoryRecord,
     snapshot: MandalaTrajectorySnapshot | null,
@@ -87,7 +89,8 @@ export function JourneyScreen({
   maxCollectiveFlows = 5,
   fieldPeriods = [],
   activeFieldPeriodId,
-  fieldPeriodLabel = "Observatorio",
+  fieldPeriodLabel = "Campo coletivo",
+  fieldLegend = "Fluxos suaves mostram correntes agregadas da mandala, nunca jornadas individuais.",
   fieldClimateCopy,
   isFieldTransitioning = false,
   width = "100%",
@@ -99,6 +102,7 @@ export function JourneyScreen({
   style,
   onProgressChange,
   onFieldPeriodSelect,
+  onRestartJourney,
   onTrajectoryChange,
   onAnalyticsEvent,
   onJourneyComplete,
@@ -121,6 +125,7 @@ export function JourneyScreen({
     selectStep,
     goToPreviousStep,
     goToNextStep,
+    restartJourney,
   } = useJourneyProgress({
     journeys,
     initialJourneyId,
@@ -142,7 +147,7 @@ export function JourneyScreen({
       selectStep(stepIndex, "canvas");
     },
   });
-  const { trajectorySnapshot } = useJourneyTrajectory({
+  const { trajectorySnapshot, resetTrajectory } = useJourneyTrajectory({
     journeys,
     activeProgress,
     storageKey: trajectoryStorageKey,
@@ -151,6 +156,13 @@ export function JourneyScreen({
     onPersistTrajectory,
     onTrajectoryChange,
   });
+
+  function handleRestartJourney() {
+    resetTrajectory();
+    restartJourney();
+    clearHover();
+    onRestartJourney?.();
+  }
 
   return (
     <section className={journeyCx("journey-screen", className)} style={style}>
@@ -166,6 +178,7 @@ export function JourneyScreen({
         <FieldPeriodSelector
           periods={fieldPeriods}
           activePeriodId={activeFieldPeriodId}
+          legend={fieldLegend}
           climateCopy={fieldClimateCopy}
           isTransitioning={isFieldTransitioning}
           label={fieldPeriodLabel}
@@ -218,6 +231,7 @@ export function JourneyScreen({
 
             goToNextStep();
           }}
+          onRestartJourney={handleRestartJourney}
         />
       </div>
     </section>

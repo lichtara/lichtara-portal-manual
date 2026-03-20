@@ -1,246 +1,218 @@
-# Jornada do Usuario
+# Jornada NAVROS - V1 Operacional
 
-## Sintese
+## Principio
 
-A jornada desenhada no manual-base comeca com um encontro simples com NAVROS e se desdobra em uma travessia progressiva. O portal nao quer apenas responder a uma pergunta; quer acompanhar a pessoa em fases, agentes e retornos de continuidade.
+Esta nao e uma jornada de aprendizado.
 
-Fluxo-base da V1:
+E uma travessia.
 
-`landing -> protocolo de entrada -> consulta NAVROS -> sintese -> agente ativo -> continuidade de jornada -> retorno ao portal`
+A experiencia deve ser continua, simples e sem necessidade de explicacao externa.
 
-## Momento Zero: Abertura do Campo
+## Fluxo Completo
 
-Antes da pergunta e antes da leitura, o portal pode operar um pequeno gesto de desaceleracao. Esse gesto e o protocolo de entrada do Lichtara.
+`entrada -> foco -> leitura -> reconhecimento -> orientacao -> movimento -> fechamento`
 
-Frase de abertura recomendada:
+Cada etapa deve acontecer de forma sequencial, sem bifurcacoes e sem sobrecarga.
+
+## Etapa 1 - Entrada
+
+### O que a pessoa ve
 
 > Voce nao esta aqui para aprender algo novo.  
 > Voce esta aqui para reconhecer onde ja esta.
 
-Objetivos desse momento:
+### O que acontece
 
-- interromper o modo de consumo de conteudo
-- reduzir ansiedade
-- deslocar a atencao para a propria posicao interior
-- preparar o terreno para NAVROS
+- pausa implicita
+- reducao de ritmo
+- quebra do modo de consumo
 
-## Perfil de Entrada
+### Regra
 
-O perfil prioritario e a pessoa que chega ao portal em algum tipo de tensao pratica ou existencial:
+Nao explicar o sistema.
 
-- decisao importante
-- relacoes
-- trabalho ou proposito
-- transicao de vida
-- confusao geral
+Nao apresentar opcoes.
 
-## Etapa 1: Descoberta
+Apenas permitir entrada.
 
-A descoberta acontece por uma promessa clara e nao mistificada. A copy mais forte do material atual e:
+## Etapa 2 - Foco
 
-> Sistema de navegacao da consciencia para ajudar voce a reconhecer direcao no proprio caminho.
+### O que a pessoa ve
 
-Sinais desejados nessa etapa:
-- curiosidade
-- confianca inicial
-- sensacao de acolhimento sem excesso de teoria
+Perguntas diretas:
 
-## Etapa 2: Entrada no Portal
+1. Qual area da sua vida esta pedindo mais atencao agora?
+2. Como essa area tem se apresentado recentemente?
+3. Qual sensacao esta mais presente neste momento?
 
-A entrada deve ser simples, calma e direta. O manual descreve uma tela inicial com um circulo suave pulsando e uma mensagem de boas-vindas centrada em orientacao.
+### O que a pessoa faz
 
-Mensagens-base:
+- responde
+- direciona atencao
 
-> Aqui voce nao recebe respostas prontas.  
-> Voce aprende a navegar.
+### Funcao
 
-Objetivos da entrada:
-- abrir o campo de navegacao
-- reduzir ansiedade
-- deixar claro que o primeiro encontro e com NAVROS
+`posicionar a pessoa dentro da propria experiencia`
 
-Em uma versao mais contemplativa, essa entrada pode usar a triade de frases do protocolo:
+## Etapa 3 - Leitura
 
-- reconhecer onde ja esta
-- reconhecer de onde sair
-- reconhecer que ja esta no caminho
+### O que a pessoa ve
 
-## Etapa 3: Consulta NAVROS
+Uma sintese clara.
 
-A consulta aparece em duas profundidades no material:
+Nao longa.
 
-- versao expandida de 10 a 15 minutos
-- versao pronta para implementacao de 2 a 3 minutos
+Nao explicativa.
 
-Nucleo da consulta:
-- pergunta de foco
-- leitura da sensacao de campo
-- leitura do movimento interno
-- pequeno compromisso para as proximas 24 horas
+Nao abstrata.
 
-As tres perguntas estruturais da versao pronta para implementacao sao:
+### Estrutura interna invisivel
 
-1. Qual area da sua vida esta pedindo mais atencao neste momento?
-2. Como essa area da sua vida tem se apresentado recentemente?
-3. Diante disso, qual dessas sensacoes esta mais presente em voce agora?
+- espelho
+- leitura
+- interpretacao
+- direcao
 
-## Etapa 4: Sintese de Navegacao
+### Regra
 
-A resposta NAVROS deve conter quatro camadas:
+A leitura deve parecer:
 
-1. espelho imediato
-2. leitura do campo
-3. interpretacao do movimento
-4. sugestao de navegacao
+`obvia e precisa ao mesmo tempo`
 
-Efeitos desejados:
-- a pessoa se sente vista
-- a leitura faz sentido sem ser invasiva
-- surge um proximo passo claro
+## Etapa 4 - Reconhecimento
 
-Depois da leitura, o Livro Vivo pode oferecer uma frase de integracao:
+### O que a pessoa ve
 
-> O caminho nao comeca quando voce decide andar.  
-> Ele comeca quando voce reconhece que ja esta dentro dele.
+Uma pergunta simples:
 
-## Etapa 5: Agente Ativo e Continuidade
+`Isso faz sentido para voce?`
 
-Depois da consulta, o portal deve apontar um agente ativo ou uma fase da travessia. Essa ponte transforma a resposta inicial em continuidade de jornada.
+Opcional:
 
-Exemplos de roteamento presentes no material:
-- confusao -> LUMORA
-- decisao -> SYNTARIS
-- acao -> FLUX
-- expansao -> VORAX
+- sim
+- ajustar leitura
 
-## Etapa 6: Retorno
+### O que acontece
 
-O retorno ao portal deve mostrar progressao. O manual sugere mensagens de continuidade como:
+- validacao interna
+- ancoragem da experiencia
 
-> Sua jornada recente: Percepcao -> Reorganizacao -> Movimento.  
-> Voce esta entrando em uma fase de Integracao.
+### Regra
 
-Objetivo do retorno:
-- transformar historico em sentido
-- reforcar percepcao de processo vivo
-- manter a pessoa dentro de um mapa compreensivel
+Sem esse momento, nao ha travessia.
 
-## Base Narrativa no Livro Vivo
+## Etapa 5 - Orientacao
 
-Existe uma leitura importante do Capitulo 01 do Livro Vivo que ajuda a sustentar por que o portal funciona melhor como travessia do que como conteudo. O capitulo nao apresenta uma lista explicita de etapas, mas sua progressao narrativa deixa visivel uma estrutura de 7 movimentos humanos.
+### O que a pessoa ve
 
-Leitura derivada do capitulo:
+Um unico direcionamento:
 
-1. chamado
-2. reconhecimento
-3. pausa
-4. sim
-5. alinhamento
-6. campo
-7. travessia
+`Nas proximas 24 horas, observe / faca: [acao simples e concreta]`
 
-Estados humanos associados:
+### Regra
 
-- chamado: inquietacao
-- reconhecimento: percepcao
-- pausa: atencao
-- sim: permissao
-- alinhamento: coerencia
-- campo: expansao
-- travessia: acao consciente
+- uma acao apenas
+- executavel
+- sem ambiguidade
 
-Traducao operacional no portal:
+## Etapa 6 - Movimento
 
-| Livro Vivo | Portal |
-| --- | --- |
-| chamado | entrada e abertura do campo |
-| reconhecimento | NAVROS reconhece a posicao |
-| pausa | atencao e micro-ritual |
-| sim | escolha e aceite da travessia |
-| alinhamento | SYNTARIS e reorganizacao interna |
-| campo | percepcao ampliada e leitura sistemica |
-| travessia | FLUX e movimento orientado |
+### O que a pessoa ve
 
-Essa leitura importa porque mostra que a jornada de 7 etapas do portal nao foi inventada apenas como artefato de UX. Ela torna navegavel uma arquitetura humana que o proprio Livro Vivo ja descreve em linguagem narrativa.
+Indicacao de continuidade:
 
-## Expansao: Jornadas de 7 Etapas
+`Voce esta entrando em uma fase de: [agente ou estado]`
 
-Como evolucao natural das rotas da mandala, o portal pode oferecer jornadas guiadas de 7 etapas. A vantagem dessa estrutura e manter profundidade sem alongar demais a travessia.
+Exemplos:
 
-Decisao recomendada para a primeira experiencia publica:
+- reorganizacao
+- clareza
+- movimento
 
-- V1 publica com uma unica jornada
-- rota ativa: `Percepcao`
-- agente de entrada: `NAVROS`
+### Funcao
 
-Leitura de rollout:
+`abrir continuidade sem quebrar a simplicidade`
 
-- `Percepcao` entra primeiro
-- `Estrutura` fica preparada para camada seguinte sob `SYNTARIS`
-- `Acao` fica preparada para camada seguinte sob `FLUX`
+## Etapa 7 - Fechamento
 
-Isso reduz a complexidade percebida na primeira travessia sem desmontar a arquitetura das tres rotas.
+### O que a pessoa ve
 
-Padrao-base:
+Uma frase de integracao:
 
-1. entrada
-2. percepcao
-3. compreensao
-4. integracao
-5. movimento
-6. expansao
-7. retorno consciente
+`Voce nao esta mais no mesmo ponto de quando entrou.`
 
-Leitura operacional:
+Opcional:
 
-- `Percepcao`: `NAVROS -> LUMORA -> OSLO -> KAORAN -> SYNTARIS -> FLUX -> NAVROS`
-- `Estrutura`: `NAVROS -> SYNTARIS -> FINCE -> ORIA -> HESLOS -> FLUX -> NAVROS`
-- `Acao`: `NAVROS -> FLUX -> SOLARA -> VELTARA -> SYNTRIA -> ASTRAEL -> OKTAVE`
+- variacoes baseadas na leitura
 
-Em interface, isso permite trocar um menu amplo por tres entradas legiveis:
+### O que acontece
 
-- compreender o que esta acontecendo
-- organizar minha vida ou projeto
-- criar movimento e transformacao
+- sensacao de travessia
+- fechamento do ciclo
+- preparacao para retorno
 
-Mas essa camada nao precisa aparecer na V1 publica. Na primeira abertura do portal, a recomendacao mais segura e:
+## Regras Estruturais da Jornada
 
-`NAVROS -> jornada de Percepcao -> clareza e orientacao`
+### 1. Sem explicacao externa
 
-Cada etapa pode aparecer como um agente da mandala com uma unica reflexao, uma acao breve e um avanco claro para o proximo passo.
+Se a pessoa precisar entender para continuar, a jornada falhou.
 
-Frase-sintese que reforca esse desenho:
+### 2. Sem multiplos caminhos
 
-> Este capitulo nao e sobre compreender. E sobre atravessar.
+A V1 deve ter:
 
-No contexto do portal, isso significa que a experiencia nao deve se apresentar como explicacao do sistema, mas como passagem orientada por ele.
+`um unico fluxo`
 
-## Pontos de Contato Principais
+### 3. Sem excesso de linguagem
 
-- landing com proposta de valor
-- protocolo de entrada ou voz inicial do Livro Vivo
-- tela inicial de acolhimento
-- perguntas de navegacao
-- micro-ritual de leitura
-- sintese NAVROS
-- painel do agente ativo
-- seletor de jornadas de 7 etapas
-- stepper da jornada ativa
-- mandala ou bussola viva da jornada
-- historico de retorno
+Evitar:
 
-## Friccoes a Observar
+- termos abstratos
+- camadas conceituais visiveis
+- explicacoes sobre o sistema
 
-- excesso de teoria logo na entrada
-- linguagem mistificada demais
-- resposta vaga demais para gerar valor
-- salvamento obrigatorio cedo demais
-- falta de ponte entre a primeira leitura e a jornada longa
+### 4. Tempo total
 
-## Sinais de Sucesso
+`3 a 5 minutos`
 
-- a pessoa conclui a primeira travessia em poucos minutos
-- a sintese gera percepcao real de clareza
-- ha desejo de continuar para o agente ativo
-- a jornada guiada de 7 etapas pode ser completada sem fadiga
-- o retorno ao portal produz sensacao de continuidade
+A primeira travessia deve ser curta.
+
+### 5. Criterio de sucesso
+
+A jornada funciona quando:
+
+- a pessoa chega ate o final
+- sente clareza
+- nao precisou de ajuda
+- deseja continuar
+
+## Funcao da V1
+
+A V1 nao entrega o sistema completo.
+
+Ela garante:
+
+`a primeira travessia possivel`
+
+## Frase estrutural da jornada
+
+`Nao e sobre entender. E sobre atravessar.`
+
+## Funcao deste Documento
+
+Este arquivo e a fonte unica de verdade da experiencia.
+
+Ele alinha:
+
+- UX
+- copy
+- frontend
+- logica da jornada
+
+## Regra Editorial
+
+Nao voltar a misturar teoria aqui.
+
+Este arquivo e:
+
+`execucao pura`

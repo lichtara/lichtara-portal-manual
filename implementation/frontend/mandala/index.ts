@@ -121,6 +121,9 @@ export type {
 export { FieldPeriodSelector } from "./FieldPeriodSelector";
 export type { FieldPeriodSelectorProps } from "./FieldPeriodSelector";
 
+export { PortalEntryGate } from "./PortalEntryGate";
+export type { PortalEntryGateProps } from "./PortalEntryGate";
+
 export { JourneySelector } from "./JourneySelector";
 export type { JourneySelectorProps } from "./JourneySelector";
 

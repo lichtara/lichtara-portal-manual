@@ -75,6 +75,74 @@ select {
   max-width: 64ch;
 }
 
+.portal-entry-gate {
+  background: rgba(255, 252, 246, 0.86);
+  border: 1px solid rgba(58, 53, 44, 0.12);
+  border-radius: 32px;
+  box-shadow: 0 20px 48px rgba(58, 53, 44, 0.07);
+  display: grid;
+  gap: 16px;
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 28px;
+}
+
+.portal-entry-gate__eyebrow {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.portal-entry-gate__title {
+  color: #1f1b16;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 14ch;
+}
+
+.portal-entry-gate__lines {
+  display: grid;
+  gap: 10px;
+}
+
+.portal-entry-gate__line {
+  color: #2a251e;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.portal-entry-gate__helper {
+  color: #7f7668;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 56ch;
+}
+
+.portal-entry-gate__action {
+  appearance: none;
+  background: #1f1b16;
+  border: none;
+  border-radius: 999px;
+  color: #f8f3ea;
+  cursor: pointer;
+  justify-self: start;
+  padding: 12px 18px;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.portal-entry-gate__action:hover,
+.portal-entry-gate__action:focus-visible {
+  box-shadow: 0 10px 20px rgba(31, 27, 22, 0.16);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .inspector {
   background: rgba(255, 252, 246, 0.88);
   border: 1px solid rgba(58, 53, 44, 0.12);
