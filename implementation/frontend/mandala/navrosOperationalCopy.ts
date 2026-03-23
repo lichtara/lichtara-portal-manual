@@ -80,12 +80,12 @@ export const navrosAreaLabels: Record<(typeof navrosSuggestedAreas)[number], str
 };
 
 export const navrosAreaContexts: Record<(typeof navrosSuggestedAreas)[number], string> = {
-  trabalho: "o que você faz",
-  saude: "corpo e energia",
-  relacoes: "com outras pessoas",
-  financas: "dinheiro e recursos",
-  proposito: "sentido e direção",
-  transicao: "mudança em curso",
+  trabalho: "rotina e entregas",
+  saude: "corpo, energia e descanso",
+  relacoes: "com quem você convive",
+  financas: "dinheiro, contas e recursos",
+  proposito: "sentido e rumo",
+  transicao: "algo mudando na sua vida",
 };
 
 export const navrosSuggestedStates = [

@@ -395,12 +395,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__group {
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(58, 53, 44, 0.08);
+  border-radius: 22px;
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  padding: 18px 18px 20px;
 }
 
 .operational-step__group + .operational-step__group {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .operational-step__group-label {
@@ -526,7 +530,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__chip--contextual {
-  min-width: 176px;
+  min-width: 188px;
 }
 
 .operational-step__chip-label {
@@ -538,7 +542,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__chip-context {
   color: #7f7668;
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.45;
+  max-width: 18ch;
 }
 
 .operational-step__actions {
