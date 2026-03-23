@@ -421,13 +421,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
   justify-items: start;
   min-height: clamp(300px, 44vh, 420px);
   margin: 0 auto;
-  max-width: 520px;
-  width: min(100%, 520px);
+  max-width: 560px;
+  width: min(100%, 560px);
 }
 
 .operational-step--entry .operational-step__copy-group {
   gap: 18px;
-  max-width: 34ch;
+  max-width: 40ch;
 }
 
 .operational-step--entry .operational-step__label,
@@ -440,7 +440,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
   color: rgba(10, 26, 47, 0.58);
   font-size: 13px;
   margin-top: 6px;
-  max-width: 36ch;
+  max-width: 40ch;
 }
 
 .operational-step--entry .operational-step__action {
