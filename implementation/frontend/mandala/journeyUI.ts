@@ -520,6 +520,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
   text-transform: uppercase;
 }
 
+.operational-step__helper {
+  color: rgba(10, 26, 47, 0.64);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
 .operational-step__quote,
 .operational-step__copy,
 .operational-step__prompt,

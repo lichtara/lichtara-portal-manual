@@ -100,15 +100,48 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [area, setArea] = React.useState(answers.area);
   const [state, setState] = React.useState(answers.state);
   const [feeling, setFeeling] = React.useState(answers.feeling);
+  const hasArea = Boolean(area.trim());
+  const hasState = Boolean(state.trim());
+  const areaLabel =
+    area.trim() && area.trim().toLowerCase() in navrosAreaLabels
+      ? navrosAreaLabels[area.trim().toLowerCase() as keyof typeof navrosAreaLabels]
+      : area.trim();
 
-  const canContinue = Boolean(area.trim() && state.trim() && feeling.trim());
+  function handleAreaSelect(nextArea: string) {
+    const shouldReset = nextArea !== area;
+    const nextState = shouldReset ? "" : state;
+    const nextFeeling = shouldReset ? "" : feeling;
 
-  function handleNext() {
-    if (!canContinue) {
-      return;
-    }
+    setArea(nextArea);
+    setState(nextState);
+    setFeeling(nextFeeling);
+    onUpdate({
+      area: nextArea,
+      state: nextState,
+      feeling: nextFeeling,
+    });
+  }
 
-    onUpdate({ area, state, feeling });
+  function handleStateSelect(nextState: string) {
+    const shouldReset = nextState !== state;
+    const nextFeeling = shouldReset ? "" : feeling;
+
+    setState(nextState);
+    setFeeling(nextFeeling);
+    onUpdate({
+      area,
+      state: nextState,
+      feeling: nextFeeling,
+    });
+  }
+
+  function handleFeelingSelect(nextFeeling: string) {
+    setFeeling(nextFeeling);
+    onUpdate({
+      area,
+      state,
+      feeling: nextFeeling,
+    });
     onNext();
   }
 
@@ -116,6 +149,9 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
     <div className="operational-step">
       <p className="operational-step__label">
         {navrosOperationalScreenCopy.focus.label}
+      </p>
+      <p className="operational-step__helper">
+        {navrosOperationalScreenCopy.focus.helper}
       </p>
       <div className="operational-step__group">
         <p className="operational-step__group-label">
@@ -138,7 +174,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                   "operational-step__chip--contextual",
                   isActive && "operational-step__chip--active",
                 )}
-                onClick={() => setArea(suggestedArea)}
+                onClick={() => handleAreaSelect(suggestedArea)}
               >
                 <span className="operational-step__chip-label">
                   {navrosAreaLabels[suggestedArea]}
@@ -151,77 +187,75 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
           })}
         </div>
       </div>
-      <div className="operational-step__group">
-        <p className="operational-step__group-label">
-          {navrosOperationalScreenCopy.focus.state.label}
-        </p>
-        <p className="operational-step__prompt">
-          {navrosOperationalScreenCopy.focus.state.prompt}
-        </p>
-        <div className="operational-step__chips">
-          {navrosSuggestedStates.map((suggestedState) => {
-            const isActive =
-              state.trim().toLowerCase() === suggestedState.toLowerCase();
 
-            return (
-              <button
-                key={suggestedState}
-                type="button"
-                className={journeyCx(
-                  "operational-step__chip",
-                  isActive && "operational-step__chip--active",
-                )}
-                onClick={() => setState(suggestedState)}
-              >
-                <span className="operational-step__chip-label">
-                  {navrosStateLabels[suggestedState]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-      <div className="operational-step__group">
-        <p className="operational-step__group-label">
-          {navrosOperationalScreenCopy.focus.feeling.label}
-        </p>
-        <p className="operational-step__prompt">
-          {navrosOperationalScreenCopy.focus.feeling.prompt}
-        </p>
-        <div className="operational-step__chips">
-          {navrosSuggestedFeelings.map((suggestedFeeling) => {
-            const isActive =
-              normalizeNavrosReadingFeeling(feeling) === suggestedFeeling.id &&
-              Boolean(feeling.trim());
+      {hasArea ? (
+        <div className="operational-step__group">
+          <p className="operational-step__group-label">
+            {navrosOperationalScreenCopy.focus.state.label}
+          </p>
+          <p className="operational-step__prompt">
+            {areaLabel
+              ? `Em ${areaLabel}, ${navrosOperationalScreenCopy.focus.state.prompt.toLowerCase()}`
+              : navrosOperationalScreenCopy.focus.state.prompt}
+          </p>
+          <div className="operational-step__chips">
+            {navrosSuggestedStates.map((suggestedState) => {
+              const isActive =
+                state.trim().toLowerCase() === suggestedState.toLowerCase();
 
-            return (
-              <button
-                key={suggestedFeeling.id}
-                type="button"
-                className={journeyCx(
-                  "operational-step__chip",
-                  isActive && "operational-step__chip--active",
-                )}
-                onClick={() => setFeeling(suggestedFeeling.label)}
-              >
-                <span className="operational-step__chip-label">
-                  {suggestedFeeling.label}
-                </span>
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={suggestedState}
+                  type="button"
+                  className={journeyCx(
+                    "operational-step__chip",
+                    isActive && "operational-step__chip--active",
+                  )}
+                  onClick={() => handleStateSelect(suggestedState)}
+                >
+                  <span className="operational-step__chip-label">
+                    {navrosStateLabels[suggestedState]}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div className="operational-step__actions">
-        <button
-          type="button"
-          className="operational-step__action"
-          disabled={!canContinue}
-          onClick={handleNext}
-        >
-          {navrosOperationalScreenCopy.focus.action}
-        </button>
-      </div>
+      ) : null}
+
+      {hasArea && hasState ? (
+        <div className="operational-step__group">
+          <p className="operational-step__group-label">
+            {navrosOperationalScreenCopy.focus.feeling.label}
+          </p>
+          <p className="operational-step__prompt">
+            {navrosOperationalScreenCopy.focus.feeling.prompt}
+          </p>
+          <div className="operational-step__chips">
+            {navrosSuggestedFeelings.map((suggestedFeeling) => {
+              const isActive =
+                normalizeNavrosReadingFeeling(feeling) === suggestedFeeling.id &&
+                Boolean(feeling.trim());
+
+              return (
+                <button
+                  key={suggestedFeeling.id}
+                  type="button"
+                  className={journeyCx(
+                    "operational-step__chip",
+                    isActive && "operational-step__chip--active",
+                  )}
+                  onClick={() => handleFeelingSelect(suggestedFeeling.label)}
+                >
+                  <span className="operational-step__chip-label">
+                    {suggestedFeeling.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
