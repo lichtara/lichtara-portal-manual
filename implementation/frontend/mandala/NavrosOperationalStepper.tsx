@@ -16,7 +16,7 @@ export type NavrosOperationalStepperProps = {
 
 export function NavrosOperationalStepper({
   title = "Jornada NAVROS - V1 Operacional",
-  intro = "Fluxo continuo, sem bifurcacoes e sem necessidade de explicacao externa.",
+  intro = "Fluxo contínuo, sem bifurcações e sem necessidade de explicação externa.",
   className,
 }: NavrosOperationalStepperProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);

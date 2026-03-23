@@ -55,7 +55,7 @@ export const navrosOperationalSteps: NavrosOperationalStep[] = [
   { id: "entry", label: "Entrada" },
   { id: "focus", label: "Foco" },
   { id: "reading", label: "Leitura" },
-  { id: "orientation", label: "Orientacao" },
+  { id: "orientation", label: "Orientação" },
   { id: "movement", label: "Movimento" },
   { id: "closure", label: "Fechamento" },
 ];
@@ -75,6 +75,15 @@ export const navrosSuggestedAreas = [
   "transicao",
 ] as const;
 
+export const navrosAreaLabels: Record<(typeof navrosSuggestedAreas)[number], string> = {
+  trabalho: "trabalho",
+  saude: "saúde",
+  relacoes: "relações",
+  financas: "finanças",
+  proposito: "propósito",
+  transicao: "transição",
+};
+
 export const navrosSuggestedStates = [
   "inicio",
   "sobrecarga",
@@ -83,13 +92,21 @@ export const navrosSuggestedStates = [
   "estagnacao",
 ] as const;
 
+export const navrosStateLabels: Record<(typeof navrosSuggestedStates)[number], string> = {
+  inicio: "início",
+  sobrecarga: "sobrecarga",
+  mudanca: "mudança",
+  instabilidade: "instabilidade",
+  estagnacao: "estagnação",
+};
+
 export const navrosSuggestedFeelings: Array<{
   id: NavrosReadingFeelingId;
   label: string;
   pattern: NavrosReadingPatternId;
 }> = [
-  { id: "confusao", label: "confusao", pattern: "confusao" },
-  { id: "duvida", label: "duvida", pattern: "duvida" },
+  { id: "confusao", label: "confusão", pattern: "confusao" },
+  { id: "duvida", label: "dúvida", pattern: "duvida" },
   { id: "ansiedade", label: "ansiedade", pattern: "ansiedade" },
   { id: "travamento", label: "travamento", pattern: "paralisia" },
   { id: "desalinhamento", label: "desalinhamento", pattern: "desalinhamento" },
@@ -97,10 +114,10 @@ export const navrosSuggestedFeelings: Array<{
 
 export const movementLabels: Record<MovementType, string> = {
   clarify: "clareza",
-  organize: "organizacao",
-  stabilize: "estabilizacao",
-  initiate: "inicio de movimento",
-  expand: "expansao",
+  organize: "organização",
+  stabilize: "estabilização",
+  initiate: "início de movimento",
+  expand: "expansão",
 };
 
 const NAVROS_PATTERN_IDS: NavrosReadingPatternId[] = [
@@ -131,7 +148,12 @@ function resolveAreaPrefix(area: string): string {
     return "Neste momento,";
   }
 
-  return `Na area de ${normalizedArea},`;
+  const displayArea =
+    normalizedArea in navrosAreaLabels
+      ? navrosAreaLabels[normalizedArea as keyof typeof navrosAreaLabels]
+      : normalizedArea;
+
+  return `Na área de ${displayArea},`;
 }
 
 function buildNavrosReadingAnchor(
@@ -143,25 +165,25 @@ function buildNavrosReadingAnchor(
 
   switch (normalizedState) {
     case "inicio":
-      return `${areaPrefix} algo esta comecando a tomar forma.`;
+      return `${areaPrefix} algo está começando a tomar forma.`;
 
     case "pressao":
-      return `${areaPrefix} ha uma pressao ativa pedindo resposta.`;
+      return `${areaPrefix} há uma pressão ativa pedindo resposta.`;
 
     case "mudanca":
-      return `${areaPrefix} um movimento de mudanca ja esta em curso.`;
+      return `${areaPrefix} um movimento de mudança já está em curso.`;
 
     case "sobrecarga":
-      return `${areaPrefix} ha acumulo no mesmo nivel de prioridade.`;
+      return `${areaPrefix} há acúmulo no mesmo nível de prioridade.`;
 
     case "instabilidade":
       return `${areaPrefix} o que aparece ainda muda de forma com rapidez.`;
 
     case "estagnacao":
-      return `${areaPrefix} as coisas nao estao avancando como poderiam.`;
+      return `${areaPrefix} as coisas não estão avançando como poderiam.`;
 
     default:
-      return `${areaPrefix} algo esta pedindo leitura com mais precisao.`;
+      return `${areaPrefix} algo está pedindo leitura com mais precisão.`;
   }
 }
 
@@ -285,32 +307,32 @@ function buildNavrosReadingStructure(
 
   switch (normalizedFeeling) {
     case "confusao":
-      return "Ha elementos suficientes para agir, mas ainda sem organizacao clara para sustentar uma escolha.";
+      return "Há elementos suficientes para agir, mas ainda sem organização clara para sustentar uma escolha.";
 
     case "pressao":
-      return "A demanda por resposta esta mais rapida do que a clareza disponivel.";
+      return "A demanda por resposta está mais rápida do que a clareza disponível.";
 
     case "duvida":
-      return "Mais de uma possibilidade se apresenta, mas sem um criterio definido entre elas.";
+      return "Mais de uma possibilidade se apresenta, mas sem um critério definido entre elas.";
 
     case "travamento":
-      return "Existe movimento possivel, mas ele ainda nao encontra base suficiente para acontecer.";
+      return "Existe movimento possível, mas ele ainda não encontra base suficiente para acontecer.";
 
     case "ansiedade":
-      return "O impulso por resolver pode estar antecipando um passo que ainda nao se sustenta.";
+      return "O impulso por resolver pode estar antecipando um passo que ainda não se sustenta.";
 
     case "desalinhamento":
-      return "Algo continua em movimento mesmo ja nao estando coerente internamente.";
+      return "Algo continua em movimento mesmo já não estando coerente internamente.";
 
     case "indefinicao":
-      return "O que esta acontecendo ainda nao terminou de se mostrar com clareza.";
+      return "O que está acontecendo ainda não terminou de se mostrar com clareza.";
 
     default:
       if (normalizeNavrosState(state) === "sobrecarga") {
-        return "Ha exigencias demais ocupando o mesmo espaco, o que reduz a capacidade de distinguir prioridade.";
+        return "Há exigências demais ocupando o mesmo espaço, o que reduz a capacidade de distinguir prioridade.";
       }
 
-      return "Ha um padrao em formacao que ainda nao esta completamente claro.";
+      return "Há um padrão em formação que ainda não está completamente claro.";
   }
 }
 
@@ -322,11 +344,11 @@ function buildNavrosReadingDirection(
   const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
 
   if (normalizedState === "sobrecarga") {
-    return "Antes de responder a tudo, vale devolver prioridade apenas ao que realmente pede espaco agora.";
+    return "Antes de responder a tudo, vale devolver prioridade apenas ao que realmente pede espaço agora.";
   }
 
   if (normalizedState === "indefinicao") {
-    return "Observar mais um pouco pode permitir que a direcao apareca com mais nitidez.";
+    return "Observar mais um pouco pode permitir que a direção apareça com mais nitidez.";
   }
 
   if (normalizedState === "estagnacao") {
@@ -335,13 +357,13 @@ function buildNavrosReadingDirection(
 
   switch (normalizedFeeling) {
     case "confusao":
-      return "Antes de decidir, vale reduzir as opcoes ao que realmente importa agora.";
+      return "Antes de decidir, vale reduzir as opções ao que realmente importa agora.";
 
     case "pressao":
-      return "Antes de responder, pode ser mais util desacelerar o ritmo da decisao.";
+      return "Antes de responder, pode ser mais útil desacelerar o ritmo da decisão.";
 
     case "duvida":
-      return "Definir um criterio claro tende a tornar a escolha mais simples.";
+      return "Definir um critério claro tende a tornar a escolha mais simples.";
 
     case "travamento":
       return "Um primeiro passo menor pode ser suficiente para iniciar movimento.";
@@ -350,10 +372,10 @@ function buildNavrosReadingDirection(
       return "Ganhar um pouco mais de clareza antes de agir tende a evitar desalinhamento.";
 
     case "desalinhamento":
-      return "Reconhecer o que ja nao faz sentido pode reorganizar o caminho.";
+      return "Reconhecer o que já não faz sentido pode reorganizar o caminho.";
 
     case "indefinicao":
-      return "Observar mais um pouco pode permitir que a direcao apareca com mais nitidez.";
+      return "Observar mais um pouco pode permitir que a direção apareça com mais nitidez.";
 
     default:
       return "Vale observar antes de tentar resolver imediatamente.";
@@ -368,11 +390,11 @@ function buildNavrosOrientationAction(
   const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
 
   if (normalizedState === "sobrecarga") {
-    return "devolva prioridade apenas ao que realmente pede espaco agora, em vez de sustentar tudo no mesmo nivel";
+    return "devolva prioridade apenas ao que realmente pede espaço agora, em vez de sustentar tudo no mesmo nível";
   }
 
   if (normalizedState === "estagnacao") {
-    return "de um primeiro passo pequeno, sem tentar resolver tudo ao mesmo tempo";
+    return "dê um primeiro passo pequeno, sem tentar resolver tudo ao mesmo tempo";
   }
 
   if (normalizedState === "indefinicao") {
@@ -381,13 +403,13 @@ function buildNavrosOrientationAction(
 
   switch (normalizedFeeling) {
     case "confusao":
-      return "reduza as opcoes ao que realmente importa antes de decidir";
+      return "reduza as opções ao que realmente importa antes de decidir";
 
     case "pressao":
       return "evite responder imediatamente ao que parece urgente";
 
     case "duvida":
-      return "defina um criterio simples antes de decidir";
+      return "defina um critério simples antes de decidir";
 
     case "travamento":
       return "comece por um passo pequeno, sem tentar resolver tudo de uma vez";
@@ -396,13 +418,13 @@ function buildNavrosOrientationAction(
       return "reserve alguns minutos apenas para observar antes de agir";
 
     case "desalinhamento":
-      return "reconheca o que ja nao faz sentido sustentar";
+      return "reconheça o que já não faz sentido sustentar";
 
     case "indefinicao":
       return "observe mais um pouco antes de tentar chegar a uma resposta";
 
     default:
-      return "observe melhor o que esta acontecendo antes de responder";
+      return "observe melhor o que está acontecendo antes de responder";
   }
 }
 
@@ -411,28 +433,28 @@ function buildNavrosMovementLine(feeling: string): string {
 
   switch (normalizedFeeling) {
     case "confusao":
-      return "O proximo passo e ganhar mais clareza antes de decidir.";
+      return "O próximo passo é ganhar mais clareza antes de decidir.";
 
     case "pressao":
-      return "O proximo passo e reduzir a urgencia antes de responder.";
+      return "O próximo passo é reduzir a urgência antes de responder.";
 
     case "duvida":
-      return "O proximo passo e definir um criterio antes de escolher.";
+      return "O próximo passo é definir um critério antes de escolher.";
 
     case "travamento":
-      return "O proximo passo e iniciar um movimento pequeno e possivel.";
+      return "O próximo passo é iniciar um movimento pequeno e possível.";
 
     case "ansiedade":
-      return "O proximo passo e ganhar um pouco mais de estabilidade antes de agir.";
+      return "O próximo passo é ganhar um pouco mais de estabilidade antes de agir.";
 
     case "desalinhamento":
-      return "O proximo passo e reorganizar o que ja nao faz sentido.";
+      return "O próximo passo é reorganizar o que já não faz sentido.";
 
     case "indefinicao":
-      return "O proximo passo e observar mais antes de avancar.";
+      return "O próximo passo é observar mais antes de avançar.";
 
     default:
-      return "O proximo passo e observar melhor antes de responder.";
+      return "O próximo passo é observar melhor antes de responder.";
   }
 }
 
@@ -565,7 +587,7 @@ export function buildNavrosReadingCopy(
 export function buildNavrosOrientationCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return `Nas proximas 24 horas, ${buildNavrosOrientationAction(
+  return `Nas próximas 24 horas, ${buildNavrosOrientationAction(
     answers.state,
     answers.feeling,
   )}.`;
@@ -578,5 +600,5 @@ export function buildNavrosMovementCopy(
 
   return `${buildNavrosMovementLine(answers.feeling)}
 
-Voce esta entrando em uma fase de ${agent}.`;
+Você está entrando em uma fase de ${agent}.`;
 }

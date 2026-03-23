@@ -4,9 +4,11 @@ import {
   buildNavrosMovementCopy,
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
+  navrosAreaLabels,
   navrosSuggestedAreas,
   navrosSuggestedStates,
   navrosSuggestedFeelings,
+  navrosStateLabels,
   normalizeNavrosReadingFeeling,
   resolveNextAgentFromAnswers,
   type NavrosAgentId,
@@ -61,10 +63,10 @@ function EntryStep({ onNext }: { onNext: () => void }) {
       <p className="operational-step__label">Entrada</p>
       <div className="operational-step__copy-group">
         <p className="operational-step__quote">
-          Voce nao esta aqui para aprender algo novo.
+          Você não está aqui para aprender algo novo.
         </p>
         <p className="operational-step__quote">
-          Voce esta aqui para reconhecer onde ja esta.
+          Você está aqui para reconhecer onde já está.
         </p>
       </div>
       <div className="operational-step__actions">
@@ -106,9 +108,9 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
     <div className="operational-step">
       <p className="operational-step__label">Foco</p>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">Area</p>
+        <p className="operational-step__group-label">Área</p>
         <p className="operational-step__prompt">
-          Qual area esta mais presente agora?
+          Qual área está mais presente agora?
         </p>
         <div className="operational-step__chips">
           {navrosSuggestedAreas.map((suggestedArea) => {
@@ -125,7 +127,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 )}
                 onClick={() => setArea(suggestedArea)}
               >
-                {suggestedArea}
+                {navrosAreaLabels[suggestedArea]}
               </button>
             );
           })}
@@ -151,16 +153,16 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 )}
                 onClick={() => setState(suggestedState)}
               >
-                {suggestedState}
+                {navrosStateLabels[suggestedState]}
               </button>
             );
           })}
         </div>
       </div>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">Sensacao</p>
+        <p className="operational-step__group-label">Sensação</p>
         <p className="operational-step__prompt">
-          Qual dessas sensacoes esta mais proxima agora?
+          Qual dessas sensações está mais próxima agora?
         </p>
         <div className="operational-step__chips">
           {navrosSuggestedFeelings.map((suggestedFeeling) => {
@@ -245,7 +247,7 @@ function OrientationStep({
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Orientacao</p>
+      <p className="operational-step__label">Orientação</p>
       <p className="operational-step__copy">
         {buildNavrosOrientationCopy(answers)}
       </p>
@@ -260,7 +262,7 @@ function OrientationStep({
           </button>
         ) : (
           <span className="operational-step__pause">
-            Deixe essa orientacao pousar por um instante.
+            Deixe essa orientação pousar por um instante.
           </span>
         )}
       </div>
@@ -305,7 +307,7 @@ function ClosureStep({ onRestart }: { onRestart: () => void }) {
     <div className="operational-step">
       <p className="operational-step__label">Fechamento</p>
       <p className="operational-step__copy">
-        Voce nao esta mais no mesmo ponto de quando entrou.
+        Você não está mais no mesmo ponto de quando entrou.
       </p>
       <div className="operational-step__actions">
         <button
@@ -313,7 +315,7 @@ function ClosureStep({ onRestart }: { onRestart: () => void }) {
           className="operational-step__action"
           onClick={onRestart}
         >
-          Recomecar travessia
+          Recomeçar travessia
         </button>
       </div>
     </div>
