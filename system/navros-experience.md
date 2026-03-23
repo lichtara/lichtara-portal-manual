@@ -244,7 +244,7 @@ Composicao atual do `OrientationStep`:
 
 - nao opera como conselho
 - continua diretamente a leitura
-- transforma `state + sensacao + area` em uma acao minima coerente para as proximas 24 horas
+- transforma `state + sensacao` em uma acao minima coerente para as proximas 24 horas
 - remove a area da frase quando ela pesa mais do que ajuda a fluidez
 - segura o avancar por um instante antes de liberar o botao
 

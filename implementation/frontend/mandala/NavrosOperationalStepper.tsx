@@ -5,6 +5,7 @@ import {
   navrosOperationalSteps,
   type NavrosOperationalAnswers,
 } from "./navrosOperationalJourney";
+import { navrosOperationalStepperCopy } from "./navrosOperationalCopy";
 import { MANDALA_JOURNEY_UI_CSS, journeyCx } from "./journeyUI";
 import { NavrosOperationalScreen } from "./NavrosOperationalScreen";
 
@@ -15,8 +16,8 @@ export type NavrosOperationalStepperProps = {
 };
 
 export function NavrosOperationalStepper({
-  title = "Jornada NAVROS - V1 Operacional",
-  intro = "Fluxo continuo, sem bifurcacoes e sem necessidade de explicacao externa.",
+  title = navrosOperationalStepperCopy.title,
+  intro = navrosOperationalStepperCopy.intro,
   className,
 }: NavrosOperationalStepperProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
@@ -25,6 +26,9 @@ export function NavrosOperationalStepper({
   );
 
   const currentStep = navrosOperationalSteps[currentStepIndex];
+  const isEntryStep = currentStep?.id === "entry";
+  const shouldShowHeader =
+    !isEntryStep && Boolean(navrosOperationalStepperCopy.eyebrow || title || intro);
 
   function next() {
     setCurrentStepIndex((previousIndex) => {
@@ -47,30 +51,52 @@ export function NavrosOperationalStepper({
   }
 
   return (
-    <section className={journeyCx("operational-journey", className)}>
+    <section
+      className={journeyCx(
+        "operational-journey",
+        isEntryStep && "operational-journey--entry",
+        className,
+      )}
+    >
       <style>{MANDALA_JOURNEY_UI_CSS}</style>
 
-      <header className="operational-journey__header">
-        <p className="operational-journey__eyebrow">Travessia</p>
-        <h2 className="operational-journey__title">{title}</h2>
-        <p className="operational-journey__intro">{intro}</p>
-      </header>
+      {shouldShowHeader ? (
+        <header className="operational-journey__header">
+          {navrosOperationalStepperCopy.eyebrow ? (
+            <p className="operational-journey__eyebrow">
+              {navrosOperationalStepperCopy.eyebrow}
+            </p>
+          ) : null}
+          {title ? <h2 className="operational-journey__title">{title}</h2> : null}
+          {intro ? <p className="operational-journey__intro">{intro}</p> : null}
+        </header>
+      ) : null}
 
-      <div className="operational-journey__progress">
-        <p className="operational-journey__count">
-          Etapa {currentStepIndex + 1} de {navrosOperationalSteps.length}
-        </p>
-        <div className="operational-journey__bar" aria-hidden="true">
-          <span
-            className="operational-journey__bar-fill"
-            style={{
-              width: `${((currentStepIndex + 1) / navrosOperationalSteps.length) * 100}%`,
-            }}
-          />
+      {!isEntryStep ? (
+        <div className="operational-journey__progress">
+          <p className="operational-journey__count">
+            {navrosOperationalStepperCopy.progress(
+              currentStepIndex + 1,
+              navrosOperationalSteps.length,
+            )}
+          </p>
+          <div className="operational-journey__bar" aria-hidden="true">
+            <span
+              className="operational-journey__bar-fill"
+              style={{
+                width: `${((currentStepIndex + 1) / navrosOperationalSteps.length) * 100}%`,
+              }}
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <div className="operational-journey__panel">
+      <div
+        className={journeyCx(
+          "operational-journey__panel",
+          isEntryStep && "operational-journey__panel--entry",
+        )}
+      >
         <NavrosOperationalScreen
           step={currentStep?.id ?? "entry"}
           answers={answers}

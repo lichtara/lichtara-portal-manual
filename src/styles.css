@@ -1,8 +1,13 @@
 :root {
-  color: #1f1b16;
+  --lichtara-blue: #0a1a2f;
+  --lichtara-gold: #d4af37;
+  --lichtara-silver: #c9d2d9;
+  --lichtara-surface: #f5f6f7;
+  --lichtara-ink: #000814;
+  color: var(--lichtara-ink);
   background:
-    radial-gradient(circle at top, rgba(239, 231, 214, 0.9), rgba(247, 243, 235, 0.96) 42%, #f3ede2 100%);
-  font-family: "Georgia", "Times New Roman", serif;
+    radial-gradient(circle at top, rgba(24, 44, 74, 0.96), rgba(10, 26, 47, 0.98) 40%, #000814 100%);
+  font-family: "Inter", system-ui, sans-serif;
   line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -53,7 +58,7 @@ select {
 }
 
 .hero__eyebrow {
-  color: #7f7668;
+  color: var(--lichtara-silver);
   font-size: 12px;
   letter-spacing: 0.16em;
   margin: 0;
@@ -61,25 +66,27 @@ select {
 }
 
 .hero__title {
+  color: var(--lichtara-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(2.25rem, 4vw, 4.5rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.95;
   margin: 0;
   max-width: 12ch;
 }
 
 .hero__copy {
-  color: #5e564a;
+  color: var(--lichtara-silver);
   font-size: 1rem;
   margin: 0;
   max-width: 64ch;
 }
 
 .portal-entry-gate {
-  background: rgba(255, 252, 246, 0.86);
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  background: linear-gradient(180deg, rgba(245, 246, 247, 0.96), rgba(236, 240, 244, 0.92));
+  border: 1px solid rgba(201, 210, 217, 0.3);
   border-radius: 32px;
-  box-shadow: 0 20px 48px rgba(58, 53, 44, 0.07);
+  box-shadow: 0 22px 52px rgba(0, 8, 20, 0.24);
   display: grid;
   gap: 16px;
   margin: 0 auto;
@@ -88,7 +95,7 @@ select {
 }
 
 .portal-entry-gate__eyebrow {
-  color: #7f7668;
+  color: var(--lichtara-blue);
   font-size: 12px;
   letter-spacing: 0.16em;
   margin: 0;
@@ -96,9 +103,10 @@ select {
 }
 
 .portal-entry-gate__title {
-  color: #1f1b16;
+  color: var(--lichtara-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
   margin: 0;
   max-width: 14ch;
@@ -110,14 +118,14 @@ select {
 }
 
 .portal-entry-gate__line {
-  color: #2a251e;
+  color: var(--lichtara-ink);
   font-size: 1.02rem;
   line-height: 1.65;
   margin: 0;
 }
 
 .portal-entry-gate__helper {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.74);
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
@@ -126,11 +134,12 @@ select {
 
 .portal-entry-gate__action {
   appearance: none;
-  background: #1f1b16;
-  border: none;
+  background: var(--lichtara-gold);
+  border: 1px solid rgba(212, 175, 55, 0.56);
   border-radius: 999px;
-  color: #f8f3ea;
+  color: var(--lichtara-blue);
   cursor: pointer;
+  font-weight: 600;
   justify-self: start;
   padding: 12px 18px;
   transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
@@ -138,16 +147,16 @@ select {
 
 .portal-entry-gate__action:hover,
 .portal-entry-gate__action:focus-visible {
-  box-shadow: 0 10px 20px rgba(31, 27, 22, 0.16);
+  box-shadow: 0 10px 24px rgba(212, 175, 55, 0.22);
   outline: none;
   transform: translateY(-1px);
 }
 
 .inspector {
-  background: rgba(255, 252, 246, 0.88);
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  background: rgba(245, 246, 247, 0.9);
+  border: 1px solid rgba(201, 210, 217, 0.26);
   border-radius: 24px;
-  box-shadow: 0 18px 40px rgba(58, 53, 44, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 8, 20, 0.18);
   display: grid;
   gap: 18px;
   padding: 20px;
@@ -161,7 +170,7 @@ select {
 }
 
 .inspector__eyebrow {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.72);
   font-size: 11px;
   letter-spacing: 0.14em;
   margin: 0;
@@ -169,7 +178,7 @@ select {
 }
 
 .inspector__copy {
-  color: #2a251e;
+  color: var(--lichtara-ink);
   font-size: 0.96rem;
   line-height: 1.6;
   margin: 0;
@@ -184,10 +193,10 @@ select {
 }
 
 .inspector__event {
-  background: rgba(247, 243, 235, 0.92);
-  border: 1px solid rgba(58, 53, 44, 0.08);
+  background: rgba(201, 210, 217, 0.18);
+  border: 1px solid rgba(201, 210, 217, 0.24);
   border-radius: 14px;
-  color: #5e564a;
+  color: rgba(0, 8, 20, 0.78);
   font-size: 0.92rem;
   line-height: 1.5;
   padding: 10px 12px;

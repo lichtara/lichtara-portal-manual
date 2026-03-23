@@ -4,7 +4,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .journey-screen {
   display: grid;
   gap: 24px;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .journey-screen__header {
@@ -13,7 +13,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-screen__eyebrow {
-  color: #7f7668;
+  color: var(--lichtara-silver);
   font-size: 12px;
   letter-spacing: 0.14em;
   margin: 0;
@@ -21,15 +21,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-screen__title {
-  color: #1f1b16;
+  color: var(--lichtara-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   margin: 0;
 }
 
 .journey-screen__intro {
-  color: #7f7668;
+  color: var(--lichtara-silver);
   font-size: 16px;
   line-height: 1.6;
   margin: 0;
@@ -42,7 +43,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-field__label {
-  color: #7f7668;
+  color: var(--lichtara-silver);
   font-size: 12px;
   letter-spacing: 0.14em;
   margin: 0;
@@ -57,10 +58,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-field__button {
   appearance: none;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  background: rgba(245, 246, 247, 0.9);
+  border: 1px solid rgba(201, 210, 217, 0.28);
   border-radius: 18px;
-  color: #1f1b16;
+  color: var(--lichtara-ink);
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
@@ -73,15 +74,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-field__button:hover,
 .journey-field__button:focus-visible {
-  border-color: rgba(58, 53, 44, 0.3);
-  box-shadow: 0 10px 24px rgba(58, 53, 44, 0.08);
+  border-color: rgba(212, 175, 55, 0.38);
+  box-shadow: 0 10px 24px rgba(0, 8, 20, 0.18);
   outline: none;
   transform: translateY(-1px);
 }
 
 .journey-field__button--active {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(58, 53, 44, 0.38);
+  background: rgba(10, 26, 47, 0.98);
+  border-color: rgba(212, 175, 55, 0.64);
+  color: var(--lichtara-gold);
 }
 
 .journey-field__button-title {
@@ -90,13 +92,17 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-field__button-copy {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.72);
   font-size: 13px;
   line-height: 1.45;
 }
 
+.journey-field__button--active .journey-field__button-copy {
+  color: rgba(201, 210, 217, 0.82);
+}
+
 .journey-field__climate {
-  color: #5e564a;
+  color: rgba(245, 246, 247, 0.84);
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
@@ -105,7 +111,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-field__legend {
-  color: #7f7668;
+  color: rgba(201, 210, 217, 0.72);
   font-size: 13px;
   line-height: 1.55;
   margin: 0;
@@ -125,10 +131,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-selector__button {
   appearance: none;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(58, 53, 44, 0.14);
+  background: rgba(245, 246, 247, 0.92);
+  border: 1px solid rgba(201, 210, 217, 0.24);
   border-radius: 20px;
-  color: #1f1b16;
+  color: var(--lichtara-ink);
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
@@ -141,15 +147,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-selector__button:hover,
 .journey-selector__button:focus-visible {
-  border-color: rgba(58, 53, 44, 0.34);
-  box-shadow: 0 12px 28px rgba(58, 53, 44, 0.08);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 28px rgba(0, 8, 20, 0.16);
   outline: none;
   transform: translateY(-1px);
 }
 
 .journey-selector__button--active {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(58, 53, 44, 0.42);
+  background: rgba(10, 26, 47, 0.98);
+  border-color: rgba(212, 175, 55, 0.64);
+  color: var(--lichtara-gold);
 }
 
 .journey-selector__label {
@@ -158,9 +165,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-selector__copy {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.72);
   font-size: 14px;
   line-height: 1.45;
+}
+
+.journey-selector__button--active .journey-selector__copy {
+  color: rgba(201, 210, 217, 0.82);
 }
 
 .journey-screen__grid {
@@ -170,10 +181,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-stepper {
-  background: linear-gradient(180deg, rgba(250, 247, 240, 0.98), rgba(247, 243, 235, 0.98));
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  background: linear-gradient(180deg, rgba(245, 246, 247, 0.98), rgba(234, 239, 243, 0.96));
+  border: 1px solid rgba(201, 210, 217, 0.26);
   border-radius: 28px;
-  box-shadow: 0 18px 40px rgba(58, 53, 44, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 8, 20, 0.18);
   display: grid;
   gap: 20px;
   padding: 24px;
@@ -185,7 +196,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-stepper__count {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.68);
   font-size: 12px;
   letter-spacing: 0.12em;
   margin: 0;
@@ -193,15 +204,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-stepper__title {
-  color: #1f1b16;
+  color: var(--lichtara-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   margin: 0;
 }
 
 .journey-stepper__agent {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.74);
   font-size: 15px;
   line-height: 1.5;
   margin: 0;
@@ -211,7 +223,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .journey-stepper__question,
 .journey-stepper__completion,
 .journey-stepper__path {
-  color: #7f7668;
+  color: rgba(0, 8, 20, 0.76);
   font-size: 15px;
   line-height: 1.65;
   margin: 0;
@@ -220,7 +232,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .journey-stepper__question strong,
 .journey-stepper__completion strong,
 .journey-stepper__copy strong {
-  color: #1f1b16;
+  color: var(--lichtara-ink);
   font-weight: 600;
 }
 
@@ -236,9 +248,9 @@ export const MANDALA_JOURNEY_UI_CSS = `
   align-items: center;
   appearance: none;
   background: transparent;
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  border: 1px solid rgba(201, 210, 217, 0.24);
   border-radius: 16px;
-  color: #1f1b16;
+  color: var(--lichtara-ink);
   cursor: pointer;
   display: grid;
   gap: 2px;
@@ -250,22 +262,23 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-stepper__step-button:hover,
 .journey-stepper__step-button:focus-visible {
-  background: rgba(255, 255, 255, 0.58);
-  border-color: rgba(58, 53, 44, 0.28);
+  background: rgba(201, 210, 217, 0.14);
+  border-color: rgba(212, 175, 55, 0.38);
   outline: none;
 }
 
 .journey-stepper__step-button--active {
-  background: rgba(255, 255, 255, 0.86);
-  border-color: rgba(58, 53, 44, 0.42);
+  background: rgba(10, 26, 47, 0.98);
+  border-color: rgba(212, 175, 55, 0.64);
+  color: var(--lichtara-gold);
 }
 
 .journey-stepper__step-button--done {
-  border-color: rgba(58, 53, 44, 0.22);
+  border-color: rgba(201, 210, 217, 0.38);
 }
 
 .journey-stepper__step-order {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.6);
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -277,7 +290,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .journey-stepper__step-experience {
-  color: #7f7668;
+  color: rgba(0, 8, 20, 0.62);
   font-size: 13px;
   line-height: 1.4;
 }
@@ -290,10 +303,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-stepper__action {
   appearance: none;
-  background: transparent;
-  border: 1px solid rgba(58, 53, 44, 0.16);
+  background: rgba(245, 246, 247, 0.92);
+  border: 1px solid rgba(201, 210, 217, 0.3);
   border-radius: 999px;
-  color: #1f1b16;
+  color: var(--lichtara-blue);
   cursor: pointer;
   padding: 10px 14px;
   transition: background 180ms ease, border-color 180ms ease;
@@ -301,8 +314,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-stepper__action:hover,
 .journey-stepper__action:focus-visible {
-  background: rgba(255, 255, 255, 0.62);
-  border-color: rgba(58, 53, 44, 0.36);
+  background: rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.5);
   outline: none;
 }
 
@@ -313,14 +326,21 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .journey-stepper__action--quiet {
   background: transparent;
-  border-color: rgba(58, 53, 44, 0.1);
-  color: #7f7668;
+  border-color: rgba(201, 210, 217, 0.18);
+  color: rgba(201, 210, 217, 0.82);
 }
 
 .operational-journey {
   display: grid;
   gap: 24px;
+  justify-self: center;
   max-width: 860px;
+  width: min(100%, 860px);
+}
+
+.operational-journey--entry {
+  align-content: center;
+  min-height: calc(100vh - 112px);
 }
 
 .operational-journey__header {
@@ -331,7 +351,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-journey__eyebrow,
 .operational-journey__count,
 .operational-step__label {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.66);
   font-size: 12px;
   letter-spacing: 0.14em;
   margin: 0;
@@ -339,15 +359,16 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey__title {
-  color: #1f1b16;
+  color: var(--lichtara-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.1;
   margin: 0;
 }
 
 .operational-journey__intro {
-  color: #5e564a;
+  color: rgba(0, 8, 20, 0.74);
   font-size: 16px;
   line-height: 1.6;
   margin: 0;
@@ -360,7 +381,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey__bar {
-  background: rgba(58, 53, 44, 0.08);
+  background: rgba(201, 210, 217, 0.34);
   border-radius: 999px;
   height: 8px;
   overflow: hidden;
@@ -368,7 +389,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey__bar-fill {
-  background: #1f1b16;
+  background: var(--lichtara-gold);
   border-radius: 999px;
   display: block;
   height: 100%;
@@ -376,16 +397,55 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey__panel {
-  background: linear-gradient(180deg, rgba(250, 247, 240, 0.98), rgba(247, 243, 235, 0.98));
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  background: linear-gradient(180deg, rgba(245, 246, 247, 0.98), rgba(232, 238, 243, 0.96));
+  border: 1px solid rgba(201, 210, 217, 0.28);
   border-radius: 28px;
-  box-shadow: 0 18px 40px rgba(58, 53, 44, 0.06);
+  box-shadow: 0 20px 44px rgba(0, 8, 20, 0.2);
   padding: 28px;
+}
+
+.operational-journey__panel--entry {
+  align-items: center;
+  display: grid;
+  min-height: clamp(360px, 54vh, 520px);
 }
 
 .operational-step {
   display: grid;
   gap: 18px;
+}
+
+.operational-step--entry {
+  align-content: center;
+  gap: 22px;
+  justify-items: start;
+  min-height: clamp(300px, 44vh, 420px);
+  margin: 0 auto;
+  max-width: 560px;
+  width: min(100%, 560px);
+}
+
+.operational-step--entry .operational-step__copy-group {
+  gap: 18px;
+  max-width: 40ch;
+}
+
+.operational-step--entry .operational-step__label,
+.operational-step--entry .operational-step__actions,
+.operational-step--entry .operational-step__tag {
+  width: 100%;
+}
+
+.operational-step--entry .operational-step__tag {
+  color: rgba(10, 26, 47, 0.58);
+  font-size: 13px;
+  margin-top: 6px;
+  max-width: 40ch;
+}
+
+.operational-step--entry .operational-step__action {
+  min-height: 54px;
+  padding: 14px 26px;
 }
 
 .operational-step__copy-group,
@@ -395,16 +455,20 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__group {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(201, 210, 217, 0.32);
+  border-radius: 22px;
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  padding: 18px 18px 20px;
 }
 
 .operational-step__group + .operational-step__group {
-  margin-top: 10px;
+  margin-top: 18px;
 }
 
 .operational-step__group-label {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.66);
   font-size: 12px;
   letter-spacing: 0.14em;
   margin: 0;
@@ -415,18 +479,26 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__copy,
 .operational-step__prompt,
 .operational-step__tag {
-  color: #2a251e;
+  color: var(--lichtara-ink);
   font-size: 18px;
   line-height: 1.65;
   margin: 0;
 }
 
 .operational-step__quote {
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 22px;
+  font-weight: 600;
+}
+
+.operational-step__prompt {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .operational-step__tag {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.72);
   font-size: 14px;
   line-height: 1.55;
 }
@@ -441,7 +513,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .mandala-mini__ring {
-  border: 1px solid rgba(58, 53, 44, 0.12);
+  border: 1px solid rgba(201, 210, 217, 0.28);
   border-radius: 50%;
   height: 180px;
   position: absolute;
@@ -449,7 +521,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .mandala-mini__core {
-  background: radial-gradient(circle, rgba(58, 53, 44, 0.16), rgba(58, 53, 44, 0.04));
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.24), rgba(10, 26, 47, 0.1));
   border-radius: 50%;
   height: 18px;
   position: absolute;
@@ -458,7 +530,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .mandala-mini__agent {
   align-items: center;
-  color: #a49a8b;
+  color: rgba(10, 26, 47, 0.32);
   display: grid;
   gap: 6px;
   justify-items: center;
@@ -470,12 +542,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .mandala-mini__agent--past {
-  color: #776f63;
+  color: rgba(10, 26, 47, 0.56);
   opacity: 0.36;
 }
 
 .mandala-mini__agent--active {
-  color: #1f1b16;
+  color: var(--lichtara-gold);
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.12);
 }
@@ -483,14 +555,14 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .mandala-mini__dot {
   background: currentColor;
   border-radius: 50%;
-  box-shadow: 0 0 0 6px rgba(58, 53, 44, 0.04);
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.08);
   display: block;
   height: 10px;
   width: 10px;
 }
 
 .mandala-mini__agent--active .mandala-mini__dot {
-  box-shadow: 0 0 0 10px rgba(58, 53, 44, 0.08);
+  box-shadow: 0 0 0 10px rgba(212, 175, 55, 0.16);
 }
 
 .mandala-mini__label {
@@ -502,23 +574,48 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 
 .operational-step__chip {
   appearance: none;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(58, 53, 44, 0.12);
-  border-radius: 999px;
-  color: #5e564a;
+  align-items: flex-start;
+  background: rgba(245, 246, 247, 0.92);
+  border: 1px solid rgba(201, 210, 217, 0.34);
+  border-radius: 18px;
+  color: var(--lichtara-blue);
   cursor: pointer;
-  padding: 8px 12px;
+  display: inline-grid;
+  gap: 4px;
+  padding: 10px 14px;
+  text-align: left;
 }
 
 .operational-step__chip--active {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(58, 53, 44, 0.32);
-  color: #1f1b16;
+  background: rgba(10, 26, 47, 0.98);
+  border-color: rgba(212, 175, 55, 0.72);
+  color: var(--lichtara-gold);
+}
+
+.operational-step__chip--contextual {
+  min-width: 188px;
+}
+
+.operational-step__chip-label {
+  color: inherit;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.operational-step__chip-context {
+  color: rgba(10, 26, 47, 0.68);
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 18ch;
+}
+
+.operational-step__chip--active .operational-step__chip-context {
+  color: rgba(201, 210, 217, 0.82);
 }
 
 .operational-step__actions {
@@ -529,18 +626,19 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__action {
   appearance: none;
-  background: #1f1b16;
-  border: none;
+  background: var(--lichtara-gold);
+  border: 1px solid rgba(212, 175, 55, 0.58);
   border-radius: 999px;
-  color: #f8f3ea;
+  color: var(--lichtara-blue);
   cursor: pointer;
+  font-weight: 600;
   padding: 11px 16px;
   transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
 .operational-step__action:hover,
 .operational-step__action:focus-visible {
-  box-shadow: 0 10px 20px rgba(31, 27, 22, 0.14);
+  box-shadow: 0 10px 24px rgba(212, 175, 55, 0.22);
   outline: none;
   transform: translateY(-1px);
 }
@@ -551,7 +649,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__pause {
-  color: #7f7668;
+  color: rgba(10, 26, 47, 0.72);
   font-size: 14px;
   line-height: 1.55;
 }
@@ -559,6 +657,116 @@ export const MANDALA_JOURNEY_UI_CSS = `
 @media (max-width: 980px) {
   .journey-screen__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .operational-journey {
+    gap: 18px;
+    max-width: 100%;
+  }
+
+  .operational-journey--entry {
+    min-height: calc(100vh - 64px);
+  }
+
+  .operational-journey__panel {
+    border-radius: 22px;
+    padding: 18px 16px;
+  }
+
+  .operational-journey__panel--entry {
+    min-height: clamp(320px, 52vh, 460px);
+  }
+
+  .operational-step {
+    gap: 16px;
+  }
+
+  .operational-step--entry {
+    min-height: auto;
+    max-width: none;
+    width: 100%;
+  }
+
+  .operational-step--entry .operational-step__copy-group,
+  .operational-step--entry .operational-step__tag {
+    max-width: none;
+  }
+
+  .operational-step__group {
+    border-radius: 18px;
+    gap: 12px;
+    padding: 16px 14px 18px;
+  }
+
+  .operational-step__group + .operational-step__group {
+    margin-top: 14px;
+  }
+
+  .operational-step__quote {
+    font-size: 19px;
+    line-height: 1.45;
+  }
+
+  .operational-step__prompt {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .operational-step__copy,
+  .operational-step__tag {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .operational-journey__progress {
+    gap: 8px;
+  }
+
+  .operational-journey__bar {
+    width: 100%;
+  }
+
+  .operational-step__chips {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .operational-step__chip,
+  .operational-step__chip--contextual {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .operational-step__actions {
+    width: 100%;
+  }
+
+  .operational-step__action {
+    justify-content: center;
+    min-height: 48px;
+    width: 100%;
+  }
+
+  .mandala-mini {
+    min-height: 180px;
+  }
+
+  .mandala-mini__ring {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 420px) {
+  .operational-step__chips {
+    grid-template-columns: 1fr;
+  }
+
+  .operational-step__chip-context {
+    max-width: none;
   }
 }
 `;

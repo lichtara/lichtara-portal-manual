@@ -65,6 +65,7 @@ Leitura de rigor:
 ### Implementacao
 
 - [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+- [implementation/notas-de-teste-v1.md](implementation/notas-de-teste-v1.md)
 - [implementation/frontend/mandala/MandalaCanvas.tsx](implementation/frontend/mandala/MandalaCanvas.tsx)
 - [implementation/frontend/mandala/mandalaJourneys.ts](implementation/frontend/mandala/mandalaJourneys.ts)
 - [implementation/frontend/mandala/JourneySelector.tsx](implementation/frontend/mandala/JourneySelector.tsx)
@@ -72,6 +73,7 @@ Leitura de rigor:
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
 - [implementation/frontend/mandala/NavrosOperationalStepper.tsx](implementation/frontend/mandala/NavrosOperationalStepper.tsx)
 - [implementation/frontend/mandala/NavrosOperationalScreen.tsx](implementation/frontend/mandala/NavrosOperationalScreen.tsx)
+- [implementation/frontend/mandala/navrosOperationalCopy.ts](implementation/frontend/mandala/navrosOperationalCopy.ts)
 - [implementation/frontend/mandala/navrosOperationalJourney.ts](implementation/frontend/mandala/navrosOperationalJourney.ts)
 - [implementation/frontend/mandala/MandalaMini.tsx](implementation/frontend/mandala/MandalaMini.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)
