@@ -63,7 +63,7 @@ export function NavrosOperationalScreen({
 
 function EntryStep({ onNext }: { onNext: () => void }) {
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--entry">
       <p className="operational-step__label">
         {navrosOperationalScreenCopy.entry.label}
       </p>

@@ -51,7 +51,13 @@ export function NavrosOperationalStepper({
   }
 
   return (
-    <section className={journeyCx("operational-journey", className)}>
+    <section
+      className={journeyCx(
+        "operational-journey",
+        isEntryStep && "operational-journey--entry",
+        className,
+      )}
+    >
       <style>{MANDALA_JOURNEY_UI_CSS}</style>
 
       {shouldShowHeader ? (
@@ -85,7 +91,12 @@ export function NavrosOperationalStepper({
         </div>
       ) : null}
 
-      <div className="operational-journey__panel">
+      <div
+        className={journeyCx(
+          "operational-journey__panel",
+          isEntryStep && "operational-journey__panel--entry",
+        )}
+      >
         <NavrosOperationalScreen
           step={currentStep?.id ?? "entry"}
           answers={answers}

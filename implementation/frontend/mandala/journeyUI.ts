@@ -333,7 +333,14 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-journey {
   display: grid;
   gap: 24px;
+  justify-self: center;
   max-width: 860px;
+  width: min(100%, 860px);
+}
+
+.operational-journey--entry {
+  align-content: center;
+  min-height: calc(100vh - 112px);
 }
 
 .operational-journey__header {
@@ -397,9 +404,29 @@ export const MANDALA_JOURNEY_UI_CSS = `
   padding: 28px;
 }
 
+.operational-journey__panel--entry {
+  align-items: center;
+  display: grid;
+  min-height: clamp(360px, 54vh, 520px);
+}
+
 .operational-step {
   display: grid;
   gap: 18px;
+}
+
+.operational-step--entry {
+  align-content: center;
+  min-height: clamp(300px, 44vh, 420px);
+}
+
+.operational-step--entry .operational-step__copy-group {
+  gap: 18px;
+  max-width: 28ch;
+}
+
+.operational-step--entry .operational-step__tag {
+  max-width: 32ch;
 }
 
 .operational-step__copy-group,
@@ -620,13 +647,30 @@ export const MANDALA_JOURNEY_UI_CSS = `
     max-width: 100%;
   }
 
+  .operational-journey--entry {
+    min-height: calc(100vh - 64px);
+  }
+
   .operational-journey__panel {
     border-radius: 22px;
     padding: 18px 16px;
   }
 
+  .operational-journey__panel--entry {
+    min-height: clamp(320px, 52vh, 460px);
+  }
+
   .operational-step {
     gap: 16px;
+  }
+
+  .operational-step--entry {
+    min-height: auto;
+  }
+
+  .operational-step--entry .operational-step__copy-group,
+  .operational-step--entry .operational-step__tag {
+    max-width: none;
   }
 
   .operational-step__group {
