@@ -170,8 +170,8 @@ No momento, o repositorio contem:
 - expectation gate inicial antes da mandala para orientar a primeira entrada
 - reset suave de jornada para limpar progresso e trajetoria local sem mexer na camada agregada
 - micro-observatorio mais inteligivel como `Campo coletivo`, com legenda curta e periodos legiveis
-- traducao operacional da Jornada NAVROS em um fluxo React direto de 7 estados
-- entrada NAVROS agora estruturada em `area + estado + sensacao + notes opcional`
+- traducao operacional da Jornada NAVROS em um fluxo React direto da V1
+- entrada NAVROS agora estruturada em `area + estado + sensacao`
 - leitura NAVROS reforcada por padroes estruturais de nomeacao, tensao e direcao
 - leitura NAVROS agora composta por ancora concreta, organizacao estrutural e abertura leve, com menos dependencia do fallback
 - `ReadingStep` agora composicional em `anchor + structure + direction`, com aderencia direta a `area + estado + sensacao`
@@ -179,6 +179,9 @@ No momento, o repositorio contem:
 - mandala minima no `MovementStep` funcionando como reflexo visual do agente ativo
 - rastro minimo na mandala operacional preservando apenas `NAVROS -> agente` como sombra curta de movimento
 - `OrientationStep` e `MovementStep` agora seguem a mesma linguagem da leitura, sem conselho generico nem metalinguagem de sistema
+- `FocusStep` agora usa apenas chips, com categorias visualmente separadas e sem duplicidade entre estado e sensacao
+- o topo da travessia agora funciona como progresso passivo, sem aparencia de clique
+- o step explicito de reconhecimento foi removido da V1 operacional
 - contrato tecnico inicial para trajetorias, memoria local e atlas agregado da mandala
 - camada inicial de arquitetura, dados e governanca
 - arquitetura minima operacional da V1 consolidada em tres camadas

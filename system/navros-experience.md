@@ -199,16 +199,9 @@ Exemplos de frase:
 
 ## Confirmacao de Leitura
 
-Depois que a bussola para, a interface deve perguntar:
+Essa camada pode existir em versoes futuras ou mais contemplativas da experiencia.
 
-> Isso faz sentido para voce?
-
-Botoes-base:
-
-- Sim
-- Refazer leitura
-
-Essa camada protege o tom nao prescritivo da experiencia: a interface propoe uma leitura, mas nao a fecha como verdade absoluta.
+Na V1 operacional atual, o step explicito de reconhecimento foi removido para preservar fluidez entre leitura, orientacao e movimento.
 
 ## Formato da Resposta
 
@@ -253,6 +246,7 @@ Composicao atual do `OrientationStep`:
 - continua diretamente a leitura
 - transforma `state + sensacao + area` em uma acao minima coerente para as proximas 24 horas
 - remove a area da frase quando ela pesa mais do que ajuda a fluidez
+- segura o avancar por um instante antes de liberar o botao
 
 Composicao atual do `MovementStep`:
 
@@ -265,7 +259,6 @@ Entrada estruturada da V1:
 - area
 - estado
 - sensacao
-- campo opcional em texto livre
 
 Leitura operacional:
 
@@ -303,8 +296,14 @@ O fallback deve existir, mas perder protagonismo. O objetivo da V1 e depender ca
 Camadas de entrada recomendadas:
 
 - areas: trabalho, saude, relacoes, financas, proposito, transicao
-- estados: inicio, pressao, mudanca, indefinicao, sobrecarga, estagnacao
-- sensacoes: confusao, pressao, duvida, travamento, ansiedade, desalinhamento, indefinicao
+- estados: inicio, sobrecarga, mudanca, instabilidade, estagnacao
+- sensacoes: confusao, duvida, ansiedade, travamento, desalinhamento
+
+Regra de interface para a V1:
+
+- pergunta -> chips
+- sem campos de texto visiveis
+- separacao visual clara entre os tres blocos
 
 ## Decisao de Continuidade
 

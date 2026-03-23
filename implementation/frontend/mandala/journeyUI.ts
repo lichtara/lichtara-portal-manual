@@ -359,30 +359,20 @@ export const MANDALA_JOURNEY_UI_CSS = `
   gap: 10px;
 }
 
-.operational-journey__steps {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.operational-journey__step {
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(58, 53, 44, 0.1);
+.operational-journey__bar {
+  background: rgba(58, 53, 44, 0.08);
   border-radius: 999px;
-  color: #7f7668;
-  font-size: 13px;
-  padding: 8px 12px;
+  height: 8px;
+  overflow: hidden;
+  width: min(320px, 100%);
 }
 
-.operational-journey__step--past {
-  border-color: rgba(58, 53, 44, 0.18);
-  color: #5e564a;
-}
-
-.operational-journey__step--active {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(58, 53, 44, 0.34);
-  color: #1f1b16;
+.operational-journey__bar-fill {
+  background: #1f1b16;
+  border-radius: 999px;
+  display: block;
+  height: 100%;
+  transition: width 240ms ease;
 }
 
 .operational-journey__panel {
@@ -399,10 +389,26 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__copy-group,
-.operational-step__field,
 .operational-step__paragraphs {
   display: grid;
   gap: 8px;
+}
+
+.operational-step__group {
+  display: grid;
+  gap: 12px;
+}
+
+.operational-step__group + .operational-step__group {
+  margin-top: 10px;
+}
+
+.operational-step__group-label {
+  color: #7f7668;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 .operational-step__quote,
@@ -493,25 +499,6 @@ export const MANDALA_JOURNEY_UI_CSS = `
   text-transform: uppercase;
 }
 
-.operational-step__input {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(58, 53, 44, 0.14);
-  border-radius: 18px;
-  color: #1f1b16;
-  min-height: 50px;
-  padding: 12px 14px;
-}
-
-.operational-step__input:focus-visible {
-  border-color: rgba(58, 53, 44, 0.34);
-  outline: none;
-}
-
-.operational-step__textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
 .operational-step__chips {
   display: flex;
   flex-wrap: wrap;
@@ -561,6 +548,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__action:disabled {
   cursor: not-allowed;
   opacity: 0.42;
+}
+
+.operational-step__pause {
+  color: #7f7668;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 @media (max-width: 980px) {

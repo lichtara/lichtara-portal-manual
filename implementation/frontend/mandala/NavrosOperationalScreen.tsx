@@ -41,9 +41,6 @@ export function NavrosOperationalScreen({
     case "reading":
       return <ReadingStep answers={answers} onNext={onNext} />;
 
-    case "recognition":
-      return <RecognitionStep onNext={onNext} />;
-
     case "orientation":
       return <OrientationStep answers={answers} onNext={onNext} />;
 
@@ -93,7 +90,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [area, setArea] = React.useState(answers.area);
   const [state, setState] = React.useState(answers.state);
   const [feeling, setFeeling] = React.useState(answers.feeling);
-  const [notes, setNotes] = React.useState(answers.notes);
 
   const canContinue = Boolean(area.trim() && state.trim() && feeling.trim());
 
@@ -102,24 +98,18 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
       return;
     }
 
-    onUpdate({ area, state, feeling, notes });
+    onUpdate({ area, state, feeling });
     onNext();
   }
 
   return (
     <div className="operational-step">
       <p className="operational-step__label">Foco</p>
-      <div className="operational-step__field">
-        <label className="operational-step__prompt" htmlFor="navros-area">
-          Qual area da sua vida esta pedindo mais atencao agora?
-        </label>
-        <input
-          id="navros-area"
-          className="operational-step__input"
-          placeholder="Ex.: trabalho, saude, relacoes, financas"
-          value={area}
-          onChange={(event) => setArea(event.target.value)}
-        />
+      <div className="operational-step__group">
+        <p className="operational-step__group-label">Area</p>
+        <p className="operational-step__prompt">
+          Qual area esta mais presente agora?
+        </p>
         <div className="operational-step__chips">
           {navrosSuggestedAreas.map((suggestedArea) => {
             const isActive =
@@ -141,10 +131,11 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
           })}
         </div>
       </div>
-      <div className="operational-step__field">
-        <label className="operational-step__prompt" htmlFor="navros-state">
+      <div className="operational-step__group">
+        <p className="operational-step__group-label">Estado</p>
+        <p className="operational-step__prompt">
           Como isso tem se apresentado?
-        </label>
+        </p>
         <div className="operational-step__chips">
           {navrosSuggestedStates.map((suggestedState) => {
             const isActive =
@@ -166,17 +157,11 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
           })}
         </div>
       </div>
-      <div className="operational-step__field">
-        <label className="operational-step__prompt" htmlFor="navros-feeling">
+      <div className="operational-step__group">
+        <p className="operational-step__group-label">Sensacao</p>
+        <p className="operational-step__prompt">
           Qual dessas sensacoes esta mais proxima agora?
-        </label>
-        <input
-          id="navros-feeling"
-          className="operational-step__input"
-          placeholder="Ex.: confusao, pressao, travamento"
-          value={feeling}
-          onChange={(event) => setFeeling(event.target.value)}
-        />
+        </p>
         <div className="operational-step__chips">
           {navrosSuggestedFeelings.map((suggestedFeeling) => {
             const isActive =
@@ -198,18 +183,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
             );
           })}
         </div>
-      </div>
-      <div className="operational-step__field">
-        <label className="operational-step__prompt" htmlFor="navros-notes">
-          Se quiser, descreva com suas palavras
-        </label>
-        <textarea
-          id="navros-notes"
-          className="operational-step__input operational-step__textarea"
-          placeholder="Opcional"
-          value={notes}
-          onChange={(event) => setNotes(event.target.value)}
-        />
       </div>
       <div className="operational-step__actions">
         <button
@@ -256,30 +229,20 @@ function ReadingStep({
   );
 }
 
-function RecognitionStep({ onNext }: { onNext: () => void }) {
-  return (
-    <div className="operational-step">
-      <p className="operational-step__label">Reconhecimento</p>
-      <p className="operational-step__copy">
-        Isso faz sentido para voce?
-      </p>
-      <div className="operational-step__actions">
-        <button
-          type="button"
-          className="operational-step__action"
-          onClick={onNext}
-        >
-          Sim
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function OrientationStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
+  const [isReady, setIsReady] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setIsReady(true);
+    }, 1200);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
   return (
     <div className="operational-step">
       <p className="operational-step__label">Orientacao</p>
@@ -287,13 +250,19 @@ function OrientationStep({
         {buildNavrosOrientationCopy(answers)}
       </p>
       <div className="operational-step__actions">
-        <button
-          type="button"
-          className="operational-step__action"
-          onClick={onNext}
-        >
-          Continuar
-        </button>
+        {isReady ? (
+          <button
+            type="button"
+            className="operational-step__action"
+            onClick={onNext}
+          >
+            Continuar
+          </button>
+        ) : (
+          <span className="operational-step__pause">
+            Deixe essa orientacao pousar por um instante.
+          </span>
+        )}
       </div>
     </div>
   );

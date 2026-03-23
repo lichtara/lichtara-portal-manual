@@ -60,24 +60,13 @@ export function NavrosOperationalStepper({
         <p className="operational-journey__count">
           Etapa {currentStepIndex + 1} de {navrosOperationalSteps.length}
         </p>
-        <div className="operational-journey__steps">
-          {navrosOperationalSteps.map((step, index) => {
-            const isActive = index === currentStepIndex;
-            const isPast = index < currentStepIndex;
-
-            return (
-              <span
-                key={step.id}
-                className={journeyCx(
-                  "operational-journey__step",
-                  isActive && "operational-journey__step--active",
-                  isPast && "operational-journey__step--past",
-                )}
-              >
-                {step.label}
-              </span>
-            );
-          })}
+        <div className="operational-journey__bar" aria-hidden="true">
+          <span
+            className="operational-journey__bar-fill"
+            style={{
+              width: `${((currentStepIndex + 1) / navrosOperationalSteps.length) * 100}%`,
+            }}
+          />
         </div>
       </div>
 
