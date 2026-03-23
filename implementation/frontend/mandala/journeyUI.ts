@@ -417,7 +417,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step--entry {
   align-content: center;
+  gap: 22px;
+  justify-items: start;
   min-height: clamp(300px, 44vh, 420px);
+  margin: 0 auto;
+  max-width: 440px;
+  width: min(100%, 440px);
 }
 
 .operational-step--entry .operational-step__copy-group {
@@ -425,8 +430,22 @@ export const MANDALA_JOURNEY_UI_CSS = `
   max-width: 28ch;
 }
 
+.operational-step--entry .operational-step__label,
+.operational-step--entry .operational-step__actions,
 .operational-step--entry .operational-step__tag {
+  width: 100%;
+}
+
+.operational-step--entry .operational-step__tag {
+  color: rgba(10, 26, 47, 0.58);
+  font-size: 13px;
+  margin-top: 6px;
   max-width: 32ch;
+}
+
+.operational-step--entry .operational-step__action {
+  min-height: 54px;
+  padding: 14px 26px;
 }
 
 .operational-step__copy-group,
@@ -666,6 +685,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
   .operational-step--entry {
     min-height: auto;
+    max-width: none;
+    width: 100%;
   }
 
   .operational-step--entry .operational-step__copy-group,
