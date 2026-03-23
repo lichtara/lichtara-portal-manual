@@ -2,7 +2,6 @@ export type NavrosOperationalStepId =
   | "entry"
   | "focus"
   | "reading"
-  | "recognition"
   | "orientation"
   | "movement"
   | "closure";
@@ -11,7 +10,6 @@ export type NavrosOperationalAnswers = {
   area: string;
   state: string;
   feeling: string;
-  notes: string;
 };
 
 export type NavrosReadingPatternId =
@@ -57,7 +55,6 @@ export const navrosOperationalSteps: NavrosOperationalStep[] = [
   { id: "entry", label: "Entrada" },
   { id: "focus", label: "Foco" },
   { id: "reading", label: "Leitura" },
-  { id: "recognition", label: "Reconhecimento" },
   { id: "orientation", label: "Orientacao" },
   { id: "movement", label: "Movimento" },
   { id: "closure", label: "Fechamento" },
@@ -67,7 +64,6 @@ export const emptyNavrosOperationalAnswers: NavrosOperationalAnswers = {
   area: "",
   state: "",
   feeling: "",
-  notes: "",
 };
 
 export const navrosSuggestedAreas = [
@@ -81,10 +77,9 @@ export const navrosSuggestedAreas = [
 
 export const navrosSuggestedStates = [
   "inicio",
-  "pressao",
-  "mudanca",
-  "indefinicao",
   "sobrecarga",
+  "mudanca",
+  "instabilidade",
   "estagnacao",
 ] as const;
 
@@ -94,12 +89,10 @@ export const navrosSuggestedFeelings: Array<{
   pattern: NavrosReadingPatternId;
 }> = [
   { id: "confusao", label: "confusao", pattern: "confusao" },
-  { id: "pressao", label: "pressao", pattern: "ansiedade" },
   { id: "duvida", label: "duvida", pattern: "duvida" },
-  { id: "travamento", label: "travamento", pattern: "paralisia" },
   { id: "ansiedade", label: "ansiedade", pattern: "ansiedade" },
+  { id: "travamento", label: "travamento", pattern: "paralisia" },
   { id: "desalinhamento", label: "desalinhamento", pattern: "desalinhamento" },
-  { id: "indefinicao", label: "indefinicao", pattern: "indefinicao" },
 ];
 
 export const movementLabels: Record<MovementType, string> = {
@@ -158,11 +151,11 @@ function buildNavrosReadingAnchor(
     case "mudanca":
       return `${areaPrefix} um movimento de mudanca ja esta em curso.`;
 
-    case "indefinicao":
-      return `${areaPrefix} ainda nao ha forma suficiente para nomear com precisao.`;
-
     case "sobrecarga":
       return `${areaPrefix} ha acumulo no mesmo nivel de prioridade.`;
+
+    case "instabilidade":
+      return `${areaPrefix} o que aparece ainda muda de forma com rapidez.`;
 
     case "estagnacao":
       return `${areaPrefix} as coisas nao estao avancando como poderiam.`;
@@ -237,6 +230,10 @@ function normalizeNavrosState(state: string): string {
 
   if (hasWord(normalizedState, ["indefin", "nevoa", "sem forma"])) {
     return "indefinicao";
+  }
+
+  if (hasWord(normalizedState, ["instab", "oscil", "volatil"])) {
+    return "instabilidade";
   }
 
   if (hasWord(normalizedState, ["press", "aperto"])) {

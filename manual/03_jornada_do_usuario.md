@@ -10,7 +10,7 @@ A experiencia deve ser continua, simples e sem necessidade de explicacao externa
 
 ## Fluxo Completo
 
-`entrada -> foco -> leitura -> reconhecimento -> orientacao -> movimento -> fechamento`
+`entrada -> foco -> leitura -> orientacao -> movimento -> fechamento`
 
 Cada etapa deve acontecer de forma sequencial, sem bifurcacoes e sem sobrecarga.
 
@@ -44,7 +44,6 @@ Selecoes diretas:
 1. Qual area esta mais presente agora?
 2. Como isso tem se apresentado?
 3. Qual sensacao esta mais proxima?
-4. Se quiser, descreva com suas palavras.
 
 ### O que a pessoa faz
 
@@ -80,29 +79,7 @@ A leitura deve parecer:
 
 `obvia e precisa ao mesmo tempo`
 
-## Etapa 4 - Reconhecimento
-
-### O que a pessoa ve
-
-Uma pergunta simples:
-
-`Isso faz sentido para voce?`
-
-Opcional:
-
-- sim
-- ajustar leitura
-
-### O que acontece
-
-- validacao interna
-- ancoragem da experiencia
-
-### Regra
-
-Sem esse momento, nao ha travessia.
-
-## Etapa 5 - Orientacao
+## Etapa 4 - Orientacao
 
 ### O que a pessoa ve
 
@@ -116,8 +93,9 @@ Um unico direcionamento:
 - executavel
 - sem ambiguidade
 - continuidade direta da leitura anterior
+- pequena pausa antes do botao continuar
 
-## Etapa 6 - Movimento
+## Etapa 5 - Movimento
 
 ### O que a pessoa ve
 
@@ -139,7 +117,7 @@ Regra:
 
 o movimento confirma a direcao anterior.
 
-## Etapa 7 - Fechamento
+## Etapa 6 - Fechamento
 
 ### O que a pessoa ve
 
