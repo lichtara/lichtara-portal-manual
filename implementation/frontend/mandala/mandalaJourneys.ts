@@ -13,6 +13,12 @@ export type MandalaJourneyStageId =
   | "expansion"
   | "return";
 
+export type MandalaJourneyOption = {
+  id: string;
+  label: string;
+  hint?: string;
+};
+
 export type MandalaJourneyStep = {
   id: string;
   order: 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -23,6 +29,7 @@ export type MandalaJourneyStep = {
   experience: string;
   narrative: string;
   reflectionPrompt: string;
+  options?: MandalaJourneyOption[];
   ctaLabel: string;
 };
 
@@ -134,7 +141,15 @@ export const mandalaJourneys: MandalaJourney[] = [
         experience: "reconhecer onde estou",
         narrative:
           "A jornada comeca no centro. NAVROS nao entrega resposta pronta; ele orienta o ponto atual.",
-        reflectionPrompt: "Qual aspecto da sua vida esta pedindo leitura agora?",
+        reflectionPrompt: "Onde isso aparece com mais forca agora?",
+        options: [
+          { id: "trabalho", label: "trabalho", hint: "o que voce faz" },
+          { id: "saude", label: "saude", hint: "corpo e energia" },
+          { id: "relacoes", label: "relacoes", hint: "com outras pessoas" },
+          { id: "financas", label: "financas", hint: "recursos e dinheiro" },
+          { id: "proposito", label: "proposito", hint: "sentido e direcao" },
+          { id: "transicao", label: "transicao", hint: "mudanca em curso" },
+        ],
         ctaLabel: "Reconhecer o ponto atual",
       },
       {

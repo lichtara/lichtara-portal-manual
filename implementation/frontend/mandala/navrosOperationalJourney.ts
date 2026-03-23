@@ -8,9 +8,11 @@ import {
   buildNavrosReadingStructureCopy,
   movementLabels,
   navrosOperationalStepLabels,
+  resolveNavrosReadingVariantCopy,
   navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosSuggestedStates,
+  type NavrosReadingVariant,
 } from "./navrosOperationalCopy";
 
 export type NavrosOperationalStepId =
@@ -105,10 +107,11 @@ function isNavrosReadingPatternId(value: string): value is NavrosReadingPatternI
 function buildNavrosReadingAnchor(
   area: string,
   state: string,
+  variant: NavrosReadingVariant,
 ): string {
   const normalizedState = normalizeNavrosState(state);
 
-  return buildNavrosReadingAnchorCopy(area, normalizedState);
+  return buildNavrosReadingAnchorCopy(area, normalizedState, variant);
 }
 
 function resolvePattern(
@@ -226,20 +229,34 @@ function resolvePatternFromAnswers(
 function buildNavrosReadingStructure(
   state: string,
   feeling: string,
+  variant: NavrosReadingVariant,
 ): string {
   const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
 
   return buildNavrosReadingStructureCopy(
     normalizeNavrosState(state),
     normalizedFeeling,
+    variant,
   );
 }
 
 function buildNavrosReadingDirection(
   state: string,
   feeling: string,
+  variant: NavrosReadingVariant,
 ): string {
   return buildNavrosReadingDirectionCopy(
+    normalizeNavrosState(state),
+    normalizeNavrosReadingFeeling(feeling),
+    variant,
+  );
+}
+
+function resolveNavrosReadingVariant(
+  state: string,
+  feeling: string,
+): NavrosReadingVariant {
+  return resolveNavrosReadingVariantCopy(
     normalizeNavrosState(state),
     normalizeNavrosReadingFeeling(feeling),
   );
@@ -380,10 +397,12 @@ export function resolveNextAgentFromAnswers(
 export function buildNavrosReadingCopy(
   answers: NavrosOperationalAnswers,
 ): string {
+  const variant = resolveNavrosReadingVariant(answers.state, answers.feeling);
+
   return [
-    buildNavrosReadingAnchor(answers.area, answers.state),
-    buildNavrosReadingStructure(answers.state, answers.feeling),
-    buildNavrosReadingDirection(answers.state, answers.feeling),
+    buildNavrosReadingAnchor(answers.area, answers.state, variant),
+    buildNavrosReadingStructure(answers.state, answers.feeling, variant),
+    buildNavrosReadingDirection(answers.state, answers.feeling, variant),
   ].join("\n\n");
 }
 

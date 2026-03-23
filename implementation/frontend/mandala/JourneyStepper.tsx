@@ -29,6 +29,7 @@ export function JourneyStepper({
 }: JourneyStepperProps) {
   const activeStep = getSafeMandalaJourneyStep(journey, activeStepIndex);
   const isLastStep = activeStepIndex === journey.steps.length - 1;
+  const hasOptions = Boolean(activeStep.options?.length);
   const pathLabel = buildJourneyPath(journey.path);
 
   return (
@@ -44,9 +45,30 @@ export function JourneyStepper({
       </div>
 
       <p className="journey-stepper__copy">{activeStep.narrative}</p>
-      <p className="journey-stepper__question">
-        <strong>Pergunta ativa:</strong> {activeStep.reflectionPrompt}
-      </p>
+      <p className="journey-stepper__question">{activeStep.reflectionPrompt}</p>
+
+      {hasOptions ? (
+        <div className="journey-stepper__options">
+          {activeStep.options?.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              className="journey-stepper__option"
+              onClick={onNextStep}
+            >
+              <span className="journey-stepper__option-label">
+                {option.label}
+              </span>
+              {option.hint ? (
+                <span className="journey-stepper__option-hint">
+                  {option.hint}
+                </span>
+              ) : null}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       <p className="journey-stepper__copy">
         <strong>Questao central:</strong> {journey.centralQuestion}
       </p>
@@ -106,13 +128,15 @@ export function JourneyStepper({
           Etapa anterior
         </button>
 
-        <button
-          type="button"
-          className="journey-stepper__action"
-          onClick={onNextStep}
-        >
-          {isLastStep ? "Recomecar jornada" : activeStep.ctaLabel}
-        </button>
+        {hasOptions ? null : (
+          <button
+            type="button"
+            className="journey-stepper__action"
+            onClick={onNextStep}
+          >
+            {isLastStep ? "Recomecar jornada" : activeStep.ctaLabel}
+          </button>
+        )}
 
         {onRestartJourney && activeStepIndex > 0 ? (
           <button
