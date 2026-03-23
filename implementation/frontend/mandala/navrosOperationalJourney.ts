@@ -1,14 +1,10 @@
 import {
+  composeNavrosInsightCopy,
   buildNavrosMovementLineCopy,
-  buildNavrosReadingAnchorCopy,
-  buildNavrosReadingDirectionCopy,
-  buildNavrosReadingStructureCopy,
   navrosOperationalStepLabels,
-  resolveNavrosReadingVariantCopy,
   navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosSuggestedStates,
-  type NavrosReadingVariant,
 } from "./navrosOperationalCopy";
 
 export type NavrosOperationalStepId =
@@ -96,16 +92,6 @@ function hasWord(source: string, candidates: string[]): boolean {
 
 function isNavrosReadingPatternId(value: string): value is NavrosReadingPatternId {
   return NAVROS_PATTERN_IDS.includes(value as NavrosReadingPatternId);
-}
-
-function buildNavrosReadingAnchor(
-  area: string,
-  state: string,
-  variant: NavrosReadingVariant,
-): string {
-  const normalizedState = normalizeNavrosState(state);
-
-  return buildNavrosReadingAnchorCopy(area, normalizedState, variant);
 }
 
 function resolvePattern(
@@ -220,103 +206,10 @@ function resolvePatternFromAnswers(
   return feelingPattern;
 }
 
-function buildNavrosReadingStructure(
-  state: string,
-  feeling: string,
-  variant: NavrosReadingVariant,
-): string {
-  const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
-
-  return buildNavrosReadingStructureCopy(
-    normalizeNavrosState(state),
-    normalizedFeeling,
-    variant,
-  );
-}
-
-function buildNavrosReadingDirection(
-  state: string,
-  feeling: string,
-  variant: NavrosReadingVariant,
-): string {
-  return buildNavrosReadingDirectionCopy(
-    normalizeNavrosState(state),
-    normalizeNavrosReadingFeeling(feeling),
-    variant,
-  );
-}
-
-function resolveNavrosReadingVariant(
-  state: string,
-  feeling: string,
-): NavrosReadingVariant {
-  return resolveNavrosReadingVariantCopy(
-    normalizeNavrosState(state),
-    normalizeNavrosReadingFeeling(feeling),
-  );
-}
-
 function buildNavrosMovementLine(feeling: string): string {
   return buildNavrosMovementLineCopy(
     normalizeNavrosReadingFeeling(feeling),
   );
-}
-
-function lowerFirst(text: string): string {
-  if (!text) {
-    return text;
-  }
-
-  return `${text.charAt(0).toLowerCase()}${text.slice(1)}`;
-}
-
-function softenNavrosDirection(text: string): string {
-  const trimmed = text.trim().replace(/[.!?]+$/u, "");
-
-  if (!trimmed) {
-    return "algo comeca a ganhar nitidez";
-  }
-
-  const replacements: Array<[RegExp, string]> = [
-    [/^Antes de decidir,\s*vale\s+/iu, ""],
-    [/^Antes de responder,\s*pode ser mais util\s+/iu, ""],
-    [/^Definir um criterio claro tende a\s+/iu, "um criterio claro costuma "],
-    [/^Um primeiro passo menor pode ser suficiente para\s+/iu, "um primeiro passo menor ja pode "],
-    [/^Ganhar um pouco mais de clareza antes de agir tende a\s+/iu, "mais clareza costuma "],
-    [/^Reconhecer o que ja nao faz sentido pode\s+/iu, "reconhecer o que ja nao faz sentido costuma "],
-    [/^Observar mais um pouco pode\s+/iu, "observar mais um pouco costuma "],
-    [/^Antes de escolher,\s*pode ser mais importante\s+/iu, ""],
-    [/^Talvez o proximo passo nao seja decidir ja, mas\s+/iu, ""],
-    [/^Antes de resolver,\s*pode ser mais importante\s+/iu, ""],
-    [/^Antes de tentar resolver,\s*pode ser mais importante\s+/iu, ""],
-    [/^Antes de responder,\s*/iu, ""],
-    [/^Antes de avancar,\s*/iu, ""],
-    [/^Em vez de retomar tudo,\s*/iu, ""],
-    [/^Antes de insistir no que ja nao responde,\s*/iu, ""],
-  ];
-
-  const softened = replacements.reduce((current, [pattern, replacement]) => {
-    return current.replace(pattern, replacement);
-  }, trimmed);
-
-  return lowerFirst(softened.trim());
-}
-
-function softenNavrosMovement(text: string): string {
-  const trimmed = text.trim().replace(/[.!?]+$/u, "");
-
-  if (!trimmed) {
-    return "Algo começa a se reorganizar.";
-  }
-
-  const softened = trimmed
-    .replace(/^O proximo passo e\s+/iu, "")
-    .replace(/^Mais\s+/iu, "Mais ")
-    .trim();
-
-  const withLeading = softened === trimmed ? softened : lowerFirst(softened);
-
-  return withLeading.endsWith(".") ? withLeading : `${withLeading}.`;
 }
 
 export function normalizeNavrosFeeling(
@@ -438,28 +331,15 @@ export function resolveNextAgentFromAnswers(
 export function buildNavrosInsightCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const variant = resolveNavrosReadingVariant(answers.state, answers.feeling);
-  const anchor = buildNavrosReadingAnchor(
+  return composeNavrosInsightCopy(
     answers.area,
-    answers.state,
-    variant,
+    normalizeNavrosState(answers.state),
+    normalizeNavrosReadingFeeling(answers.feeling),
   );
-  const structure = buildNavrosReadingStructure(
-    answers.state,
-    answers.feeling,
-    variant,
-  );
-  const direction = buildNavrosReadingDirection(
-    answers.state,
-    answers.feeling,
-    variant,
-  );
-
-  return `${anchor} ${structure}\n\n${softenNavrosDirection(direction)}.`;
 }
 
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return softenNavrosMovement(buildNavrosMovementLine(answers.feeling));
+  return buildNavrosMovementLine(answers.feeling);
 }

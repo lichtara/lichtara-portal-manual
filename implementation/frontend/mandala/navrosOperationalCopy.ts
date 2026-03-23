@@ -280,24 +280,6 @@ export function resolveNavrosReadingVariantCopy(
   return "direct";
 }
 
-function getStableVariantIndex(
-  parts: string[],
-  length: number,
-): number {
-  if (length <= 1) {
-    return 0;
-  }
-
-  const seed = parts.join(":");
-  let total = 0;
-
-  for (let index = 0; index < seed.length; index += 1) {
-    total += seed.charCodeAt(index) * (index + 1);
-  }
-
-  return total % length;
-}
-
 export function buildNavrosReadingAnchorCopy(
   area: string,
   normalizedState: string,
@@ -357,15 +339,15 @@ export function buildNavrosReadingDirectionCopy(
         : NAVROS_READING_DIRECTIONS_BY_FEELING;
 
   if (normalizedState === "sobrecarga") {
-    return "Antes de responder a tudo, vale devolver prioridade apenas ao que realmente pede espaço agora.";
+    return "O que realmente pede espaço volta a aparecer quando nem tudo permanece no mesmo nível de prioridade.";
   }
 
   if (normalizedState === "indefinicao") {
-    return "Observar mais um pouco pode permitir que a direção apareça com mais nitidez.";
+    return "A direção costuma ganhar nitidez quando ainda não é forçada a aparecer.";
   }
 
   if (normalizedState === "estagnacao") {
-    return "Um primeiro passo menor pode ser suficiente para devolver movimento ao que ficou parado.";
+    return "Um primeiro gesto menor costuma devolver movimento ao que ficou parado.";
   }
 
   return (
@@ -373,6 +355,42 @@ export function buildNavrosReadingDirectionCopy(
     NAVROS_READING_DIRECTIONS_BY_FEELING[normalizedFeeling] ??
     "Algo ganha nitidez quando deixa de ser forçado."
   );
+}
+
+function mergeInsightCopy(
+  anchor: string,
+  structure: string,
+  direction: string,
+): string {
+  return `${anchor} ${structure} ${direction}`;
+}
+
+export function composeNavrosInsightCopy(
+  area: string,
+  normalizedState: string,
+  normalizedFeeling: string,
+): string {
+  const variant = resolveNavrosReadingVariantCopy(
+    normalizedState,
+    normalizedFeeling,
+  );
+  const anchor = buildNavrosReadingAnchorCopy(
+    area,
+    normalizedState,
+    variant,
+  );
+  const structure = buildNavrosReadingStructureCopy(
+    normalizedState,
+    normalizedFeeling,
+    variant,
+  );
+  const direction = buildNavrosReadingDirectionCopy(
+    normalizedState,
+    normalizedFeeling,
+    variant,
+  );
+
+  return mergeInsightCopy(anchor, structure, direction);
 }
 
 export function buildNavrosMovementLineCopy(
