@@ -72,6 +72,7 @@ Leitura de rigor:
 - [implementation/frontend/mandala/JourneyScreen.tsx](implementation/frontend/mandala/JourneyScreen.tsx)
 - [implementation/frontend/mandala/NavrosOperationalStepper.tsx](implementation/frontend/mandala/NavrosOperationalStepper.tsx)
 - [implementation/frontend/mandala/NavrosOperationalScreen.tsx](implementation/frontend/mandala/NavrosOperationalScreen.tsx)
+- [implementation/frontend/mandala/navrosOperationalCopy.ts](implementation/frontend/mandala/navrosOperationalCopy.ts)
 - [implementation/frontend/mandala/navrosOperationalJourney.ts](implementation/frontend/mandala/navrosOperationalJourney.ts)
 - [implementation/frontend/mandala/MandalaMini.tsx](implementation/frontend/mandala/MandalaMini.tsx)
 - [implementation/frontend/mandala/MandalaJourneyPrototype.tsx](implementation/frontend/mandala/MandalaJourneyPrototype.tsx)

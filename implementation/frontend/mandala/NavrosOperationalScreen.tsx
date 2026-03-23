@@ -4,17 +4,20 @@ import {
   buildNavrosMovementCopy,
   buildNavrosOrientationCopy,
   buildNavrosReadingCopy,
-  navrosAreaLabels,
-  navrosSuggestedAreas,
-  navrosSuggestedStates,
-  navrosSuggestedFeelings,
-  navrosStateLabels,
   normalizeNavrosReadingFeeling,
   resolveNextAgentFromAnswers,
   type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
+import {
+  navrosAreaLabels,
+  navrosOperationalScreenCopy,
+  navrosStateLabels,
+  navrosSuggestedAreas,
+  navrosSuggestedFeelings,
+  navrosSuggestedStates,
+} from "./navrosOperationalCopy";
 import { MandalaMini } from "./MandalaMini";
 import { journeyCx } from "./journeyUI";
 
@@ -60,14 +63,15 @@ export function NavrosOperationalScreen({
 function EntryStep({ onNext }: { onNext: () => void }) {
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Entrada</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.entry.label}
+      </p>
       <div className="operational-step__copy-group">
-        <p className="operational-step__quote">
-          Você não está aqui para aprender algo novo.
-        </p>
-        <p className="operational-step__quote">
-          Você está aqui para reconhecer onde já está.
-        </p>
+        {navrosOperationalScreenCopy.entry.quotes.map((quote) => (
+          <p key={quote} className="operational-step__quote">
+            {quote}
+          </p>
+        ))}
       </div>
       <div className="operational-step__actions">
         <button
@@ -75,7 +79,7 @@ function EntryStep({ onNext }: { onNext: () => void }) {
           className="operational-step__action"
           onClick={onNext}
         >
-          Entrar
+          {navrosOperationalScreenCopy.entry.action}
         </button>
       </div>
     </div>
@@ -106,11 +110,15 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Foco</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.focus.label}
+      </p>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">Área</p>
+        <p className="operational-step__group-label">
+          {navrosOperationalScreenCopy.focus.area.label}
+        </p>
         <p className="operational-step__prompt">
-          Qual área está mais presente agora?
+          {navrosOperationalScreenCopy.focus.area.prompt}
         </p>
         <div className="operational-step__chips">
           {navrosSuggestedAreas.map((suggestedArea) => {
@@ -134,9 +142,11 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         </div>
       </div>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">Estado</p>
+        <p className="operational-step__group-label">
+          {navrosOperationalScreenCopy.focus.state.label}
+        </p>
         <p className="operational-step__prompt">
-          Como isso tem se apresentado?
+          {navrosOperationalScreenCopy.focus.state.prompt}
         </p>
         <div className="operational-step__chips">
           {navrosSuggestedStates.map((suggestedState) => {
@@ -160,9 +170,11 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         </div>
       </div>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">Sensação</p>
+        <p className="operational-step__group-label">
+          {navrosOperationalScreenCopy.focus.feeling.label}
+        </p>
         <p className="operational-step__prompt">
-          Qual dessas sensações está mais próxima agora?
+          {navrosOperationalScreenCopy.focus.feeling.prompt}
         </p>
         <div className="operational-step__chips">
           {navrosSuggestedFeelings.map((suggestedFeeling) => {
@@ -193,7 +205,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
           disabled={!canContinue}
           onClick={handleNext}
         >
-          Continuar
+          {navrosOperationalScreenCopy.focus.action}
         </button>
       </div>
     </div>
@@ -210,7 +222,9 @@ function ReadingStep({
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Leitura</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.reading.label}
+      </p>
       <div className="operational-step__paragraphs">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="operational-step__copy">
@@ -224,7 +238,7 @@ function ReadingStep({
           className="operational-step__action"
           onClick={onNext}
         >
-          Continuar
+          {navrosOperationalScreenCopy.reading.action}
         </button>
       </div>
     </div>
@@ -247,7 +261,9 @@ function OrientationStep({
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Orientação</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.orientation.label}
+      </p>
       <p className="operational-step__copy">
         {buildNavrosOrientationCopy(answers)}
       </p>
@@ -258,11 +274,11 @@ function OrientationStep({
             className="operational-step__action"
             onClick={onNext}
           >
-            Continuar
+            {navrosOperationalScreenCopy.orientation.action}
           </button>
         ) : (
           <span className="operational-step__pause">
-            Deixe essa orientação pousar por um instante.
+            {navrosOperationalScreenCopy.orientation.pause}
           </span>
         )}
       </div>
@@ -283,7 +299,9 @@ function MovementStep({
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Movimento</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.movement.label}
+      </p>
       <MandalaMini activeAgent={agent} trajectory={trajectory} />
       <p className="operational-step__copy">{paragraphs[0]}</p>
       {paragraphs[1] ? (
@@ -295,7 +313,7 @@ function MovementStep({
           className="operational-step__action"
           onClick={onNext}
         >
-          Continuar
+          {navrosOperationalScreenCopy.movement.action}
         </button>
       </div>
     </div>
@@ -305,9 +323,11 @@ function MovementStep({
 function ClosureStep({ onRestart }: { onRestart: () => void }) {
   return (
     <div className="operational-step">
-      <p className="operational-step__label">Fechamento</p>
+      <p className="operational-step__label">
+        {navrosOperationalScreenCopy.closure.label}
+      </p>
       <p className="operational-step__copy">
-        Você não está mais no mesmo ponto de quando entrou.
+        {navrosOperationalScreenCopy.closure.quote}
       </p>
       <div className="operational-step__actions">
         <button
@@ -315,7 +335,7 @@ function ClosureStep({ onRestart }: { onRestart: () => void }) {
           className="operational-step__action"
           onClick={onRestart}
         >
-          Recomeçar travessia
+          {navrosOperationalScreenCopy.closure.action}
         </button>
       </div>
     </div>

@@ -5,6 +5,7 @@ import {
   navrosOperationalSteps,
   type NavrosOperationalAnswers,
 } from "./navrosOperationalJourney";
+import { navrosOperationalStepperCopy } from "./navrosOperationalCopy";
 import { MANDALA_JOURNEY_UI_CSS, journeyCx } from "./journeyUI";
 import { NavrosOperationalScreen } from "./NavrosOperationalScreen";
 
@@ -15,8 +16,8 @@ export type NavrosOperationalStepperProps = {
 };
 
 export function NavrosOperationalStepper({
-  title = "Jornada NAVROS - V1 Operacional",
-  intro = "Fluxo contínuo, sem bifurcações e sem necessidade de explicação externa.",
+  title = navrosOperationalStepperCopy.title,
+  intro = navrosOperationalStepperCopy.intro,
   className,
 }: NavrosOperationalStepperProps) {
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
@@ -51,14 +52,19 @@ export function NavrosOperationalStepper({
       <style>{MANDALA_JOURNEY_UI_CSS}</style>
 
       <header className="operational-journey__header">
-        <p className="operational-journey__eyebrow">Travessia</p>
+        <p className="operational-journey__eyebrow">
+          {navrosOperationalStepperCopy.eyebrow}
+        </p>
         <h2 className="operational-journey__title">{title}</h2>
         <p className="operational-journey__intro">{intro}</p>
       </header>
 
       <div className="operational-journey__progress">
         <p className="operational-journey__count">
-          Etapa {currentStepIndex + 1} de {navrosOperationalSteps.length}
+          {navrosOperationalStepperCopy.progress(
+            currentStepIndex + 1,
+            navrosOperationalSteps.length,
+          )}
         </p>
         <div className="operational-journey__bar" aria-hidden="true">
           <span
