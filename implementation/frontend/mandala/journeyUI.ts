@@ -400,7 +400,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__group + .operational-step__group {
-  margin-top: 10px;
+  margin-top: 22px;
 }
 
 .operational-step__group-label {
@@ -502,23 +502,43 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 
 .operational-step__chip {
   appearance: none;
+  align-items: flex-start;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(58, 53, 44, 0.12);
-  border-radius: 999px;
+  border-radius: 18px;
   color: #5e564a;
   cursor: pointer;
-  padding: 8px 12px;
+  display: inline-grid;
+  gap: 4px;
+  padding: 10px 14px;
+  text-align: left;
 }
 
 .operational-step__chip--active {
   background: rgba(255, 255, 255, 0.96);
   border-color: rgba(58, 53, 44, 0.32);
   color: #1f1b16;
+}
+
+.operational-step__chip--contextual {
+  min-width: 176px;
+}
+
+.operational-step__chip-label {
+  color: inherit;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.operational-step__chip-context {
+  color: #7f7668;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .operational-step__actions {

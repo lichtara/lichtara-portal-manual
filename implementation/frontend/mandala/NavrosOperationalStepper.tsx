@@ -26,6 +26,9 @@ export function NavrosOperationalStepper({
   );
 
   const currentStep = navrosOperationalSteps[currentStepIndex];
+  const isEntryStep = currentStep?.id === "entry";
+  const shouldShowHeader =
+    !isEntryStep && Boolean(navrosOperationalStepperCopy.eyebrow || title || intro);
 
   function next() {
     setCurrentStepIndex((previousIndex) => {
@@ -51,30 +54,36 @@ export function NavrosOperationalStepper({
     <section className={journeyCx("operational-journey", className)}>
       <style>{MANDALA_JOURNEY_UI_CSS}</style>
 
-      <header className="operational-journey__header">
-        <p className="operational-journey__eyebrow">
-          {navrosOperationalStepperCopy.eyebrow}
-        </p>
-        <h2 className="operational-journey__title">{title}</h2>
-        <p className="operational-journey__intro">{intro}</p>
-      </header>
+      {shouldShowHeader ? (
+        <header className="operational-journey__header">
+          {navrosOperationalStepperCopy.eyebrow ? (
+            <p className="operational-journey__eyebrow">
+              {navrosOperationalStepperCopy.eyebrow}
+            </p>
+          ) : null}
+          {title ? <h2 className="operational-journey__title">{title}</h2> : null}
+          {intro ? <p className="operational-journey__intro">{intro}</p> : null}
+        </header>
+      ) : null}
 
-      <div className="operational-journey__progress">
-        <p className="operational-journey__count">
-          {navrosOperationalStepperCopy.progress(
-            currentStepIndex + 1,
-            navrosOperationalSteps.length,
-          )}
-        </p>
-        <div className="operational-journey__bar" aria-hidden="true">
-          <span
-            className="operational-journey__bar-fill"
-            style={{
-              width: `${((currentStepIndex + 1) / navrosOperationalSteps.length) * 100}%`,
-            }}
-          />
+      {!isEntryStep ? (
+        <div className="operational-journey__progress">
+          <p className="operational-journey__count">
+            {navrosOperationalStepperCopy.progress(
+              currentStepIndex + 1,
+              navrosOperationalSteps.length,
+            )}
+          </p>
+          <div className="operational-journey__bar" aria-hidden="true">
+            <span
+              className="operational-journey__bar-fill"
+              style={{
+                width: `${((currentStepIndex + 1) / navrosOperationalSteps.length) * 100}%`,
+              }}
+            />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="operational-journey__panel">
         <NavrosOperationalScreen

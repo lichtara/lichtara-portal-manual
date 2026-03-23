@@ -1,15 +1,7 @@
-export const navrosOperationalHeroCopy = {
-  eyebrow: "Portal Lichtara",
-  title: "Tradução operacional da Jornada NAVROS",
-  intro:
-    "Esta tela valida a V1 como travessia contínua. Sem múltiplos caminhos, sem explicação externa e sem depender da mandala para funcionar.",
-} as const;
-
 export const navrosOperationalStepperCopy = {
-  eyebrow: "Travessia",
-  title: "Jornada NAVROS - V1 Operacional",
-  intro:
-    "Fluxo contínuo, sem bifurcações e sem necessidade de explicação externa.",
+  eyebrow: "",
+  title: "",
+  intro: "",
   progress(currentStep: number, totalSteps: number): string {
     return `Etapa ${currentStep} de ${totalSteps}`;
   },
@@ -17,7 +9,7 @@ export const navrosOperationalStepperCopy = {
 
 export const navrosOperationalScreenCopy = {
   entry: {
-    label: "Entrada",
+    label: "Travessia",
     quotes: [
       "Você não está aqui para aprender algo novo.",
       "Você está aqui para reconhecer onde já está.",
@@ -29,7 +21,7 @@ export const navrosOperationalScreenCopy = {
     action: "Continuar",
     area: {
       label: "Área",
-      prompt: "Qual área está mais presente agora?",
+      prompt: "Onde isso está mais aparecendo agora?",
     },
     state: {
       label: "Estado",
@@ -85,6 +77,15 @@ export const navrosAreaLabels: Record<(typeof navrosSuggestedAreas)[number], str
   financas: "finanças",
   proposito: "propósito",
   transicao: "transição",
+};
+
+export const navrosAreaContexts: Record<(typeof navrosSuggestedAreas)[number], string> = {
+  trabalho: "o que você faz",
+  saude: "corpo e energia",
+  relacoes: "com outras pessoas",
+  financas: "dinheiro e recursos",
+  proposito: "sentido e direção",
+  transicao: "mudança em curso",
 };
 
 export const navrosSuggestedStates = [

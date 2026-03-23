@@ -11,6 +11,7 @@ import {
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
 import {
+  navrosAreaContexts,
   navrosAreaLabels,
   navrosOperationalScreenCopy,
   navrosStateLabels,
@@ -131,11 +132,17 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 type="button"
                 className={journeyCx(
                   "operational-step__chip",
+                  "operational-step__chip--contextual",
                   isActive && "operational-step__chip--active",
                 )}
                 onClick={() => setArea(suggestedArea)}
               >
-                {navrosAreaLabels[suggestedArea]}
+                <span className="operational-step__chip-label">
+                  {navrosAreaLabels[suggestedArea]}
+                </span>
+                <span className="operational-step__chip-context">
+                  {navrosAreaContexts[suggestedArea]}
+                </span>
               </button>
             );
           })}
@@ -163,7 +170,9 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 )}
                 onClick={() => setState(suggestedState)}
               >
-                {navrosStateLabels[suggestedState]}
+                <span className="operational-step__chip-label">
+                  {navrosStateLabels[suggestedState]}
+                </span>
               </button>
             );
           })}
@@ -192,7 +201,9 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 )}
                 onClick={() => setFeeling(suggestedFeeling.label)}
               >
-                {suggestedFeeling.label}
+                <span className="operational-step__chip-label">
+                  {suggestedFeeling.label}
+                </span>
               </button>
             );
           })}
