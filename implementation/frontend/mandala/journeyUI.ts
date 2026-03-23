@@ -190,6 +190,26 @@ export const MANDALA_JOURNEY_UI_CSS = `
   padding: 24px;
 }
 
+.journey-stepper--soft {
+  align-content: space-between;
+  gap: 24px;
+  min-height: 100%;
+}
+
+.journey-stepper__flow {
+  display: grid;
+  gap: 12px;
+}
+
+.journey-stepper__flow-content {
+  color: var(--lichtara-ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0;
+}
+
 .journey-stepper__meta {
   display: grid;
   gap: 8px;
@@ -373,6 +393,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
   background: transparent;
   border-color: rgba(201, 210, 217, 0.18);
   color: rgba(201, 210, 217, 0.82);
+}
+
+.journey-stepper__action--flow {
+  background: var(--lichtara-gold);
+  border-color: rgba(212, 175, 55, 0.58);
+  color: var(--lichtara-blue);
+  font-weight: 600;
 }
 
 .operational-journey {
@@ -713,6 +740,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 @media (max-width: 640px) {
+  .journey-stepper__flow-content {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
   .journey-stepper__options {
     grid-template-columns: 1fr;
   }

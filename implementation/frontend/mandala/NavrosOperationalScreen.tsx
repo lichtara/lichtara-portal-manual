@@ -298,6 +298,9 @@ function OrientationStep({
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
   const [isReady, setIsReady] = React.useState(false);
+  const paragraphs = buildNavrosOrientationCopy(answers)
+    .split("\n\n")
+    .filter(Boolean);
 
   React.useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -312,9 +315,13 @@ function OrientationStep({
       <p className="operational-step__label">
         {navrosOperationalScreenCopy.orientation.label}
       </p>
-      <p className="operational-step__copy">
-        {buildNavrosOrientationCopy(answers)}
-      </p>
+      <div className="operational-step__paragraphs">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className="operational-step__copy">
+            {paragraph}
+          </p>
+        ))}
+      </div>
       <div className="operational-step__actions">
         {isReady ? (
           <button

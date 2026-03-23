@@ -249,6 +249,50 @@ const NAVROS_ORIENTATION_ACTIONS_BY_FEELING: Record<string, string> = {
     "observe mais um pouco antes de tentar chegar a uma resposta",
 };
 
+type NavrosOrientationCopy = {
+  lead: string;
+  support: string;
+};
+
+const NAVROS_DIRECT_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
+  {
+    lead: "Hoje, retire uma coisa desse mesmo nível de prioridade.",
+    support:
+      "Não precisa resolver tudo — apenas devolver espaço ao que realmente importa agora.",
+  },
+  {
+    lead: "Antes de responder ao próximo pedido, pause e escolha o que fica de fora.",
+    support:
+      "Clareza também vem do que você decide não sustentar agora.",
+  },
+];
+
+const NAVROS_CONTEMPLATIVE_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
+  {
+    lead: "Hoje, apenas observe quando isso voltar a aparecer.",
+    support:
+      "Sem tentar resolver — só reconheça como se repete.",
+  },
+  {
+    lead: "Se isso surgir novamente, não responda de imediato.",
+    support:
+      "Dê um pouco mais de tempo para entender o que está se formando.",
+  },
+];
+
+const NAVROS_CONCRETE_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
+  {
+    lead: "Escolha uma única ação e leve até o fim.",
+    support:
+      "Evite abrir novos movimentos antes de concluir esse.",
+  },
+  {
+    lead: "No próximo momento em que isso pedir resposta, reduza para um único passo.",
+    support:
+      "Movimento claro vem de direção, não de quantidade.",
+  },
+];
+
 const NAVROS_MOVEMENT_LINES_BY_FEELING: Record<string, string> = {
   confusao:
     "O próximo passo é ganhar mais clareza antes de decidir.",
@@ -309,6 +353,24 @@ export function resolveNavrosReadingVariantCopy(
   }
 
   return "direct";
+}
+
+function getStableVariantIndex(
+  parts: string[],
+  length: number,
+): number {
+  if (length <= 1) {
+    return 0;
+  }
+
+  const seed = parts.join(":");
+  let total = 0;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    total += seed.charCodeAt(index) * (index + 1);
+  }
+
+  return total % length;
 }
 
 export function buildNavrosReadingAnchorCopy(
@@ -412,6 +474,30 @@ export function buildNavrosOrientationActionCopy(
 
 export function buildNavrosOrientationLeadCopy(action: string): string {
   return `Nas próximas 24 horas, ${action}.`;
+}
+
+export function buildNavrosOrientationVariantCopy(
+  normalizedState: string,
+  normalizedFeeling: string,
+  variant: NavrosReadingVariant = "direct",
+): string {
+  const options =
+    variant === "contemplative"
+      ? NAVROS_CONTEMPLATIVE_ORIENTATION_VARIANTS
+      : variant === "concrete"
+        ? NAVROS_CONCRETE_ORIENTATION_VARIANTS
+        : NAVROS_DIRECT_ORIENTATION_VARIANTS;
+  const selected = options[
+    getStableVariantIndex(
+      [normalizedState, normalizedFeeling, variant],
+      options.length,
+    )
+  ] ?? {
+    lead: "Hoje, observe com mais cuidado o que volta a pedir espaço.",
+    support: "Basta um próximo passo possível para manter a leitura viva.",
+  };
+
+  return `${selected.lead}\n\n${selected.support}`;
 }
 
 export function buildNavrosMovementLineCopy(

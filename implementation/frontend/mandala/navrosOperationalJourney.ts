@@ -1,8 +1,7 @@
 import {
   buildNavrosMovementLineCopy,
   buildNavrosMovementPhaseCopy,
-  buildNavrosOrientationActionCopy,
-  buildNavrosOrientationLeadCopy,
+  buildNavrosOrientationVariantCopy,
   buildNavrosReadingAnchorCopy,
   buildNavrosReadingDirectionCopy,
   buildNavrosReadingStructureCopy,
@@ -266,9 +265,17 @@ function buildNavrosOrientationAction(
   state: string,
   feeling: string,
 ): string {
-  return buildNavrosOrientationActionCopy(
-    normalizeNavrosState(state),
-    normalizeNavrosReadingFeeling(feeling),
+  const normalizedState = normalizeNavrosState(state);
+  const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
+  const variant = resolveNavrosReadingVariantCopy(
+    normalizedState,
+    normalizedFeeling,
+  );
+
+  return buildNavrosOrientationVariantCopy(
+    normalizedState,
+    normalizedFeeling,
+    variant,
   );
 }
 
@@ -409,9 +416,7 @@ export function buildNavrosReadingCopy(
 export function buildNavrosOrientationCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return buildNavrosOrientationLeadCopy(
-    buildNavrosOrientationAction(answers.state, answers.feeling),
-  );
+  return buildNavrosOrientationAction(answers.state, answers.feeling);
 }
 
 export function buildNavrosMovementCopy(
