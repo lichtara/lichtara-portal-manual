@@ -39,11 +39,12 @@ Apenas permitir entrada.
 
 ### O que a pessoa ve
 
-Perguntas diretas:
+Selecoes diretas:
 
-1. Qual area da sua vida esta pedindo mais atencao agora?
-2. Como essa area tem se apresentado recentemente?
-3. Qual sensacao esta mais presente neste momento?
+1. Qual area esta mais presente agora?
+2. Como isso tem se apresentado?
+3. Qual sensacao esta mais proxima?
+4. Se quiser, descreva com suas palavras.
 
 ### O que a pessoa faz
 
@@ -114,6 +115,7 @@ Um unico direcionamento:
 - uma acao apenas
 - executavel
 - sem ambiguidade
+- continuidade direta da leitura anterior
 
 ## Etapa 6 - Movimento
 
@@ -132,6 +134,10 @@ Exemplos:
 ### Funcao
 
 `abrir continuidade sem quebrar a simplicidade`
+
+Regra:
+
+o movimento confirma a direcao anterior.
 
 ## Etapa 7 - Fechamento
 

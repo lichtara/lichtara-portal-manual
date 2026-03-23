@@ -507,6 +507,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
   outline: none;
 }
 
+.operational-step__textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
 .operational-step__chips {
   display: flex;
   flex-wrap: wrap;

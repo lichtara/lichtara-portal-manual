@@ -241,6 +241,36 @@ Regra pratica:
 - 1 linha de organizacao estrutural
 - 1 linha de abertura ou direcao sem soar oracular
 
+Composicao atual do `ReadingStep`:
+
+- `anchor`: area + estado
+- `structure`: leitura do padrao predominante
+- `direction`: proximo tipo de movimento em linguagem simples
+
+Composicao atual do `OrientationStep`:
+
+- nao opera como conselho
+- continua diretamente a leitura
+- transforma `state + sensacao + area` em uma acao minima coerente para as proximas 24 horas
+- remove a area da frase quando ela pesa mais do que ajuda a fluidez
+
+Composicao atual do `MovementStep`:
+
+- nao explica o sistema
+- confirma a direcao iniciada na orientacao
+- nomeia o proximo passo em linguagem humana antes de nomear o agente
+
+Entrada estruturada da V1:
+
+- area
+- estado
+- sensacao
+- campo opcional em texto livre
+
+Leitura operacional:
+
+`area -> estado -> sensacao -> padrao -> movimento -> agente`
+
 NAVROS nao deve operar como `categoria -> texto pronto`.
 
 Ele deve operar como `input -> interpretacao -> composicao da leitura`.
@@ -270,6 +300,12 @@ Cada um deve:
 
 O fallback deve existir, mas perder protagonismo. O objetivo da V1 e depender cada vez menos dele.
 
+Camadas de entrada recomendadas:
+
+- areas: trabalho, saude, relacoes, financas, proposito, transicao
+- estados: inicio, pressao, mudanca, indefinicao, sobrecarga, estagnacao
+- sensacoes: confusao, pressao, duvida, travamento, ansiedade, desalinhamento, indefinicao
+
 ## Decisao de Continuidade
 
 NAVROS nao escolhe um agente por atalho.
@@ -283,7 +319,7 @@ Ele opera em quatro camadas:
 
 Pipeline-base da V1:
 
-`feeling -> movement type -> agent`
+`area + estado + sensacao -> padrao -> movement type -> agent`
 
 Mapeamento inicial:
 
@@ -293,6 +329,7 @@ Mapeamento inicial:
 - `duvida` -> `clarify` -> `LUMORA`
 - `ansiedade` -> `stabilize` -> `NAVROS`
 - `desalinhamento` -> `organize` -> `SYNTARIS`
+- `indefinicao` -> `stabilize` -> `NAVROS`
 
 Ponto de rigor:
 
