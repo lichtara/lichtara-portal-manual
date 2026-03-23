@@ -14,6 +14,7 @@ export const navrosOperationalScreenCopy = {
       "Você não está aqui para aprender algo novo.",
       "Você está aqui para reconhecer onde já está.",
     ],
+    helper: "Esta travessia começa e termina aqui.",
     action: "Entrar",
   },
   focus: {

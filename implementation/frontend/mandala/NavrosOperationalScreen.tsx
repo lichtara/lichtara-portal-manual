@@ -74,6 +74,9 @@ function EntryStep({ onNext }: { onNext: () => void }) {
           </p>
         ))}
       </div>
+      <p className="operational-step__tag">
+        {navrosOperationalScreenCopy.entry.helper}
+      </p>
       <div className="operational-step__actions">
         <button
           type="button"
