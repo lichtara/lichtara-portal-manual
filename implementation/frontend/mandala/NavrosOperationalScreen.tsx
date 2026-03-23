@@ -6,7 +6,6 @@ import {
   buildNavrosReadingCopy,
   navrosSuggestedAreas,
   navrosSuggestedStates,
-  movementLabels,
   navrosSuggestedFeelings,
   normalizeNavrosReadingFeeling,
   resolveNextAgentFromAnswers,
@@ -307,7 +306,7 @@ function MovementStep({
   const paragraphs = buildNavrosMovementCopy(answers)
     .split("\n\n")
     .filter(Boolean);
-  const { movement, agent } = resolveNextAgentFromAnswers(answers);
+  const { agent } = resolveNextAgentFromAnswers(answers);
   const trajectory: NavrosAgentId[] =
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
@@ -315,16 +314,10 @@ function MovementStep({
     <div className="operational-step">
       <p className="operational-step__label">Movimento</p>
       <MandalaMini activeAgent={agent} trajectory={trajectory} />
-      <div className="operational-step__paragraphs">
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="operational-step__copy">
-            {paragraph}
-          </p>
-        ))}
-      </div>
-      <p className="operational-step__tag">
-        Movimento reconhecido: {movementLabels[movement]} para {agent}
-      </p>
+      <p className="operational-step__copy">{paragraphs[0]}</p>
+      {paragraphs[1] ? (
+        <p className="operational-step__tag">{paragraphs[1]}</p>
+      ) : null}
       <div className="operational-step__actions">
         <button
           type="button"

@@ -115,6 +115,7 @@ Um unico direcionamento:
 - uma acao apenas
 - executavel
 - sem ambiguidade
+- continuidade direta da leitura anterior
 
 ## Etapa 6 - Movimento
 
@@ -133,6 +134,10 @@ Exemplos:
 ### Funcao
 
 `abrir continuidade sem quebrar a simplicidade`
+
+Regra:
+
+o movimento confirma a direcao anterior.
 
 ## Etapa 7 - Fechamento
 

@@ -363,6 +363,82 @@ function buildNavrosReadingDirection(
   }
 }
 
+function buildNavrosOrientationAction(
+  state: string,
+  feeling: string,
+): string {
+  const normalizedState = normalizeNavrosState(state);
+  const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
+
+  if (normalizedState === "sobrecarga") {
+    return "devolva prioridade apenas ao que realmente pede espaco agora, em vez de sustentar tudo no mesmo nivel";
+  }
+
+  if (normalizedState === "estagnacao") {
+    return "de um primeiro passo pequeno, sem tentar resolver tudo ao mesmo tempo";
+  }
+
+  if (normalizedState === "indefinicao") {
+    return "observe mais um pouco antes de tentar chegar a uma resposta";
+  }
+
+  switch (normalizedFeeling) {
+    case "confusao":
+      return "reduza as opcoes ao que realmente importa antes de decidir";
+
+    case "pressao":
+      return "evite responder imediatamente ao que parece urgente";
+
+    case "duvida":
+      return "defina um criterio simples antes de decidir";
+
+    case "travamento":
+      return "comece por um passo pequeno, sem tentar resolver tudo de uma vez";
+
+    case "ansiedade":
+      return "reserve alguns minutos apenas para observar antes de agir";
+
+    case "desalinhamento":
+      return "reconheca o que ja nao faz sentido sustentar";
+
+    case "indefinicao":
+      return "observe mais um pouco antes de tentar chegar a uma resposta";
+
+    default:
+      return "observe melhor o que esta acontecendo antes de responder";
+  }
+}
+
+function buildNavrosMovementLine(feeling: string): string {
+  const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
+
+  switch (normalizedFeeling) {
+    case "confusao":
+      return "O proximo passo e ganhar mais clareza antes de decidir.";
+
+    case "pressao":
+      return "O proximo passo e reduzir a urgencia antes de responder.";
+
+    case "duvida":
+      return "O proximo passo e definir um criterio antes de escolher.";
+
+    case "travamento":
+      return "O proximo passo e iniciar um movimento pequeno e possivel.";
+
+    case "ansiedade":
+      return "O proximo passo e ganhar um pouco mais de estabilidade antes de agir.";
+
+    case "desalinhamento":
+      return "O proximo passo e reorganizar o que ja nao faz sentido.";
+
+    case "indefinicao":
+      return "O proximo passo e observar mais antes de avancar.";
+
+    default:
+      return "O proximo passo e observar melhor antes de responder.";
+  }
+}
+
 export function normalizeNavrosFeeling(
   feeling: string,
 ): NavrosReadingPatternId {
@@ -492,42 +568,18 @@ export function buildNavrosReadingCopy(
 export function buildNavrosOrientationCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const area = answers.area.trim() || "essa situacao";
-  const pattern = resolvePatternFromAnswers(answers);
-
-  switch (pattern) {
-    case "confusao":
-      return `Nas proximas 24 horas, anote o que em ${area} realmente importa antes de responder a qualquer pressao de decisao.`;
-
-    case "sobrecarga":
-      return `Nas proximas 24 horas, retire uma demanda de ${area} do mesmo nivel de prioridade e devolva espaco ao essencial.`;
-
-    case "paralisia":
-      return `Nas proximas 24 horas, escolha um passo pequeno em ${area} que possa ser concluido sem preparacao extra.`;
-
-    case "duvida":
-      return `Nas proximas 24 horas, escreva qual criterio deve orientar sua escolha em ${area} antes de comparar caminhos.`;
-
-    case "ansiedade":
-      return `Nas proximas 24 horas, espere alguns minutos antes de responder ao que parece urgente em ${area}.`;
-
-    case "desalinhamento":
-      return `Nas proximas 24 horas, observe onde ${area} continua em movimento mesmo sem coerencia interna.`;
-
-    case "indefinicao":
-      return `Nas proximas 24 horas, observe o que em ${area} ainda esta se formando antes de tentar concluir ou decidir.`;
-
-    default:
-      return `Nas proximas 24 horas, devolva alguns minutos de observacao a ${area} antes de buscar resposta imediata.`;
-  }
+  return `Nas proximas 24 horas, ${buildNavrosOrientationAction(
+    answers.state,
+    answers.feeling,
+  )}.`;
 }
 
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const { movement, agent } = resolveNextAgentFromAnswers(answers);
+  const { agent } = resolveNextAgentFromAnswers(answers);
 
-  return `A partir do que apareceu, o proximo passo nao e ampliar, e ${movementLabels[movement]}.
+  return `${buildNavrosMovementLine(answers.feeling)}
 
 Voce esta entrando em uma fase de ${agent}.`;
 }

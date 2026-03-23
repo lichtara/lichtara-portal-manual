@@ -247,6 +247,19 @@ Composicao atual do `ReadingStep`:
 - `structure`: leitura do padrao predominante
 - `direction`: proximo tipo de movimento em linguagem simples
 
+Composicao atual do `OrientationStep`:
+
+- nao opera como conselho
+- continua diretamente a leitura
+- transforma `state + sensacao + area` em uma acao minima coerente para as proximas 24 horas
+- remove a area da frase quando ela pesa mais do que ajuda a fluidez
+
+Composicao atual do `MovementStep`:
+
+- nao explica o sistema
+- confirma a direcao iniciada na orientacao
+- nomeia o proximo passo em linguagem humana antes de nomear o agente
+
 Entrada estruturada da V1:
 
 - area
