@@ -74,12 +74,6 @@ export function NavrosOperationalStepper({
 
       {!isEntryStep ? (
         <div className="operational-journey__progress">
-          <p className="operational-journey__count">
-            {navrosOperationalStepperCopy.progress(
-              currentStepIndex + 1,
-              navrosOperationalSteps.length,
-            )}
-          </p>
           <div className="operational-journey__bar" aria-hidden="true">
             <span
               className="operational-journey__bar-fill"

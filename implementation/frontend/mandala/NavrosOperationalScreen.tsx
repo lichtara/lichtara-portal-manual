@@ -1,9 +1,8 @@
 import * as React from "react";
 
 import {
+  buildNavrosInsightCopy,
   buildNavrosMovementCopy,
-  buildNavrosOrientationCopy,
-  buildNavrosReadingCopy,
   normalizeNavrosReadingFeeling,
   resolveNextAgentFromAnswers,
   type NavrosAgentId,
@@ -44,11 +43,8 @@ export function NavrosOperationalScreen({
     case "focus":
       return <FocusStep answers={answers} onNext={onNext} onUpdate={onUpdate} />;
 
-    case "reading":
-      return <ReadingStep answers={answers} onNext={onNext} />;
-
-    case "orientation":
-      return <OrientationStep answers={answers} onNext={onNext} />;
+    case "insight":
+      return <InsightStep answers={answers} onNext={onNext} />;
 
     case "movement":
       return <MovementStep answers={answers} onNext={onNext} />;
@@ -147,9 +143,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">
-        {navrosOperationalScreenCopy.focus.label}
-      </p>
       <p className="operational-step__helper">
         {navrosOperationalScreenCopy.focus.helper}
       </p>
@@ -260,19 +253,16 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   );
 }
 
-function ReadingStep({
+function InsightStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const paragraphs = buildNavrosReadingCopy(answers)
+  const paragraphs = buildNavrosInsightCopy(answers)
     .split("\n\n")
     .filter(Boolean);
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">
-        {navrosOperationalScreenCopy.reading.label}
-      </p>
       <div className="operational-step__paragraphs">
         {paragraphs.map((paragraph) => (
           <p key={paragraph} className="operational-step__copy">
@@ -286,56 +276,8 @@ function ReadingStep({
           className="operational-step__action"
           onClick={onNext}
         >
-          {navrosOperationalScreenCopy.reading.action}
+          {navrosOperationalScreenCopy.insight.action}
         </button>
-      </div>
-    </div>
-  );
-}
-
-function OrientationStep({
-  answers,
-  onNext,
-}: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const [isReady, setIsReady] = React.useState(false);
-  const paragraphs = buildNavrosOrientationCopy(answers)
-    .split("\n\n")
-    .filter(Boolean);
-
-  React.useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setIsReady(true);
-    }, 1200);
-
-    return () => window.clearTimeout(timeoutId);
-  }, []);
-
-  return (
-    <div className="operational-step">
-      <p className="operational-step__label">
-        {navrosOperationalScreenCopy.orientation.label}
-      </p>
-      <div className="operational-step__paragraphs">
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="operational-step__copy">
-            {paragraph}
-          </p>
-        ))}
-      </div>
-      <div className="operational-step__actions">
-        {isReady ? (
-          <button
-            type="button"
-            className="operational-step__action"
-            onClick={onNext}
-          >
-            {navrosOperationalScreenCopy.orientation.action}
-          </button>
-        ) : (
-          <span className="operational-step__pause">
-            {navrosOperationalScreenCopy.orientation.pause}
-          </span>
-        )}
       </div>
     </div>
   );
@@ -354,14 +296,8 @@ function MovementStep({
 
   return (
     <div className="operational-step">
-      <p className="operational-step__label">
-        {navrosOperationalScreenCopy.movement.label}
-      </p>
       <MandalaMini activeAgent={agent} trajectory={trajectory} />
       <p className="operational-step__copy">{paragraphs[0]}</p>
-      {paragraphs[1] ? (
-        <p className="operational-step__tag">{paragraphs[1]}</p>
-      ) : null}
       <div className="operational-step__actions">
         <button
           type="button"
@@ -378,9 +314,6 @@ function MovementStep({
 function ClosureStep({ onRestart }: { onRestart: () => void }) {
   return (
     <div className="operational-step">
-      <p className="operational-step__label">
-        {navrosOperationalScreenCopy.closure.label}
-      </p>
       <p className="operational-step__copy">
         {navrosOperationalScreenCopy.closure.quote}
       </p>

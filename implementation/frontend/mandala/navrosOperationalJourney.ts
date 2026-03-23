@@ -17,8 +17,7 @@ import {
 export type NavrosOperationalStepId =
   | "entry"
   | "focus"
-  | "reading"
-  | "orientation"
+  | "insight"
   | "movement"
   | "closure";
 
@@ -70,8 +69,7 @@ export type NavrosOperationalStep = {
 export const navrosOperationalSteps: NavrosOperationalStep[] = [
   { id: "entry", label: navrosOperationalStepLabels.entry },
   { id: "focus", label: navrosOperationalStepLabels.focus },
-  { id: "reading", label: navrosOperationalStepLabels.reading },
-  { id: "orientation", label: navrosOperationalStepLabels.orientation },
+  { id: "insight", label: navrosOperationalStepLabels.insight },
   { id: "movement", label: navrosOperationalStepLabels.movement },
   { id: "closure", label: navrosOperationalStepLabels.closure },
 ];
@@ -417,6 +415,14 @@ export function buildNavrosOrientationCopy(
   answers: NavrosOperationalAnswers,
 ): string {
   return buildNavrosOrientationAction(answers.state, answers.feeling);
+}
+
+export function buildNavrosInsightCopy(
+  answers: NavrosOperationalAnswers,
+): string {
+  return `${buildNavrosReadingCopy(answers)}\n\n${buildNavrosOrientationCopy(
+    answers,
+  )}`;
 }
 
 export function buildNavrosMovementCopy(

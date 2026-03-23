@@ -34,14 +34,9 @@ export const navrosOperationalScreenCopy = {
       prompt: "E agora, o que está mais presente?",
     },
   },
-  reading: {
-    label: "Leitura",
+  insight: {
+    label: "Insight",
     action: "Continuar",
-  },
-  orientation: {
-    label: "Orientação",
-    action: "Continuar",
-    pause: "Deixe essa orientação pousar por um instante.",
   },
   movement: {
     label: "Movimento",
@@ -57,8 +52,7 @@ export const navrosOperationalScreenCopy = {
 export const navrosOperationalStepLabels = {
   entry: navrosOperationalScreenCopy.entry.label,
   focus: navrosOperationalScreenCopy.focus.label,
-  reading: navrosOperationalScreenCopy.reading.label,
-  orientation: navrosOperationalScreenCopy.orientation.label,
+  insight: navrosOperationalScreenCopy.insight.label,
   movement: navrosOperationalScreenCopy.movement.label,
   closure: navrosOperationalScreenCopy.closure.label,
 } as const;
