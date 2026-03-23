@@ -65,6 +65,7 @@ Leitura de rigor:
 ### Implementacao
 
 - [implementation/portal-roadmap-e-backlog.md](implementation/portal-roadmap-e-backlog.md)
+- [implementation/estado-tecnico-v1.md](implementation/estado-tecnico-v1.md)
 - [implementation/notas-de-teste-v1.md](implementation/notas-de-teste-v1.md)
 - [implementation/frontend/mandala/MandalaCanvas.tsx](implementation/frontend/mandala/MandalaCanvas.tsx)
 - [implementation/frontend/mandala/mandalaJourneys.ts](implementation/frontend/mandala/mandalaJourneys.ts)

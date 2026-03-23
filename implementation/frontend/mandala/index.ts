@@ -182,14 +182,10 @@ export type { UseJourneyHoverResult } from "./useJourneyHover";
 export {
   buildNavrosAreaPrefixCopy,
   buildNavrosMovementLineCopy,
-  buildNavrosMovementPhaseCopy,
-  buildNavrosOrientationActionCopy,
-  buildNavrosOrientationLeadCopy,
   buildNavrosReadingAnchorCopy,
   buildNavrosReadingDirectionCopy,
   buildNavrosReadingStructureCopy,
   navrosAreaContexts,
-  movementLabels,
   navrosAreaLabels,
   navrosOperationalScreenCopy,
   navrosOperationalStepperCopy,
@@ -201,9 +197,8 @@ export {
 } from "./navrosOperationalCopy";
 
 export {
+  buildNavrosInsightCopy,
   buildNavrosMovementCopy,
-  buildNavrosOrientationCopy,
-  buildNavrosReadingCopy,
   emptyNavrosOperationalAnswers,
   getAgentFromMovement,
   getMovementType,
