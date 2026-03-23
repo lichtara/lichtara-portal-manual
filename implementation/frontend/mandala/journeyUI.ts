@@ -236,6 +236,51 @@ export const MANDALA_JOURNEY_UI_CSS = `
   font-weight: 600;
 }
 
+.journey-stepper__options {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.journey-stepper__option {
+  appearance: none;
+  align-items: flex-start;
+  background: rgba(245, 246, 247, 0.92);
+  border: 1px solid rgba(201, 210, 217, 0.3);
+  border-radius: 18px;
+  color: var(--lichtara-blue);
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  text-align: left;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.journey-stepper__option:hover,
+.journey-stepper__option:focus-visible {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 10px 24px rgba(0, 8, 20, 0.12);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.journey-stepper__option-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.journey-stepper__option-hint {
+  color: rgba(10, 26, 47, 0.68);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .journey-stepper__steps {
   display: grid;
   gap: 10px;
@@ -661,6 +706,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 @media (max-width: 640px) {
+  .journey-stepper__options {
+    grid-template-columns: 1fr;
+  }
+
   .operational-journey {
     gap: 18px;
     max-width: 100%;

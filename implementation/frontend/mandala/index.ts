@@ -69,6 +69,7 @@ export type {
   MandalaJourneyAnalyticsEvent,
   MandalaJourneyCompletionMode,
   MandalaJourneyId,
+  MandalaJourneyOption,
   MandalaJourneyProgress,
   MandalaJourneyProgressChange,
   MandalaJourneyProgressSource,
