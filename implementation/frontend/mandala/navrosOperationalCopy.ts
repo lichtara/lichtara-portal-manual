@@ -108,14 +108,6 @@ export const navrosSuggestedFeelings = [
   { id: "desalinhamento", label: "desalinhamento", pattern: "desalinhamento" },
 ] as const;
 
-export const movementLabels = {
-  clarify: "clareza",
-  organize: "organização",
-  stabilize: "estabilização",
-  initiate: "início de movimento",
-  expand: "expansão",
-} as const;
-
 export type NavrosReadingVariant =
   | "direct"
   | "contemplative"
@@ -189,119 +181,58 @@ const NAVROS_CONCRETE_STRUCTURES_BY_FEELING: Record<string, string> = {
 
 const NAVROS_READING_DIRECTIONS_BY_FEELING: Record<string, string> = {
   confusao:
-    "Antes de decidir, vale reduzir as opções ao que realmente importa agora.",
+    "O que importa agora aparece melhor quando as opções deixam de ter o mesmo peso.",
   pressao:
-    "Antes de responder, pode ser mais útil desacelerar o ritmo da decisão.",
+    "A direção reaparece quando o ritmo deixa de responder por você.",
   duvida:
-    "Definir um critério claro tende a tornar a escolha mais simples.",
+    "Um critério claro costuma fazer a escolha se mostrar sozinha.",
   travamento:
-    "Um primeiro passo menor pode ser suficiente para iniciar movimento.",
+    "Um primeiro gesto possível já devolve movimento.",
   ansiedade:
-    "Ganhar um pouco mais de clareza antes de agir tende a evitar desalinhamento.",
+    "Mais clareza costuma mudar o modo como você entra nisso.",
   desalinhamento:
-    "Reconhecer o que já não faz sentido pode reorganizar o caminho.",
+    "O que já não faz sentido, quando reconhecido, reorganiza o caminho.",
   indefinicao:
-    "Observar mais um pouco pode permitir que a direção apareça com mais nitidez.",
+    "Mais nitidez costuma aparecer quando a resposta não é forçada.",
 };
 
 const NAVROS_CONTEMPLATIVE_DIRECTIONS_BY_FEELING: Record<string, string> = {
   confusao:
-    "Antes de escolher, pode ser mais importante permanecer tempo suficiente diante do que ainda está se organizando.",
+    "O que ainda está se organizando ganha forma quando não é apressado.",
   duvida:
-    "Talvez o próximo passo não seja decidir já, mas perceber qual critério começa a se mostrar com mais verdade.",
+    "O critério tende a aparecer antes da decisão, quando você não força um fechamento.",
   ansiedade:
-    "Antes de resolver, pode ser mais importante sustentar a observação do que responder ao primeiro impulso.",
+    "O que pede leitura amadurece quando o impulso deixa de decidir por você.",
   indefinicao:
-    "Antes de tentar resolver, pode ser mais importante sustentar a observação do que ainda está aparecendo.",
+    "A direção costuma aparecer quando o que está em formação recebe tempo suficiente.",
 };
 
 const NAVROS_CONCRETE_DIRECTIONS_BY_FEELING: Record<string, string> = {
   pressao:
-    "Antes de responder, reduzir o campo ao que é essencial pode tornar o próximo passo mais preciso.",
+    "Quando o campo se reduz ao essencial, o movimento ganha precisão.",
   ansiedade:
-    "Antes de avançar, reduzir o campo ao que é essencial pode devolver precisão ao próximo passo.",
+    "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.",
   travamento:
-    "Em vez de retomar tudo, escolha um gesto pequeno que já possa ser sustentado.",
+    "Quando um gesto pequeno encontra espaço, o movimento volta a existir.",
   desalinhamento:
-    "Antes de insistir no que já não responde, reorganizar o que ficou fora de eixo pode devolver direção.",
+    "Quando o que saiu de eixo é visto, a direção começa a retornar.",
 };
-
-const NAVROS_ORIENTATION_ACTIONS_BY_FEELING: Record<string, string> = {
-  confusao:
-    "reduza as opções ao que realmente importa antes de decidir",
-  pressao:
-    "evite responder imediatamente ao que parece urgente",
-  duvida:
-    "defina um critério simples antes de decidir",
-  travamento:
-    "comece por um passo pequeno, sem tentar resolver tudo de uma vez",
-  ansiedade:
-    "reserve alguns minutos apenas para observar antes de agir",
-  desalinhamento:
-    "reconheça o que já não faz sentido sustentar",
-  indefinicao:
-    "observe mais um pouco antes de tentar chegar a uma resposta",
-};
-
-type NavrosOrientationCopy = {
-  lead: string;
-  support: string;
-};
-
-const NAVROS_DIRECT_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
-  {
-    lead: "Hoje, retire uma coisa desse mesmo nível de prioridade.",
-    support:
-      "Não precisa resolver tudo — apenas devolver espaço ao que realmente importa agora.",
-  },
-  {
-    lead: "Antes de responder ao próximo pedido, pause e escolha o que fica de fora.",
-    support:
-      "Clareza também vem do que você decide não sustentar agora.",
-  },
-];
-
-const NAVROS_CONTEMPLATIVE_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
-  {
-    lead: "Hoje, apenas observe quando isso voltar a aparecer.",
-    support:
-      "Sem tentar resolver — só reconheça como se repete.",
-  },
-  {
-    lead: "Se isso surgir novamente, não responda de imediato.",
-    support:
-      "Dê um pouco mais de tempo para entender o que está se formando.",
-  },
-];
-
-const NAVROS_CONCRETE_ORIENTATION_VARIANTS: NavrosOrientationCopy[] = [
-  {
-    lead: "Escolha uma única ação e leve até o fim.",
-    support:
-      "Evite abrir novos movimentos antes de concluir esse.",
-  },
-  {
-    lead: "No próximo momento em que isso pedir resposta, reduza para um único passo.",
-    support:
-      "Movimento claro vem de direção, não de quantidade.",
-  },
-];
 
 const NAVROS_MOVEMENT_LINES_BY_FEELING: Record<string, string> = {
   confusao:
-    "O próximo passo é ganhar mais clareza antes de decidir.",
+    "Mais clareza começa a se formar.",
   pressao:
-    "O próximo passo é reduzir a urgência antes de responder.",
+    "A urgência começa a perder força.",
   duvida:
-    "O próximo passo é definir um critério antes de escolher.",
+    "Um critério começa a aparecer.",
   travamento:
-    "O próximo passo é iniciar um movimento pequeno e possível.",
+    "Um movimento pequeno já encontra espaço.",
   ansiedade:
-    "O próximo passo é ganhar um pouco mais de estabilidade antes de agir.",
+    "Mais estabilidade começa a se firmar.",
   desalinhamento:
-    "O próximo passo é reorganizar o que já não faz sentido.",
+    "Algo começa a se reorganizar.",
   indefinicao:
-    "O próximo passo é observar mais antes de avançar.",
+    "A direção começa a ganhar contorno.",
 };
 
 export function buildNavrosAreaPrefixCopy(area: string): string {
@@ -440,58 +371,8 @@ export function buildNavrosReadingDirectionCopy(
   return (
     directionsByVariant[normalizedFeeling] ??
     NAVROS_READING_DIRECTIONS_BY_FEELING[normalizedFeeling] ??
-    "Vale observar antes de tentar resolver imediatamente."
+    "Algo ganha nitidez quando deixa de ser forçado."
   );
-}
-
-export function buildNavrosOrientationActionCopy(
-  normalizedState: string,
-  normalizedFeeling: string,
-): string {
-  if (normalizedState === "sobrecarga") {
-    return "devolva prioridade apenas ao que realmente pede espaço agora, em vez de sustentar tudo no mesmo nível";
-  }
-
-  if (normalizedState === "estagnacao") {
-    return "dê um primeiro passo pequeno, sem tentar resolver tudo ao mesmo tempo";
-  }
-
-  if (normalizedState === "indefinicao") {
-    return "observe mais um pouco antes de tentar chegar a uma resposta";
-  }
-
-  return (
-    NAVROS_ORIENTATION_ACTIONS_BY_FEELING[normalizedFeeling] ??
-    "observe melhor o que está acontecendo antes de responder"
-  );
-}
-
-export function buildNavrosOrientationLeadCopy(action: string): string {
-  return `Nas próximas 24 horas, ${action}.`;
-}
-
-export function buildNavrosOrientationVariantCopy(
-  normalizedState: string,
-  normalizedFeeling: string,
-  variant: NavrosReadingVariant = "direct",
-): string {
-  const options =
-    variant === "contemplative"
-      ? NAVROS_CONTEMPLATIVE_ORIENTATION_VARIANTS
-      : variant === "concrete"
-        ? NAVROS_CONCRETE_ORIENTATION_VARIANTS
-        : NAVROS_DIRECT_ORIENTATION_VARIANTS;
-  const selected = options[
-    getStableVariantIndex(
-      [normalizedState, normalizedFeeling, variant],
-      options.length,
-    )
-  ] ?? {
-    lead: "Hoje, observe com mais cuidado o que volta a pedir espaço.",
-    support: "Basta um próximo passo possível para manter a leitura viva.",
-  };
-
-  return `${selected.lead}\n\n${selected.support}`;
 }
 
 export function buildNavrosMovementLineCopy(
@@ -499,10 +380,6 @@ export function buildNavrosMovementLineCopy(
 ): string {
   return (
     NAVROS_MOVEMENT_LINES_BY_FEELING[normalizedFeeling] ??
-    "O próximo passo é observar melhor antes de responder."
+    "Algo começa a se reorganizar."
   );
-}
-
-export function buildNavrosMovementPhaseCopy(agent: string): string {
-  return `Você está entrando em uma fase de ${agent}.`;
 }

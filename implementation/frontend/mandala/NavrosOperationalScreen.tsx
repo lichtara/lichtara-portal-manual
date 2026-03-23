@@ -287,9 +287,7 @@ function MovementStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const paragraphs = buildNavrosMovementCopy(answers)
-    .split("\n\n")
-    .filter(Boolean);
+  const movementCopy = buildNavrosMovementCopy(answers);
   const { agent } = resolveNextAgentFromAnswers(answers);
   const trajectory: NavrosAgentId[] =
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
@@ -297,7 +295,7 @@ function MovementStep({
   return (
     <div className="operational-step">
       <MandalaMini activeAgent={agent} trajectory={trajectory} />
-      <p className="operational-step__copy">{paragraphs[0]}</p>
+      <p className="operational-step__copy">{movementCopy}</p>
       <div className="operational-step__actions">
         <button
           type="button"

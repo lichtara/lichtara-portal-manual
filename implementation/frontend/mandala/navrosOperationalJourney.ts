@@ -1,11 +1,8 @@
 import {
   buildNavrosMovementLineCopy,
-  buildNavrosMovementPhaseCopy,
-  buildNavrosOrientationVariantCopy,
   buildNavrosReadingAnchorCopy,
   buildNavrosReadingDirectionCopy,
   buildNavrosReadingStructureCopy,
-  movementLabels,
   navrosOperationalStepLabels,
   resolveNavrosReadingVariantCopy,
   navrosSuggestedAreas,
@@ -259,28 +256,67 @@ function resolveNavrosReadingVariant(
   );
 }
 
-function buildNavrosOrientationAction(
-  state: string,
-  feeling: string,
-): string {
-  const normalizedState = normalizeNavrosState(state);
-  const normalizedFeeling = normalizeNavrosReadingFeeling(feeling);
-  const variant = resolveNavrosReadingVariantCopy(
-    normalizedState,
-    normalizedFeeling,
-  );
-
-  return buildNavrosOrientationVariantCopy(
-    normalizedState,
-    normalizedFeeling,
-    variant,
-  );
-}
-
 function buildNavrosMovementLine(feeling: string): string {
   return buildNavrosMovementLineCopy(
     normalizeNavrosReadingFeeling(feeling),
   );
+}
+
+function lowerFirst(text: string): string {
+  if (!text) {
+    return text;
+  }
+
+  return `${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+}
+
+function softenNavrosDirection(text: string): string {
+  const trimmed = text.trim().replace(/[.!?]+$/u, "");
+
+  if (!trimmed) {
+    return "algo comeca a ganhar nitidez";
+  }
+
+  const replacements: Array<[RegExp, string]> = [
+    [/^Antes de decidir,\s*vale\s+/iu, ""],
+    [/^Antes de responder,\s*pode ser mais util\s+/iu, ""],
+    [/^Definir um criterio claro tende a\s+/iu, "um criterio claro costuma "],
+    [/^Um primeiro passo menor pode ser suficiente para\s+/iu, "um primeiro passo menor ja pode "],
+    [/^Ganhar um pouco mais de clareza antes de agir tende a\s+/iu, "mais clareza costuma "],
+    [/^Reconhecer o que ja nao faz sentido pode\s+/iu, "reconhecer o que ja nao faz sentido costuma "],
+    [/^Observar mais um pouco pode\s+/iu, "observar mais um pouco costuma "],
+    [/^Antes de escolher,\s*pode ser mais importante\s+/iu, ""],
+    [/^Talvez o proximo passo nao seja decidir ja, mas\s+/iu, ""],
+    [/^Antes de resolver,\s*pode ser mais importante\s+/iu, ""],
+    [/^Antes de tentar resolver,\s*pode ser mais importante\s+/iu, ""],
+    [/^Antes de responder,\s*/iu, ""],
+    [/^Antes de avancar,\s*/iu, ""],
+    [/^Em vez de retomar tudo,\s*/iu, ""],
+    [/^Antes de insistir no que ja nao responde,\s*/iu, ""],
+  ];
+
+  const softened = replacements.reduce((current, [pattern, replacement]) => {
+    return current.replace(pattern, replacement);
+  }, trimmed);
+
+  return lowerFirst(softened.trim());
+}
+
+function softenNavrosMovement(text: string): string {
+  const trimmed = text.trim().replace(/[.!?]+$/u, "");
+
+  if (!trimmed) {
+    return "Algo começa a se reorganizar.";
+  }
+
+  const softened = trimmed
+    .replace(/^O proximo passo e\s+/iu, "")
+    .replace(/^Mais\s+/iu, "Mais ")
+    .trim();
+
+  const withLeading = softened === trimmed ? softened : lowerFirst(softened);
+
+  return withLeading.endsWith(".") ? withLeading : `${withLeading}.`;
 }
 
 export function normalizeNavrosFeeling(
@@ -399,38 +435,31 @@ export function resolveNextAgentFromAnswers(
   return { pattern, movement, agent };
 }
 
-export function buildNavrosReadingCopy(
-  answers: NavrosOperationalAnswers,
-): string {
-  const variant = resolveNavrosReadingVariant(answers.state, answers.feeling);
-
-  return [
-    buildNavrosReadingAnchor(answers.area, answers.state, variant),
-    buildNavrosReadingStructure(answers.state, answers.feeling, variant),
-    buildNavrosReadingDirection(answers.state, answers.feeling, variant),
-  ].join("\n\n");
-}
-
-export function buildNavrosOrientationCopy(
-  answers: NavrosOperationalAnswers,
-): string {
-  return buildNavrosOrientationAction(answers.state, answers.feeling);
-}
-
 export function buildNavrosInsightCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return `${buildNavrosReadingCopy(answers)}\n\n${buildNavrosOrientationCopy(
-    answers,
-  )}`;
+  const variant = resolveNavrosReadingVariant(answers.state, answers.feeling);
+  const anchor = buildNavrosReadingAnchor(
+    answers.area,
+    answers.state,
+    variant,
+  );
+  const structure = buildNavrosReadingStructure(
+    answers.state,
+    answers.feeling,
+    variant,
+  );
+  const direction = buildNavrosReadingDirection(
+    answers.state,
+    answers.feeling,
+    variant,
+  );
+
+  return `${anchor} ${structure}\n\n${softenNavrosDirection(direction)}.`;
 }
 
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  const { agent } = resolveNextAgentFromAnswers(answers);
-
-  return `${buildNavrosMovementLine(answers.feeling)}
-
-${buildNavrosMovementPhaseCopy(agent)}`;
+  return softenNavrosMovement(buildNavrosMovementLine(answers.feeling));
 }
