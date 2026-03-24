@@ -6,6 +6,10 @@ export type NavrosDomain =
   | "proposito"
   | "transicao";
 
+export type NavrosDomainAutoCorrectMode =
+  | "insight"
+  | "movement";
+
 function compactWhitespace(text: string): string {
   return text
     .replace(/\s+/g, " ")
@@ -51,22 +55,32 @@ function applyGlobalSafety(text: string): string {
   );
 }
 
-function correctSaude(text: string): string {
+function correctSaude(
+  text: string,
+  mode: NavrosDomainAutoCorrectMode,
+): string {
   return compactWhitespace(
     text
-      .replace(/\bcampo\b/giu, "corpo")
-      .replace(/\bresposta\b/giu, "resposta do corpo")
+      .replace(/\bpede resposta\b/giu, "pede atenção")
       .replace(/se estabilizar/giu, "encontrar mais estabilidade")
-      .replace(/se reorganizar/giu, "começar a se reorganizar")
-      .replace(/deixa de se espalhar/giu, "pode ganhar mais direção"),
+      .replace(
+        /deixa de se espalhar/giu,
+        mode === "movement" ? "pode ganhar mais direção" : "deixa de se dispersar",
+      ),
   );
 }
 
-function correctRelacoes(text: string): string {
+function correctRelacoes(
+  text: string,
+  mode: NavrosDomainAutoCorrectMode,
+): string {
   return compactWhitespace(
     text
-      .replace(/se estabilizar/giu, "encontrar outro ritmo")
-      .replace(/se firmar/giu, "ganhar outra forma")
+      .replace(
+        /se estabilizar/giu,
+        mode === "movement" ? "ganhar outro ritmo" : "encontrar outro ritmo",
+      )
+      .replace(/se firmar/giu, mode === "movement" ? "aparecer" : "ganhar outra forma")
       .replace(/ganha nitidez/giu, "pode ganhar mais clareza"),
   );
 }
@@ -89,12 +103,17 @@ function correctProposito(text: string): string {
   );
 }
 
-function correctTransicao(text: string): string {
+function correctTransicao(
+  text: string,
+  mode: NavrosDomainAutoCorrectMode,
+): string {
   return compactWhitespace(
     text
       .replace(/se organizar/giu, "se reorganizar aos poucos")
       .replace(/comeca a se formar/giu, "começa a se delinear")
-      .replace(/começa a se formar/giu, "começa a se delinear"),
+      .replace(/começa a se formar/giu, "começa a se delinear")
+      .replace(/se estabilizar/giu, mode === "movement" ? "ganhar outro ritmo" : "se estabilizar")
+      .replace(/se firmar/giu, mode === "movement" ? "aparecer" : "se firmar"),
   );
 }
 
@@ -102,13 +121,17 @@ function correctTrabalho(text: string): string {
   return text;
 }
 
-function applyDomainRules(text: string, domain: NavrosDomain): string {
+function applyDomainRules(
+  text: string,
+  domain: NavrosDomain,
+  mode: NavrosDomainAutoCorrectMode,
+): string {
   switch (domain) {
     case "saude":
-      return correctSaude(text);
+      return correctSaude(text, mode);
 
     case "relacoes":
-      return correctRelacoes(text);
+      return correctRelacoes(text, mode);
 
     case "financas":
       return correctFinancas(text);
@@ -117,7 +140,7 @@ function applyDomainRules(text: string, domain: NavrosDomain): string {
       return correctProposito(text);
 
     case "transicao":
-      return correctTransicao(text);
+      return correctTransicao(text, mode);
 
     case "trabalho":
     default:
@@ -128,9 +151,10 @@ function applyDomainRules(text: string, domain: NavrosDomain): string {
 export function autoCorrectByDomain(
   text: string,
   domain: NavrosDomain,
+  mode: NavrosDomainAutoCorrectMode = "insight",
 ): string {
   const globallySafe = applyGlobalSafety(text);
-  const domainSafe = applyDomainRules(globallySafe, domain);
+  const domainSafe = applyDomainRules(globallySafe, domain, mode);
 
   return domainSafe.trim();
 }

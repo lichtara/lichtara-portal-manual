@@ -180,6 +180,8 @@ export { useJourneyHover } from "./useJourneyHover";
 export type { UseJourneyHoverResult } from "./useJourneyHover";
 
 export {
+  applyIntensityToDirection,
+  applyIntensityToStructure,
   buildNavrosAreaPrefixCopy,
   composeNavrosInsightCopy,
   buildNavrosMovementLineCopy,
@@ -191,10 +193,14 @@ export {
   navrosOperationalScreenCopy,
   navrosOperationalStepperCopy,
   navrosOperationalStepLabels,
+  resolveNavrosIntensity,
   navrosStateLabels,
   navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosSuggestedStates,
+} from "./navrosOperationalCopy";
+export type {
+  NavrosIntensity,
 } from "./navrosOperationalCopy";
 
 export {
@@ -212,7 +218,10 @@ export {
   autoCorrectByDomain,
   normalizeNavrosDomain,
 } from "./navrosDomainAutoCorrect";
-export type { NavrosDomain } from "./navrosDomainAutoCorrect";
+export type {
+  NavrosDomain,
+  NavrosDomainAutoCorrectMode,
+} from "./navrosDomainAutoCorrect";
 
 export {
   buildNavrosInsightCopy,

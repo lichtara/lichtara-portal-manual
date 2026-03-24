@@ -100,6 +100,11 @@ export type NavrosReadingVariant =
   | "contemplative"
   | "concrete";
 
+export type NavrosIntensity =
+  | "low"
+  | "medium"
+  | "high";
+
 type NavrosAnchorType =
   | "formation"
   | "overload"
@@ -344,10 +349,74 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     variants: [
       "Algo ganha nitidez quando deixa de ser forçado.",
       "À medida que deixa de ser forçado, algo ganha nitidez.",
-      "Quando a força diminui, algo começa a ganhar nitidez.",
+      "Algo começa a ganhar nitidez quando deixa de ser forçado.",
     ],
   },
 ];
+
+const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
+  Exclude<NavrosIntensity, "low">,
+  Record<string, string>
+> = {
+  medium: {
+    "Há elementos presentes, mas ainda sem organização suficiente para orientar uma decisão.":
+      "Há elementos presentes, mas ainda sem organização suficiente para orientar uma decisão com firmeza.",
+    "O ritmo interno ainda não acompanha a pressão por resposta.":
+      "O ritmo interno ainda não acompanha por completo a pressão por resposta.",
+    "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.":
+      "Há movimento suficiente para pedir resposta, mas ainda não no ritmo em que ele quer ser lido.",
+  },
+  high: {
+    "O ritmo interno ainda não acompanha a pressão por resposta.":
+      "O ritmo interno ainda não consegue acompanhar a pressão por resposta.",
+    "A resposta parece urgente, mas o que pede leitura ainda não terminou de se formar.":
+      "A resposta parece urgente, mas o que pede leitura ainda não terminou de se formar por completo.",
+    "Existe movimento possível, mas ele ainda não encontra base para acontecer.":
+      "Existe movimento possível, mas ele ainda não encontra base suficiente para acontecer.",
+    "O movimento ainda não encontrou um ponto simples o bastante para começar.":
+      "O movimento ainda não encontrou um ponto simples o bastante para se sustentar.",
+    "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.":
+      "Há movimento suficiente para pedir resposta, mas não no ritmo em que está sendo pressionado.",
+    "Parte do que está em curso ainda não se deixa acompanhar no ritmo esperado.":
+      "Parte do que está em curso ainda não se deixa acompanhar no ritmo exigido.",
+  },
+};
+
+const NAVROS_DIRECTION_INTENSITY_BY_LEVEL: Record<
+  Exclude<NavrosIntensity, "low">,
+  Record<string, string>
+> = {
+  medium: {
+    "Algo ganha nitidez quando deixa de ser forçado.":
+      "Algo começa a ganhar nitidez quando deixa de ser forçado.",
+    "À medida que deixa de ser forçado, algo ganha nitidez.":
+      "À medida que deixa de ser forçado, algo começa a ganhar nitidez.",
+    "O que importa agora aparece melhor quando as opções deixam de ter o mesmo peso.":
+      "O que importa agora começa a aparecer melhor quando as opções deixam de ter o mesmo peso.",
+    "A direção reaparece quando o ritmo deixa de responder por você.":
+      "A direção começa a reaparecer quando o ritmo deixa de responder por você.",
+    "Mais nitidez costuma aparecer quando a resposta não é forçada.":
+      "Mais nitidez começa a aparecer quando a resposta não é forçada.",
+  },
+  high: {
+    "Algo ganha nitidez quando deixa de ser forçado.":
+      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+    "À medida que deixa de ser forçado, algo ganha nitidez.":
+      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+    "Algo começa a ganhar nitidez quando deixa de ser forçado.":
+      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+    "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.":
+      "Quando o campo se reduz ao essencial, a resposta precisa ganhar direção.",
+    "À medida que o campo se reduz ao essencial, a resposta deixa de se espalhar.":
+      "À medida que o campo se reduz ao essencial, a resposta precisa ganhar direção.",
+    "O essencial ganha mais espaço, e a resposta deixa de se espalhar.":
+      "Quando o essencial ganha mais espaço, a resposta precisa ganhar direção.",
+    "Quando o essencial ganha mais espaço, a resposta deixa de se dispersar.":
+      "Quando o essencial ganha mais espaço, a resposta precisa ganhar direção.",
+    "Quando um gesto pequeno encontra espaço, o movimento volta a aparecer.":
+      "Um gesto pequeno precisa encontrar espaço para que o movimento volte a aparecer.",
+  },
+};
 
 const NAVROS_MOVEMENT_LINES_BY_PATTERN: Record<string, string> = {
   confusao:
@@ -436,6 +505,49 @@ function selectNavrosStructureType(
   );
 
   return available[index] ?? "limit";
+}
+
+export function resolveNavrosIntensity(
+  normalizedFeeling: string,
+): NavrosIntensity {
+  if (
+    normalizedFeeling === "ansiedade" ||
+    normalizedFeeling === "travamento"
+  ) {
+    return "high";
+  }
+
+  if (
+    normalizedFeeling === "confusao" ||
+    normalizedFeeling === "pressao" ||
+    normalizedFeeling === "desalinhamento"
+  ) {
+    return "medium";
+  }
+
+  return "low";
+}
+
+export function applyIntensityToStructure(
+  text: string,
+  intensity: NavrosIntensity,
+): string {
+  if (intensity === "low") {
+    return text;
+  }
+
+  return NAVROS_STRUCTURE_INTENSITY_BY_LEVEL[intensity][text] ?? text;
+}
+
+export function applyIntensityToDirection(
+  text: string,
+  intensity: NavrosIntensity,
+): string {
+  if (intensity === "low") {
+    return text;
+  }
+
+  return NAVROS_DIRECTION_INTENSITY_BY_LEVEL[intensity][text] ?? text;
 }
 
 export function buildNavrosAreaPrefixCopy(area: string): string {
@@ -546,7 +658,7 @@ export function buildNavrosReadingStructureCopy(
     return "Há exigências demais ocupando o mesmo espaço, o que reduz a capacidade de distinguir prioridade.";
   }
 
-  return "Há um padrão em formação que ainda não está completamente claro.";
+  return "Há algo presente, mas ainda sem organização suficiente para se sustentar.";
 }
 
 export function buildNavrosReadingDirectionCopy(
@@ -621,6 +733,7 @@ export function composeNavrosInsightCopy(
   normalizedState: string,
   normalizedFeeling: string,
 ): string {
+  const intensity = resolveNavrosIntensity(normalizedFeeling);
   const variant = resolveNavrosReadingVariantCopy(
     normalizedState,
     normalizedFeeling,
@@ -653,8 +766,8 @@ export function composeNavrosInsightCopy(
 
   return mergeInsightCopy(
     override?.anchor ?? anchor,
-    override?.structure ?? structure,
-    override?.direction ?? diversifiedDirection,
+    override?.structure ?? applyIntensityToStructure(structure, intensity),
+    override?.direction ?? applyIntensityToDirection(diversifiedDirection, intensity),
   );
 }
 
