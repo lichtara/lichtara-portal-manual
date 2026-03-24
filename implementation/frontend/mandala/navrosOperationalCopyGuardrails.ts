@@ -3,6 +3,11 @@ export type NavrosCopyValidationResult = {
   issues: string[];
 };
 
+export type NavrosCopyCorrectionContext = {
+  area?: string;
+  mode?: "insight" | "movement";
+};
+
 const INSTRUCTION_PATTERNS = [
   "antes de",
   "faca",
@@ -191,4 +196,46 @@ export function autoCorrectNavrosCopy(text: string): string {
   result = reduceRepetition(result);
 
   return result.trim();
+}
+
+function autoCorrectNavrosCopyByDomain(
+  text: string,
+  context: NavrosCopyCorrectionContext = {},
+): string {
+  const normalizedArea = normalizeForMatch(context.area ?? "");
+  let result = text;
+
+  if (normalizedArea === "saude") {
+    result = compactWhitespace(
+      result
+        .replace(/\bpede resposta\b/giu, "pede atenção")
+        .replace(
+          /\ba resposta deixa de se espalhar\b/giu,
+          "a resposta deixa de se dispersar",
+        ),
+    );
+  }
+
+  if (
+    context.mode === "movement" &&
+    (normalizedArea === "relacoes" ||
+      normalizedArea === "saude" ||
+      normalizedArea === "proposito")
+  ) {
+    result = compactWhitespace(
+      result.replace(
+        /\bmais estabilidade pode começar a se firmar\./giu,
+        "Algo pode começar a se estabilizar.",
+      ),
+    );
+  }
+
+  return result.trim();
+}
+
+export function autoCorrectNavrosCopyWithContext(
+  text: string,
+  context: NavrosCopyCorrectionContext = {},
+): string {
+  return autoCorrectNavrosCopyByDomain(autoCorrectNavrosCopy(text), context);
 }
