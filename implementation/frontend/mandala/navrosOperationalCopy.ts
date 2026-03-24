@@ -19,20 +19,7 @@ export const navrosOperationalScreenCopy = {
   },
   focus: {
     label: "Foco",
-    action: "Continuar",
     helper: "Deixe vir primeiro.",
-    area: {
-      label: "Área",
-      prompt: "Onde isso está mais aparecendo agora?",
-    },
-    state: {
-      label: "Estado",
-      prompt: "Como isso tem se apresentado?",
-    },
-    feeling: {
-      label: "Sensação",
-      prompt: "E agora, o que está mais presente?",
-    },
   },
   insight: {
     label: "Insight",
