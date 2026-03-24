@@ -166,6 +166,39 @@ const NAVROS_CONCRETE_STRUCTURES_BY_FEELING: Record<string, string> = {
     "Quando algo continua em curso sem coerência, a energia é gasta mantendo o que já perdeu sentido.",
 };
 
+const NAVROS_STATE_STRUCTURE_OVERRIDES: Record<string, Partial<Record<string, string>>> = {
+  inicio: {
+    confusao:
+      "Nem tudo que aparece aqui já encontra base suficiente para sustentar uma escolha.",
+    duvida:
+      "O que surge ainda não encontrou um critério estável para se diferenciar.",
+    ansiedade:
+      "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.",
+    indefinicao:
+      "Nem tudo que aparece aqui já pode ser sustentado com clareza.",
+  },
+  mudanca: {
+    confusao:
+      "O que muda aqui não se organiza por inteiro no mesmo tempo.",
+    duvida:
+      "Quando algo muda, partes diferentes costumam pedir critérios diferentes antes de se deixarem distinguir.",
+    ansiedade:
+      "Nem toda mudança pede resposta imediata; parte dela ainda encontra o próprio ritmo.",
+    travamento:
+      "Mesmo com movimento disponível, ainda falta um ponto firme para que ele se sustente.",
+  },
+  indefinicao: {
+    confusao:
+      "Nem tudo que aparece aqui já encontra forma suficiente para ser distinguido.",
+    duvida:
+      "Ainda não há base suficiente para que as diferenças se mostrem com nitidez.",
+    ansiedade:
+      "A pressa por definir pode apertar algo que ainda não terminou de aparecer.",
+    indefinicao:
+      "Nem tudo que aparece aqui já pode ser sustentado com clareza.",
+  },
+};
+
 const NAVROS_READING_DIRECTIONS_BY_FEELING: Record<string, string> = {
   confusao:
     "O que importa agora aparece melhor quando as opções deixam de ter o mesmo peso.",
@@ -292,6 +325,13 @@ export function buildNavrosReadingStructureCopy(
   normalizedFeeling: string,
   variant: NavrosReadingVariant = "direct",
 ): string {
+  const stateOverride =
+    NAVROS_STATE_STRUCTURE_OVERRIDES[normalizedState]?.[normalizedFeeling];
+
+  if (stateOverride) {
+    return stateOverride;
+  }
+
   const structuresByVariant =
     variant === "contemplative"
       ? NAVROS_CONTEMPLATIVE_STRUCTURES_BY_FEELING
