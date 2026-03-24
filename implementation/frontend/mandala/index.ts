@@ -181,6 +181,7 @@ export type { UseJourneyHoverResult } from "./useJourneyHover";
 
 export {
   buildNavrosAreaPrefixCopy,
+  composeNavrosInsightCopy,
   buildNavrosMovementLineCopy,
   buildNavrosReadingAnchorCopy,
   buildNavrosReadingDirectionCopy,

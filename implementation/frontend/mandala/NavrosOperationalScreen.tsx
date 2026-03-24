@@ -98,10 +98,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [feeling, setFeeling] = React.useState(answers.feeling);
   const hasArea = Boolean(area.trim());
   const hasState = Boolean(state.trim());
-  const areaLabel =
-    area.trim() && area.trim().toLowerCase() in navrosAreaLabels
-      ? navrosAreaLabels[area.trim().toLowerCase() as keyof typeof navrosAreaLabels]
-      : area.trim();
 
   function handleAreaSelect(nextArea: string) {
     const shouldReset = nextArea !== area;
@@ -147,12 +143,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
         {navrosOperationalScreenCopy.focus.helper}
       </p>
       <div className="operational-step__group">
-        <p className="operational-step__group-label">
-          {navrosOperationalScreenCopy.focus.area.label}
-        </p>
-        <p className="operational-step__prompt">
-          {navrosOperationalScreenCopy.focus.area.prompt}
-        </p>
         <div className="operational-step__chips">
           {navrosSuggestedAreas.map((suggestedArea) => {
             const isActive =
@@ -183,14 +173,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 
       {hasArea ? (
         <div className="operational-step__group">
-          <p className="operational-step__group-label">
-            {navrosOperationalScreenCopy.focus.state.label}
-          </p>
-          <p className="operational-step__prompt">
-            {areaLabel
-              ? `Em ${areaLabel}, ${navrosOperationalScreenCopy.focus.state.prompt.toLowerCase()}`
-              : navrosOperationalScreenCopy.focus.state.prompt}
-          </p>
           <div className="operational-step__chips">
             {navrosSuggestedStates.map((suggestedState) => {
               const isActive =
@@ -218,12 +200,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 
       {hasArea && hasState ? (
         <div className="operational-step__group">
-          <p className="operational-step__group-label">
-            {navrosOperationalScreenCopy.focus.feeling.label}
-          </p>
-          <p className="operational-step__prompt">
-            {navrosOperationalScreenCopy.focus.feeling.prompt}
-          </p>
           <div className="operational-step__chips">
             {navrosSuggestedFeelings.map((suggestedFeeling) => {
               const isActive =
@@ -257,19 +233,11 @@ function InsightStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const paragraphs = buildNavrosInsightCopy(answers)
-    .split("\n\n")
-    .filter(Boolean);
+  const insightCopy = buildNavrosInsightCopy(answers);
 
   return (
     <div className="operational-step">
-      <div className="operational-step__paragraphs">
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="operational-step__copy">
-            {paragraph}
-          </p>
-        ))}
-      </div>
+      <p className="operational-step__copy">{insightCopy}</p>
       <div className="operational-step__actions">
         <button
           type="button"

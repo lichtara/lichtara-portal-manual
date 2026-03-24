@@ -19,20 +19,7 @@ export const navrosOperationalScreenCopy = {
   },
   focus: {
     label: "Foco",
-    action: "Continuar",
     helper: "Deixe vir primeiro.",
-    area: {
-      label: "Área",
-      prompt: "Onde isso está mais aparecendo agora?",
-    },
-    state: {
-      label: "Estado",
-      prompt: "Como isso tem se apresentado?",
-    },
-    feeling: {
-      label: "Sensação",
-      prompt: "E agora, o que está mais presente?",
-    },
   },
   insight: {
     label: "Insight",
@@ -130,10 +117,10 @@ const NAVROS_CONTEMPLATIVE_ANCHORS_BY_STATE: Record<string, string> = {
 };
 
 const NAVROS_CONCRETE_ANCHORS_BY_STATE: Record<string, string> = {
-  inicio: "já existem sinais suficientes para começar a responder.",
+  inicio: "já existem sinais para começar a responder.",
   mudanca:
-    "já existem elementos suficientes para agir, mas ainda sem organização clara.",
-  sobrecarga: "há acúmulo demais ocupando o mesmo espaço.",
+    "já existem elementos para agir, mas ainda sem organização clara.",
+  sobrecarga: "há acúmulo no mesmo nível de atenção.",
   instabilidade:
     "o que aparece muda rápido, mas já deixa pistas suficientes para orientar um gesto.",
   estagnacao:
@@ -172,11 +159,50 @@ const NAVROS_CONCRETE_STRUCTURES_BY_FEELING: Record<string, string> = {
   pressao:
     "Quando a resposta vem antes da leitura, a ação tende a se espalhar em vez de ganhar direção.",
   ansiedade:
-    "Quando o impulso por resolver chega primeiro, o movimento perde precisão mesmo parecendo urgente.",
+    "O que aparece pede resposta, mas não no ritmo em que está sendo pressionado.",
   travamento:
     "Existe movimento disponível, mas ele ainda não encontrou um ponto simples o bastante para começar.",
   desalinhamento:
     "Quando algo continua em curso sem coerência, a energia é gasta mantendo o que já perdeu sentido.",
+};
+
+const NAVROS_STATE_STRUCTURE_OVERRIDES: Record<string, Partial<Record<string, string>>> = {
+  inicio: {
+    confusao:
+      "Nem tudo que aparece aqui já encontra base suficiente para sustentar uma escolha.",
+    duvida:
+      "O que surge ainda não encontrou um critério estável para se diferenciar.",
+    ansiedade:
+      "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.",
+    indefinicao:
+      "Nem tudo que aparece aqui já pode ser sustentado com clareza.",
+  },
+  mudanca: {
+    confusao:
+      "O que muda aqui não se organiza por inteiro no mesmo tempo.",
+    duvida:
+      "Quando algo muda, partes diferentes costumam pedir critérios diferentes antes de se deixarem distinguir.",
+    ansiedade:
+      "Parte do que está em curso ainda não se deixa acompanhar no ritmo esperado.",
+    travamento:
+      "Mesmo com movimento disponível, ainda falta um ponto firme para que ele se sustente.",
+  },
+  sobrecarga: {
+    duvida:
+      "Exigências demais ocupam o mesmo espaço, dificultando distinguir o que realmente importa.",
+    travamento:
+      "Exigências demais ocupam o mesmo espaço, dificultando qualquer resposta que precise se sustentar.",
+  },
+  indefinicao: {
+    confusao:
+      "Nem tudo que aparece aqui já encontra forma suficiente para ser distinguido.",
+    duvida:
+      "Ainda não há base suficiente para que as diferenças se mostrem com nitidez.",
+    ansiedade:
+      "A pressa por definir pode apertar algo que ainda não terminou de aparecer.",
+    indefinicao:
+      "Nem tudo que aparece aqui já pode ser sustentado com clareza.",
+  },
 };
 
 const NAVROS_READING_DIRECTIONS_BY_FEELING: Record<string, string> = {
@@ -213,26 +239,46 @@ const NAVROS_CONCRETE_DIRECTIONS_BY_FEELING: Record<string, string> = {
   ansiedade:
     "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.",
   travamento:
-    "Quando um gesto pequeno encontra espaço, o movimento volta a existir.",
+    "Quando um gesto pequeno encontra espaço, o movimento volta a aparecer.",
   desalinhamento:
     "Quando o que saiu de eixo é visto, a direção começa a retornar.",
 };
 
-const NAVROS_MOVEMENT_LINES_BY_FEELING: Record<string, string> = {
+type NavrosInsightOverride = {
+  anchor?: string;
+  structure?: string;
+  direction?: string;
+};
+
+const NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES: Record<string, NavrosInsightOverride> = {
+  "saude:sobrecarga:travamento": {
+    anchor: "Na área de saúde, há exigências demais ocupando o mesmo espaço.",
+    structure: "O corpo pode não responder quando tudo é mantido ao mesmo tempo.",
+    direction: "Quando algo encontra espaço suficiente, uma resposta começa a aparecer.",
+  },
+};
+
+const NAVROS_MOVEMENT_LINES_BY_PATTERN: Record<string, string> = {
   confusao:
     "Mais clareza começa a se formar.",
+  sobrecarga:
+    "Algo começa a se reorganizar.",
   pressao:
     "A urgência começa a perder força.",
   duvida:
     "Um critério começa a aparecer.",
+  paralisia:
+    "Um movimento pequeno já encontra espaço.",
   travamento:
     "Um movimento pequeno já encontra espaço.",
   ansiedade:
-    "Mais estabilidade começa a se firmar.",
+    "Mais estabilidade pode começar a se firmar.",
   desalinhamento:
     "Algo começa a se reorganizar.",
   indefinicao:
     "A direção começa a ganhar contorno.",
+  fallback:
+    "Algo começa a se reorganizar.",
 };
 
 export function buildNavrosAreaPrefixCopy(area: string): string {
@@ -280,24 +326,6 @@ export function resolveNavrosReadingVariantCopy(
   return "direct";
 }
 
-function getStableVariantIndex(
-  parts: string[],
-  length: number,
-): number {
-  if (length <= 1) {
-    return 0;
-  }
-
-  const seed = parts.join(":");
-  let total = 0;
-
-  for (let index = 0; index < seed.length; index += 1) {
-    total += seed.charCodeAt(index) * (index + 1);
-  }
-
-  return total % length;
-}
-
 export function buildNavrosReadingAnchorCopy(
   area: string,
   normalizedState: string,
@@ -323,6 +351,13 @@ export function buildNavrosReadingStructureCopy(
   normalizedFeeling: string,
   variant: NavrosReadingVariant = "direct",
 ): string {
+  const stateOverride =
+    NAVROS_STATE_STRUCTURE_OVERRIDES[normalizedState]?.[normalizedFeeling];
+
+  if (stateOverride) {
+    return stateOverride;
+  }
+
   const structuresByVariant =
     variant === "contemplative"
       ? NAVROS_CONTEMPLATIVE_STRUCTURES_BY_FEELING
@@ -357,15 +392,15 @@ export function buildNavrosReadingDirectionCopy(
         : NAVROS_READING_DIRECTIONS_BY_FEELING;
 
   if (normalizedState === "sobrecarga") {
-    return "Antes de responder a tudo, vale devolver prioridade apenas ao que realmente pede espaço agora.";
+    return "O que pede espaço tende a reaparecer quando nem tudo é mantido ao mesmo tempo.";
   }
 
   if (normalizedState === "indefinicao") {
-    return "Observar mais um pouco pode permitir que a direção apareça com mais nitidez.";
+    return "A direção costuma ganhar nitidez quando ainda não é forçada a aparecer.";
   }
 
   if (normalizedState === "estagnacao") {
-    return "Um primeiro passo menor pode ser suficiente para devolver movimento ao que ficou parado.";
+    return "Um primeiro gesto menor costuma devolver movimento ao que ficou parado.";
   }
 
   return (
@@ -375,11 +410,68 @@ export function buildNavrosReadingDirectionCopy(
   );
 }
 
-export function buildNavrosMovementLineCopy(
+function mergeInsightCopy(
+  anchor: string,
+  structure: string,
+  direction: string,
+): string {
+  return `${anchor} ${structure} ${direction}`;
+}
+
+function buildNavrosInsightOverrideKey(
+  area: string,
+  normalizedState: string,
   normalizedFeeling: string,
 ): string {
-  return (
-    NAVROS_MOVEMENT_LINES_BY_FEELING[normalizedFeeling] ??
-    "Algo começa a se reorganizar."
+  return `${area.trim().toLowerCase()}:${normalizedState}:${normalizedFeeling}`;
+}
+
+export function composeNavrosInsightCopy(
+  area: string,
+  normalizedState: string,
+  normalizedFeeling: string,
+): string {
+  const variant = resolveNavrosReadingVariantCopy(
+    normalizedState,
+    normalizedFeeling,
   );
+  const anchor = buildNavrosReadingAnchorCopy(
+    area,
+    normalizedState,
+    variant,
+  );
+  const structure = buildNavrosReadingStructureCopy(
+    normalizedState,
+    normalizedFeeling,
+    variant,
+  );
+  const direction = buildNavrosReadingDirectionCopy(
+    normalizedState,
+    normalizedFeeling,
+    variant,
+  );
+  const override =
+    NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES[
+      buildNavrosInsightOverrideKey(area, normalizedState, normalizedFeeling)
+    ];
+
+  return mergeInsightCopy(
+    override?.anchor ?? anchor,
+    override?.structure ?? structure,
+    override?.direction ?? direction,
+  );
+}
+
+export function buildNavrosMovementLineCopy(
+  normalizedPattern: string,
+  normalizedArea = "",
+): string {
+  if (
+    normalizedPattern === "ansiedade" &&
+    (normalizedArea === "relacoes" || normalizedArea === "saude")
+  ) {
+    return "Algo pode começar a se estabilizar.";
+  }
+
+  return NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern] ?? "Algo começa a se reorganizar.";
 }
