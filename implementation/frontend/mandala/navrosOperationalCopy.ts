@@ -100,6 +100,17 @@ export type NavrosReadingVariant =
   | "contemplative"
   | "concrete";
 
+type NavrosAnchorType =
+  | "formation"
+  | "overload"
+  | "instability"
+  | "stagnation";
+
+type NavrosStructureType =
+  | "limit"
+  | "tension"
+  | "contrast";
+
 const NAVROS_READING_ANCHORS_BY_STATE: Record<string, string> = {
   inicio: "algo está começando a tomar forma.",
   pressao: "há uma pressão ativa pedindo resposta.",
@@ -164,6 +175,54 @@ const NAVROS_CONCRETE_STRUCTURES_BY_FEELING: Record<string, string> = {
     "Existe movimento disponível, mas ele ainda não encontrou um ponto simples o bastante para começar.",
   desalinhamento:
     "Quando algo continua em curso sem coerência, a energia é gasta mantendo o que já perdeu sentido.",
+};
+
+const NAVROS_STRUCTURE_BY_TYPE: Record<
+  NavrosStructureType,
+  Record<string, string>
+> = {
+  limit: {
+    confusao:
+      "Nem tudo que aparece aqui já se sustenta com clareza.",
+    duvida:
+      "Ainda não há critério suficiente para sustentar uma escolha.",
+    ansiedade:
+      "O ritmo interno ainda não acompanha a pressão por resposta.",
+    travamento:
+      "O movimento ainda não encontrou um ponto simples o bastante para começar.",
+    desalinhamento:
+      "Parte do que segue ativo já não se sustenta internamente.",
+    indefinicao:
+      "O que aparece ainda não terminou de se mostrar.",
+  },
+  tension: {
+    confusao:
+      "Há elementos presentes, mas ainda sem organização suficiente para orientar uma decisão.",
+    duvida:
+      "Mais de uma direção aparece, mas nenhuma ainda se sustenta por completo.",
+    ansiedade:
+      "A resposta parece urgente, mas o que pede leitura ainda não terminou de se formar.",
+    travamento:
+      "Existe movimento possível, mas ele ainda não encontra base para acontecer.",
+    desalinhamento:
+      "Algo segue em movimento mesmo fora de coerência.",
+    indefinicao:
+      "O que aparece ainda oscila sem forma definida.",
+  },
+  contrast: {
+    confusao:
+      "Não pela falta de elementos, mas pela forma como ainda não se organizam.",
+    duvida:
+      "Não pela ausência de direção, mas pela dificuldade de sustentar uma entre elas.",
+    ansiedade:
+      "Não pela falta de resposta, mas pelo modo como ela está sendo antecipada.",
+    travamento:
+      "Não pela ausência de movimento, mas pela falta de um ponto de partida simples.",
+    desalinhamento:
+      "Não por erro evidente, mas por um desvio que ainda não foi interrompido.",
+    indefinicao:
+      "Não por ausência, mas por algo que ainda não se deixa fixar.",
+  },
 };
 
 const NAVROS_STATE_STRUCTURE_OVERRIDES: Record<string, Partial<Record<string, string>>> = {
@@ -281,6 +340,63 @@ const NAVROS_MOVEMENT_LINES_BY_PATTERN: Record<string, string> = {
     "Algo começa a se reorganizar.",
 };
 
+function classifyNavrosAnchorType(
+  normalizedState: string,
+): NavrosAnchorType {
+  switch (normalizedState) {
+    case "inicio":
+    case "mudanca":
+      return "formation";
+
+    case "sobrecarga":
+      return "overload";
+
+    case "instabilidade":
+      return "instability";
+
+    case "estagnacao":
+      return "stagnation";
+
+    default:
+      return "formation";
+  }
+}
+
+function getStableChoiceIndex(parts: string[], length: number): number {
+  if (length <= 1) {
+    return 0;
+  }
+
+  const seed = parts.join(":");
+  let total = 0;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    total += seed.charCodeAt(index) * (index + 1);
+  }
+
+  return total % length;
+}
+
+function selectNavrosStructureType(
+  anchorType: NavrosAnchorType,
+  normalizedState: string,
+  normalizedFeeling: string,
+): NavrosStructureType {
+  const options: Record<NavrosAnchorType, NavrosStructureType[]> = {
+    formation: ["limit", "tension"],
+    overload: ["contrast", "limit"],
+    instability: ["tension", "contrast"],
+    stagnation: ["tension", "limit"],
+  };
+  const available = options[anchorType] ?? ["limit"];
+  const index = getStableChoiceIndex(
+    [anchorType, normalizedState, normalizedFeeling],
+    available.length,
+  );
+
+  return available[index] ?? "limit";
+}
+
 export function buildNavrosAreaPrefixCopy(area: string): string {
   const normalizedArea = area.trim();
 
@@ -356,6 +472,19 @@ export function buildNavrosReadingStructureCopy(
 
   if (stateOverride) {
     return stateOverride;
+  }
+
+  const anchorType = classifyNavrosAnchorType(normalizedState);
+  const structureType = selectNavrosStructureType(
+    anchorType,
+    normalizedState,
+    normalizedFeeling,
+  );
+  const alternativeStructure =
+    NAVROS_STRUCTURE_BY_TYPE[structureType]?.[normalizedFeeling];
+
+  if (alternativeStructure) {
+    return alternativeStructure;
   }
 
   const structuresByVariant =
