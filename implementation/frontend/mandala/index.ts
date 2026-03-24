@@ -209,6 +209,12 @@ export {
 export type { NavrosCopyValidationResult } from "./navrosOperationalCopyGuardrails";
 
 export {
+  autoCorrectByDomain,
+  normalizeNavrosDomain,
+} from "./navrosDomainAutoCorrect";
+export type { NavrosDomain } from "./navrosDomainAutoCorrect";
+
+export {
   buildNavrosInsightCopy,
   buildNavrosMovementCopy,
   emptyNavrosOperationalAnswers,

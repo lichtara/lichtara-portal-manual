@@ -317,6 +317,38 @@ const NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES: Record<string, NavrosInsightO
   },
 };
 
+const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
+  match: string;
+  variants: string[];
+}> = [
+  {
+    match: "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.",
+    variants: [
+      "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.",
+      "À medida que o campo se reduz ao essencial, a resposta deixa de se espalhar.",
+      "O essencial ganha mais espaço, e a resposta deixa de se espalhar.",
+      "Quando o essencial ganha mais espaço, a resposta deixa de se dispersar.",
+    ],
+  },
+  {
+    match: "O que pede espaço tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
+    variants: [
+      "O que pede espaço tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
+      "O que realmente importa tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
+      "O essencial volta a se destacar quando nem tudo permanece ativo ao mesmo tempo.",
+      "O que faz diferença começa a se evidenciar quando nem tudo é sustentado junto.",
+    ],
+  },
+  {
+    match: "Algo ganha nitidez quando deixa de ser forçado.",
+    variants: [
+      "Algo ganha nitidez quando deixa de ser forçado.",
+      "À medida que deixa de ser forçado, algo ganha nitidez.",
+      "Quando a força diminui, algo começa a ganhar nitidez.",
+    ],
+  },
+];
+
 const NAVROS_MOVEMENT_LINES_BY_PATTERN: Record<string, string> = {
   confusao:
     "Mais clareza começa a se formar.",
@@ -375,6 +407,15 @@ function getStableChoiceIndex(parts: string[], length: number): number {
   }
 
   return total % length;
+}
+
+function selectStableTextVariant(
+  parts: string[],
+  variants: string[],
+): string {
+  const index = getStableChoiceIndex(parts, variants.length);
+
+  return variants[index] ?? variants[0] ?? "";
 }
 
 function selectNavrosStructureType(
@@ -555,6 +596,26 @@ function buildNavrosInsightOverrideKey(
   return `${area.trim().toLowerCase()}:${normalizedState}:${normalizedFeeling}`;
 }
 
+function diversifyNavrosDirectionCopy(
+  text: string,
+  area: string,
+  normalizedState: string,
+  normalizedFeeling: string,
+): string {
+  const pool = NAVROS_DIRECTION_VARIANT_POOLS.find(
+    (entry) => entry.match === text,
+  );
+
+  if (!pool) {
+    return text;
+  }
+
+  return selectStableTextVariant(
+    [area.trim().toLowerCase(), normalizedState, normalizedFeeling, text],
+    pool.variants,
+  );
+}
+
 export function composeNavrosInsightCopy(
   area: string,
   normalizedState: string,
@@ -579,6 +640,12 @@ export function composeNavrosInsightCopy(
     normalizedFeeling,
     variant,
   );
+  const diversifiedDirection = diversifyNavrosDirectionCopy(
+    direction,
+    area,
+    normalizedState,
+    normalizedFeeling,
+  );
   const override =
     NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES[
       buildNavrosInsightOverrideKey(area, normalizedState, normalizedFeeling)
@@ -587,7 +654,7 @@ export function composeNavrosInsightCopy(
   return mergeInsightCopy(
     override?.anchor ?? anchor,
     override?.structure ?? structure,
-    override?.direction ?? direction,
+    override?.direction ?? diversifiedDirection,
   );
 }
 
