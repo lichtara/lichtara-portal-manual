@@ -331,8 +331,9 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     variants: [
       "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.",
       "À medida que o campo se reduz ao essencial, a resposta deixa de se espalhar.",
-      "O essencial ganha mais espaço, e a resposta deixa de se espalhar.",
-      "Quando o essencial ganha mais espaço, a resposta deixa de se dispersar.",
+      "À medida que o essencial ganha mais espaço, algo começa a se organizar.",
+      "Quando o que importa começa a se destacar, algo começa a se alinhar.",
+      "Quando o essencial ganha espaço, a resposta encontra um eixo mais claro.",
     ],
   },
   {
@@ -353,6 +354,12 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     ],
   },
 ];
+
+const NAVROS_STRUCTURE_FALLBACKS = [
+  "Há elementos presentes, mas ainda sem uma base que se sustente.",
+  "O que aparece ainda não encontrou forma suficiente para se manter.",
+  "Existe algo em curso, mas ainda sem consistência para se sustentar.",
+] as const;
 
 const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
   Exclude<NavrosIntensity, "low">,
@@ -384,37 +391,57 @@ const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
 
 const NAVROS_DIRECTION_INTENSITY_BY_LEVEL: Record<
   Exclude<NavrosIntensity, "low">,
-  Record<string, string>
+  Record<string, string[]>
 > = {
   medium: {
     "Algo ganha nitidez quando deixa de ser forçado.":
-      "Algo começa a ganhar nitidez quando deixa de ser forçado.",
+      ["Algo começa a ganhar nitidez quando deixa de ser forçado."],
     "À medida que deixa de ser forçado, algo ganha nitidez.":
-      "À medida que deixa de ser forçado, algo começa a ganhar nitidez.",
+      ["À medida que deixa de ser forçado, algo começa a ganhar nitidez."],
     "O que importa agora aparece melhor quando as opções deixam de ter o mesmo peso.":
-      "O que importa agora começa a aparecer melhor quando as opções deixam de ter o mesmo peso.",
+      ["O que importa agora começa a aparecer melhor quando as opções deixam de ter o mesmo peso."],
     "A direção reaparece quando o ritmo deixa de responder por você.":
-      "A direção começa a reaparecer quando o ritmo deixa de responder por você.",
+      ["A direção começa a reaparecer quando o ritmo deixa de responder por você."],
     "Mais nitidez costuma aparecer quando a resposta não é forçada.":
-      "Mais nitidez começa a aparecer quando a resposta não é forçada.",
+      ["Mais nitidez começa a aparecer quando a resposta não é forçada."],
   },
   high: {
     "Algo ganha nitidez quando deixa de ser forçado.":
-      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+      [
+        "Algo precisa ganhar nitidez para que o movimento se sustente.",
+        "Algo passa a exigir mais clareza para se sustentar.",
+        "O que aparece não se sustenta sem mais clareza.",
+      ],
     "À medida que deixa de ser forçado, algo ganha nitidez.":
-      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+      [
+        "Algo precisa ganhar nitidez para que o movimento se sustente.",
+        "Algo passa a exigir mais clareza para se sustentar.",
+        "O que aparece não se sustenta sem mais clareza.",
+      ],
     "Algo começa a ganhar nitidez quando deixa de ser forçado.":
-      "Algo precisa ganhar nitidez para que o movimento se sustente.",
+      [
+        "Algo precisa ganhar nitidez para que o movimento se sustente.",
+        "Algo passa a exigir mais clareza para se sustentar.",
+        "O que aparece não se sustenta sem mais clareza.",
+      ],
     "Quando o campo se reduz ao essencial, a resposta deixa de se espalhar.":
-      "Quando o campo se reduz ao essencial, a resposta precisa ganhar direção.",
+      [
+        "Quando o campo se reduz ao essencial, a resposta começa a se organizar.",
+        "Quando o campo se reduz ao essencial, algo começa a se alinhar.",
+        "Quando o campo se reduz ao essencial, a resposta encontra um eixo mais claro.",
+      ],
     "À medida que o campo se reduz ao essencial, a resposta deixa de se espalhar.":
-      "À medida que o campo se reduz ao essencial, a resposta precisa ganhar direção.",
-    "O essencial ganha mais espaço, e a resposta deixa de se espalhar.":
-      "Quando o essencial ganha mais espaço, a resposta precisa ganhar direção.",
-    "Quando o essencial ganha mais espaço, a resposta deixa de se dispersar.":
-      "Quando o essencial ganha mais espaço, a resposta precisa ganhar direção.",
+      [
+        "À medida que o campo se reduz ao essencial, a resposta começa a se organizar.",
+        "À medida que o campo se reduz ao essencial, algo começa a se alinhar.",
+        "À medida que o campo se reduz ao essencial, a resposta encontra um eixo mais claro.",
+      ],
     "Quando um gesto pequeno encontra espaço, o movimento volta a aparecer.":
-      "Um gesto pequeno precisa encontrar espaço para que o movimento volte a aparecer.",
+      [
+        "Um gesto pequeno precisa encontrar espaço para que o movimento volte a aparecer.",
+        "O movimento só volta a aparecer quando um gesto pequeno encontra espaço.",
+        "Quando um gesto pequeno encontra espaço, algo volta a se mover.",
+      ],
   },
 };
 
@@ -509,18 +536,18 @@ function selectNavrosStructureType(
 
 export function resolveNavrosIntensity(
   normalizedFeeling: string,
+  normalizedState = "",
 ): NavrosIntensity {
-  if (
-    normalizedFeeling === "ansiedade" ||
-    normalizedFeeling === "travamento"
-  ) {
+  if (normalizedFeeling === "travamento") {
     return "high";
   }
 
   if (
+    normalizedFeeling === "ansiedade" ||
     normalizedFeeling === "confusao" ||
     normalizedFeeling === "pressao" ||
-    normalizedFeeling === "desalinhamento"
+    normalizedFeeling === "desalinhamento" ||
+    normalizedState === "sobrecarga"
   ) {
     return "medium";
   }
@@ -542,12 +569,22 @@ export function applyIntensityToStructure(
 export function applyIntensityToDirection(
   text: string,
   intensity: NavrosIntensity,
+  seedParts: string[] = [],
 ): string {
   if (intensity === "low") {
     return text;
   }
 
-  return NAVROS_DIRECTION_INTENSITY_BY_LEVEL[intensity][text] ?? text;
+  const variants = NAVROS_DIRECTION_INTENSITY_BY_LEVEL[intensity][text];
+
+  if (!variants) {
+    return text;
+  }
+
+  return selectStableTextVariant(
+    [intensity, ...seedParts, text],
+    variants,
+  );
 }
 
 export function buildNavrosAreaPrefixCopy(area: string): string {
@@ -619,6 +656,7 @@ export function buildNavrosReadingStructureCopy(
   normalizedState: string,
   normalizedFeeling: string,
   variant: NavrosReadingVariant = "direct",
+  areaSeed = "",
 ): string {
   const stateOverride =
     NAVROS_STATE_STRUCTURE_OVERRIDES[normalizedState]?.[normalizedFeeling];
@@ -658,7 +696,10 @@ export function buildNavrosReadingStructureCopy(
     return "Há exigências demais ocupando o mesmo espaço, o que reduz a capacidade de distinguir prioridade.";
   }
 
-  return "Há algo presente, mas ainda sem organização suficiente para se sustentar.";
+  return selectStableTextVariant(
+    [areaSeed.trim().toLowerCase(), normalizedState, normalizedFeeling, "structure-fallback"],
+    [...NAVROS_STRUCTURE_FALLBACKS],
+  );
 }
 
 export function buildNavrosReadingDirectionCopy(
@@ -732,7 +773,10 @@ export function composeNavrosInsightCopy(
   area: string,
   normalizedState: string,
   normalizedFeeling: string,
-  intensity: NavrosIntensity = resolveNavrosIntensity(normalizedFeeling),
+  intensity: NavrosIntensity = resolveNavrosIntensity(
+    normalizedFeeling,
+    normalizedState,
+  ),
 ): string {
   const variant = resolveNavrosReadingVariantCopy(
     normalizedState,
@@ -747,6 +791,7 @@ export function composeNavrosInsightCopy(
     normalizedState,
     normalizedFeeling,
     variant,
+    area,
   );
   const direction = buildNavrosReadingDirectionCopy(
     normalizedState,
@@ -767,7 +812,12 @@ export function composeNavrosInsightCopy(
   return mergeInsightCopy(
     override?.anchor ?? anchor,
     override?.structure ?? applyIntensityToStructure(structure, intensity),
-    override?.direction ?? applyIntensityToDirection(diversifiedDirection, intensity),
+    override?.direction ??
+      applyIntensityToDirection(diversifiedDirection, intensity, [
+        area.trim().toLowerCase(),
+        normalizedState,
+        normalizedFeeling,
+      ]),
   );
 }
 

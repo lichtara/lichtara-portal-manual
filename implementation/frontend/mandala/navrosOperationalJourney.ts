@@ -274,7 +274,7 @@ export function updateNavrosSessionMemory(
   return {
     recentStates: [...memory.recentStates.slice(-2), normalizedState],
     recentFeelings: [...memory.recentFeelings.slice(-2), normalizedFeeling],
-    lastIntensity: resolveNavrosIntensity(normalizedFeeling),
+    lastIntensity: resolveNavrosIntensity(normalizedFeeling, normalizedState),
   };
 }
 
@@ -431,7 +431,10 @@ export function buildNavrosResponse(
   const normalizedState = normalizeNavrosState(answers.state);
   const normalizedFeeling = normalizeNavrosReadingFeeling(answers.feeling);
   const domain = normalizeNavrosDomain(answers.area);
-  const baseIntensity = resolveNavrosIntensity(normalizedFeeling);
+  const baseIntensity = resolveNavrosIntensity(
+    normalizedFeeling,
+    normalizedState,
+  );
   const intensity = adjustNavrosIntensityWithMemory(
     baseIntensity,
     memory,
