@@ -7,7 +7,11 @@ import {
   navrosSuggestedStates,
 } from "./navrosOperationalCopy";
 import {
-  autoCorrectNavrosCopyWithContext,
+  autoCorrectByDomain,
+  normalizeNavrosDomain,
+} from "./navrosDomainAutoCorrect";
+import {
+  autoCorrectNavrosCopy,
   validateNavrosCopy,
 } from "./navrosOperationalCopyGuardrails";
 
@@ -343,10 +347,10 @@ export function buildNavrosInsightCopy(
     normalizeNavrosState(answers.state),
     normalizeNavrosReadingFeeling(answers.feeling),
   );
-  const insight = autoCorrectNavrosCopyWithContext(rawInsight, {
-    area: answers.area,
-    mode: "insight",
-  });
+  const insight = autoCorrectByDomain(
+    autoCorrectNavrosCopy(rawInsight),
+    normalizeNavrosDomain(answers.area),
+  );
 
   if (import.meta.env.DEV) {
     const validation = validateNavrosCopy(insight);
@@ -366,10 +370,10 @@ export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
   const rawMovement = buildNavrosMovementLine(answers);
-  const movement = autoCorrectNavrosCopyWithContext(rawMovement, {
-    area: answers.area,
-    mode: "movement",
-  });
+  const movement = autoCorrectByDomain(
+    autoCorrectNavrosCopy(rawMovement),
+    normalizeNavrosDomain(answers.area),
+  );
 
   if (import.meta.env.DEV) {
     const validation = validateNavrosCopy(movement);

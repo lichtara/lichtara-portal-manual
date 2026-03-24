@@ -199,7 +199,6 @@ export {
 
 export {
   autoCorrectNavrosCopy,
-  autoCorrectNavrosCopyWithContext,
   hasFalseCertainty,
   hasInstruction,
   hasRepetition,
@@ -207,10 +206,13 @@ export {
   soundsGeneric,
   validateNavrosCopy,
 } from "./navrosOperationalCopyGuardrails";
-export type {
-  NavrosCopyCorrectionContext,
-  NavrosCopyValidationResult,
-} from "./navrosOperationalCopyGuardrails";
+export type { NavrosCopyValidationResult } from "./navrosOperationalCopyGuardrails";
+
+export {
+  autoCorrectByDomain,
+  normalizeNavrosDomain,
+} from "./navrosDomainAutoCorrect";
+export type { NavrosDomain } from "./navrosDomainAutoCorrect";
 
 export {
   buildNavrosInsightCopy,
