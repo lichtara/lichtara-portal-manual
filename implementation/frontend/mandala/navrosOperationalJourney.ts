@@ -206,9 +206,12 @@ function resolvePatternFromAnswers(
   return feelingPattern;
 }
 
-function buildNavrosMovementLine(feeling: string): string {
+function buildNavrosMovementLine(answers: NavrosOperationalAnswers): string {
+  const pattern = resolvePatternFromAnswers(answers);
+
   return buildNavrosMovementLineCopy(
-    normalizeNavrosReadingFeeling(feeling),
+    pattern,
+    answers.area.trim().toLowerCase(),
   );
 }
 
@@ -341,5 +344,5 @@ export function buildNavrosInsightCopy(
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return buildNavrosMovementLine(answers.feeling);
+  return buildNavrosMovementLine(answers);
 }
