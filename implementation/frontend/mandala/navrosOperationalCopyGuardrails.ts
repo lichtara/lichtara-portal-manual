@@ -182,6 +182,14 @@ function reduceRepetition(text: string): string {
   );
 }
 
+function removeDuplicatePhrases(text: string): string {
+  return compactWhitespace(
+    text
+      .replace(/\bcomeça a\s+começa a\b/giu, "começa a")
+      .replace(/\bpode começar a\s+pode começar a\b/giu, "pode começar a"),
+  );
+}
+
 export function autoCorrectNavrosCopy(text: string): string {
   let result = text;
 
@@ -189,6 +197,7 @@ export function autoCorrectNavrosCopy(text: string): string {
   result = softenCertainty(result);
   result = removeInstruction(result);
   result = reduceRepetition(result);
+  result = removeDuplicatePhrases(result);
 
   return result.trim();
 }

@@ -212,7 +212,10 @@ export {
   autoCorrectByDomain,
   normalizeNavrosDomain,
 } from "./navrosDomainAutoCorrect";
-export type { NavrosDomain } from "./navrosDomainAutoCorrect";
+export type {
+  NavrosDomain,
+  NavrosDomainAutoCorrectMode,
+} from "./navrosDomainAutoCorrect";
 
 export {
   buildNavrosInsightCopy,

@@ -350,6 +350,7 @@ export function buildNavrosInsightCopy(
   const insight = autoCorrectByDomain(
     autoCorrectNavrosCopy(rawInsight),
     normalizeNavrosDomain(answers.area),
+    "insight",
   );
 
   if (import.meta.env.DEV) {
@@ -373,6 +374,7 @@ export function buildNavrosMovementCopy(
   const movement = autoCorrectByDomain(
     autoCorrectNavrosCopy(rawMovement),
     normalizeNavrosDomain(answers.area),
+    "movement",
   );
 
   if (import.meta.env.DEV) {

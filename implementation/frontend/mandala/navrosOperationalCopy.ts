@@ -344,7 +344,7 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     variants: [
       "Algo ganha nitidez quando deixa de ser forçado.",
       "À medida que deixa de ser forçado, algo ganha nitidez.",
-      "Quando a força diminui, algo começa a ganhar nitidez.",
+      "Algo começa a ganhar nitidez quando deixa de ser forçado.",
     ],
   },
 ];
@@ -546,7 +546,7 @@ export function buildNavrosReadingStructureCopy(
     return "Há exigências demais ocupando o mesmo espaço, o que reduz a capacidade de distinguir prioridade.";
   }
 
-  return "Há um padrão em formação que ainda não está completamente claro.";
+  return "Há algo presente, mas ainda sem organização suficiente para se sustentar.";
 }
 
 export function buildNavrosReadingDirectionCopy(
