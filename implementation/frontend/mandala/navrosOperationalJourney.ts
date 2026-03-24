@@ -2,9 +2,11 @@ import {
   composeNavrosInsightCopy,
   buildNavrosMovementLineCopy,
   navrosOperationalStepLabels,
+  resolveNavrosIntensity,
   navrosSuggestedAreas,
   navrosSuggestedFeelings,
   navrosSuggestedStates,
+  type NavrosIntensity,
 } from "./navrosOperationalCopy";
 import {
   autoCorrectByDomain,
@@ -26,6 +28,12 @@ export type NavrosOperationalAnswers = {
   area: string;
   state: string;
   feeling: string;
+};
+
+export type NavrosSessionMemory = {
+  recentStates: string[];
+  recentFeelings: string[];
+  lastIntensity?: NavrosIntensity;
 };
 
 export type NavrosReadingPatternId =
@@ -79,6 +87,20 @@ export const emptyNavrosOperationalAnswers: NavrosOperationalAnswers = {
   area: "",
   state: "",
   feeling: "",
+};
+
+export const emptyNavrosSessionMemory: NavrosSessionMemory = {
+  recentStates: [],
+  recentFeelings: [],
+};
+
+export type NavrosBuiltResponse = {
+  insight: string;
+  movement: string;
+  intensity: NavrosIntensity;
+  pattern: NavrosReadingPatternId;
+  movementType: MovementType;
+  agent: NavrosAgentId;
 };
 
 const NAVROS_PATTERN_IDS: NavrosReadingPatternId[] = [
@@ -223,6 +245,55 @@ function buildNavrosMovementLine(answers: NavrosOperationalAnswers): string {
   );
 }
 
+function validateBuiltCopy(
+  kind: "insight" | "movement",
+  text: string,
+  answers: NavrosOperationalAnswers,
+): void {
+  if (!import.meta.env.DEV) {
+    return;
+  }
+
+  const validation = validateNavrosCopy(text);
+
+  if (!validation.valid) {
+    console.warn(`Navros ${kind} copy issue:`, validation.issues, {
+      answers,
+      text,
+    });
+  }
+}
+
+export function updateNavrosSessionMemory(
+  memory: NavrosSessionMemory,
+  answers: NavrosOperationalAnswers,
+): NavrosSessionMemory {
+  const normalizedState = normalizeNavrosState(answers.state);
+  const normalizedFeeling = normalizeNavrosReadingFeeling(answers.feeling);
+
+  return {
+    recentStates: [...memory.recentStates.slice(-2), normalizedState],
+    recentFeelings: [...memory.recentFeelings.slice(-2), normalizedFeeling],
+    lastIntensity: resolveNavrosIntensity(normalizedFeeling),
+  };
+}
+
+export function adjustNavrosIntensityWithMemory(
+  base: NavrosIntensity,
+  memory: NavrosSessionMemory,
+  normalizedFeeling: string,
+): NavrosIntensity {
+  if (base !== "medium") {
+    return base;
+  }
+
+  const repeatedFeelingCount = memory.recentFeelings.filter((feeling) => {
+    return feeling === normalizedFeeling;
+  }).length;
+
+  return repeatedFeelingCount >= 2 ? "high" : base;
+}
+
 export function normalizeNavrosFeeling(
   feeling: string,
 ): NavrosReadingPatternId {
@@ -341,52 +412,56 @@ export function resolveNextAgentFromAnswers(
 
 export function buildNavrosInsightCopy(
   answers: NavrosOperationalAnswers,
+  memory: NavrosSessionMemory = emptyNavrosSessionMemory,
 ): string {
-  const rawInsight = composeNavrosInsightCopy(
-    answers.area,
-    normalizeNavrosState(answers.state),
-    normalizeNavrosReadingFeeling(answers.feeling),
-  );
-  const insight = autoCorrectByDomain(
-    autoCorrectNavrosCopy(rawInsight),
-    normalizeNavrosDomain(answers.area),
-    "insight",
-  );
-
-  if (import.meta.env.DEV) {
-    const validation = validateNavrosCopy(insight);
-
-    if (!validation.valid) {
-      console.warn("Navros insight copy issue:", validation.issues, {
-        answers,
-        text: insight,
-      });
-    }
-  }
-
-  return insight;
+  return buildNavrosResponse(answers, memory).insight;
 }
 
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
+  memory: NavrosSessionMemory = emptyNavrosSessionMemory,
 ): string {
-  const rawMovement = buildNavrosMovementLine(answers);
-  const movement = autoCorrectByDomain(
-    autoCorrectNavrosCopy(rawMovement),
-    normalizeNavrosDomain(answers.area),
-    "movement",
+  return buildNavrosResponse(answers, memory).movement;
+}
+
+export function buildNavrosResponse(
+  answers: NavrosOperationalAnswers,
+  memory: NavrosSessionMemory = emptyNavrosSessionMemory,
+): NavrosBuiltResponse {
+  const normalizedState = normalizeNavrosState(answers.state);
+  const normalizedFeeling = normalizeNavrosReadingFeeling(answers.feeling);
+  const domain = normalizeNavrosDomain(answers.area);
+  const baseIntensity = resolveNavrosIntensity(normalizedFeeling);
+  const intensity = adjustNavrosIntensityWithMemory(
+    baseIntensity,
+    memory,
+    normalizedFeeling,
   );
+  const rawInsight = composeNavrosInsightCopy(
+    answers.area,
+    normalizedState,
+    normalizedFeeling,
+    intensity,
+  );
+  const rawMovement = buildNavrosMovementLine(answers);
+  const insight = autoCorrectNavrosCopy(
+    autoCorrectByDomain(rawInsight, domain, "insight"),
+  );
+  const movement = autoCorrectNavrosCopy(
+    autoCorrectByDomain(rawMovement, domain, "movement"),
+  );
+  const { pattern, movement: movementType, agent } =
+    resolveNextAgentFromAnswers(answers);
 
-  if (import.meta.env.DEV) {
-    const validation = validateNavrosCopy(movement);
+  validateBuiltCopy("insight", insight, answers);
+  validateBuiltCopy("movement", movement, answers);
 
-    if (!validation.valid) {
-      console.warn("Navros movement copy issue:", validation.issues, {
-        answers,
-        text: movement,
-      });
-    }
-  }
-
-  return movement;
+  return {
+    insight,
+    movement,
+    intensity,
+    pattern,
+    movementType,
+    agent,
+  };
 }

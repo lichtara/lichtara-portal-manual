@@ -732,8 +732,8 @@ export function composeNavrosInsightCopy(
   area: string,
   normalizedState: string,
   normalizedFeeling: string,
+  intensity: NavrosIntensity = resolveNavrosIntensity(normalizedFeeling),
 ): string {
-  const intensity = resolveNavrosIntensity(normalizedFeeling);
   const variant = resolveNavrosReadingVariantCopy(
     normalizedState,
     normalizedFeeling,
