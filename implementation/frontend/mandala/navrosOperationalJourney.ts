@@ -6,6 +6,10 @@ import {
   navrosSuggestedFeelings,
   navrosSuggestedStates,
 } from "./navrosOperationalCopy";
+import {
+  autoCorrectNavrosCopy,
+  validateNavrosCopy,
+} from "./navrosOperationalCopyGuardrails";
 
 export type NavrosOperationalStepId =
   | "entry"
@@ -334,15 +338,43 @@ export function resolveNextAgentFromAnswers(
 export function buildNavrosInsightCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return composeNavrosInsightCopy(
+  const rawInsight = composeNavrosInsightCopy(
     answers.area,
     normalizeNavrosState(answers.state),
     normalizeNavrosReadingFeeling(answers.feeling),
   );
+  const insight = autoCorrectNavrosCopy(rawInsight);
+
+  if (import.meta.env.DEV) {
+    const validation = validateNavrosCopy(insight);
+
+    if (!validation.valid) {
+      console.warn("Navros insight copy issue:", validation.issues, {
+        answers,
+        text: insight,
+      });
+    }
+  }
+
+  return insight;
 }
 
 export function buildNavrosMovementCopy(
   answers: NavrosOperationalAnswers,
 ): string {
-  return buildNavrosMovementLine(answers);
+  const rawMovement = buildNavrosMovementLine(answers);
+  const movement = autoCorrectNavrosCopy(rawMovement);
+
+  if (import.meta.env.DEV) {
+    const validation = validateNavrosCopy(movement);
+
+    if (!validation.valid) {
+      console.warn("Navros movement copy issue:", validation.issues, {
+        answers,
+        text: movement,
+      });
+    }
+  }
+
+  return movement;
 }

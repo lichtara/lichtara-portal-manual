@@ -198,6 +198,17 @@ export {
 } from "./navrosOperationalCopy";
 
 export {
+  autoCorrectNavrosCopy,
+  hasFalseCertainty,
+  hasInstruction,
+  hasRepetition,
+  hasTemporalPrescription,
+  soundsGeneric,
+  validateNavrosCopy,
+} from "./navrosOperationalCopyGuardrails";
+export type { NavrosCopyValidationResult } from "./navrosOperationalCopyGuardrails";
+
+export {
   buildNavrosInsightCopy,
   buildNavrosMovementCopy,
   emptyNavrosOperationalAnswers,
