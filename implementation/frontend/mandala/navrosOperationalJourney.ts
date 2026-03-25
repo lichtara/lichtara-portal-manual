@@ -114,6 +114,8 @@ const NAVROS_PATTERN_IDS: NavrosReadingPatternId[] = [
   "fallback",
 ];
 
+const TRACE_NAVROS_ENGINE = false;
+
 const NAVROS_MEDIUM_MOVEMENT_VARIANTS: Partial<Record<string, string[]>> = {
   "Algo começa a se reorganizar.": [
     "Algo começa a se reorganizar.",
@@ -204,6 +206,14 @@ function selectStableTextVariant(
   const index = getStableChoiceIndex(parts, variants.length);
 
   return variants[index] ?? variants[0] ?? "";
+}
+
+function traceNavrosEngine(payload: Record<string, unknown>): void {
+  if (!import.meta.env.DEV || !TRACE_NAVROS_ENGINE) {
+    return;
+  }
+
+  console.log("[navros-engine]", payload);
 }
 
 function resolvePattern(
@@ -565,6 +575,9 @@ export function buildNavrosResponse(
     answers.feeling,
   );
   const normalizedFeelingPattern = normalizeNavrosFeeling(answers.feeling);
+  // INVARIANT:
+  // feeling and pattern are resolved once here and propagated downstream.
+  // They must not be recomputed later, or insight, movement, and agent can drift.
   const pattern = resolvePatternFromSignals(
     normalizedState,
     normalizedFeelingPattern,
@@ -602,6 +615,19 @@ export function buildNavrosResponse(
   );
   const movementType = getMovementType(pattern);
   const agent = getAgentFromMovement(movementType);
+
+  traceNavrosEngine({
+    area: answers.area,
+    state: normalizedState,
+    feelingReading: normalizedFeelingReading,
+    feelingPattern: normalizedFeelingPattern,
+    pattern,
+    intensity,
+    domain,
+    // Conscious boundary for this cycle:
+    // memory may raise intensity, but it does not alter pattern origin or insight structure.
+    memory,
+  });
 
   validateBuiltCopy("insight", insight, answers);
   validateBuiltCopy("movement", movement, answers);
