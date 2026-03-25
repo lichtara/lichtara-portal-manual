@@ -71,13 +71,41 @@ export const navrosAreaContexts: Record<(typeof navrosSuggestedAreas)[number], s
   transicao: "algo mudando na sua vida",
 };
 
-const navrosAreaAnchors: Record<(typeof navrosSuggestedAreas)[number], string> = {
-  trabalho: "No trabalho,",
-  saude: "Na saúde,",
-  relacoes: "Nas relações,",
-  financas: "Nas finanças,",
-  proposito: "No propósito,",
-  transicao: "Na transição,",
+const NAVROS_AREA_PREFIX_VARIANTS: Record<
+  (typeof navrosSuggestedAreas)[number],
+  string[]
+> = {
+  trabalho: [
+    "No trabalho,",
+    "Já no trabalho,",
+    "Em relação ao trabalho,",
+    "No que envolve trabalho,",
+  ],
+  saude: [
+    "Na saúde,",
+    "No corpo,",
+    "Em relação ao corpo,",
+  ],
+  relacoes: [
+    "Nas relações,",
+    "No que envolve relações,",
+    "Em relação às relações,",
+  ],
+  financas: [
+    "Nas finanças,",
+    "No que envolve recursos,",
+    "Em relação às finanças,",
+  ],
+  proposito: [
+    "No propósito,",
+    "No que diz respeito ao rumo,",
+    "Em relação ao propósito,",
+  ],
+  transicao: [
+    "Na transição,",
+    "No que está mudando,",
+    "Em relação à transição,",
+  ],
 };
 
 export const navrosSuggestedStates = [
@@ -329,6 +357,13 @@ const NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES: Record<string, NavrosInsightO
     structure: "O corpo pode não responder quando tudo é mantido ao mesmo tempo.",
     direction: "Quando algo encontra espaço suficiente, uma resposta começa a aparecer.",
   },
+  "relacoes:mudanca:desalinhamento": {
+    anchor: "Nas relações, algo já está em movimento.",
+  },
+  "financas:sobrecarga:travamento": {
+    direction:
+      "Parte do que ocupa espaço aqui já não precisa permanecer ativo da mesma forma.",
+  },
 };
 
 const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
@@ -350,8 +385,8 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     variants: [
       "O que pede espaço tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
       "O que realmente importa tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
-      "O essencial volta a se destacar quando nem tudo permanece ativo ao mesmo tempo.",
-      "O que faz diferença começa a se evidenciar quando nem tudo é sustentado junto.",
+      "Nem tudo que está ativo aqui precisa permanecer no mesmo nível.",
+      "Parte do que ocupa espaço aqui já não precisa permanecer ativo da mesma forma.",
     ],
   },
   {
@@ -368,6 +403,9 @@ const NAVROS_STRUCTURE_FALLBACKS = [
   "O que aparece ainda não encontrou forma suficiente para se manter.",
   "O que está presente ainda não se sustenta por completo.",
   "Ainda não há consistência suficiente para que isso se mantenha.",
+  "Existe algo em curso, mas ainda sem base para se sustentar.",
+  "O que aparece ainda não encontrou estrutura suficiente para se manter.",
+  "Ainda não há forma suficiente para que isso se sustente.",
 ] as const;
 
 const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
@@ -489,9 +527,19 @@ const NAVROS_MOVEMENT_VARIANT_POOLS: Array<{
       "Algo começa a encontrar outro arranjo.",
       "Um novo equilíbrio começa a aparecer.",
       "Algo começa a se recompor.",
+      "Algo começa a se reposicionar.",
+      "Um novo arranjo começa a aparecer.",
+      "Algo passa a encontrar outro arranjo.",
     ],
   },
 ];
+
+const NAVROS_MOVEMENT_FALLBACK_VARIANTS = [
+  "Algo começa a se reorganizar.",
+  "Algo começa a se ajustar.",
+  "Algo começa a encontrar outro arranjo.",
+  "Um novo arranjo começa a aparecer.",
+] as const;
 
 function classifyNavrosAnchorType(
   normalizedState: string,
@@ -603,6 +651,17 @@ export function applyIntensityToDirection(
   const variants = NAVROS_DIRECTION_INTENSITY_BY_LEVEL[intensity][text];
 
   if (!variants) {
+    if (intensity === "high" && text.includes("ganha")) {
+      return selectStableTextVariant(
+        [intensity, ...seedParts, text, "intensity-fallback"],
+        [
+          text,
+          text.replace("ganha", "precisa ganhar"),
+          text.replace("ganha", "passa a exigir mais clareza"),
+        ],
+      );
+    }
+
     return text;
   }
 
@@ -612,7 +671,10 @@ export function applyIntensityToDirection(
   );
 }
 
-export function buildNavrosAreaPrefixCopy(area: string): string {
+export function buildNavrosAreaPrefixCopy(
+  area: string,
+  seedParts: string[] = [],
+): string {
   const normalizedArea = area.trim();
 
   if (!normalizedArea) {
@@ -624,8 +686,13 @@ export function buildNavrosAreaPrefixCopy(area: string): string {
       ? navrosAreaLabels[normalizedArea as keyof typeof navrosAreaLabels]
       : normalizedArea;
 
-  if (normalizedArea in navrosAreaAnchors) {
-    return navrosAreaAnchors[normalizedArea as keyof typeof navrosAreaAnchors];
+  if (normalizedArea in NAVROS_AREA_PREFIX_VARIANTS) {
+    return selectStableTextVariant(
+      [normalizedArea, ...seedParts, "area-prefix"],
+      NAVROS_AREA_PREFIX_VARIANTS[
+        normalizedArea as keyof typeof NAVROS_AREA_PREFIX_VARIANTS
+      ],
+    );
   }
 
   return `Em ${displayArea},`;
@@ -666,7 +733,10 @@ export function buildNavrosReadingAnchorCopy(
   normalizedState: string,
   variant: NavrosReadingVariant = "direct",
 ): string {
-  const areaPrefix = buildNavrosAreaPrefixCopy(area);
+  const areaPrefix = buildNavrosAreaPrefixCopy(area, [
+    normalizedState,
+    variant,
+  ]);
   const stateLineByVariant =
     variant === "contemplative"
       ? NAVROS_CONTEMPLATIVE_ANCHORS_BY_STATE
@@ -784,6 +854,39 @@ function diversifyNavrosDirectionCopy(
   normalizedState: string,
   normalizedFeeling: string,
 ): string {
+  const seedParts = [
+    area.trim().toLowerCase(),
+    normalizedState,
+    normalizedFeeling,
+    text,
+  ];
+
+  if (text.includes("deixa de se espalhar") || text.includes("deixa de se dispersar")) {
+    return selectStableTextVariant(seedParts, [
+      text,
+      "À medida que o essencial ganha mais espaço, algo começa a se organizar.",
+      "Quando o que importa se destaca, algo começa a se alinhar.",
+      "Quando o essencial ganha espaço, a resposta encontra um eixo mais claro.",
+    ]);
+  }
+
+  if (text.includes("tende a reaparecer")) {
+    return selectStableTextVariant(seedParts, [
+      text,
+      "O que realmente importa tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
+      "O essencial volta a se destacar quando nem tudo permanece ativo ao mesmo tempo.",
+      "O que faz diferença começa a se evidenciar quando nem tudo é sustentado junto.",
+    ]);
+  }
+
+  if (text.includes("ganha nitidez")) {
+    return selectStableTextVariant(seedParts, [
+      text,
+      "À medida que deixa de ser forçado, algo ganha nitidez.",
+      "Algo começa a ganhar nitidez quando deixa de ser forçado.",
+    ]);
+  }
+
   const pool = NAVROS_DIRECTION_VARIANT_POOLS.find(
     (entry) => entry.match === text,
   );
@@ -792,10 +895,7 @@ function diversifyNavrosDirectionCopy(
     return text;
   }
 
-  return selectStableTextVariant(
-    [area.trim().toLowerCase(), normalizedState, normalizedFeeling, text],
-    pool.variants,
-  );
+  return selectStableTextVariant(seedParts, pool.variants);
 }
 
 function diversifyNavrosMovementCopy(
@@ -825,6 +925,7 @@ export function composeNavrosInsightCopy(
     normalizedFeeling,
     normalizedState,
   ),
+  normalizedPattern = "",
 ): string {
   const variant = resolveNavrosReadingVariantCopy(
     normalizedState,
@@ -865,6 +966,7 @@ export function composeNavrosInsightCopy(
         area.trim().toLowerCase(),
         normalizedState,
         normalizedFeeling,
+        normalizedPattern,
       ]),
   );
 }
@@ -873,16 +975,26 @@ export function buildNavrosMovementLineCopy(
   normalizedPattern: string,
   normalizedArea = "",
 ): string {
-  if (
-    normalizedPattern === "ansiedade" &&
-    (normalizedArea === "relacoes" || normalizedArea === "saude")
-  ) {
-    return "Algo pode começar a se estabilizar.";
+  if (normalizedPattern === "ansiedade" && normalizedArea === "relacoes") {
+    return "Outro ritmo começa a se tornar possível.";
   }
 
-  const line =
-    NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern] ??
-    "Algo começa a se reorganizar.";
+  if (normalizedPattern === "ansiedade" && normalizedArea === "saude") {
+    return "Algo pode começar a encontrar mais estabilidade.";
+  }
+
+  if (normalizedPattern === "ansiedade" && normalizedArea === "transicao") {
+    return "Algo começa a se sustentar de outra forma.";
+  }
+
+  const line = NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern];
+
+  if (!line) {
+    return selectStableTextVariant(
+      [normalizedArea, normalizedPattern, "movement-fallback"],
+      [...NAVROS_MOVEMENT_FALLBACK_VARIANTS],
+    );
+  }
 
   return diversifyNavrosMovementCopy(
     line,

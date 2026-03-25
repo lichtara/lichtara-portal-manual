@@ -114,6 +114,66 @@ const NAVROS_PATTERN_IDS: NavrosReadingPatternId[] = [
   "fallback",
 ];
 
+const TRACE_NAVROS_ENGINE = false;
+
+const NAVROS_MEDIUM_MOVEMENT_VARIANTS: Partial<Record<string, string[]>> = {
+  "Algo começa a se reorganizar.": [
+    "Algo começa a se reorganizar.",
+    "Algo começa a ganhar outro arranjo.",
+    "Algo começa a encontrar outro eixo.",
+  ],
+  "Mais clareza começa a se formar.": [
+    "Mais clareza começa a se formar.",
+    "Mais clareza começa a ganhar forma.",
+  ],
+  "Um critério começa a aparecer.": [
+    "Um critério começa a aparecer.",
+    "Um critério começa a ganhar contorno.",
+  ],
+  "Um movimento pequeno já encontra espaço.": [
+    "Um movimento pequeno já encontra espaço.",
+    "Um movimento pequeno começa a ganhar espaço.",
+  ],
+};
+
+const NAVROS_HIGH_MOVEMENT_VARIANTS: Partial<Record<string, string[]>> = {
+  "Algo começa a se reorganizar.": [
+    "Algo começa a se reorganizar.",
+    "Algo precisa começar a se reorganizar.",
+    "Algo passa a exigir ajuste para se reorganizar.",
+  ],
+  "Algo começa a se ajustar.": [
+    "Algo começa a se ajustar.",
+    "Algo precisa começar a se ajustar.",
+    "Algo passa a exigir ajuste para se ajustar.",
+  ],
+  "Algo começa a encontrar outro arranjo.": [
+    "Algo começa a encontrar outro arranjo.",
+    "Algo precisa encontrar outro arranjo.",
+    "Algo passa a exigir ajuste para encontrar outro arranjo.",
+  ],
+  "Algo começa a se recompor.": [
+    "Algo começa a se recompor.",
+    "Algo precisa começar a se recompor.",
+    "Algo passa a exigir ajuste para se recompor.",
+  ],
+  "Algo começa a se reposicionar.": [
+    "Algo começa a se reposicionar.",
+    "Algo precisa começar a se reposicionar.",
+    "Algo passa a exigir ajuste para se reposicionar.",
+  ],
+  "Um novo equilíbrio começa a aparecer.": [
+    "Um novo equilíbrio começa a aparecer.",
+    "Um novo equilíbrio precisa começar a aparecer.",
+    "Algo passa a exigir ajuste para que outro equilíbrio apareça.",
+  ],
+  "Um movimento pequeno já encontra espaço.": [
+    "Um movimento pequeno já encontra espaço.",
+    "Um movimento pequeno precisa encontrar espaço.",
+    "Esse movimento já pede espaço para se sustentar.",
+  ],
+};
+
 function hasWord(source: string, candidates: string[]): boolean {
   const normalized = source.trim().toLowerCase();
 
@@ -122,6 +182,38 @@ function hasWord(source: string, candidates: string[]): boolean {
 
 function isNavrosReadingPatternId(value: string): value is NavrosReadingPatternId {
   return NAVROS_PATTERN_IDS.includes(value as NavrosReadingPatternId);
+}
+
+function getStableChoiceIndex(parts: string[], length: number): number {
+  if (length <= 1) {
+    return 0;
+  }
+
+  const seed = parts.join(":");
+  let total = 0;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    total += seed.charCodeAt(index) * (index + 1);
+  }
+
+  return total % length;
+}
+
+function selectStableTextVariant(
+  parts: string[],
+  variants: string[],
+): string {
+  const index = getStableChoiceIndex(parts, variants.length);
+
+  return variants[index] ?? variants[0] ?? "";
+}
+
+function traceNavrosEngine(payload: Record<string, unknown>): void {
+  if (!import.meta.env.DEV || !TRACE_NAVROS_ENGINE) {
+    return;
+  }
+
+  console.log("[navros-engine]", payload);
 }
 
 function resolvePattern(
@@ -210,22 +302,23 @@ function normalizeNavrosState(state: string): string {
   return normalizedState;
 }
 
-function resolvePatternFromAnswers(
-  answers: NavrosOperationalAnswers,
+function resolvePatternFromSignals(
+  normalizedState: string,
+  feelingPattern: NavrosReadingPatternId,
 ): NavrosReadingPatternId {
-  const state = normalizeNavrosState(answers.state);
-  const feelingPattern = normalizeNavrosFeeling(answers.feeling);
-
-  if (state === "sobrecarga") {
+  if (normalizedState === "sobrecarga") {
     return "sobrecarga";
   }
 
-  if (state === "estagnacao" && (feelingPattern === "duvida" || feelingPattern === "fallback")) {
+  if (
+    normalizedState === "estagnacao" &&
+    (feelingPattern === "duvida" || feelingPattern === "fallback")
+  ) {
     return "paralisia";
   }
 
   if (
-    state === "indefinicao" &&
+    normalizedState === "indefinicao" &&
     (feelingPattern === "duvida" ||
       feelingPattern === "ansiedade" ||
       feelingPattern === "fallback")
@@ -236,12 +329,22 @@ function resolvePatternFromAnswers(
   return feelingPattern;
 }
 
-function buildNavrosMovementLine(answers: NavrosOperationalAnswers): string {
-  const pattern = resolvePatternFromAnswers(answers);
+function resolvePatternFromAnswers(
+  answers: NavrosOperationalAnswers,
+): NavrosReadingPatternId {
+  return resolvePatternFromSignals(
+    normalizeNavrosState(answers.state),
+    normalizeNavrosFeeling(answers.feeling),
+  );
+}
 
+function buildNavrosMovementLine(
+  pattern: NavrosReadingPatternId,
+  area: string,
+): string {
   return buildNavrosMovementLineCopy(
     pattern,
-    answers.area.trim().toLowerCase(),
+    area.trim().toLowerCase(),
   );
 }
 
@@ -292,6 +395,42 @@ export function adjustNavrosIntensityWithMemory(
   }).length;
 
   return repeatedFeelingCount >= 2 ? "high" : base;
+}
+
+function applyIntensityToMovement(
+  text: string,
+  intensity: NavrosIntensity,
+  answers: NavrosOperationalAnswers,
+): string {
+  if (intensity === "low") {
+    return text;
+  }
+
+  const seedParts = [
+    answers.area.trim().toLowerCase(),
+    answers.state.trim().toLowerCase(),
+    answers.feeling.trim().toLowerCase(),
+    intensity,
+    text,
+  ];
+
+  if (intensity === "medium") {
+    const variants = NAVROS_MEDIUM_MOVEMENT_VARIANTS[text];
+
+    if (!variants) {
+      return text;
+    }
+
+    return selectStableTextVariant(seedParts, variants);
+  }
+
+  const variants = NAVROS_HIGH_MOVEMENT_VARIANTS[text];
+
+  if (!variants) {
+    return text;
+  }
+
+  return selectStableTextVariant(seedParts, variants);
 }
 
 export function normalizeNavrosFeeling(
@@ -403,7 +542,10 @@ export function resolveNextAgentFromAnswers(
   movement: MovementType;
   agent: NavrosAgentId;
 } {
-  const pattern = resolvePatternFromAnswers(answers);
+  const pattern = resolvePatternFromSignals(
+    normalizeNavrosState(answers.state),
+    normalizeNavrosFeeling(answers.feeling),
+  );
   const movement = getMovementType(pattern);
   const agent = getAgentFromMovement(movement);
 
@@ -429,32 +571,64 @@ export function buildNavrosResponse(
   memory: NavrosSessionMemory = emptyNavrosSessionMemory,
 ): NavrosBuiltResponse {
   const normalizedState = normalizeNavrosState(answers.state);
-  const normalizedFeeling = normalizeNavrosReadingFeeling(answers.feeling);
+  const normalizedFeelingReading = normalizeNavrosReadingFeeling(
+    answers.feeling,
+  );
+  const normalizedFeelingPattern = normalizeNavrosFeeling(answers.feeling);
+  // INVARIANT:
+  // feeling and pattern are resolved once here and propagated downstream.
+  // They must not be recomputed later, or insight, movement, and agent can drift.
+  const pattern = resolvePatternFromSignals(
+    normalizedState,
+    normalizedFeelingPattern,
+  );
   const domain = normalizeNavrosDomain(answers.area);
   const baseIntensity = resolveNavrosIntensity(
-    normalizedFeeling,
+    normalizedFeelingReading,
     normalizedState,
   );
   const intensity = adjustNavrosIntensityWithMemory(
     baseIntensity,
     memory,
-    normalizedFeeling,
+    normalizedFeelingReading,
   );
   const rawInsight = composeNavrosInsightCopy(
     answers.area,
     normalizedState,
-    normalizedFeeling,
+    normalizedFeelingReading,
     intensity,
+    pattern,
   );
-  const rawMovement = buildNavrosMovementLine(answers);
+  const rawMovement = buildNavrosMovementLine(
+    pattern,
+    answers.area,
+  );
+  const intensifiedMovement = applyIntensityToMovement(
+    rawMovement,
+    intensity,
+    answers,
+  );
   const insight = autoCorrectNavrosCopy(
     autoCorrectByDomain(rawInsight, domain, "insight"),
   );
   const movement = autoCorrectNavrosCopy(
-    autoCorrectByDomain(rawMovement, domain, "movement"),
+    autoCorrectByDomain(intensifiedMovement, domain, "movement"),
   );
-  const { pattern, movement: movementType, agent } =
-    resolveNextAgentFromAnswers(answers);
+  const movementType = getMovementType(pattern);
+  const agent = getAgentFromMovement(movementType);
+
+  traceNavrosEngine({
+    area: answers.area,
+    state: normalizedState,
+    feelingReading: normalizedFeelingReading,
+    feelingPattern: normalizedFeelingPattern,
+    pattern,
+    intensity,
+    domain,
+    // Conscious boundary for this cycle:
+    // memory may raise intensity, but it does not alter pattern origin or insight structure.
+    memory,
+  });
 
   validateBuiltCopy("insight", insight, answers);
   validateBuiltCopy("movement", movement, answers);
