@@ -71,6 +71,15 @@ export const navrosAreaContexts: Record<(typeof navrosSuggestedAreas)[number], s
   transicao: "algo mudando na sua vida",
 };
 
+const navrosAreaAnchors: Record<(typeof navrosSuggestedAreas)[number], string> = {
+  trabalho: "No trabalho,",
+  saude: "Na saúde,",
+  relacoes: "Nas relações,",
+  financas: "Nas finanças,",
+  proposito: "No propósito,",
+  transicao: "Na transição,",
+};
+
 export const navrosSuggestedStates = [
   "inicio",
   "sobrecarga",
@@ -237,7 +246,7 @@ const NAVROS_STATE_STRUCTURE_OVERRIDES: Record<string, Partial<Record<string, st
     duvida:
       "O que surge ainda não encontrou um critério estável para se diferenciar.",
     ansiedade:
-      "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.",
+      "Há movimento suficiente para pedir resposta, mas não no ritmo em que aparece.",
     indefinicao:
       "Nem tudo que aparece aqui já pode ser sustentado com clareza.",
   },
@@ -316,7 +325,7 @@ type NavrosInsightOverride = {
 
 const NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES: Record<string, NavrosInsightOverride> = {
   "saude:sobrecarga:travamento": {
-    anchor: "Na área de saúde, há exigências demais ocupando o mesmo espaço.",
+    anchor: "Na saúde, há exigências demais ocupando o mesmo espaço.",
     structure: "O corpo pode não responder quando tudo é mantido ao mesmo tempo.",
     direction: "Quando algo encontra espaço suficiente, uma resposta começa a aparecer.",
   },
@@ -356,9 +365,9 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
 ];
 
 const NAVROS_STRUCTURE_FALLBACKS = [
-  "Há elementos presentes, mas ainda sem uma base que se sustente.",
   "O que aparece ainda não encontrou forma suficiente para se manter.",
-  "Existe algo em curso, mas ainda sem consistência para se sustentar.",
+  "O que está presente ainda não se sustenta por completo.",
+  "Ainda não há consistência suficiente para que isso se mantenha.",
 ] as const;
 
 const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
@@ -370,8 +379,8 @@ const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
       "Há elementos presentes, mas ainda sem organização suficiente para orientar uma decisão com firmeza.",
     "O ritmo interno ainda não acompanha a pressão por resposta.":
       "O ritmo interno ainda não acompanha por completo a pressão por resposta.",
-    "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.":
-      "Há movimento suficiente para pedir resposta, mas ainda não no ritmo em que ele quer ser lido.",
+    "Há movimento suficiente para pedir resposta, mas não no ritmo em que aparece.":
+      "Há movimento suficiente para pedir resposta, mas ainda não no ritmo em que aparece.",
   },
   high: {
     "O ritmo interno ainda não acompanha a pressão por resposta.":
@@ -382,7 +391,7 @@ const NAVROS_STRUCTURE_INTENSITY_BY_LEVEL: Record<
       "Existe movimento possível, mas ele ainda não encontra base suficiente para acontecer.",
     "O movimento ainda não encontrou um ponto simples o bastante para começar.":
       "O movimento ainda não encontrou um ponto simples o bastante para se sustentar.",
-    "Há movimento suficiente para pedir resposta, mas não no ritmo em que ele quer ser lido.":
+    "Há movimento suficiente para pedir resposta, mas não no ritmo em que aparece.":
       "Há movimento suficiente para pedir resposta, mas não no ritmo em que está sendo pressionado.",
     "Parte do que está em curso ainda não se deixa acompanhar no ritmo esperado.":
       "Parte do que está em curso ainda não se deixa acompanhar no ritmo exigido.",
@@ -467,6 +476,22 @@ const NAVROS_MOVEMENT_LINES_BY_PATTERN: Record<string, string> = {
   fallback:
     "Algo começa a se reorganizar.",
 };
+
+const NAVROS_MOVEMENT_VARIANT_POOLS: Array<{
+  match: string;
+  variants: string[];
+}> = [
+  {
+    match: "Algo começa a se reorganizar.",
+    variants: [
+      "Algo começa a se reorganizar.",
+      "Algo começa a se ajustar.",
+      "Algo começa a encontrar outro arranjo.",
+      "Um novo equilíbrio começa a aparecer.",
+      "Algo começa a se recompor.",
+    ],
+  },
+];
 
 function classifyNavrosAnchorType(
   normalizedState: string,
@@ -599,7 +624,11 @@ export function buildNavrosAreaPrefixCopy(area: string): string {
       ? navrosAreaLabels[normalizedArea as keyof typeof navrosAreaLabels]
       : normalizedArea;
 
-  return `Na área de ${displayArea},`;
+  if (normalizedArea in navrosAreaAnchors) {
+    return navrosAreaAnchors[normalizedArea as keyof typeof navrosAreaAnchors];
+  }
+
+  return `Em ${displayArea},`;
 }
 
 export function resolveNavrosReadingVariantCopy(
@@ -769,6 +798,25 @@ function diversifyNavrosDirectionCopy(
   );
 }
 
+function diversifyNavrosMovementCopy(
+  text: string,
+  normalizedPattern: string,
+  normalizedArea: string,
+): string {
+  const pool = NAVROS_MOVEMENT_VARIANT_POOLS.find(
+    (entry) => entry.match === text,
+  );
+
+  if (!pool) {
+    return text;
+  }
+
+  return selectStableTextVariant(
+    [normalizedArea, normalizedPattern, text],
+    pool.variants,
+  );
+}
+
 export function composeNavrosInsightCopy(
   area: string,
   normalizedState: string,
@@ -832,5 +880,13 @@ export function buildNavrosMovementLineCopy(
     return "Algo pode começar a se estabilizar.";
   }
 
-  return NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern] ?? "Algo começa a se reorganizar.";
+  const line =
+    NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern] ??
+    "Algo começa a se reorganizar.";
+
+  return diversifyNavrosMovementCopy(
+    line,
+    normalizedPattern,
+    normalizedArea,
+  );
 }
