@@ -3,12 +3,12 @@ import * as React from "react";
 import {
   buildNavrosResponse,
   normalizeNavrosReadingFeeling,
+  type NavrosBuiltResponse,
   type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
 import {
-  navrosAreaContexts,
   navrosAreaLabels,
   navrosOperationalScreenCopy,
   navrosStateLabels,
@@ -34,6 +34,14 @@ export function NavrosOperationalScreen({
   onUpdate,
   onRestart,
 }: NavrosOperationalScreenProps) {
+  const response = React.useMemo<NavrosBuiltResponse | null>(() => {
+    if (!answers.area.trim() || !answers.state.trim() || !answers.feeling.trim()) {
+      return null;
+    }
+
+    return buildNavrosResponse(answers);
+  }, [answers.area, answers.state, answers.feeling]);
+
   switch (step) {
     case "entry":
       return <EntryStep onNext={onNext} />;
@@ -42,10 +50,10 @@ export function NavrosOperationalScreen({
       return <FocusStep answers={answers} onNext={onNext} onUpdate={onUpdate} />;
 
     case "insight":
-      return <InsightStep answers={answers} onNext={onNext} />;
+      return response ? <InsightStep response={response} onNext={onNext} /> : null;
 
     case "movement":
-      return <MovementStep answers={answers} onNext={onNext} />;
+      return response ? <MovementStep response={response} onNext={onNext} /> : null;
 
     case "closure":
       return <ClosureStep onRestart={onRestart} />;
@@ -160,9 +168,6 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
                 <span className="operational-step__chip-label">
                   {navrosAreaLabels[suggestedArea]}
                 </span>
-                <span className="operational-step__chip-context">
-                  {navrosAreaContexts[suggestedArea]}
-                </span>
               </button>
             );
           })}
@@ -228,14 +233,15 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 }
 
 function InsightStep({
-  answers,
+  response,
   onNext,
-}: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const { insight } = buildNavrosResponse(answers);
-
+}: {
+  response: NavrosBuiltResponse;
+  onNext: () => void;
+}) {
   return (
     <div className="operational-step">
-      <p className="operational-step__copy">{insight}</p>
+      <p className="operational-step__copy">{response.insight}</p>
       <div className="operational-step__actions">
         <button
           type="button"
@@ -250,10 +256,13 @@ function InsightStep({
 }
 
 function MovementStep({
-  answers,
+  response,
   onNext,
-}: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const { movement, agent } = buildNavrosResponse(answers);
+}: {
+  response: NavrosBuiltResponse;
+  onNext: () => void;
+}) {
+  const { movement, agent } = response;
   const trajectory: NavrosAgentId[] =
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
