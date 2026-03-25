@@ -404,7 +404,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-journey {
   display: grid;
-  gap: 24px;
+  gap: 20px;
   justify-self: center;
   max-width: 860px;
   width: min(100%, 860px);
@@ -449,57 +449,78 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-journey__progress {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .operational-journey__bar {
-  background: rgba(201, 210, 217, 0.34);
+  background: rgba(201, 210, 217, 0.2);
   border-radius: 999px;
-  height: 8px;
+  height: 5px;
   overflow: hidden;
-  width: min(320px, 100%);
+  width: min(308px, 100%);
 }
 
 .operational-journey__bar-fill {
-  background: var(--lichtara-gold);
+  background: rgba(212, 175, 55, 0.82);
   border-radius: 999px;
   display: block;
   height: 100%;
-  transition: width 240ms ease;
+  transition: width 220ms ease, opacity 180ms ease;
 }
 
 .operational-journey__panel {
-  background: linear-gradient(180deg, rgba(245, 246, 247, 0.98), rgba(232, 238, 243, 0.96));
-  border: 1px solid rgba(201, 210, 217, 0.28);
-  border-radius: 28px;
-  box-shadow: 0 20px 44px rgba(0, 8, 20, 0.2);
-  padding: 28px;
+  backdrop-filter: blur(2px);
+  background: rgba(245, 246, 247, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  box-shadow: 0 14px 34px rgba(0, 8, 20, 0.18);
+  margin: 0 auto;
+  padding: 32px 28px;
+  width: 100%;
 }
 
 .operational-journey__panel--entry {
   align-items: center;
   display: grid;
-  min-height: clamp(360px, 54vh, 520px);
+  max-width: 760px;
+  min-height: auto;
+}
+
+.operational-journey__panel--focus {
+  max-width: 840px;
+}
+
+.operational-journey__panel--insight {
+  max-width: 760px;
+}
+
+.operational-journey__panel--movement {
+  max-width: 760px;
+}
+
+.operational-journey__panel--closure {
+  max-width: 760px;
 }
 
 .operational-step {
   display: grid;
-  gap: 18px;
+  gap: 20px;
+  animation: operationalFadeIn 220ms ease-out both;
 }
 
 .operational-step--entry {
   align-content: center;
-  gap: 22px;
+  gap: 24px;
   justify-items: start;
-  min-height: clamp(300px, 44vh, 420px);
+  min-height: auto;
   margin: 0 auto;
-  max-width: 560px;
-  width: min(100%, 560px);
+  max-width: 520px;
+  width: min(100%, 520px);
 }
 
 .operational-step--entry .operational-step__copy-group {
-  gap: 18px;
-  max-width: 40ch;
+  gap: 20px;
+  max-width: 38ch;
 }
 
 .operational-step--entry .operational-step__label,
@@ -511,8 +532,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step--entry .operational-step__tag {
   color: rgba(10, 26, 47, 0.58);
   font-size: 13px;
-  margin-top: 6px;
-  max-width: 40ch;
+  margin-top: 8px;
+  max-width: 38ch;
 }
 
 .operational-step--entry .operational-step__action {
@@ -527,16 +548,20 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__group {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(201, 210, 217, 0.32);
-  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(201, 210, 217, 0.18);
+  border-radius: 24px;
   display: grid;
-  gap: 14px;
-  padding: 18px 18px 20px;
+  gap: 12px;
+  padding: 20px 18px;
+}
+
+.operational-step__group--active {
+  animation: operationalFadeIn 220ms ease-out both;
 }
 
 .operational-step__group + .operational-step__group {
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 .operational-step__group-label {
@@ -552,6 +577,34 @@ export const MANDALA_JOURNEY_UI_CSS = `
   font-size: 14px;
   line-height: 1.55;
   margin: 0;
+}
+
+.operational-step__selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: -4px;
+}
+
+.operational-step__selected-chip {
+  appearance: none;
+  background: rgba(10, 26, 47, 0.04);
+  border: 1px solid rgba(10, 26, 47, 0.12);
+  border-radius: 999px;
+  color: rgba(10, 26, 47, 0.7);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 8px 12px;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.operational-step__selected-chip:hover,
+.operational-step__selected-chip:focus-visible {
+  background: rgba(10, 26, 47, 0.06);
+  border-color: rgba(10, 26, 47, 0.18);
+  color: rgba(10, 26, 47, 0.82);
+  outline: none;
 }
 
 .operational-step__quote,
@@ -582,29 +635,53 @@ export const MANDALA_JOURNEY_UI_CSS = `
   line-height: 1.55;
 }
 
+.operational-step--insight .operational-step__copy,
+.operational-step--movement .operational-step__copy {
+  font-size: 17px;
+  line-height: 1.72;
+  margin: 0 auto;
+  max-width: 520px;
+  width: 100%;
+}
+
+.operational-step--closure .operational-step__copy {
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 34ch;
+}
+
+.operational-step__mandala {
+  margin-top: -2px;
+  opacity: 0.68;
+  pointer-events: none;
+  transform: scale(0.88);
+  transform-origin: center top;
+  width: 100%;
+}
+
 .mandala-mini {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin: 4px 0 10px;
-  min-height: 220px;
+  margin: 0;
+  min-height: 168px;
   position: relative;
 }
 
 .mandala-mini__ring {
   border: 1px solid rgba(201, 210, 217, 0.28);
   border-radius: 50%;
-  height: 180px;
+  height: 150px;
   position: absolute;
-  width: 180px;
+  width: 150px;
 }
 
 .mandala-mini__core {
   background: radial-gradient(circle, rgba(212, 175, 55, 0.24), rgba(10, 26, 47, 0.1));
   border-radius: 50%;
-  height: 18px;
+  height: 14px;
   position: absolute;
-  width: 18px;
+  width: 14px;
 }
 
 .mandala-mini__agent {
@@ -613,7 +690,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
   display: grid;
   gap: 6px;
   justify-items: center;
-  opacity: 0.22;
+  opacity: 0.18;
   position: absolute;
   text-align: center;
   transform: translate(-50%, -50%) scale(1);
@@ -622,13 +699,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .mandala-mini__agent--past {
   color: rgba(10, 26, 47, 0.56);
-  opacity: 0.36;
+  opacity: 0.28;
 }
 
 .mandala-mini__agent--active {
   color: var(--lichtara-gold);
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.12);
+  opacity: 0.92;
+  transform: translate(-50%, -50%) scale(1.06);
 }
 
 .mandala-mini__dot {
@@ -645,7 +722,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .mandala-mini__label {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -653,31 +730,41 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-step__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .operational-step__chip {
   appearance: none;
   align-items: flex-start;
-  background: rgba(245, 246, 247, 0.92);
-  border: 1px solid rgba(201, 210, 217, 0.34);
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(201, 210, 217, 0.22);
+  border-radius: 999px;
   color: var(--lichtara-blue);
   cursor: pointer;
   display: inline-grid;
   gap: 4px;
-  padding: 10px 14px;
+  min-height: 48px;
+  padding: 11px 16px;
   text-align: left;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.operational-step__chip:hover,
+.operational-step__chip:focus-visible {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(212, 175, 55, 0.28);
+  outline: none;
+  transform: translateY(-1px);
 }
 
 .operational-step__chip--active {
-  background: rgba(10, 26, 47, 0.98);
-  border-color: rgba(212, 175, 55, 0.72);
+  background: rgba(10, 26, 47, 0.96);
+  border-color: rgba(212, 175, 55, 0.56);
   color: var(--lichtara-gold);
 }
 
 .operational-step__chip--contextual {
-  min-width: 188px;
+  min-width: 172px;
 }
 
 .operational-step__chip-label {
@@ -711,7 +798,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
   color: var(--lichtara-blue);
   cursor: pointer;
   font-weight: 600;
-  padding: 11px 16px;
+  min-height: 50px;
+  padding: 12px 22px;
   transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
@@ -727,10 +815,36 @@ export const MANDALA_JOURNEY_UI_CSS = `
   opacity: 0.42;
 }
 
+.operational-step__action--secondary {
+  background: transparent;
+  border-color: rgba(10, 26, 47, 0.14);
+  color: rgba(10, 26, 47, 0.58);
+  font-weight: 500;
+}
+
+.operational-step__action--secondary:hover,
+.operational-step__action--secondary:focus-visible {
+  background: rgba(10, 26, 47, 0.04);
+  box-shadow: none;
+  color: rgba(10, 26, 47, 0.78);
+}
+
 .operational-step__pause {
   color: rgba(10, 26, 47, 0.72);
   font-size: 14px;
   line-height: 1.55;
+}
+
+@keyframes operationalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 980px) {
@@ -760,11 +874,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
   .operational-journey__panel {
     border-radius: 22px;
-    padding: 18px 16px;
+    padding: 22px 18px;
   }
 
   .operational-journey__panel--entry {
-    min-height: clamp(320px, 52vh, 460px);
+    min-height: auto;
   }
 
   .operational-step {
@@ -785,11 +899,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
   .operational-step__group {
     border-radius: 18px;
     gap: 12px;
-    padding: 16px 14px 18px;
+    padding: 16px 14px;
   }
 
   .operational-step__group + .operational-step__group {
-    margin-top: 14px;
+    margin-top: 0;
   }
 
   .operational-step__quote {
@@ -806,6 +920,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
   .operational-step__tag {
     font-size: 15px;
     line-height: 1.55;
+  }
+
+  .operational-step--insight .operational-step__copy,
+  .operational-step--movement .operational-step__copy,
+  .operational-step--closure .operational-step__copy {
+    font-size: 15px;
+    max-width: none;
   }
 
   .operational-journey__progress {
@@ -839,12 +960,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
   }
 
   .mandala-mini {
-    min-height: 180px;
+    min-height: 148px;
   }
 
   .mandala-mini__ring {
-    height: 150px;
-    width: 150px;
+    height: 132px;
+    width: 132px;
   }
 }
 

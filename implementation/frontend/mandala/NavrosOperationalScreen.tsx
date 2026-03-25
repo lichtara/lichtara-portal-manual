@@ -104,6 +104,14 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [feeling, setFeeling] = React.useState(answers.feeling);
   const hasArea = Boolean(area.trim());
   const hasState = Boolean(state.trim());
+  const selectedAreaLabel =
+    hasArea && area.trim().toLowerCase() in navrosAreaLabels
+      ? navrosAreaLabels[area.trim().toLowerCase() as keyof typeof navrosAreaLabels]
+      : area.trim();
+  const selectedStateLabel =
+    hasState && state.trim().toLowerCase() in navrosStateLabels
+      ? navrosStateLabels[state.trim().toLowerCase() as keyof typeof navrosStateLabels]
+      : state.trim();
 
   function handleAreaSelect(nextArea: string) {
     const shouldReset = nextArea !== area;
@@ -144,38 +152,61 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   }
 
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--focus">
       <p className="operational-step__helper">
         {navrosOperationalScreenCopy.focus.helper}
       </p>
-      <div className="operational-step__group">
-        <div className="operational-step__chips">
-          {navrosSuggestedAreas.map((suggestedArea) => {
-            const isActive =
-              area.trim().toLowerCase() === suggestedArea.toLowerCase();
-
-            return (
-              <button
-                key={suggestedArea}
-                type="button"
-                className={journeyCx(
-                  "operational-step__chip",
-                  "operational-step__chip--contextual",
-                  isActive && "operational-step__chip--active",
-                )}
-                onClick={() => handleAreaSelect(suggestedArea)}
-              >
-                <span className="operational-step__chip-label">
-                  {navrosAreaLabels[suggestedArea]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
       {hasArea ? (
-        <div className="operational-step__group">
+        <div className="operational-step__selection">
+          <button
+            type="button"
+            className="operational-step__selected-chip"
+            onClick={() => handleAreaSelect("")}
+          >
+            {selectedAreaLabel}
+          </button>
+          {hasState ? (
+            <button
+              type="button"
+              className="operational-step__selected-chip"
+              onClick={() => handleStateSelect("")}
+            >
+              {selectedStateLabel}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      {!hasArea ? (
+        <div className="operational-step__group operational-step__group--active">
+          <div className="operational-step__chips">
+            {navrosSuggestedAreas.map((suggestedArea) => {
+              const isActive =
+                area.trim().toLowerCase() === suggestedArea.toLowerCase();
+
+              return (
+                <button
+                  key={suggestedArea}
+                  type="button"
+                  className={journeyCx(
+                    "operational-step__chip",
+                    "operational-step__chip--contextual",
+                    isActive && "operational-step__chip--active",
+                  )}
+                  onClick={() => handleAreaSelect(suggestedArea)}
+                >
+                  <span className="operational-step__chip-label">
+                    {navrosAreaLabels[suggestedArea]}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
+      {hasArea && !hasState ? (
+        <div className="operational-step__group operational-step__group--active">
           <div className="operational-step__chips">
             {navrosSuggestedStates.map((suggestedState) => {
               const isActive =
@@ -202,7 +233,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
       ) : null}
 
       {hasArea && hasState ? (
-        <div className="operational-step__group">
+        <div className="operational-step__group operational-step__group--active">
           <div className="operational-step__chips">
             {navrosSuggestedFeelings.map((suggestedFeeling) => {
               const isActive =
@@ -240,7 +271,7 @@ function InsightStep({
   onNext: () => void;
 }) {
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--insight">
       <p className="operational-step__copy">{response.insight}</p>
       <div className="operational-step__actions">
         <button
@@ -267,9 +298,11 @@ function MovementStep({
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
   return (
-    <div className="operational-step">
-      <MandalaMini activeAgent={agent} trajectory={trajectory} />
+    <div className="operational-step operational-step--movement">
       <p className="operational-step__copy">{movement}</p>
+      <div className="operational-step__mandala">
+        <MandalaMini activeAgent={agent} trajectory={trajectory} />
+      </div>
       <div className="operational-step__actions">
         <button
           type="button"
@@ -285,14 +318,14 @@ function MovementStep({
 
 function ClosureStep({ onRestart }: { onRestart: () => void }) {
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--closure">
       <p className="operational-step__copy">
         {navrosOperationalScreenCopy.closure.quote}
       </p>
       <div className="operational-step__actions">
         <button
           type="button"
-          className="operational-step__action"
+          className="operational-step__action operational-step__action--secondary"
           onClick={onRestart}
         >
           {navrosOperationalScreenCopy.closure.action}
