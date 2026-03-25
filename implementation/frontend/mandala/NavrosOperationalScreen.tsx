@@ -1,10 +1,8 @@
 import * as React from "react";
 
 import {
-  buildNavrosInsightCopy,
-  buildNavrosMovementCopy,
+  buildNavrosResponse,
   normalizeNavrosReadingFeeling,
-  resolveNextAgentFromAnswers,
   type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
@@ -233,11 +231,11 @@ function InsightStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const insightCopy = buildNavrosInsightCopy(answers);
+  const { insight } = buildNavrosResponse(answers);
 
   return (
     <div className="operational-step">
-      <p className="operational-step__copy">{insightCopy}</p>
+      <p className="operational-step__copy">{insight}</p>
       <div className="operational-step__actions">
         <button
           type="button"
@@ -255,15 +253,14 @@ function MovementStep({
   answers,
   onNext,
 }: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const movementCopy = buildNavrosMovementCopy(answers);
-  const { agent } = resolveNextAgentFromAnswers(answers);
+  const { movement, agent } = buildNavrosResponse(answers);
   const trajectory: NavrosAgentId[] =
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
   return (
     <div className="operational-step">
       <MandalaMini activeAgent={agent} trajectory={trajectory} />
-      <p className="operational-step__copy">{movementCopy}</p>
+      <p className="operational-step__copy">{movement}</p>
       <div className="operational-step__actions">
         <button
           type="button"

@@ -225,7 +225,10 @@ export type {
 
 export {
   buildNavrosInsightCopy,
+  buildNavrosResponse,
   buildNavrosMovementCopy,
+  adjustNavrosIntensityWithMemory,
+  emptyNavrosSessionMemory,
   emptyNavrosOperationalAnswers,
   getAgentFromMovement,
   getMovementType,
@@ -234,13 +237,16 @@ export {
   normalizeNavrosFeeling,
   resolveNextAgent,
   resolveNextAgentFromAnswers,
+  updateNavrosSessionMemory,
 } from "./navrosOperationalJourney";
 export type {
   MovementType,
   NavrosAgentId,
+  NavrosBuiltResponse,
   NavrosOperationalAnswers,
   NavrosReadingFeelingId,
   NavrosReadingPatternId,
+  NavrosSessionMemory,
   NavrosOperationalStep,
   NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
