@@ -404,7 +404,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-journey {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   justify-self: center;
   max-width: 860px;
   width: min(100%, 860px);
@@ -455,9 +455,9 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-journey__bar {
   background: rgba(201, 210, 217, 0.2);
   border-radius: 999px;
-  height: 5px;
+  height: 4px;
   overflow: hidden;
-  width: min(308px, 100%);
+  width: min(296px, 100%);
 }
 
 .operational-journey__bar-fill {
@@ -470,42 +470,44 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-journey__panel {
   backdrop-filter: blur(2px);
-  background: rgba(245, 246, 247, 0.92);
+  background: rgba(245, 246, 247, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 30px;
-  box-shadow: 0 14px 34px rgba(0, 8, 20, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 8, 20, 0.18);
   margin: 0 auto;
-  padding: 32px 28px;
+  padding: 28px 24px;
   width: 100%;
 }
 
 .operational-journey__panel--entry {
   align-items: center;
   display: grid;
-  max-width: 760px;
+  max-width: 700px;
   min-height: auto;
 }
 
 .operational-journey__panel--focus {
-  max-width: 840px;
+  max-width: 760px;
 }
 
 .operational-journey__panel--insight {
-  max-width: 760px;
+  max-width: 700px;
 }
 
 .operational-journey__panel--movement {
-  max-width: 760px;
+  max-width: 700px;
 }
 
 .operational-journey__panel--closure {
-  max-width: 760px;
+  max-width: 700px;
+  padding-bottom: 24px;
+  padding-top: 24px;
 }
 
 .operational-step {
   display: grid;
-  gap: 20px;
-  animation: operationalFadeIn 220ms ease-out both;
+  gap: 18px;
+  animation: operationalFadeIn 180ms ease-out both;
 }
 
 .operational-step--entry {
@@ -579,6 +581,17 @@ export const MANDALA_JOURNEY_UI_CSS = `
   margin: 0;
 }
 
+.operational-step--focus {
+  gap: 16px;
+}
+
+.operational-step--focus .operational-step__group {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
 .operational-step__selection {
   display: flex;
   flex-wrap: wrap;
@@ -588,12 +601,13 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__selected-chip {
   appearance: none;
-  background: rgba(10, 26, 47, 0.04);
-  border: 1px solid rgba(10, 26, 47, 0.12);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(10, 26, 47, 0.16);
   border-radius: 999px;
-  color: rgba(10, 26, 47, 0.7);
+  color: rgba(10, 26, 47, 0.82);
   cursor: pointer;
   font-size: 13px;
+  font-weight: 500;
   line-height: 1.2;
   padding: 8px 12px;
   transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
@@ -601,9 +615,9 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step__selected-chip:hover,
 .operational-step__selected-chip:focus-visible {
-  background: rgba(10, 26, 47, 0.06);
-  border-color: rgba(10, 26, 47, 0.18);
-  color: rgba(10, 26, 47, 0.82);
+  background: rgba(255, 255, 255, 0.44);
+  border-color: rgba(10, 26, 47, 0.22);
+  color: rgba(10, 26, 47, 0.92);
   outline: none;
 }
 
@@ -637,10 +651,10 @@ export const MANDALA_JOURNEY_UI_CSS = `
 
 .operational-step--insight .operational-step__copy,
 .operational-step--movement .operational-step__copy {
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16.5px;
+  line-height: 1.75;
   margin: 0 auto;
-  max-width: 520px;
+  max-width: 500px;
   width: 100%;
 }
 
@@ -650,11 +664,26 @@ export const MANDALA_JOURNEY_UI_CSS = `
   max-width: 34ch;
 }
 
+.operational-step--movement {
+  gap: 14px;
+  justify-items: center;
+}
+
+.operational-step--movement .operational-step__actions {
+  justify-content: center;
+  width: 100%;
+}
+
+.operational-step--closure {
+  gap: 14px;
+  padding-top: 2px;
+}
+
 .operational-step__mandala {
-  margin-top: -2px;
-  opacity: 0.68;
+  margin-top: -6px;
+  opacity: 0.4;
   pointer-events: none;
-  transform: scale(0.88);
+  transform: scale(0.85);
   transform-origin: center top;
   width: 100%;
 }
@@ -733,6 +762,12 @@ export const MANDALA_JOURNEY_UI_CSS = `
   gap: 14px;
 }
 
+.operational-step--focus .operational-step__chips {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .operational-step__chip {
   appearance: none;
   align-items: flex-start;
@@ -764,7 +799,11 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-step__chip--contextual {
-  min-width: 172px;
+  min-width: 0;
+}
+
+.operational-step--focus .operational-step__chip {
+  width: 100%;
 }
 
 .operational-step__chip-label {
@@ -798,8 +837,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
   color: var(--lichtara-blue);
   cursor: pointer;
   font-weight: 600;
-  min-height: 50px;
-  padding: 12px 22px;
+  min-height: 46px;
+  padding: 10px 20px;
   transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
@@ -838,7 +877,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 @keyframes operationalFadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(4px);
   }
 
   to {
@@ -970,7 +1009,8 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 @media (max-width: 420px) {
-  .operational-step__chips {
+  .operational-step__chips,
+  .operational-step--focus .operational-step__chips {
     grid-template-columns: 1fr;
   }
 
