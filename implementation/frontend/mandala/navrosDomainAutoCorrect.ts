@@ -61,6 +61,22 @@ function correctSaude(
 ): string {
   return compactWhitespace(
     text
+      .replace(
+        /Algo precisa encontrar outro arranjo\./giu,
+        "Outro arranjo começa a se tornar possível.",
+      )
+      .replace(
+        /Algo passa a exigir ajuste para encontrar outro arranjo\./giu,
+        "Outro arranjo começa a se tornar possível.",
+      )
+      .replace(
+        /Algo precisa começar a se reorganizar\./giu,
+        "Algo começa a se reorganizar.",
+      )
+      .replace(
+        /Algo passa a exigir ajuste para se reorganizar\./giu,
+        "Algo começa a se reorganizar.",
+      )
       .replace(/\bpede resposta\b/giu, "pede atenção")
       .replace(/se estabilizar/giu, "encontrar mais estabilidade")
       .replace(
@@ -77,8 +93,16 @@ function correctRelacoes(
   return compactWhitespace(
     text
       .replace(
+        /Algo pode começar a se estabilizar\./giu,
+        "Outro ritmo começa a se tornar possível.",
+      )
+      .replace(
+        /Mais estabilidade pode começar a se firmar\./giu,
+        "Outro ritmo começa a se tornar possível.",
+      )
+      .replace(
         /se estabilizar/giu,
-        mode === "movement" ? "ganhar outro ritmo" : "encontrar outro ritmo",
+        mode === "movement" ? "se reorganizar em outro ritmo" : "encontrar outro ritmo",
       )
       .replace(/se firmar/giu, mode === "movement" ? "aparecer" : "ganhar outra forma")
       .replace(/ganha nitidez/giu, "pode ganhar mais clareza"),
@@ -109,11 +133,25 @@ function correctTransicao(
 ): string {
   return compactWhitespace(
     text
+      .replace(
+        /Mais estabilidade pode começar a se firmar\./giu,
+        "Algo começa a se sustentar de outra forma.",
+      )
+      .replace(
+        /Mais estabilidade pode começar a aparecer\./giu,
+        "Algo começa a se sustentar de outra forma.",
+      )
       .replace(/se organizar/giu, "se reorganizar aos poucos")
       .replace(/comeca a se formar/giu, "começa a se delinear")
       .replace(/começa a se formar/giu, "começa a se delinear")
-      .replace(/se estabilizar/giu, mode === "movement" ? "ganhar outro ritmo" : "se estabilizar")
-      .replace(/se firmar/giu, mode === "movement" ? "aparecer" : "se firmar"),
+      .replace(
+        /se estabilizar/giu,
+        mode === "movement" ? "se sustentar de outra forma" : "se estabilizar",
+      )
+      .replace(
+        /se firmar/giu,
+        mode === "movement" ? "se sustentar de outra forma" : "se firmar",
+      ),
   );
 }
 

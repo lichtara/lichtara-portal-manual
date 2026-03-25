@@ -357,6 +357,13 @@ const NAVROS_AREA_STATE_FEELING_INSIGHT_OVERRIDES: Record<string, NavrosInsightO
     structure: "O corpo pode não responder quando tudo é mantido ao mesmo tempo.",
     direction: "Quando algo encontra espaço suficiente, uma resposta começa a aparecer.",
   },
+  "relacoes:mudanca:desalinhamento": {
+    anchor: "Nas relações, algo já está em movimento.",
+  },
+  "financas:sobrecarga:travamento": {
+    direction:
+      "Parte do que ocupa espaço aqui já não precisa permanecer ativo da mesma forma.",
+  },
 };
 
 const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
@@ -378,8 +385,8 @@ const NAVROS_DIRECTION_VARIANT_POOLS: Array<{
     variants: [
       "O que pede espaço tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
       "O que realmente importa tende a reaparecer quando nem tudo é mantido ao mesmo tempo.",
-      "O essencial volta a se destacar quando nem tudo permanece ativo ao mesmo tempo.",
-      "O que faz diferença começa a se evidenciar quando nem tudo é sustentado junto.",
+      "Nem tudo que está ativo aqui precisa permanecer no mesmo nível.",
+      "Parte do que ocupa espaço aqui já não precisa permanecer ativo da mesma forma.",
     ],
   },
   {
@@ -521,6 +528,8 @@ const NAVROS_MOVEMENT_VARIANT_POOLS: Array<{
       "Um novo equilíbrio começa a aparecer.",
       "Algo começa a se recompor.",
       "Algo começa a se reposicionar.",
+      "Um novo arranjo começa a aparecer.",
+      "Algo passa a encontrar outro arranjo.",
     ],
   },
 ];
@@ -529,6 +538,7 @@ const NAVROS_MOVEMENT_FALLBACK_VARIANTS = [
   "Algo começa a se reorganizar.",
   "Algo começa a se ajustar.",
   "Algo começa a encontrar outro arranjo.",
+  "Um novo arranjo começa a aparecer.",
 ] as const;
 
 function classifyNavrosAnchorType(
@@ -965,11 +975,16 @@ export function buildNavrosMovementLineCopy(
   normalizedPattern: string,
   normalizedArea = "",
 ): string {
-  if (
-    normalizedPattern === "ansiedade" &&
-    (normalizedArea === "relacoes" || normalizedArea === "saude")
-  ) {
-    return "Algo pode começar a se estabilizar.";
+  if (normalizedPattern === "ansiedade" && normalizedArea === "relacoes") {
+    return "Outro ritmo começa a se tornar possível.";
+  }
+
+  if (normalizedPattern === "ansiedade" && normalizedArea === "saude") {
+    return "Algo pode começar a encontrar mais estabilidade.";
+  }
+
+  if (normalizedPattern === "ansiedade" && normalizedArea === "transicao") {
+    return "Algo começa a se sustentar de outra forma.";
   }
 
   const line = NAVROS_MOVEMENT_LINES_BY_PATTERN[normalizedPattern];

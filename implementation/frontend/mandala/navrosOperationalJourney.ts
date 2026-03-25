@@ -603,15 +603,16 @@ export function buildNavrosResponse(
     pattern,
     answers.area,
   );
+  const intensifiedMovement = applyIntensityToMovement(
+    rawMovement,
+    intensity,
+    answers,
+  );
   const insight = autoCorrectNavrosCopy(
     autoCorrectByDomain(rawInsight, domain, "insight"),
   );
   const movement = autoCorrectNavrosCopy(
-    applyIntensityToMovement(
-      autoCorrectByDomain(rawMovement, domain, "movement"),
-      intensity,
-      answers,
-    ),
+    autoCorrectByDomain(intensifiedMovement, domain, "movement"),
   );
   const movementType = getMovementType(pattern);
   const agent = getAgentFromMovement(movementType);
