@@ -3,12 +3,12 @@ import * as React from "react";
 import {
   buildNavrosResponse,
   normalizeNavrosReadingFeeling,
+  type NavrosBuiltResponse,
   type NavrosAgentId,
   type NavrosOperationalAnswers,
   type NavrosOperationalStepId,
 } from "./navrosOperationalJourney";
 import {
-  navrosAreaContexts,
   navrosAreaLabels,
   navrosOperationalScreenCopy,
   navrosStateLabels,
@@ -34,6 +34,14 @@ export function NavrosOperationalScreen({
   onUpdate,
   onRestart,
 }: NavrosOperationalScreenProps) {
+  const response = React.useMemo<NavrosBuiltResponse | null>(() => {
+    if (!answers.area.trim() || !answers.state.trim() || !answers.feeling.trim()) {
+      return null;
+    }
+
+    return buildNavrosResponse(answers);
+  }, [answers.area, answers.state, answers.feeling]);
+
   switch (step) {
     case "entry":
       return <EntryStep onNext={onNext} />;
@@ -42,10 +50,10 @@ export function NavrosOperationalScreen({
       return <FocusStep answers={answers} onNext={onNext} onUpdate={onUpdate} />;
 
     case "insight":
-      return <InsightStep answers={answers} onNext={onNext} />;
+      return response ? <InsightStep response={response} onNext={onNext} /> : null;
 
     case "movement":
-      return <MovementStep answers={answers} onNext={onNext} />;
+      return response ? <MovementStep response={response} onNext={onNext} /> : null;
 
     case "closure":
       return <ClosureStep onRestart={onRestart} />;
@@ -96,6 +104,14 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   const [feeling, setFeeling] = React.useState(answers.feeling);
   const hasArea = Boolean(area.trim());
   const hasState = Boolean(state.trim());
+  const selectedAreaLabel =
+    hasArea && area.trim().toLowerCase() in navrosAreaLabels
+      ? navrosAreaLabels[area.trim().toLowerCase() as keyof typeof navrosAreaLabels]
+      : area.trim();
+  const selectedStateLabel =
+    hasState && state.trim().toLowerCase() in navrosStateLabels
+      ? navrosStateLabels[state.trim().toLowerCase() as keyof typeof navrosStateLabels]
+      : state.trim();
 
   function handleAreaSelect(nextArea: string) {
     const shouldReset = nextArea !== area;
@@ -136,41 +152,61 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
   }
 
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--focus">
       <p className="operational-step__helper">
         {navrosOperationalScreenCopy.focus.helper}
       </p>
-      <div className="operational-step__group">
-        <div className="operational-step__chips">
-          {navrosSuggestedAreas.map((suggestedArea) => {
-            const isActive =
-              area.trim().toLowerCase() === suggestedArea.toLowerCase();
-
-            return (
-              <button
-                key={suggestedArea}
-                type="button"
-                className={journeyCx(
-                  "operational-step__chip",
-                  "operational-step__chip--contextual",
-                  isActive && "operational-step__chip--active",
-                )}
-                onClick={() => handleAreaSelect(suggestedArea)}
-              >
-                <span className="operational-step__chip-label">
-                  {navrosAreaLabels[suggestedArea]}
-                </span>
-                <span className="operational-step__chip-context">
-                  {navrosAreaContexts[suggestedArea]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
       {hasArea ? (
-        <div className="operational-step__group">
+        <div className="operational-step__selection">
+          <button
+            type="button"
+            className="operational-step__selected-chip"
+            onClick={() => handleAreaSelect("")}
+          >
+            {selectedAreaLabel}
+          </button>
+          {hasState ? (
+            <button
+              type="button"
+              className="operational-step__selected-chip"
+              onClick={() => handleStateSelect("")}
+            >
+              {selectedStateLabel}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      {!hasArea ? (
+        <div className="operational-step__group operational-step__group--active">
+          <div className="operational-step__chips">
+            {navrosSuggestedAreas.map((suggestedArea) => {
+              const isActive =
+                area.trim().toLowerCase() === suggestedArea.toLowerCase();
+
+              return (
+                <button
+                  key={suggestedArea}
+                  type="button"
+                  className={journeyCx(
+                    "operational-step__chip",
+                    "operational-step__chip--contextual",
+                    isActive && "operational-step__chip--active",
+                  )}
+                  onClick={() => handleAreaSelect(suggestedArea)}
+                >
+                  <span className="operational-step__chip-label">
+                    {navrosAreaLabels[suggestedArea]}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
+      {hasArea && !hasState ? (
+        <div className="operational-step__group operational-step__group--active">
           <div className="operational-step__chips">
             {navrosSuggestedStates.map((suggestedState) => {
               const isActive =
@@ -197,7 +233,7 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
       ) : null}
 
       {hasArea && hasState ? (
-        <div className="operational-step__group">
+        <div className="operational-step__group operational-step__group--active">
           <div className="operational-step__chips">
             {navrosSuggestedFeelings.map((suggestedFeeling) => {
               const isActive =
@@ -228,14 +264,15 @@ function FocusStep({ answers, onNext, onUpdate }: FocusStepProps) {
 }
 
 function InsightStep({
-  answers,
+  response,
   onNext,
-}: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const { insight } = buildNavrosResponse(answers);
-
+}: {
+  response: NavrosBuiltResponse;
+  onNext: () => void;
+}) {
   return (
-    <div className="operational-step">
-      <p className="operational-step__copy">{insight}</p>
+    <div className="operational-step operational-step--insight">
+      <p className="operational-step__copy">{response.insight}</p>
       <div className="operational-step__actions">
         <button
           type="button"
@@ -250,17 +287,22 @@ function InsightStep({
 }
 
 function MovementStep({
-  answers,
+  response,
   onNext,
-}: Pick<NavrosOperationalScreenProps, "answers" | "onNext">) {
-  const { movement, agent } = buildNavrosResponse(answers);
+}: {
+  response: NavrosBuiltResponse;
+  onNext: () => void;
+}) {
+  const { movement, agent } = response;
   const trajectory: NavrosAgentId[] =
     agent === "NAVROS" ? ["NAVROS"] : ["NAVROS", agent];
 
   return (
-    <div className="operational-step">
-      <MandalaMini activeAgent={agent} trajectory={trajectory} />
+    <div className="operational-step operational-step--movement">
       <p className="operational-step__copy">{movement}</p>
+      <div className="operational-step__mandala">
+        <MandalaMini activeAgent={agent} trajectory={trajectory} />
+      </div>
       <div className="operational-step__actions">
         <button
           type="button"
@@ -276,14 +318,14 @@ function MovementStep({
 
 function ClosureStep({ onRestart }: { onRestart: () => void }) {
   return (
-    <div className="operational-step">
+    <div className="operational-step operational-step--closure">
       <p className="operational-step__copy">
         {navrosOperationalScreenCopy.closure.quote}
       </p>
       <div className="operational-step__actions">
         <button
           type="button"
-          className="operational-step__action"
+          className="operational-step__action operational-step__action--secondary"
           onClick={onRestart}
         >
           {navrosOperationalScreenCopy.closure.action}

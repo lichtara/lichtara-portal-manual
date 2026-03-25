@@ -89,6 +89,7 @@ export function NavrosOperationalStepper({
         className={journeyCx(
           "operational-journey__panel",
           isEntryStep && "operational-journey__panel--entry",
+          currentStep?.id && `operational-journey__panel--${currentStep.id}`,
         )}
       >
         <NavrosOperationalScreen
