@@ -403,16 +403,17 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey {
+  align-content: center;
   display: grid;
   gap: 18px;
   justify-self: center;
   max-width: 860px;
+  min-height: calc(100vh - 112px);
   width: min(100%, 860px);
 }
 
 .operational-journey--entry {
   align-content: center;
-  min-height: calc(100vh - 112px);
 }
 
 .operational-journey__header {
@@ -450,6 +451,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
 .operational-journey__progress {
   display: grid;
   gap: 8px;
+  justify-items: center;
 }
 
 .operational-journey__bar {
@@ -905,6 +907,7 @@ export const MANDALA_JOURNEY_UI_CSS = `
   .operational-journey {
     gap: 18px;
     max-width: 100%;
+    min-height: calc(100vh - 64px);
   }
 
   .operational-journey--entry {
