@@ -449,15 +449,18 @@ export const MANDALA_JOURNEY_UI_CSS = `
 }
 
 .operational-journey__progress {
-  display: grid;
+  display: flex;
   gap: 8px;
-  justify-items: center;
+  justify-content: center;
+  justify-self: center;
+  width: 100%;
 }
 
 .operational-journey__bar {
   background: rgba(201, 210, 217, 0.2);
   border-radius: 999px;
   height: 4px;
+  margin: 0 auto;
   overflow: hidden;
   width: min(296px, 100%);
 }
